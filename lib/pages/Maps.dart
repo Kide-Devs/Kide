@@ -19,19 +19,27 @@ class _MyAppState extends State<MapsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Maps Sample App'),
-          backgroundColor: Colors.green[700],
-        ),
+    return Scaffold(
         body: GoogleMap(
-          onMapCreated: _onMapCreated,
-          initialCameraPosition: CameraPosition(
-            target: _center,
-            zoom: 16.0,
-          ),
+        onMapCreated: _onMapCreated,
+        initialCameraPosition: CameraPosition(
+          target: _center,
+          zoom: 16.0,
         ),
+      ),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          FloatingActionButton(
+            child: Icon(Icons.directions),
+            heroTag: hashCode,
+          ),
+          SizedBox(height: 16,),
+          FloatingActionButton(
+            child: Icon(Icons.search),
+            heroTag: hashCode,
+          ),
+        ],
       ),
     );
   }

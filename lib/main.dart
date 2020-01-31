@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.teal,
+        primarySwatch: Colors.amber,
       ),
       home: MyHomePage(title: 'KIDE'),
     );
@@ -45,7 +45,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Center(child: Text(
+          widget.title,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontFamily: 'Roboto',
+          ),
+          )),
       ),
       body: _tabs[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -89,11 +95,6 @@ class _MyHomePageState extends State<MyHomePage> {
             _currentIndex=index;
           });
         },
-      ),
-      floatingActionButton: FloatingActionButton(
-        // onPressed: _incrementCounter,
-        // tooltip: 'Increment',
-        child: Icon(Icons.directions),
       ),
     );
   }

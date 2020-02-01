@@ -1,5 +1,4 @@
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kide/pages/EventsPage/ExpansionTitle.dart';
+import 'package:kide/pages/EventsPage/widgets/ExpansionTitle.dart';
 import 'package:kide/models/SubEvent.dart';
 import 'package:flutter/material.dart';
 

@@ -4,7 +4,7 @@ import 'package:kide/pages/Contacts.dart';
 import 'package:kide/pages/EventsPage/Events.dart';
 import 'package:kide/pages/EventsPage/SubEvents.dart';
 import 'package:kide/pages/Home.dart';
-import 'package:kide/pages/Maps.dart';
+import 'package:kide/pages/MapsPage/Maps.dart';
 import 'package:kide/pages/More.dart';
 import 'package:kide/providers/router.dart';
 import 'package:kide/widgets/BottomNav.dart';

@@ -12,9 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.amber,
-      ),
+      theme: ThemeData.dark(),
       home: MyHomePage(title: 'KIDE'),
     );
   }
@@ -53,6 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           )),
       ),
+      backgroundColor: Color.fromRGBO(18, 18, 18, 1.0),
       body: _tabs[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,

@@ -2,6 +2,23 @@
 
 A new Flutter project.
 
+## Nomenclature
+
+- ### Event
+    - The Entire Event/Fest e.g. KIITFEST
+    - #### Schema
+        - String id, String name, List<"EventCategory"> eventCategories, String startDate, String endDate
+- ### EventCategory
+    - Category in the Event e.g. Luminare, ElectroNerd, Builder.io, etc
+    - #### Schema
+        - String id, String name, List<"SubEvent"> subEvents
+- ### SubEvent
+    - Event inside of an Event Category
+    - #### Schema
+        - String id, String name, String date, String time, String description, String location, bool isBookmarked, String link_details, String link_register
+
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

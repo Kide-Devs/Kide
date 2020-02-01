@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:kide/pages/Contacts.dart';
-import 'package:kide/pages/Events.dart';
-import 'package:kide/pages/SubEvents.dart';
+import 'package:kide/pages/EventsPage/Events.dart';
+import 'package:kide/pages/EventsPage/SubEvents.dart';
 import 'package:kide/pages/Home.dart';
 import 'package:kide/pages/Maps.dart';
 import 'package:kide/pages/More.dart';

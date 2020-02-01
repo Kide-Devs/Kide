@@ -1,46 +1,47 @@
 import 'package:kide/models/EventCategory.dart';
 import 'package:kide/models/SubEvent.dart';
+import 'package:flutter/material.dart';
 
 List<SubEvent> subEvents = [
   SubEvent(
-    id: "0001",
+    id: Key("0001"),
     name: "Alankar",
     date: "1st March 2020",
     time: "09:00 PM",
-    description: "Showcase your Voice on the most watched stage",
+    description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
     location: "Campus 6, Seminar Hall 1",
     isBookmarked: false,
     linkDetails: "www.google.com",
     linkRegister: "www.facebook.com"
   ),
   SubEvent(
-    id: "0001",
+    id: Key("0002"),
     name: "Alankar1",
     date: "1st March 2020",
     time: "09:00 PM",
-    description: "Showcase your Voice on the most watched stage",
+    description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
     location: "Campus 6, Seminar Hall 1",
     isBookmarked: false,
     linkDetails: "www.google.com",
     linkRegister: "www.facebook.com"
   ),
   SubEvent(
-    id: "0001",
+    id: Key("0003"),
     name: "Alankar2",
     date: "1st March 2020",
     time: "09:00 PM",
-    description: "Showcase your Voice on the most watched stage",
+    description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
     location: "Campus 6, Seminar Hall 1",
     isBookmarked: false,
     linkDetails: "www.google.com",
     linkRegister: "www.facebook.com"
   ),
   SubEvent(
-    id: "0001",
+    id: Key("0004"),
     name: "Alankar3",
     date: "1st March 2020",
     time: "09:00 PM",
-    description: "Showcase your Voice on the most watched stage",
+    description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
     location: "Campus 6, Seminar Hall 1",
     isBookmarked: false,
     linkDetails: "www.google.com",

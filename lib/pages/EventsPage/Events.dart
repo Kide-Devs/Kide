@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kide/models/Event.dart';
-import 'package:kide/pages/Home.dart';
 import 'package:kide/data.dart';
-import 'package:kide/pages/SubEvents.dart';
+import 'package:kide/pages/EventsPage/SubEvents.dart';
 void main() => runApp(EventsPage());
 
 class EventsPage extends StatelessWidget {
@@ -13,21 +12,6 @@ class EventsPage extends StatelessWidget {
     endDate: "4th March 2020",
     eventCategories: eventCategories
   );
-  // final List<String> _eventList = [
-  //   'Cultural',
-  //   'Luminare',
-  //   'ElectroNerd',
-  //   'ChasterMef',
-  //   'Builder.io',
-  //   'Mechanix',
-  //   'Cultural',
-  //   'Luminare',
-  //   'ElectroNerd',
-  //   'ChasterMef',
-  //   'Builder.io',
-  //   'Mechanix'
-  // ];
-
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +61,6 @@ class EventsPage extends StatelessWidget {
                   ),
                 )
               ),
-              
             ]), 
           ),
           margin: const EdgeInsets.fromLTRB(0.0, 14.0, 0.0, 14.0),

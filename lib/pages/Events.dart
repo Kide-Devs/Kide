@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kide/models/Event.dart';
 import 'package:kide/pages/Home.dart';
 import 'package:kide/data.dart';
+import 'package:kide/pages/SubEvents.dart';
 void main() => runApp(EventsPage());
 
 class EventsPage extends StatelessWidget {
@@ -26,6 +27,8 @@ class EventsPage extends StatelessWidget {
   //   'Builder.io',
   //   'Mechanix'
   // ];
+
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -37,11 +40,9 @@ class EventsPage extends StatelessWidget {
           child: InkWell(
             splashColor: Colors.blue.withAlpha(30),
             onTap: ()  {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomePage()
-                )
+              Navigator.of(context).pushNamed(
+                SubEvents.routeName,
+                arguments: _eventList.eventCategories[position]
               );
               print('Card tapped.');
             },

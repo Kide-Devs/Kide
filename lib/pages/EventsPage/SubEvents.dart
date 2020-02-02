@@ -13,14 +13,12 @@ class SubEvents extends StatelessWidget {
       appBar: AppBar(
         title: Text(eventCategory.name.toUpperCase()),
       ),
-      body: (
-        ListView.builder(
+      body: ListView.builder(
           itemBuilder: (BuildContext context, int index) =>
               EntryItem(_subEventList[index]),
           itemCount: _subEventList.length,
           padding: const EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 16.0),
-        )
-      ),
+        ),
       backgroundColor: Color.fromRGBO(18, 18, 18, 1.0),
     );
   }

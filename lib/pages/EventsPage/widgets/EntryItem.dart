@@ -1,10 +1,10 @@
 import 'package:kide/pages/EventsPage/widgets/ExpansionTitle.dart';
 import 'package:kide/models/SubEvent.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import 'package:kide/providers/bookmarks.dart';
 
 class EntryItem extends StatefulWidget {
-
   EntryItem(this.entry);
   final SubEvent entry;
 
@@ -14,132 +14,153 @@ class EntryItem extends StatefulWidget {
 
 class _EntryItemState extends State<EntryItem> {
   bool exp = false;
-
+  bool _bookmarked = false;
   void onExpansionChanged(bool val) {
     setState(() {
-      exp= val;
+      exp = val;
     });
   }
 
-  Widget _buildTiles(SubEvent root) {
-    return Padding(
-      padding: const EdgeInsets.all(0.0),
-      child: Theme(
+  bool searchBookmark(SubEvent root, Bookmarks state){
+    for( int i = 0; i < state.bookmarks.length; i++ )
+      if (state.bookmarks[i] == root)
+        return true;
+    return false;
+  }
+
+  Widget _buildTiles(SubEvent root, BuildContext context) {
+    final _bookmarksState = Provider.of<Bookmarks>(context);
+    
+
+    return Theme(
         data: ThemeData(
           textTheme: TextTheme(
             subhead: TextStyle(
-              color: Colors.white,
-              letterSpacing: exp == true ? 5 : 20,
-              fontWeight: FontWeight.w600
-            ),
+                color: Colors.white,
+                letterSpacing: exp == true ? 5 : 20,
+                fontWeight: FontWeight.w600),
           ),
           unselectedWidgetColor: Colors.amber,
           accentColor: Colors.white,
         ),
         child: ExpansionTile(
-          trailing: SizedBox(
-            height: 0,
-            width: 0
-          ),
+          trailing: SizedBox(height: 0, width: 0),
           key: PageStorageKey<Key>(root.id),
           title: ExpansionTitle(context: context, exp: exp, root: root),
-          
           children: <Widget>[
-            Container(height: 20,),
+            Container(
+              height: 20,
+            ),
             Column(
               children: <Widget>[
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Container(width: 16,),
-                    Icon(
-                      Icons.event_note,
-                      color: Color.fromRGBO(0, 112, 240, 100),
-                      size: 24.0,
+                    Expanded(
+                      child: Icon(
+                        Icons.event_note,
+                        color: Color.fromRGBO(0, 112, 240, 100),
+                        size: 24.0,
+                      ),
                     ),
-                    Container(width: 10,),
-                    Text(root.date),
-                    Container(width: 40,),
-                    Icon(
-                      Icons.access_time,
-                      color: Color.fromRGBO(0, 112, 240, 100),
-                      size: 24.0,
+                    Expanded(child: Text(root.date)),
+                    Expanded(
+                      child: Icon(
+                        Icons.access_time,
+                        color: Color.fromRGBO(0, 112, 240, 100),
+                        size: 24.0,
+                      ),
                     ),
-                    Container(width: 10,),
-                    Text(root.time),
-                    Container(width: 60,),
-                    Icon(
-                      Icons.turned_in,
-                      color: Color.fromRGBO(253, 42, 42, 100),
-                      size: 24.0,
+                    Expanded(child: Text(root.time)),
+                    Expanded(
+                      child: IconButton(
+                          icon: Icon(
+                          searchBookmark(root, _bookmarksState) ? Icons.turned_in : Icons.turned_in_not,
+                          color: Color.fromRGBO(253, 42, 42, 100),
+                          size: 24.0,
+                        ),
+                        onPressed: (){
+                          searchBookmark(root, _bookmarksState) ?
+                            _bookmarksState.removeBookmark(root)
+                          : _bookmarksState.addBookmark(root);
+                        }
+                      ),
                     ),
                   ],
                 ),
-                Container(height: 20,),
+                Container(
+                  height: 20,
+                ),
                 Row(
                   children: <Widget>[
-                    Container(width: 16,),
+                    Container(
+                      width: 16,
+                    ),
                     Flexible(
                       child: Container(
                         child: Text(
                           root.description,
                           overflow: TextOverflow.visible,
-                          style: TextStyle(
-                            
-                          ),
+                          style: TextStyle(),
                         ),
                       ),
                     ),
-                    Container(width: 16,),
+                    Container(
+                      width: 16,
+                    ),
                   ],
                 ),
-                Container(height: 20,),
+                Container(
+                  height: 20,
+                ),
                 Row(
                   children: <Widget>[
-                    Container(width: 190,),
-                    FlatButton(
-                      onPressed: () {print("details");},
-                      textColor: Colors.white,
-                      child: const Text(
-                        'DETAILS',
-                        style: TextStyle(fontSize: 10)
-                      ),
+                    Container(
+                      width: 190,
                     ),
-
-                    Container(width: 16,),
+                    FlatButton(
+                      onPressed: () {
+                        print("details");
+                      },
+                      textColor: Colors.white,
+                      child:
+                          const Text('DETAILS', style: TextStyle(fontSize: 10)),
+                    ),
+                    Container(
+                      width: 16,
+                    ),
                     RaisedButton(
-                      onPressed: () {print("register");},
+                      onPressed: () {
+                        print("register");
+                      },
                       textColor: Color.fromRGBO(253, 42, 42, 1),
-                      child: const Text(
-                        'REGISTER',
-                        style: TextStyle(fontSize: 10)
-                      ),
+                      child: const Text('REGISTER',
+                          style: TextStyle(fontSize: 10)),
                       color: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)
                       )
                     ),
-
                   ],
                 ),
-                Container(height: 8,),
+                Container(
+                  height: 8,
+                ),
               ],
             ),
           ],
           onExpansionChanged: this.onExpansionChanged,
         ),
-      ),
-    );
+      );
   }
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0)
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       child: InkWell(
         splashColor: Colors.blue.withAlpha(30),
-        onTap: ()  {
+        onTap: () {
           // Navigator.of(context).pushNamed(
           //   SubEvents.routeName,
           //   arguments: _eventList.eventCategories[position]
@@ -148,35 +169,34 @@ class _EntryItemState extends State<EntryItem> {
         },
         child: Stack(children: <Widget>[
           Container(
-            constraints: new BoxConstraints(
-              minHeight: 100.0,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: BorderRadius.circular(8.0),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(
-                  './lib/assets/event.jpg',
-                ),
-              ),
-            ),
-            margin:  const EdgeInsets.fromLTRB(0.0, 00.0, 0.0, 0.0) // ADD ANIMATION to push image down.
-          ),
-          Padding(
-            padding: const EdgeInsets.all(0.0),
-            child: Container(
               constraints: new BoxConstraints(
                 minHeight: 100.0,
               ),
               decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.64),
-                  borderRadius: BorderRadius.circular(8.0)
+                color: Colors.transparent,
+                borderRadius: BorderRadius.circular(8.0),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(
+                    './lib/assets/event.jpg',
+                  ),
+                ),
               ),
-              child: _buildTiles(widget.entry)
-            ),
+              margin: const EdgeInsets.fromLTRB(
+                  0.0, 00.0, 0.0, 0.0) // ADD ANIMATION to push image down.
+              ),
+          Padding(
+            padding: const EdgeInsets.all(0.0),
+            child: Container(
+                constraints: new BoxConstraints(
+                  minHeight: 100.0,
+                ),
+                decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.64),
+                    borderRadius: BorderRadius.circular(8.0)),
+                child: _buildTiles(widget.entry, context)),
           ),
-        ]), 
+        ]),
       ),
       margin: const EdgeInsets.fromLTRB(0.0, 14.0, 0.0, 14.0),
     );

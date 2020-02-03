@@ -40,10 +40,22 @@ Set<Marker> foodcourts = {
   ),
 };
 
-Set<Marker> all = new Set.from(campuses)..addAll(foodcourts);
+//Gates
+Set<Marker> gates = {
+  Marker(
+    markerId: MarkerId('gate_152'),
+    position: LatLng(20.348714, 85.815610),
+    infoWindow: InfoWindow(
+      title: 'Gate 152',
+      snippet: 'Gas Godown Gate',
+    ),
+  ),
+};
+Set<Marker> all = Set.from(campuses)..addAll(foodcourts)..addAll(gates);
 
 Map<String, Set<Marker>> markers = {
   'all': all,
   'campuses': campuses,
   'foodcourts': foodcourts,
+  'gates': gates,
 };

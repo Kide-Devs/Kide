@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:kide/models/ContactCategory.dart';
-import 'package:kide/pages/ContactsPage/MaleHostels.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-
-class ContactCard extends StatelessWidget{
-  const ContactCard(this.contactCategory);
-  final ContactCategory contactCategory;
+class ContactCardDiallable extends StatelessWidget{
+  final String name;
+  final String number;
+  final String desc;
+  
+  ContactCardDiallable(
+    this.name, 
+    this.number, 
+    this.desc,
+  );
 
   @override
   Widget build(BuildContext context){
@@ -17,14 +22,11 @@ class ContactCard extends StatelessWidget{
       ),
       child: new InkWell(
         onTap:(){
-          Navigator.of(context).pushNamed(
-            MaleHostels.routeName,
-            arguments: contactCategory
-          );
+          launch('tel:\\$number');
           print('Contact Card tapped');
         },
       child: Center(
-        child: Text(contactCategory.name,
+        child: Text(name,
           style: TextStyle(
             color: Colors.white,
             fontSize: 15.0
@@ -35,4 +37,3 @@ class ContactCard extends StatelessWidget{
     );
   }
 }
-

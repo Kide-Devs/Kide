@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:kide/models/ContactCategory.dart';
+import 'package:kide/pages/ContactsPage/ContactList.dart';
 
-class ContactCardButton extends StatelessWidget{
-  final String name;
-  final String phone;
-  final String desc;
-  
-  ContactCardButton(
-    this.name, 
-    this.phone, 
-    this.desc
-  );
+
+class CategoryCard extends StatelessWidget{
+  const CategoryCard(this.contactCategory);
+  final ContactCategory contactCategory;
 
   @override
   Widget build(BuildContext context){
@@ -21,10 +17,14 @@ class ContactCardButton extends StatelessWidget{
       ),
       child: new InkWell(
         onTap:(){
+          Navigator.of(context).pushNamed(
+            ContactList.routeName,
+            arguments: contactCategory
+          );
           print('Contact Card tapped');
         },
       child: Center(
-        child: Text(name,
+        child: Text(contactCategory.name,
           style: TextStyle(
             color: Colors.white,
             fontSize: 15.0
@@ -35,3 +35,4 @@ class ContactCardButton extends StatelessWidget{
     );
   }
 }
+

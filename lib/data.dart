@@ -118,97 +118,32 @@ List<EmergencyContact> emergency = [
 
 List<Contact> contacts = [
   Contact(
-    id: "099",
+    id: "01",
     name: "Sahoo",
-    designation: "Cheap Warden",
-    phone: "1234567",
-    gender: "M"
-  ),
-  Contact(
-    id: "099",
-    name: "Sahoo",
-    designation: "Cheap Warden",
-    phone: "1234567",
-    gender: "M"
-  ),
-  Contact(
-    id: "099",
-    name: "Sahoo",
-    designation: "Cheap Warden",
-    phone: "1234567",
-    gender: "M"
-  ),
-  Contact(
-    id: "099",
-    name: "Sahoo",
-    designation: "Cheap Warden",
-    phone: "1234567",
-    gender: "M"
-  ),
-  Contact(
-    id: "099",
-    name: "Sahoo",
-    designation: "Cheap Warden",
-    phone: "1234567",
-    gender: "M"
+    designation: "Warden",
+    number: "9876543221",
   ),
 ];
 
-
 List<ContactCategory> contactCategoryList = [
   ContactCategory(
-    id: "0990",
-    name: "Boys' Hostel",
+    id: "01",
+    name: "Boy's Hostel",
+    contacts: contacts
+  ),
+  ContactCategory(
+    id: "02",
+    name: "Girl's Hostel",
+    contacts: contacts
+  ),
+  ContactCategory(
+    id: "03",
+    name: "Administration",
     contacts: contacts
   ),
   ContactCategory(
     id: "0990",
-    name: "Boys' Hostel",
+    name: "Helplines",
     contacts: contacts
   ),
-  ContactCategory(
-    id: "0990",
-    name: "Boys' Hostel",
-    contacts: contacts
-  ),
-  ContactCategory(
-    id: "0990",
-    name: "Boys' Hostel",
-    contacts: contacts
-  ),
-  ContactCategory(
-    id: "0990",
-    name: "Boys' Hostel",
-    contacts: contacts
-  ),
-  ContactCategory(
-    id: "0990",
-    name: "Boys' Hostel",
-    contacts: contacts
-  ),
-  ContactCategory(
-    id: "0990",
-    name: "Boys' Hostel",
-    contacts: contacts
-  ),
-  ContactCategory(
-    id: "0990",
-    name: "Boys' Hostel",
-    contacts: contacts
-  ),
-  ContactCategory(
-    id: "0990",
-    name: "Boys' Hostel",
-    contacts: contacts
-  ),
-  ContactCategory(
-    id: "0990",
-    name: "Boys' Hostel",
-    contacts: contacts
-  ),
-  ContactCategory(
-    id: "0990",
-    name: "Boys' Hostel",
-    contacts: contacts
-  )
 ];

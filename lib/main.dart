@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:kide/pages/ContactsPage/ContactList.dart';
 import 'package:kide/pages/EventsPage/BookmarksPage.dart';
 import 'package:kide/providers/bookmarks.dart';
 import 'package:provider/provider.dart';
 import 'package:kide/pages/ContactsPage/Contacts.dart';
-import 'package:kide/pages/ContactsPage/MaleHostels.dart';
+import 'package:kide/pages/ContactsPage/ContactList.dart';
 import 'package:kide/pages/EventsPage/Events.dart';
 import 'package:kide/pages/EventsPage/SubEvents.dart';
 import 'package:kide/pages/Home.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         routes: {
           SubEvents.routeName: (context) => SubEvents(),
           BookmarksPage.routeName: (context) => BookmarksPage(),
-          MaleHostels.routeName: (context) => MaleHostels(),
+          ContactList.routeName: (context) => ContactList(),
         },
       ),
     );

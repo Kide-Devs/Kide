@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:kide/data.dart';
-import 'package:kide/models/Contact.dart';
-import 'package:kide/models/EmergencyContact.dart';
 import 'package:kide/pages/ContactsPage/widgets/HeaderWidget.dart';
 import 'package:kide/pages/ContactsPage/widgets/EmergencyCard.dart';
-import 'package:kide/pages/ContactsPage/widgets/ContactCard.dart';
+import 'package:kide/pages/ContactsPage/widgets/CategoryCard.dart';
 
 void main() => runApp(ContactsPage());
+
+List<StaggeredTile> _staggeredTiles = const <StaggeredTile>[
+  const StaggeredTile.count(2, 1),
+  const StaggeredTile.count(2, 1),
+  const StaggeredTile.count(4, 1),
+];
 
 class ContactsPage extends StatelessWidget {
   final _contactCategories = contactCategoryList;
@@ -43,16 +47,7 @@ class ContactsPage extends StatelessWidget {
               crossAxisCount: 4,
               mainAxisSpacing: 4.0,
               crossAxisSpacing: 4.0,
-              staggeredTiles: const <StaggeredTile>[
-                const StaggeredTile.count(2, 1),
-                const StaggeredTile.count(2, 1),
-                const StaggeredTile.count(4, 1),
-              ],
-              // children: <Widget>[
-              //   const EmergencyCard(Colors.red, Icons.local_hospital , 'Hospital','108'),
-              //   const EmergencyCard(Colors.red, Icons.local_hospital , 'Police','100'),
-              //   const EmergencyCard(Colors.red, Icons.local_hospital , 'Fire Brigade','101')
-              // ],
+              staggeredTiles: _staggeredTiles,
               children: <Widget>[
                 for(int i=0;i<_emergencyContacts.length;i++)
                   new EmergencyCard(_emergencyContacts[i].icon, _emergencyContacts[i].emergency, _emergencyContacts[i].number),
@@ -83,7 +78,7 @@ class ContactsPage extends StatelessWidget {
               delegate: SliverChildListDelegate(
                 [
                   for(int i=0;i<contactCategoryList.length;i++)
-                    ContactCard(_contactCategories[i]),
+                    CategoryCard(_contactCategories[i]),
                 ],
               ),
             )

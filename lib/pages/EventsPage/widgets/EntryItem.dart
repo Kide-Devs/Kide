@@ -114,10 +114,9 @@ class _EntryItemState extends State<EntryItem> {
                   height: 20,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    Container(
-                      width: ViewPort.screenWidth * 0.45,
-                    ),
+                    
                     FlatButton(
                       onPressed: () {
                         print("details");
@@ -141,6 +140,9 @@ class _EntryItemState extends State<EntryItem> {
                         borderRadius: BorderRadius.circular(20)
                       )
                     ),
+                    Container(
+                      width: 16,
+                    )
                   ],
                 ),
                 Container(

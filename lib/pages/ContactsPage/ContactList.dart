@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kide/models/ContactCategory.dart';
-import 'package:kide/data.dart';
 import 'package:kide/pages/ContactsPage/widgets/ContactCardDiallable.dart';
 import 'package:kide/pages/ContactsPage/widgets/HeaderWidget.dart';
 
@@ -8,10 +7,10 @@ import 'package:kide/pages/ContactsPage/widgets/HeaderWidget.dart';
 
 class ContactList extends StatelessWidget {
   static const routeName = '/ContactList';
-  final _contactList = contacts;
   @override
   Widget build(BuildContext context) {
     final ContactCategory contactCategory = ModalRoute.of(context).settings.arguments;
+    final _contactList = contactCategory.contacts;
     return Scaffold(
       appBar: AppBar(
         title: Text('Contact List',
@@ -27,7 +26,7 @@ class ContactList extends StatelessWidget {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  HeaderWidget("KP - 6"),
+                  HeaderWidget(contactCategory.name),
                   Divider(
                     color: Colors.white,
                     endIndent: 194.0,

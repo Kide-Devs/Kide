@@ -7,7 +7,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:kide/pages/MapsPage/assets/MapMarkers.dart';
 import 'dart:math' as math;
 import 'package:kide/pages/MapsPage/widgets/FilterCategories.dart';
-import 'package:search_map_place/search_map_place.dart';
 
 void main() => runApp(MapsPage());
 

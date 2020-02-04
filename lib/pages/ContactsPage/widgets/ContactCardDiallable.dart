@@ -14,8 +14,8 @@ class ContactCardDiallable extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    return Card(
-      margin: EdgeInsets.fromLTRB(5, 15, 5, 15),
+   return Card(
+      margin: EdgeInsets.fromLTRB(8, 20, 8, 20),
       color: Colors.black26,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0)
@@ -26,14 +26,38 @@ class ContactCardDiallable extends StatelessWidget{
           print('Contact Card tapped');
         },
       child: Center(
-        child: Text(name,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 15.0
-          )
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text('Name : $name',
+              //textAlign: TextAlign.left,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 15.0
+              )
+            ),
+            Text('Designation : $desc',
+            //textAlign: TextAlign.left,
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 12.0
+              ),
+            ),
+            Text('Number : $number',
+            //textAlign: TextAlign.left,
+              style: TextStyle(
+                color: Color.fromRGBO(0, 112, 240, 100),
+                fontSize: 11.5
+              ),
+            )
+          ],
+        ),
         )
       )
     );
-  }
 }
+}
+
+
+

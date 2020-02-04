@@ -13,6 +13,13 @@ class ContactList extends StatelessWidget {
   Widget build(BuildContext context) {
     final ContactCategory contactCategory = ModalRoute.of(context).settings.arguments;
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Contact List',
+          style: TextStyle(
+            fontFamily: 'Roboto',
+          ),
+        ),
+      ),
       backgroundColor: Color.fromRGBO(18, 18, 18, 1.0),
       body : Container(
         child: CustomScrollView(
@@ -20,7 +27,7 @@ class ContactList extends StatelessWidget {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  HeaderWidget("KP - 1"),
+                  HeaderWidget("KP - 6"),
                   Divider(
                     color: Colors.white,
                     endIndent: 194.0,
@@ -38,7 +45,9 @@ class ContactList extends StatelessWidget {
               ),
             ),
             SliverGrid(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 1,
+              ),
               delegate: SliverChildListDelegate(
                 [
                   for(int i=0;i<_contactList.length;i++)

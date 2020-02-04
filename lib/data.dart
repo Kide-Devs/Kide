@@ -119,9 +119,33 @@ List<EmergencyContact> emergency = [
 List<Contact> contacts = [
   Contact(
     id: "01",
-    name: "Sahoo",
-    designation: "Warden",
-    number: "9876543221",
+    name: "Dr. Biswajit Sahoo",
+    designation: "Chief Warden of Hostel",
+    number: "9437229507",
+  ),
+  Contact(
+    id: "02",
+    name: "Mr. S.K. Rath",
+    designation: "Dy. Registrar (Hostel)",
+    number: "9437020234",
+  ),
+  Contact(
+    id: "03",
+    name: "Dr. A.A. Acharya",
+    designation: "Sr. Superintendent",
+    number: "9861058079",
+  ),
+  Contact(
+    id: "04",
+    name: "Dr. Manoj Kumar Mishra",
+    designation: "Superintendent",
+    number: "9937335233",
+  ),
+  Contact(
+    id: "05",
+    name: "Prof. Anil Kumar Swain",
+    designation: "Dy. Superintendent",
+    number: "9938853866",
   ),
 ];
 

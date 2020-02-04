@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:kide/pages/MapsPage/assets/GoogleMapsKey.dart';
 import 'package:kide/pages/MapsPage/widgets/FilterCategory.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:kide/pages/MapsPage/assets/MapMarkers.dart';
 import 'dart:math' as math;
 import 'package:kide/pages/MapsPage/widgets/FilterCategories.dart';
+import 'package:search_map_place/search_map_place.dart';
 
 void main() => runApp(MapsPage());
 
@@ -79,13 +81,9 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
         _markers = _markers.union(markers[category.label]);
         // _markers = markers[categoriesAll.label];
       } else {
-        _markers =_markers.difference(markers[category.label]);
+        _markers = _markers.difference(markers[category.label]);
       }
     });
-  }
-
-  _categoryToggled(FilterCategory category){
-    return category.isToggled;
   }
 
   _clearSearchFilter() {
@@ -99,89 +97,114 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        onMapCreated: _onMapCreated,
-        markers: _markers,
-        initialCameraPosition: CameraPosition(
-          target: _center,
-          zoom: 18.0,
-          tilt: 60,
-        ),
-        buildingsEnabled: true,
-        mapToolbarEnabled: false,
-        myLocationEnabled: true,
-        myLocationButtonEnabled: false,
-        compassEnabled: true,
-        zoomGesturesEnabled: true,
-        rotateGesturesEnabled: true,
-        tiltGesturesEnabled: true,
-        indoorViewEnabled: true,
+      body: Stack(
+        children: [
+          GoogleMap(
+            onMapCreated: _onMapCreated,
+            markers: _markers,
+            initialCameraPosition: CameraPosition(
+              target: _center,
+              zoom: 18.0,
+              tilt: 60,
+            ),
+            buildingsEnabled: true,
+            mapToolbarEnabled: false,
+            myLocationEnabled: true,
+            myLocationButtonEnabled: false,
+            compassEnabled: true,
+            zoomGesturesEnabled: true,
+            rotateGesturesEnabled: true,
+            tiltGesturesEnabled: true,
+            indoorViewEnabled: true,
+          ),
+          // Container(
+          //   width: MediaQuery.of(context).size.width - 64,
+          //   height: 40,
+          //   margin: EdgeInsets.fromLTRB(32, 50, 0, 0),
+          //   color: Colors.white,
+          //   child: Text('Search', style: TextStyle(color: Colors.black),),
+          // ),
+        ],
       ),
       floatingActionButton: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: List.generate(_categories.length, (int index) {
-            Widget child = Container(
-              height: 70.0,
-              width: 56.0,
-              alignment: FractionalOffset.topCenter,
-              child: ScaleTransition(
-                scale: CurvedAnimation(
-                  parent: _controller,
-                  curve: Interval(0.0, 1.0 - index / _categories.length / 2.0,
-                      curve: Curves.easeOut),
-                ),
-                child: FloatingActionButton(
-                  heroTag: null,
-                  backgroundColor:
-                      _categoryToggled(_categories[index]) ? Colors.black : Colors.white,
-                  mini: true,
-                  child: Icon(_categories[index].icon,
-                      color: _categoryToggled(_categories[index])
-                          ? Colors.white
-                          : Colors.black),
-                  onPressed: () {
-                    _addSearchFilter(_categories[index]);
-                  },
-                  tooltip: _categories[index].label,
-                ),
+        mainAxisSize: MainAxisSize.min,
+        children: List.generate(_categories.length, (int index) {
+          Widget child = Container(
+            height: 70.0,
+            width: 56.0,
+            alignment: FractionalOffset.topCenter,
+            child: ScaleTransition(
+              scale: CurvedAnimation(
+                parent: _controller,
+                curve: Interval(0.0, 1.0 - index / _categories.length / 2.0,
+                    curve: Curves.easeOut),
               ),
-            );
-            return child;
-          }).toList()
-            ..add(
-              FloatingActionButton(
-                heroTag: hashCode,
-                child: AnimatedBuilder(
-                  animation: _controller,
-                  builder: (BuildContext context, Widget child) {
-                    return Transform(
-                      transform:
-                          Matrix4.rotationZ(_controller.value * 0.5 * math.pi),
-                      alignment: FractionalOffset.center,
-                      child: Icon(
-                          _controller.isDismissed ? Icons.search : Icons.close),
-                    );
-                  },
-                ),
+              child: FloatingActionButton(
+                heroTag: null,
+                backgroundColor:
+                    categories[index].isToggled ? Colors.black : Colors.white,
+                mini: true,
+                child: Icon(_categories[index].icon,
+                    color: categories[index].isToggled
+                        ? Colors.white
+                        : Colors.black),
                 onPressed: () {
-                  if (_controller.isDismissed) {
-                    _controller.forward();
-                    _clearSearchFilter();
-                  } else {
-                    _addSearchFilter(categoriesAll);
-                    _controller.reverse();
-                  }
+                  _addSearchFilter(_categories[index]);
                 },
+                tooltip: _categories[index].label,
               ),
-            )
-            ..add(SizedBox(height: 16))
-            ..add(
-              FloatingActionButton(
-                child: Icon(Icons.my_location),
-                heroTag: hashCode,
-                onPressed: _currentLocation,
-              ),
-            )),
+            ),
+          );
+          return child;
+        }).toList()
+          ..add(
+            FloatingActionButton(
+              heroTag: hashCode,
+              child: AnimatedFilterWidget(controller: _controller),
+              onPressed: () {
+                if (_controller.isDismissed) {
+                  _controller.forward();
+                  _clearSearchFilter();
+                } else {
+                  _addSearchFilter(categoriesAll);
+                  _controller.reverse();
+                }
+              },
+            ),
+          )
+          ..add(SizedBox(height: 16))
+          ..add(
+            FloatingActionButton(
+              child: Icon(Icons.my_location),
+              heroTag: hashCode,
+              onPressed: _currentLocation,
+            ),
+          ),
+      ),
+    );
+  }
+}
+
+class AnimatedFilterWidget extends StatelessWidget {
+  const AnimatedFilterWidget({
+    Key key,
+    @required AnimationController controller,
+  })  : _controller = controller,
+        super(key: key);
+
+  final AnimationController _controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (BuildContext context, Widget child) {
+        return Transform(
+          transform: Matrix4.rotationZ(_controller.value * 0.5 * math.pi),
+          alignment: FractionalOffset.center,
+          child: Icon(_controller.isDismissed ? Icons.search : Icons.close),
+        );
+      },
     );
   }
 }

@@ -1,4 +1,7 @@
+import 'package:kide/models/Contact.dart';
+import 'package:kide/models/EmergencyContact.dart';
 import 'package:kide/models/EventCategory.dart';
+import 'package:kide/models/ContactCategory.dart';
 import 'package:kide/models/SubEvent.dart';
 import 'package:flutter/material.dart';
 
@@ -89,5 +92,123 @@ List<EventCategory> eventCategories = [
     id: "001", 
     name: "Cultural", 
     subEvents: subEvents,
+  )
+];
+
+List<EmergencyContact> emergency = [
+  EmergencyContact(
+    color: Colors.red, 
+    icon: Icons.local_hospital, 
+    emergency: 'Hospital', 
+    number: '108'
+  ),
+  EmergencyContact(
+    color: Colors.red, 
+    icon: Icons.local_hospital, 
+    emergency: 'Police', 
+    number: '100'
+  ),
+  EmergencyContact(
+    color: Colors.red, 
+    icon: Icons.local_hospital, 
+    emergency: 'Fire Brigade', 
+    number: '101'
+  ),
+];
+
+List<Contact> contacts = [
+  Contact(
+    id: "099",
+    name: "Sahoo",
+    designation: "Cheap Warden",
+    phone: "1234567",
+    gender: "M"
+  ),
+  Contact(
+    id: "099",
+    name: "Sahoo",
+    designation: "Cheap Warden",
+    phone: "1234567",
+    gender: "M"
+  ),
+  Contact(
+    id: "099",
+    name: "Sahoo",
+    designation: "Cheap Warden",
+    phone: "1234567",
+    gender: "M"
+  ),
+  Contact(
+    id: "099",
+    name: "Sahoo",
+    designation: "Cheap Warden",
+    phone: "1234567",
+    gender: "M"
+  ),
+  Contact(
+    id: "099",
+    name: "Sahoo",
+    designation: "Cheap Warden",
+    phone: "1234567",
+    gender: "M"
+  ),
+];
+
+
+List<ContactCategory> contactCategoryList = [
+  ContactCategory(
+    id: "0990",
+    name: "Boys' Hostel",
+    contacts: contacts
+  ),
+  ContactCategory(
+    id: "0990",
+    name: "Boys' Hostel",
+    contacts: contacts
+  ),
+  ContactCategory(
+    id: "0990",
+    name: "Boys' Hostel",
+    contacts: contacts
+  ),
+  ContactCategory(
+    id: "0990",
+    name: "Boys' Hostel",
+    contacts: contacts
+  ),
+  ContactCategory(
+    id: "0990",
+    name: "Boys' Hostel",
+    contacts: contacts
+  ),
+  ContactCategory(
+    id: "0990",
+    name: "Boys' Hostel",
+    contacts: contacts
+  ),
+  ContactCategory(
+    id: "0990",
+    name: "Boys' Hostel",
+    contacts: contacts
+  ),
+  ContactCategory(
+    id: "0990",
+    name: "Boys' Hostel",
+    contacts: contacts
+  ),
+  ContactCategory(
+    id: "0990",
+    name: "Boys' Hostel",
+    contacts: contacts
+  ),
+  ContactCategory(
+    id: "0990",
+    name: "Boys' Hostel",
+    contacts: contacts
+  ),
+  ContactCategory(
+    id: "0990",
+    name: "Boys' Hostel",
+    contacts: contacts
   )
 ];

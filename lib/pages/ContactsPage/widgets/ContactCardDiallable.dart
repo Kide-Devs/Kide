@@ -30,25 +30,32 @@ class ContactCardDiallable extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('Name : $name',
-              //textAlign: TextAlign.left,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 15.0
-              )
-            ),
-            Text('Designation : $desc',
-            //textAlign: TextAlign.left,
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 12.0
+            Center(
+              child: Text('$name',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15.0
+                )
               ),
             ),
-            Text('Number : $number',
-            //textAlign: TextAlign.left,
-              style: TextStyle(
-                color: Color.fromRGBO(0, 112, 240, 100),
-                fontSize: 11.5
+            if(desc != null) 
+              Center(
+                child: Text('$desc',
+                textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12.0
+                  ),
+                ),
+              ),
+            Center(
+              child: Text('$number',
+              textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Color.fromRGBO(0, 112, 240, 100),
+                  fontSize: 11.5
+                ),
               ),
             )
           ],

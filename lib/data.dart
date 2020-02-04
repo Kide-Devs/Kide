@@ -116,7 +116,223 @@ List<EmergencyContact> emergency = [
   ),
 ];
 
-List<Contact> contacts = [
+List<Contact> kpHostels = [
+  Contact(
+    id:"01",
+    name : "KP-1",
+    designation: null,
+    number: "8114377691",
+  ),
+  Contact(
+    id:"02",
+    name : "KP-2",
+    designation: null,
+    number: "8114377692",
+  ),
+  Contact(
+    id:"03",
+    name : "KP-3",
+    designation: null,
+    number: "8114377693",
+  ),
+  Contact(
+    id:"04",
+    name : "KP-4",
+    designation: null,
+    number: "8114379354",
+  ),
+  Contact(
+    id:"05",
+    name : "KP-5",
+    designation: null,
+    number: "8114377689",
+  ),
+  Contact(
+    id:"06",
+    name : "KP-5A",
+    designation: null,
+    number: "8114377690",
+  ),
+  Contact(
+    id:"07",
+    name : "KP-6",
+    designation: null,
+    number: "8114377694",
+  ),
+  Contact(
+    id:"08",
+    name : "KP-6 C",
+    designation: null,
+    number: "8114377678",
+  ),
+  Contact(
+    id:"09",
+    name : "KP-7 A,B",
+    designation: null,
+    number: "8114377680",
+  ),
+  Contact(
+    id:"10",
+    name : "KP-7 C",
+    designation: null,
+    number: "8114379355",
+  ),
+  Contact(
+    id:"11",
+    name : "KP-7 E",
+    designation: null,
+    number: "8114377676",
+  ),
+  Contact(
+    id:"12",
+    name : "KP-7 F",
+    designation: null,
+    number: "8114377674",
+  ),
+  Contact(
+    id:"13",
+    name : "KP-7 D",
+    designation: null,
+    number: "8114377677",
+  ),
+  Contact(
+    id:"14",
+    name : "KP-8",
+    designation: null,
+    number: "8114377681",
+  ),
+  Contact(
+    id:"15",
+    name : "KP-9 A",
+    designation: null,
+    number: "8114377682",
+  ),
+  Contact(
+    id:"16",
+    name : "KP-9 B",
+    designation: null,
+    number: "8114377683",
+  ),
+  Contact(
+    id:"17",
+    name : "KP-9 C",
+    designation: null,
+    number: "8114377675",
+  ),
+  Contact(
+    id:"18",
+    name : "KP-10 A",
+    designation: null,
+    number: "8114377684",
+  ),
+  Contact(
+    id:"19",
+    name : "KP-10 B",
+    designation: null,
+    number: "8114377685",
+  ),
+  Contact(
+    id:"20",
+    name : "KP-11 (Law)",
+    designation: null,
+    number: "8114377686",
+  ),
+  Contact(
+    id:"21",
+    name : "KP-12",
+    designation: null,
+    number: "8114377687",
+  ),
+  Contact(
+    id:"22",
+    name : "KSRM",
+    designation: null,
+    number: "8114377673",
+  ),
+  Contact(
+    id:"23",
+    name : "KSQ-B",
+    designation: null,
+    number: "8114379353",
+  ),
+  Contact(
+    id:"16",
+    name : "KP-18 (International)",
+    designation: null,
+    number: "8114377688",
+  ),
+];
+
+List<Contact> qcHostels = [
+  Contact(
+    id:"01",
+    name : "QC-1 (Campus - 3)",
+    designation: null,
+    number: "8114377695",
+  ),
+  Contact(
+    id:"02",
+    name : "QC-2 (Campus - 3)",
+    designation: null,
+    number: "8114377696",
+  ),
+  Contact(
+    id:"03",
+    name : "QC-3 (Campus - 3)",
+    designation: null,
+    number: "8114377697",
+  ),
+  Contact(
+    id:"04",
+    name : "QC-4 (Campus - 3)",
+    designation: null,
+    number: "8114377698",
+  ),
+  Contact(
+    id:"05",
+    name : "QC-5 (Campus - 7)",
+    designation: null,
+    number: "8114377699",
+  ),
+  Contact(
+    id:"06",
+    name : "QC-6 (Campus - 11)",
+    designation: null,
+    number: "8114379356",
+  ),
+  Contact(
+    id:"07",
+    name : "QC-7 (Campus - 16)",
+    designation: null,
+    number: "8114379357",
+  ),
+  Contact(
+    id:"08",
+    name : "D Block GH Campus 7",
+    designation: null,
+    number: "8114379358",
+  ),
+  Contact(
+    id:"09",
+    name : "KIMS GH Block A",
+    designation: null,
+    number: "8114379359",
+  ),
+  Contact(
+    id:"10",
+    name : "KIMS GH Block B",
+    designation: null,
+    number: "8114379360",
+  ),
+  Contact(
+    id:"11",
+    name : "KIMS GH Block C",
+    designation: null,
+    number: "8114379351",
+  ),
+];
+
+List<Contact> hostelAuthorities = [
   Contact(
     id: "01",
     name: "Dr. Biswajit Sahoo",
@@ -149,25 +365,40 @@ List<Contact> contacts = [
   ),
 ];
 
+List<Contact> contactsHelpLine = [
+  Contact(
+    id: "01",
+    name: "KIIT Contact Us - 1",
+    designation: "HelpDesk 1",
+    number: "6742725113",
+  ),
+  Contact(
+    id: "02",
+    name: "KIIT Contact Us - 2",
+    designation: "HelpDesk 2",
+    number: "6742741389",
+  ),
+];
+
 List<ContactCategory> contactCategoryList = [
   ContactCategory(
     id: "01",
-    name: "Boy's Hostel",
-    contacts: contacts
+    name: "Boy's Hostels",
+    contacts: kpHostels
   ),
   ContactCategory(
     id: "02",
-    name: "Girl's Hostel",
-    contacts: contacts
+    name: "Girl's Hostels",
+    contacts: qcHostels
   ),
   ContactCategory(
     id: "03",
     name: "Administration",
-    contacts: contacts
+    contacts: hostelAuthorities
   ),
   ContactCategory(
-    id: "0990",
+    id: "04",
     name: "Helplines",
-    contacts: contacts
+    contacts: contactsHelpLine
   ),
 ];

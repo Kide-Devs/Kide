@@ -1,4 +1,7 @@
+import 'package:kide/models/Contact.dart';
+import 'package:kide/models/EmergencyContact.dart';
 import 'package:kide/models/EventCategory.dart';
+import 'package:kide/models/ContactCategory.dart';
 import 'package:kide/models/SubEvent.dart';
 import 'package:flutter/material.dart';
 
@@ -90,4 +93,81 @@ List<EventCategory> eventCategories = [
     name: "Cultural", 
     subEvents: subEvents,
   )
+];
+
+List<EmergencyContact> emergency = [
+  EmergencyContact(
+    color: Colors.red, 
+    icon: Icons.local_hospital, 
+    emergency: 'Hospital', 
+    number: '108'
+  ),
+  EmergencyContact(
+    color: Colors.red, 
+    icon: Icons.local_hospital, 
+    emergency: 'Police', 
+    number: '100'
+  ),
+  EmergencyContact(
+    color: Colors.red, 
+    icon: Icons.local_hospital, 
+    emergency: 'Fire Brigade', 
+    number: '101'
+  ),
+];
+
+List<Contact> contacts = [
+  Contact(
+    id: "01",
+    name: "Dr. Biswajit Sahoo",
+    designation: "Chief Warden of Hostel",
+    number: "9437229507",
+  ),
+  Contact(
+    id: "02",
+    name: "Mr. S.K. Rath",
+    designation: "Dy. Registrar (Hostel)",
+    number: "9437020234",
+  ),
+  Contact(
+    id: "03",
+    name: "Dr. A.A. Acharya",
+    designation: "Sr. Superintendent",
+    number: "9861058079",
+  ),
+  Contact(
+    id: "04",
+    name: "Dr. Manoj Kumar Mishra",
+    designation: "Superintendent",
+    number: "9937335233",
+  ),
+  Contact(
+    id: "05",
+    name: "Prof. Anil Kumar Swain",
+    designation: "Dy. Superintendent",
+    number: "9938853866",
+  ),
+];
+
+List<ContactCategory> contactCategoryList = [
+  ContactCategory(
+    id: "01",
+    name: "Boy's Hostel",
+    contacts: contacts
+  ),
+  ContactCategory(
+    id: "02",
+    name: "Girl's Hostel",
+    contacts: contacts
+  ),
+  ContactCategory(
+    id: "03",
+    name: "Administration",
+    contacts: contacts
+  ),
+  ContactCategory(
+    id: "0990",
+    name: "Helplines",
+    contacts: contacts
+  ),
 ];

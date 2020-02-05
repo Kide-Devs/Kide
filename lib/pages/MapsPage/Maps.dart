@@ -9,7 +9,6 @@ import 'dart:math' as math;
 
 import 'package:kide/pages/MapsPage/models/FilterCategories.dart';
 
-
 void main() => runApp(MapsPage());
 
 class MapsPage extends StatefulWidget {
@@ -95,7 +94,20 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
     });
   }
 
-  Future<List<Marker>> _getAllMarkers(String text) {}
+  // Future<List<Marker>> _getAllMarkers(String text) {}
+
+  void _getSearchResult() async {
+    Marker searchedMarker = await Navigator.push(
+        context, MaterialPageRoute(builder: (context) => SearchBar()));
+
+    mapController.animateCamera(CameraUpdate.newCameraPosition(
+      CameraPosition(
+        target: searchedMarker.position,
+        zoom: 20.0,
+        tilt: 60,
+      ),
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,33 +132,30 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
             rotateGesturesEnabled: true,
             tiltGesturesEnabled: true,
             indoorViewEnabled: true,
-            padding: const EdgeInsets.only(top: 96.0, right: 130.0),
+            padding: const EdgeInsets.only(top: 96.0, right: 0.0),
           ),
           SafeArea(
-            child: Hero(
-              tag: 'searchmaps',
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Material(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: TextField(
-                    cursorColor: Color(0x0070f0),
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => SearchBar()));
-                    },
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(16.0),
-                      fillColor: Colors.black,
-                      filled: true,
-                      hintText: 'Search for a location',
-                      prefixIcon: Icon(Icons.search),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                        borderSide: BorderSide(
-                          width: 0,
-                          style: BorderStyle.none,
-                        ),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Material(
+                borderRadius: BorderRadius.circular(8.0),
+                child: TextField(
+                  cursorColor: Color(0x0070f0),
+                  onTap: () {
+                    _getSearchResult();
+                    FocusScope.of(context).requestFocus(new FocusNode());
+                  },
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(16.0),
+                    fillColor: Colors.black,
+                    filled: true,
+                    hintText: 'Search for a location',
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(
+                        width: 0,
+                        style: BorderStyle.none,
                       ),
                     ),
                   ),
@@ -155,7 +164,7 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
             ),
           ),
           Positioned(
-            bottom: 20,
+            bottom: 64,
             child: MaterialButton(
               elevation: 8,
               shape: CircleBorder(),
@@ -182,7 +191,7 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
             child: ScaleTransition(
               scale: CurvedAnimation(
                 parent: _controller,
-                curve: Interval(0.0, 1.0 - index / _categories.length / 2.0,
+                curve: Interval(0.0, 1.0 - (index+1) / _categories.length / 2.0,
                     curve: Curves.easeOut),
               ),
               child: FloatingActionButton(
@@ -204,18 +213,21 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
           return child;
         }).toList()
           ..add(
-            FloatingActionButton(
-              heroTag: hashCode,
-              child: AnimatedFilterWidget(controller: _controller),
-              onPressed: () {
-                if (_controller.isDismissed) {
-                  _controller.forward();
-                  _clearSearchFilter();
-                } else {
-                  _addSearchFilter(categoriesAll);
-                  _controller.reverse();
-                }
-              },
+            Padding(
+              padding: EdgeInsets.only(bottom: 48),
+              child: FloatingActionButton(
+                heroTag: hashCode,
+                child: AnimatedFilterWidget(controller: _controller),
+                onPressed: () {
+                  if (_controller.isDismissed) {
+                    _controller.forward();
+                    _clearSearchFilter();
+                  } else {
+                    _addSearchFilter(categoriesAll);
+                    _controller.reverse();
+                  }
+                },
+              ),
             ),
           ),
       ),

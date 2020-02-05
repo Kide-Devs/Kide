@@ -76,8 +76,8 @@ class _SearchBarState extends State<SearchBar> {
       return _markers.map((marker) => ChildItem(marker)).toList();
     } else {
       List<Marker> _searchList = List();
-      for (int i = 0; i < _markers.length; i++) {
-        Marker marker = _markers.elementAt(i);
+      for (int i = 0; i < markers['all'].length; i++) {
+        Marker marker = markers['all'].elementAt(i);
         String title = marker.infoWindow.title;
         String description = marker.infoWindow.snippet;
 
@@ -97,48 +97,45 @@ class _SearchBarState extends State<SearchBar> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            Hero(
-              tag: 'searchmaps',
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Material(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: TextField(
-                    controller: _searchQuery,
-                    cursorColor: Color(0x0070f0),
-                    autofocus: true,
-                    focusNode: _focus,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(16.0),
-                      fillColor: Colors.black,
-                      filled: true,
-                      hintText: 'Search for a location',
-                      prefixIcon: Icon(Icons.search),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(
-                          width: 1,
-                          style: BorderStyle.solid,
-                          color: Colors.white,
-                        ),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: BorderSide(
-                          width: 1,
-                          style: BorderStyle.solid,
-                        ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Material(
+                borderRadius: BorderRadius.circular(8.0),
+                child: TextField(
+                  controller: _searchQuery,
+                  cursorColor: Color(0x0070f0),
+                  autofocus: true,
+                  focusNode: _focus,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(16.0),
+                    fillColor: Colors.black,
+                    filled: true,
+                    hintText: 'Search for a location',
+                    prefixIcon: Icon(Icons.search),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        width: 1,
+                        style: BorderStyle.solid,
+                        color: Colors.white,
                       ),
                     ),
-                    // onChanged: ,
-                    // onSubmitted: ,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        width: 1,
+                        style: BorderStyle.solid,
+                      ),
+                    ),
                   ),
+                  // onChanged: ,
+                  // onSubmitted: ,
                 ),
               ),
             ),
             Expanded(
               child: Container(
-                height: MediaQuery.of(context).size.height,
+                height: 500,
                 child: ListView(
                   padding: EdgeInsets.symmetric(vertical: 16.0),
                   children: _isSearching ? _buildSearchList() : _buildList(),
@@ -165,7 +162,7 @@ class ChildItem extends StatelessWidget {
       isThreeLine: true,
       enabled: true,
       onTap: () {
-        print(this.marker.infoWindow.title);
+        Navigator.pop(context, marker);
       },
     );
   }

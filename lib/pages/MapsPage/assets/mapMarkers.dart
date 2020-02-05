@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 //Campus
@@ -37,6 +38,7 @@ Set<Marker> foodcourts = {
       title: 'KP 7 Food Court',
       snippet: 'Amazon Delivery Stop',
     ),
+    consumeTapEvents: true,
   ),
 };
 

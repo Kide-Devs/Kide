@@ -6,7 +6,9 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:kide/pages/MapsPage/assets/MapMarkers.dart';
 import 'dart:math' as math;
+
 import 'package:kide/pages/MapsPage/models/FilterCategories.dart';
+
 
 void main() => runApp(MapsPage());
 

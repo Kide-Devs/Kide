@@ -1,3 +1,4 @@
+import 'package:kide/config/Viewport.dart';
 import 'package:kide/pages/EventsPage/widgets/ExpansionTitle.dart';
 import 'package:kide/models/SubEvent.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,6 @@ class EntryItem extends StatefulWidget {
 
 class _EntryItemState extends State<EntryItem> {
   bool exp = false;
-  bool _bookmarked = false;
   void onExpansionChanged(bool val) {
     setState(() {
       exp = val;
@@ -30,7 +30,7 @@ class _EntryItemState extends State<EntryItem> {
 
   Widget _buildTiles(SubEvent root, BuildContext context) {
     final _bookmarksState = Provider.of<Bookmarks>(context);
-    
+    ViewPort().init(context);
 
     return Theme(
         data: ThemeData(
@@ -114,10 +114,9 @@ class _EntryItemState extends State<EntryItem> {
                   height: 20,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    Container(
-                      width: 190,
-                    ),
+                    
                     FlatButton(
                       onPressed: () {
                         print("details");
@@ -141,6 +140,9 @@ class _EntryItemState extends State<EntryItem> {
                         borderRadius: BorderRadius.circular(20)
                       )
                     ),
+                    Container(
+                      width: 16,
+                    )
                   ],
                 ),
                 Container(

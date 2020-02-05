@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:kide/pages/MapsPage/assets/GoogleMapsKey.dart';
-import 'package:kide/pages/MapsPage/widgets/FilterCategory.dart';
+import 'package:kide/pages/MapsPage/models/FilterCategory.dart';
+import 'package:kide/pages/MapsPage/widgets/SearchBar.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:kide/pages/MapsPage/assets/MapMarkers.dart';
 import 'dart:math' as math;
-import 'package:kide/pages/MapsPage/widgets/FilterCategories.dart';
-import 'package:search_map_place/search_map_place.dart';
+import 'package:kide/pages/MapsPage/models/FilterCategories.dart';
 
 void main() => runApp(MapsPage());
 
@@ -17,6 +16,7 @@ class MapsPage extends StatefulWidget {
 }
 
 class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
+  final key = GlobalKey<ScaffoldState>(debugLabel: '_mapScreenkey');
   //Google Maps controller
   GoogleMapController mapController;
   //Latitude and Lingitude of KIIT
@@ -79,7 +79,6 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
       category.toggle();
       if (category.isToggled == true) {
         _markers = _markers.union(markers[category.label]);
-        // _markers = markers[categoriesAll.label];
       } else {
         _markers = _markers.difference(markers[category.label]);
       }
@@ -94,9 +93,12 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
     });
   }
 
+  Future<List<Marker>> _getAllMarkers(String text) {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: key,
       body: Stack(
         children: [
           GoogleMap(
@@ -108,7 +110,7 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
               tilt: 60,
             ),
             buildingsEnabled: true,
-            mapToolbarEnabled: false,
+            mapToolbarEnabled: true,
             myLocationEnabled: true,
             myLocationButtonEnabled: false,
             compassEnabled: true,
@@ -116,14 +118,56 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
             rotateGesturesEnabled: true,
             tiltGesturesEnabled: true,
             indoorViewEnabled: true,
+            padding: const EdgeInsets.only(top: 96.0, right: 130.0),
           ),
-          // Container(
-          //   width: MediaQuery.of(context).size.width - 64,
-          //   height: 40,
-          //   margin: EdgeInsets.fromLTRB(32, 50, 0, 0),
-          //   color: Colors.white,
-          //   child: Text('Search', style: TextStyle(color: Colors.black),),
-          // ),
+          SafeArea(
+            child: Hero(
+              tag: 'searchmaps',
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Material(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: TextField(
+                    cursorColor: Color(0x0070f0),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => SearchBar()));
+                    },
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(16.0),
+                      fillColor: Colors.black,
+                      filled: true,
+                      hintText: 'Search for a location',
+                      prefixIcon: Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide(
+                          width: 0,
+                          style: BorderStyle.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            child: MaterialButton(
+              elevation: 8,
+              shape: CircleBorder(),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.my_location,
+                  color: Colors.blue,
+                ),
+              ),
+              color: Colors.white,
+              onPressed: _currentLocation,
+            ),
+          ),
         ],
       ),
       floatingActionButton: Column(
@@ -170,14 +214,6 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
                   _controller.reverse();
                 }
               },
-            ),
-          )
-          ..add(SizedBox(height: 16))
-          ..add(
-            FloatingActionButton(
-              child: Icon(Icons.my_location),
-              heroTag: hashCode,
-              onPressed: _currentLocation,
             ),
           ),
       ),

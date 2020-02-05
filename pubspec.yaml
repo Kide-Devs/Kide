@@ -54,7 +54,10 @@ flutter:
    - ./lib/assets/event.jpg
    - ./lib/pages/EventsPage/assets/time.svg
    - ./lib/pages/EventsPage/assets/bookmark.svg
-   - ./lib/assets/diamond.png
+   - ./lib/assets/Icon/kide_logoxxxhdpi.png
+   - ./lib/assets/Contacts_Page_OnBoarding.jpg
+   - ./lib/assets/Events_Page_OnBoarding.jpg
+   - ./lib/assets/Maps_Page_OnBoarding.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

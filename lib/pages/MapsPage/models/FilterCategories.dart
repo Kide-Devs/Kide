@@ -1,4 +1,4 @@
-import 'package:kide/pages/MapsPage/widgets/FilterCategory.dart';
+import 'package:kide/pages/MapsPage/models/FilterCategory.dart';
 import 'package:flutter/material.dart';
 
 List<FilterCategory> categories = [

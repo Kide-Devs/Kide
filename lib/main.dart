@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool firstTime = prefs.getBool('first_time');
 
-    var _duration = new Duration(seconds: 1);
+    var _duration = new Duration(seconds: 2);
 
     if (firstTime != null && !firstTime) {// Not first time
       return new Timer(_duration, navigationMyApp);
@@ -57,8 +57,8 @@ class _SplashScreenState extends State<SplashScreen> {
           Center(
             child: new Image.asset(
               'lib/assets/Icon/kide_logoxxxhdpi.png',
-              width: size.width,
-              height: size.height,
+              width: size.width/2,
+              height: size.height/2,
               fit: BoxFit.fill,
             ),
           ),

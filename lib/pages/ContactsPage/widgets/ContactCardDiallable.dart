@@ -20,6 +20,8 @@ class ContactCardDiallable extends StatelessWidget{
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0)
       ),
+      child: Padding(
+        padding: const EdgeInsets.all(18.0),
       child: new InkWell(
         onTap:(){
           launch('tel:\\$number');
@@ -62,9 +64,9 @@ class ContactCardDiallable extends StatelessWidget{
         ),
         )
       )
-    );
+    ),
+   );
+  }
 }
-}
-
 
 

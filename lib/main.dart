@@ -1,91 +1,69 @@
 import 'package:flutter/material.dart';
-import 'package:kide/pages/ContactsPage/ContactList.dart';
-import 'package:kide/pages/EventsPage/BookmarksPage.dart';
-import 'package:kide/providers/bookmarks.dart';
-import 'package:provider/provider.dart';
-import 'package:kide/pages/ContactsPage/Contacts.dart';
-import 'package:kide/pages/ContactsPage/ContactList.dart';
-import 'package:kide/pages/EventsPage/Events.dart';
-import 'package:kide/pages/EventsPage/SubEvents.dart';
-import 'package:kide/pages/Home.dart';
-import 'package:kide/pages/MapsPage/Maps.dart';
-import 'package:kide/pages/More.dart';
-import 'package:kide/providers/router.dart';
-import 'package:kide/widgets/BottomNav.dart';
+import 'dart:async';
+import './OnBoarding.dart';
+import './MyApp.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  
+void main() {
+  runApp(new MaterialApp(
+    home: new SplashScreen(),
+    routes: <String, WidgetBuilder>{
+      '/OnBoarding': (BuildContext context) => new OnBoarding(),
+      '/MyApp': (BuildContext context) => new MyApp()
+    },
+  ));
+}
+
+class SplashScreen extends StatefulWidget {
   @override
+  _SplashScreenState createState() => new _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  startTime() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool firstTime = prefs.getBool('first_time');
+
+    var _duration = new Duration(seconds: 2);
+
+    if (firstTime != null && !firstTime) {// Not first time
+      return new Timer(_duration, navigationMyApp);
+    } else {// First time
+      prefs.setBool('first_time', false);
+      return new Timer(_duration, navigationOnBoarding);
+    }
+  }
+
+  void navigationMyApp() {
+    Navigator.of(context).pushReplacementNamed('/MyApp');
+  }
+
+  void navigationOnBoarding() {
+    Navigator.of(context).pushReplacementNamed('/OnBoarding');
+  }
+  @override
+  void initState() {
+    super.initState();
+    startTime();
+  }
+
+@override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider( create: (context) => Router()),
-        ChangeNotifierProvider( create: (context) => Bookmarks()),
-      ],
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData.dark(),
-        home: MyHomePage(title: 'KIDE'),
-        routes: {
-          SubEvents.routeName: (context) => SubEvents(),
-          BookmarksPage.routeName: (context) => BookmarksPage(),
-          ContactList.routeName: (context) => ContactList(),
-        },
+    Size size = MediaQuery.of(context).size;
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          Center(
+            child: new Image.asset(
+              'lib/assets/diamond.png',
+              width: size.width,
+              height: size.height,
+              fit: BoxFit.fill,
+            ),
+          ),
+        ],
       ),
     );
   }
 }
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  final List<Widget> _tabs = [
-    MapsPage(),
-    ContactsPage(),
-    HomePage(),
-    EventsPage(),
-    MorePage(),
-  ];
-
-  final List<String> _tabNames = [
-    "Maps",
-    "Contacts",
-    "Home",
-    "Events",
-    "More"
-  ];
-  
-  @override
-  Widget build(BuildContext context) {
-    
-    final indexState = Provider.of<Router>(context);
-
-    return Scaffold(
-      appBar: indexState.bottomNavIndex != 0 ? AppBar(
-        title: Center(
-          child: Text(
-            _tabNames[indexState.bottomNavIndex],
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'Roboto',
-            ),
-          )
-        ),
-      ): null,
-      backgroundColor: Color.fromRGBO(18, 18, 18, 1.0),
-      body: _tabs[indexState.bottomNavIndex],
-      bottomNavigationBar: BottomNav(),
-    );
-  }
-}
-

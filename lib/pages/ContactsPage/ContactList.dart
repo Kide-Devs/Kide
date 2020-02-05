@@ -31,22 +31,19 @@ class ContactList extends StatelessWidget {
                     color: Colors.white,
                     endIndent: 194.0,
                   ),
-                  RotationTransition(
-                    turns: AlwaysStoppedAnimation(750/360),
-                    child: Divider(
-                      height: 0.0,
-                      color: Colors.white,
-                      indent: 163.5,
-                      endIndent: 175.0,
-                    ),
-                  ),
+                  // RotationTransition(
+                  //   turns: AlwaysStoppedAnimation(750/360),
+                  //   child: Divider(
+                  //     height: 0.0,
+                  //     color: Colors.white,
+                  //     indent: 163.5,
+                  //     endIndent: 175.0,
+                  //   ),
+                  // ),
                 ],
               ),
             ),
-            SliverGrid(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1,
-              ),
+            SliverList(
               delegate: SliverChildListDelegate(
                 [
                   for(int i=0;i<_contactList.length;i++)

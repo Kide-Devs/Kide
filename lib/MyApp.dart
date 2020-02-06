@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:kide/pages/ContactsPage/Contacts.dart';
 import 'package:kide/pages/EventsPage/Events.dart';
 import 'package:kide/pages/EventsPage/SubEvents.dart';
-import 'package:kide/pages/Home.dart';
+import 'package:kide/pages/HomePage/Home.dart';
 import 'package:kide/pages/MapsPage/Maps.dart';
 import 'package:kide/pages/More.dart';
 import 'package:kide/providers/router.dart';

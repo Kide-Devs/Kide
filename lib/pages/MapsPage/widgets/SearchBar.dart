@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:kide/pages/MapsPage/assets/MapMarkers.dart';
+import 'package:kide/pages/MapsPage/assets/mapMarkers.dart';
 import 'package:kide/pages/MapsPage/models/SuggestedMarkers.dart';
 
 void main() => runApp(MaterialApp(home: SearchBar()));

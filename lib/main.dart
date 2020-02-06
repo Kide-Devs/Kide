@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import './OnBoarding.dart';
+import 'package:kide/pages/OnBoarding/OnBoarding.dart';
 import './MyApp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 void main() {
   runApp(new MaterialApp(
     home: new SplashScreen(),
     routes: <String, WidgetBuilder>{
-      '/OnBoarding': (BuildContext context) => new OnBoarding(),
+      '/OnBoarding': (BuildContext context) => new OnboardingMainPage(),
       '/MyApp': (BuildContext context) => new MyApp()
     },
   ));
@@ -52,13 +51,14 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Stack(
         children: <Widget>[
           Center(
             child: new Image.asset(
-              'lib/assets/diamond.png',
-              width: size.width,
-              height: size.height,
+              'lib/assets/Icon/kide_logoxxxhdpi.png',
+              width: size.width/2,
+              height: size.height/2,
               fit: BoxFit.fill,
             ),
           ),

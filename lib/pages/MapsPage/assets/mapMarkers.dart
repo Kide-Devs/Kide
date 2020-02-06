@@ -37,7 +37,6 @@ Set<Marker> foodcourts = {
       title: 'KP 7 Food Court',
       snippet: 'Amazon Delivery Stop',
     ),
-    consumeTapEvents: true,
   ),
 };
 

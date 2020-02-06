@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:kide/pages/MapsPage/assets/GoogleMapsKey.dart';
-import 'package:kide/pages/MapsPage/widgets/FilterCategory.dart';
+import 'package:kide/pages/MapsPage/models/FilterCategory.dart';
+import 'package:kide/pages/MapsPage/widgets/SearchBar.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:kide/pages/MapsPage/assets/MapMarkers.dart';
+import 'package:kide/pages/MapsPage/assets/mapMarkers.dart';
 import 'dart:math' as math;
-import 'package:kide/pages/MapsPage/widgets/FilterCategories.dart';
+
+import 'package:kide/pages/MapsPage/models/FilterCategories.dart';
 
 void main() => runApp(MapsPage());
 
@@ -16,6 +17,7 @@ class MapsPage extends StatefulWidget {
 }
 
 class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
+  final key = GlobalKey<ScaffoldState>(debugLabel: '_mapScreenkey');
   //Google Maps controller
   GoogleMapController mapController;
   //Latitude and Lingitude of KIIT
@@ -78,7 +80,6 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
       category.toggle();
       if (category.isToggled == true) {
         _markers = _markers.union(markers[category.label]);
-        // _markers = markers[categoriesAll.label];
       } else {
         _markers = _markers.difference(markers[category.label]);
       }
@@ -93,9 +94,25 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
     });
   }
 
+  // Future<List<Marker>> _getAllMarkers(String text) {}
+
+  void _getSearchResult() async {
+    Marker searchedMarker = await Navigator.push(
+        context, MaterialPageRoute(builder: (context) => SearchBar()));
+
+    mapController.animateCamera(CameraUpdate.newCameraPosition(
+      CameraPosition(
+        target: searchedMarker.position,
+        zoom: 20.0,
+        tilt: 60,
+      ),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: key,
       body: Stack(
         children: [
           GoogleMap(
@@ -107,7 +124,7 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
               tilt: 60,
             ),
             buildingsEnabled: true,
-            mapToolbarEnabled: false,
+            mapToolbarEnabled: true,
             myLocationEnabled: true,
             myLocationButtonEnabled: false,
             compassEnabled: true,
@@ -115,14 +132,53 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
             rotateGesturesEnabled: true,
             tiltGesturesEnabled: true,
             indoorViewEnabled: true,
+            padding: const EdgeInsets.only(top: 96.0, right: 0.0),
           ),
-          // Container(
-          //   width: MediaQuery.of(context).size.width - 64,
-          //   height: 40,
-          //   margin: EdgeInsets.fromLTRB(32, 50, 0, 0),
-          //   color: Colors.white,
-          //   child: Text('Search', style: TextStyle(color: Colors.black),),
-          // ),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Material(
+                borderRadius: BorderRadius.circular(8.0),
+                child: TextField(
+                  cursorColor: Color(0x0070f0),
+                  onTap: () {
+                    _getSearchResult();
+                    FocusScope.of(context).requestFocus(new FocusNode());
+                  },
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(16.0),
+                    fillColor: Colors.black,
+                    filled: true,
+                    hintText: 'Search for a location',
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(
+                        width: 0,
+                        style: BorderStyle.none,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 64,
+            child: MaterialButton(
+              elevation: 8,
+              shape: CircleBorder(),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.my_location,
+                  color: Colors.blue,
+                ),
+              ),
+              color: Colors.white,
+              onPressed: _currentLocation,
+            ),
+          ),
         ],
       ),
       floatingActionButton: Column(
@@ -135,7 +191,7 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
             child: ScaleTransition(
               scale: CurvedAnimation(
                 parent: _controller,
-                curve: Interval(0.0, 1.0 - index / _categories.length / 2.0,
+                curve: Interval(0.0, 1.0 - (index+1) / _categories.length / 2.0,
                     curve: Curves.easeOut),
               ),
               child: FloatingActionButton(
@@ -157,26 +213,21 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
           return child;
         }).toList()
           ..add(
-            FloatingActionButton(
-              heroTag: hashCode,
-              child: AnimatedFilterWidget(controller: _controller),
-              onPressed: () {
-                if (_controller.isDismissed) {
-                  _controller.forward();
-                  _clearSearchFilter();
-                } else {
-                  _addSearchFilter(categoriesAll);
-                  _controller.reverse();
-                }
-              },
-            ),
-          )
-          ..add(SizedBox(height: 16))
-          ..add(
-            FloatingActionButton(
-              child: Icon(Icons.my_location),
-              heroTag: hashCode,
-              onPressed: _currentLocation,
+            Padding(
+              padding: EdgeInsets.only(bottom: 48),
+              child: FloatingActionButton(
+                heroTag: hashCode,
+                child: AnimatedFilterWidget(controller: _controller),
+                onPressed: () {
+                  if (_controller.isDismissed) {
+                    _controller.forward();
+                    _clearSearchFilter();
+                  } else {
+                    _addSearchFilter(categoriesAll);
+                    _controller.reverse();
+                  }
+                },
+              ),
             ),
           ),
       ),

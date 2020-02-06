@@ -4,6 +4,7 @@ import 'package:kide/data.dart';
 import 'package:kide/pages/ContactsPage/widgets/HeaderWidget.dart';
 import 'package:kide/pages/ContactsPage/widgets/EmergencyCard.dart';
 import 'package:kide/pages/ContactsPage/widgets/CategoryCard.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() => runApp(ContactsPage());
 
@@ -13,9 +14,34 @@ List<StaggeredTile> _staggeredTiles = const <StaggeredTile>[
   const StaggeredTile.count(4, 1),
 ];
 
-class ContactsPage extends StatelessWidget {
+class ContactsPage extends StatefulWidget {
+  @override
+  _ContactsPageState createState() => _ContactsPageState();
+}
+
+class _ContactsPageState extends State<ContactsPage> {
   final _contactCategories = contactCategoryList;
+
   final _emergencyContacts = emergency;
+
+  Future<void> _getPermissions() async {
+    Map<PermissionGroup, PermissionStatus> permissions =
+        await PermissionHandler()
+            .requestPermissions([PermissionGroup.contacts]);
+    PermissionStatus permission = await PermissionHandler()
+        .checkPermissionStatus(PermissionGroup.contacts);
+    ServiceStatus serviceStatus =
+        await PermissionHandler().checkServiceStatus(PermissionGroup.contacts);
+    bool isShown = await PermissionHandler()
+        .shouldShowRequestPermissionRationale(PermissionGroup.contacts);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getPermissions();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

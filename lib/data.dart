@@ -4,6 +4,26 @@ import 'package:kide/models/EventCategory.dart';
 import 'package:kide/models/ContactCategory.dart';
 import 'package:kide/models/SubEvent.dart';
 import 'package:flutter/material.dart';
+import 'package:kide/models/EventDetail.dart';
+
+List <EventDetail> eventDetails = [
+  EventDetail(
+    id: "01",
+    description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet."
+  ),
+  EventDetail(
+    id: "02",
+    description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet."
+  ),
+  EventDetail(
+    id: "03",
+    description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet."
+  ),
+  EventDetail(
+    id: "04",
+    description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet."
+  ),
+];
 
 List<SubEvent> subEvents = [
   SubEvent(
@@ -15,82 +35,86 @@ List<SubEvent> subEvents = [
     location: "Campus 6, Seminar Hall 1",
     isBookmarked: false,
     linkDetails: "www.google.com",
-    linkRegister: "www.facebook.com"
+    linkRegister: "www.facebook.com",
+    details: eventDetails,
   ),
   SubEvent(
     id: Key("0002"),
     name: "Alankar1",
-    date: "1st March 2020",
+    date: "2nd March 2020",
     time: "09:00 PM",
     description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
     location: "Campus 6, Seminar Hall 1",
     isBookmarked: false,
     linkDetails: "www.google.com",
-    linkRegister: "www.facebook.com"
+    linkRegister: "www.facebook.com",
+    details: eventDetails,
   ),
   SubEvent(
     id: Key("0003"),
     name: "Alankar2",
-    date: "1st March 2020",
+    date: "3rd March 2020",
     time: "09:00 PM",
     description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
     location: "Campus 6, Seminar Hall 1",
     isBookmarked: false,
     linkDetails: "www.google.com",
-    linkRegister: "www.facebook.com"
+    linkRegister: "www.facebook.com",
+    details: eventDetails,
   ),
   SubEvent(
     id: Key("0004"),
     name: "Alankar3",
-    date: "1st March 2020",
+    date: "4th March 2020",
     time: "09:00 PM",
     description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
     location: "Campus 6, Seminar Hall 1",
     isBookmarked: false,
     linkDetails: "www.google.com",
-    linkRegister: "www.facebook.com"
+    linkRegister: "www.facebook.com",
+    details: eventDetails,
   )
 ];
 
 List<EventCategory> eventCategories = [
   EventCategory(
     id: "001", 
-    name: "Cultural", 
+    name: "Cricket", 
     subEvents: subEvents,
   ),
   EventCategory(
     id: "001", 
-    name: "Luminare", 
+    name: "Hockey", 
     subEvents: subEvents,
   ),
   EventCategory(
     id: "001", 
-    name: "ElectroNerds", 
+    name: "Tennis", 
     subEvents: subEvents,
   ),
   EventCategory(
     id: "001", 
-    name: "Chastermef", 
+    name: "Wrestling", 
     subEvents: subEvents,
   ),
   EventCategory(
     id: "001", 
-    name: "Builder.io", 
+    name: "Archery", 
     subEvents: subEvents,
   ),
   EventCategory(
     id: "001", 
-    name: "Mekanix", 
+    name: "Football", 
     subEvents: subEvents,
   ),
   EventCategory(
     id: "001", 
-    name: "Bionymph", 
+    name: "BasketBall", 
     subEvents: subEvents,
   ),
   EventCategory(
     id: "001", 
-    name: "Cultural", 
+    name: "Badminton", 
     subEvents: subEvents,
   )
 ];

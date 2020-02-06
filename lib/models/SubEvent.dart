@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:kide/models/EventDetail.dart';
 
 class SubEvent {
   final Key id;
@@ -10,6 +11,7 @@ class SubEvent {
   final String linkDetails;
   final String linkRegister;
   bool isBookmarked;
+  final List<EventDetail> details;
 
   SubEvent({
     @required this.id,
@@ -21,5 +23,6 @@ class SubEvent {
     @required this.linkDetails,
     @required this.linkRegister,
     this.isBookmarked,
+    @required this.details
   });
 }

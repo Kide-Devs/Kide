@@ -4,7 +4,7 @@ import 'package:kide/pages/MapsPage/models/FilterCategory.dart';
 import 'package:kide/pages/MapsPage/widgets/SearchBar.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:kide/pages/MapsPage/assets/MapMarkers.dart';
+import 'package:kide/pages/MapsPage/assets/mapMarkers.dart';
 import 'dart:math' as math;
 
 import 'package:kide/pages/MapsPage/models/FilterCategories.dart';

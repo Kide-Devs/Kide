@@ -59,6 +59,7 @@ flutter:
    - ./lib/assets/contact.jpg
    - ./lib/assets/events.jpg
    - ./lib/assets/maps.jpg
+   - ./lib/pages/HomePage/assets/KIUG_KIIT.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

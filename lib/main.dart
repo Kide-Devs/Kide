@@ -26,9 +26,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
     var _duration = new Duration(seconds: 2);
 
-    if (firstTime != null && !firstTime) {// Not first time
+    if (firstTime != null && !firstTime) {
+      // Not first time
       return new Timer(_duration, navigationMyApp);
-    } else {// First time
+    } else {
+      // First time
       prefs.setBool('first_time', false);
       return new Timer(_duration, navigationOnBoarding);
     }
@@ -41,27 +43,45 @@ class _SplashScreenState extends State<SplashScreen> {
   void navigationOnBoarding() {
     Navigator.of(context).pushReplacementNamed('/OnBoarding');
   }
+
   @override
   void initState() {
     super.initState();
     startTime();
   }
 
-@override
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Stack(
+      body: Column(
+        // crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Center(
-            child: new Image.asset(
-              'lib/assets/Icon/kide_logoxxxhdpi.png',
-              width: size.width/2,
-              height: size.height/2,
-              fit: BoxFit.fill,
-            ),
+          Stack(
+            children: <Widget>[
+              Center(
+                child: new Image.asset('lib/assets/Icon/kide_logoldpi.png',
+                    width: size.width / 4,
+                    height: size.height / 4,
+                    fit: BoxFit.contain),
+              ),
+            ],
           ),
+          AnimatedOpacity(
+            opacity: 0.8,
+            duration: Duration(milliseconds: 4500),
+            curve: Curves.easeInOut,
+            child: Text(
+              'KIDE',
+              style: TextStyle(
+                fontSize: 20.0,
+                color: Colors.white,
+                letterSpacing: 25.0,
+              ),
+            ),
+          )
         ],
       ),
     );

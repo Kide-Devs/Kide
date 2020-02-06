@@ -55,6 +55,7 @@ flutter:
    - ./lib/pages/EventsPage/assets/time.svg
    - ./lib/pages/EventsPage/assets/bookmark.svg
    - ./lib/assets/Icon/kide_logoxxxhdpi.png
+   - ./lib/assets/Icon/kide_logoldpi.png
    - ./lib/assets/Contacts_Page_OnBoarding.jpg
    - ./lib/assets/Events_Page_OnBoarding.jpg
    - ./lib/assets/Maps_Page_OnBoarding.jpg

@@ -3,6 +3,7 @@ import 'package:kide/models/Contact.dart';
 import 'package:kide/models/EmergencyContact.dart';
 import 'package:kide/models/EventCategory.dart';
 import 'package:kide/models/ContactCategory.dart';
+import 'package:kide/models/MoreDetailsModel.dart';
 import 'package:kide/models/SubEvent.dart';
 import 'package:flutter/material.dart';
 import 'package:kide/models/EventDetail.dart';
@@ -28,6 +29,33 @@ List <EventDetail> eventDetails = [
     header: "Chief Guest: ",
     desc: "ACO (Not a 3 Star Coder)",
   ),
+];
+
+List<MoreDetailsModel> moreDetails = [
+  MoreDetailsModel(
+    id: "01",
+    header: "KISS",
+    aim: "Our aim is to break the vicious cycle of poverty and social isolation and to restore hope for a better future. We believe that every person has the right to access resources and opportunities in order to live and develop with dignity and to become an active and contributing member of our society.",
+    mission: "To build up KISS as a preferred centre of learning for the poorest of the poor indigenous (tribal) sections of the society with a focus on formal education aimed at providing sustainable livelihood and scope for all-round development.",
+    asset_route: "lib/assets/KISS.png",
+    link: "https://kiss.ac.in/"
+  ),
+  MoreDetailsModel(
+    id: "02",
+    header: "KIIT",
+    aim: "To create an advanced centre of professional learning of international standing where pursuit of knowledge and excellence shall reign supreme, unfettered by the barriers of nationality, language, cultural plurality and religion.",
+    mission: "1) Imparting value based quality education of international standard and imbibing skill for solving real life problems.\n\n2) Inculcating global perspective in attitude.\n\n3) Creating leadership qualities with futuristic vision.\n\n4) Fostering spirit of entrepreneurship and realisation of societal responsibilities.\n\n5) Cultivating adaptation of ethics, morality and healthy practices in professional life.\n\n6) Instilling habit of continual learning.\n\n7) Encouraging and supporting creative abilities and research temperament.\n\n8) Establishing and promoting close interaction with industries and other utility sectors and keep abreast with state-of-the-art technology.",
+    asset_route: "lib/assets/KIIT.jpg",
+    link: "https://kiit.ac.in/"
+  ),
+  // MoreDetailsModel(
+  //   id: "03",
+  //   header: "Our Founder",
+  //   aim: "Achyuta Samanta, after obtaining Master’s Degree in Chemistry in 1987 from Utkal University, started his career at 22 years of age. He has 30 years of teaching experience to his credit so far. Prof. Samanta went on to serve KIIT  as its first Chancellor and has had the distinction of being the youngest Chancellor of any Indian University. He served University Grants Commission (UGC) as Member for two consecutive terms (2008-11 & 2011-2014) and was a Member of the Executive Committee of All Indian Council for Technical Education (AICTE). He was also member of several other Government of India bodies like, NCTE, ISTE, ISCA, COIR BOARD, CAPART and many more. He has been a Member on the Academic Council of Central University, Silchar, Assam and the Central University, Odisha. He was the first Indian to be Member of both UGC and AICTE simultaneously and the first Odia to become Member of UGC and many other statutory bodies. Presently, he is the General President of Indian Science Congress Association (ISCA). He has delivered nearly 100 motivational speeches, including convocation addresses and foundation day lectures, in different institutions and organizations across the country and the globe.",
+  //   mission: "",
+  //   asset_route: "lib/assets/Founder_sir.jpeg",
+  //   link: "https://achyutasamanta.com/"
+  // ),
 ];
 
 List<SubEvent> subEvents = [

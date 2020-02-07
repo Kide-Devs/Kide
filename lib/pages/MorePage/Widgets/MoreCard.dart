@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:kide/pages/MorePage/MoreDetails.dart';
+import 'package:kide/models/MoreDetailsModel.dart';
+
+class MoreCard extends StatelessWidget{
+MoreCard(this._details);
+final MoreDetailsModel _details;
+  @override
+  Widget build(BuildContext context){
+    return Card(
+      margin: EdgeInsets.fromLTRB(5, 15, 5, 15),
+      color: Colors.black26,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0)
+      ),
+      child: new InkWell(
+        onTap:(){
+          Navigator.of(context).pushNamed(
+            MoreDetails.routeName,
+            arguments: _details,
+          );
+          print('More Card tapped');
+        },
+      child: Center(
+        child: Text(_details.header,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 15.0
+          )
+          ),
+        )
+      )
+    );
+  }
+}
+

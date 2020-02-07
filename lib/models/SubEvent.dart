@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:kide/models/EventDetail.dart';
 
 class SubEvent {
@@ -10,6 +11,7 @@ class SubEvent {
   final String location;
   final String linkDetails;
   final String linkRegister;
+  final LatLng marker;
   final List<String> universities;
   bool isBookmarked;
   final List<EventDetail> details;
@@ -21,6 +23,7 @@ class SubEvent {
     @required this.time,
     this.description,
     @required this.location,
+    this.marker,
     @required this.linkDetails,
     @required this.linkRegister,
     @required this.universities,

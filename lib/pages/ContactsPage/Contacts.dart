@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:kide/data.dart';
-import 'package:kide/pages/ContactsPage/widgets/HeaderWidget.dart';
+import 'package:kide/widgets/HeaderWidget.dart';
 import 'package:kide/pages/ContactsPage/widgets/EmergencyCard.dart';
 import 'package:kide/pages/ContactsPage/widgets/CategoryCard.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -52,7 +52,7 @@ class _ContactsPageState extends State<ContactsPage> {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  HeaderWidget("Emergency Contacts"),
+                  HeaderWidget("Emergency Contacts",12),
                   Divider(
                     color: Colors.white,
                     endIndent: 194.0,
@@ -82,7 +82,7 @@ class _ContactsPageState extends State<ContactsPage> {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  HeaderWidget("Other Contacts"),
+                  HeaderWidget("Other Contacts",12),
                   Divider(
                     color: Colors.white,
                     endIndent: 194.0,

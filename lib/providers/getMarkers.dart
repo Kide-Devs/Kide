@@ -11,6 +11,8 @@ class GetMarkers with ChangeNotifier {
   Set<Marker> _food = {};
   Set<Marker> _gates = {};
   Set<Marker> _all = {};
+  Set<Marker> _hostels = {};
+
   List<Marker> _suggestedMarkers = [];
 
   Map<String, Set<Marker>> _markers = {};
@@ -27,6 +29,7 @@ class GetMarkers with ChangeNotifier {
     getMarkerData('campuses', _campuses);
     getMarkerData('food', _food);
     getMarkerData('gates', _gates);
+    getMarkerData('hostels', _hostels);
 
     setMarkerMap();
     // notifyListeners();
@@ -48,12 +51,13 @@ class GetMarkers with ChangeNotifier {
   }
 
   void setMarkerMap() {
-    _all = Set.from(_campuses)..addAll(_food)..addAll(_gates);
+    _all = Set.from(_campuses)..addAll(_food)..addAll(_gates)..addAll(_hostels);
     _markers = {
       'all': _all,
       'campuses': _campuses,
       'food': _food,
       'gates': _gates,
+      'hostels': _hostels,
     };
     // notifyListeners();
   }

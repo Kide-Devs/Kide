@@ -9,19 +9,23 @@ import 'package:kide/models/EventDetail.dart';
 List <EventDetail> eventDetails = [
   EventDetail(
     id: "01",
-    description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet."
+    header: "Rules: ",
+    desc: "Hello world",
   ),
   EventDetail(
     id: "02",
-    description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet."
+    header: "Tickets: ",
+    desc: "Foo Bar",
   ),
   EventDetail(
     id: "03",
-    description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet."
+    header: "Slot Booking: ",
+    desc: "Lorem Ipsum",
   ),
   EventDetail(
     id: "04",
-    description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet."
+    header: "Chief Guest: ",
+    desc: "ACO (Not a 3 Star Coder)",
   ),
 ];
 

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class HeaderWidget extends StatelessWidget{
+  final double _size;
   final String text;
-  HeaderWidget(this.text);
+  HeaderWidget(this.text, this._size);
   @override
   Widget build(BuildContext context){
     return Container(
@@ -10,7 +11,7 @@ class HeaderWidget extends StatelessWidget{
       child: Text(text,
         style: TextStyle(
           color: Colors.white,
-          fontSize: 12.0
+          fontSize: _size
         ),
       )
     );

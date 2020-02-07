@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kide/models/ContactCategory.dart';
 import 'package:kide/pages/ContactsPage/widgets/ContactCardDiallable.dart';
-import 'package:kide/pages/ContactsPage/widgets/HeaderWidget.dart';
+import 'package:kide/widgets/HeaderWidget.dart';
 
 
 
@@ -26,7 +26,7 @@ class ContactList extends StatelessWidget {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  HeaderWidget(contactCategory.name),
+                  HeaderWidget(contactCategory.name,12),
                   Divider(
                     color: Colors.white,
                     endIndent: 194.0,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/SubEvent.dart';
-import 'package:kide/pages/ContactsPage/widgets/HeaderWidget.dart';
+import 'package:kide/widgets/HeaderWidget.dart';
 
 class DetailsPage extends StatelessWidget{
   DetailsPage(this.detail);
@@ -23,22 +23,28 @@ class DetailsPage extends StatelessWidget{
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  HeaderWidget(detail.date),
-                  Divider(
-                    color: Colors.white,
-                    endIndent: 194.0,
-                  ),
                   for(int i = 0;i<detail.details.length; i++)
-                  Center(
-                    child: Text(detail.details[i++].description,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12.0,
-                      ),
-                    ),
-                  )
-                ],
-              ),
+                    Container(
+                      child: Column(
+                        children: [
+                          HeaderWidget(detail.date,15.0),
+                          Divider(
+                            color: Colors.white,
+                            endIndent: 194.0,
+                           ),
+                          Center(
+                            child: Text(detail.details[i].description,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12.0,
+                              ),
+                            ),
+                          )
+                        ]
+                      )
+                    )
+                  ],
+                ),
             ),
           ]
         )

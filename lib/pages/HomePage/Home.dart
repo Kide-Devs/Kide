@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kide/config/Viewport.dart';
+import 'package:kide/providers/getMarkers.dart';
+import 'package:provider/provider.dart';
 import 'package:kide/providers/university.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 
 void main() => runApp(HomePage());
 
@@ -13,14 +14,22 @@ void main() => runApp(HomePage());
 //                                        //
 // ---------------------------------------//
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-
+    // Markers Listner
+    final _getMarkers = Provider.of<GetMarkers>(context);
+    _getMarkers.markers.length == 0 ? _getMarkers.setMarkers() : _getMarkers.setMarkerMap();
+    // University Listener
     final _university = Provider.of<University>(context);
     ViewPort().init(context);
 
-    return Padding(
+    return _getMarkers.markers.length > 0 ? Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
         color: Colors.black12,
@@ -327,6 +336,7 @@ class HomePage extends StatelessWidget {
           ]
         )
       )
-    );
+    )
+    : CircularProgressIndicator();
   }
 }

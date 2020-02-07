@@ -42,6 +42,7 @@ List<SubEvent> subEvents = [
     linkDetails: "www.google.com",
     linkRegister: "www.facebook.com",
     details: eventDetails,
+    university: ["KIIT", "SRM"]
   ),
   SubEvent(
     id: Key("0002"),
@@ -54,6 +55,7 @@ List<SubEvent> subEvents = [
     linkDetails: "www.google.com",
     linkRegister: "www.facebook.com",
     details: eventDetails,
+    university: ["BITS", "VIT"]
   ),
   SubEvent(
     id: Key("0003"),
@@ -66,6 +68,7 @@ List<SubEvent> subEvents = [
     linkDetails: "www.google.com",
     linkRegister: "www.facebook.com",
     details: eventDetails,
+    university: ["NIIT RKL", "IIT KGP"]
   ),
   SubEvent(
     id: Key("0004"),
@@ -78,6 +81,7 @@ List<SubEvent> subEvents = [
     linkDetails: "www.google.com",
     linkRegister: "www.facebook.com",
     details: eventDetails,
+    university: ["UTKAL University", "Jadavpur University"]
   )
 ];
 

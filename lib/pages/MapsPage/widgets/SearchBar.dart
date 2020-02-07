@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:kide/pages/MapsPage/assets/mapMarkers.dart';
-import 'package:kide/pages/MapsPage/models/SuggestedMarkers.dart';
+import 'package:provider/provider.dart';
+import 'package:kide/providers/getMarkers.dart';
 
 void main() => runApp(MaterialApp(home: SearchBar()));
 
@@ -17,6 +17,7 @@ class _SearchBarState extends State<SearchBar> {
   bool _isSearching;
   String _searchText = "";
   List<Marker> _markers;
+  bool _initialLoad = true;
 
   _SearchBarState() {
     _searchQuery.addListener(() {
@@ -39,7 +40,7 @@ class _SearchBarState extends State<SearchBar> {
     super.initState();
     _isSearching = false;
     _focus.addListener(_onFocusChange);
-    init();
+    // init();
   }
 
   void _onFocusChange() {
@@ -48,10 +49,6 @@ class _SearchBarState extends State<SearchBar> {
     } else {
       _handleSearchEnd();
     }
-  }
-
-  void init() {
-    _markers = suggestedMarkers;
   }
 
   void _handleSearchStart() {
@@ -71,13 +68,14 @@ class _SearchBarState extends State<SearchBar> {
     return _markers.map((marker) => ChildItem(marker)).toList();
   }
 
-  List<ChildItem> _buildSearchList() {
+  List<ChildItem> _buildSearchList(Set<Marker> allMarkers) {
     if (_searchText.isEmpty) {
       return _markers.map((marker) => ChildItem(marker)).toList();
     } else {
       List<Marker> _searchList = List();
-      for (int i = 0; i < markers['all'].length; i++) {
-        Marker marker = markers['all'].elementAt(i);
+      print(allMarkers);
+      for (int i = 0; i < allMarkers.length; i++) {
+        Marker marker = allMarkers.elementAt(i);
         String title = marker.infoWindow.title;
         String description = marker.infoWindow.snippet;
 
@@ -92,6 +90,11 @@ class _SearchBarState extends State<SearchBar> {
 
   @override
   Widget build(BuildContext context) {
+    //Listner
+    final _getMarkers = Provider.of<GetMarkers>(context);
+    if (_initialLoad) _markers = _getMarkers.suggestedMarkers;
+    _initialLoad = false;
+
     return Scaffold(
       key: key,
       body: SafeArea(
@@ -138,7 +141,7 @@ class _SearchBarState extends State<SearchBar> {
                 height: 500,
                 child: ListView(
                   padding: EdgeInsets.symmetric(vertical: 16.0),
-                  children: _isSearching ? _buildSearchList() : _buildList(),
+                  children: _isSearching ? _buildSearchList(_getMarkers.markers['all']) : _buildList(),
                 ),
               ),
             ),

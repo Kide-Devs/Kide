@@ -21,7 +21,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     //Listner
     final _getMarkers = Provider.of<GetMarkers>(context);
+    //for markers
     _getMarkers.markers.length == 0 ? _getMarkers.setMarkers() : _getMarkers.setMarkerMap();
+    //for suggested markers
+    if(_getMarkers.suggestedMarkers.length == 0) _getMarkers.setSuggestedMarkers();
 
     ViewPort().init(context);
     return _getMarkers.markers.length > 0 ? Padding(

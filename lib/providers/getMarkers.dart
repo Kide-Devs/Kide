@@ -11,12 +11,16 @@ class GetMarkers with ChangeNotifier {
   Set<Marker> _food = {};
   Set<Marker> _gates = {};
   Set<Marker> _all = {};
-  List<Marker> suggestedMarkers = [];
+  List<Marker> _suggestedMarkers = [];
 
   Map<String, Set<Marker>> _markers = {};
 
   Map<String, Set<Marker>> get markers {
     return _markers;
+  }
+
+  List<Marker> get suggestedMarkers {
+    return _suggestedMarkers;
   }
 
   void setMarkers() {
@@ -26,6 +30,21 @@ class GetMarkers with ChangeNotifier {
 
     setMarkerMap();
     // notifyListeners();
+  }
+
+  void setSuggestedMarkers() {
+    getSuggestedMarkerData(_suggestedMarkers);
+  }
+
+  void getSuggestedMarkerData(List<Marker> markerset) {
+    db.collection('suggestedMarkers').snapshots().listen(
+      (snapshot) {
+        snapshot.documents.forEach((doc) {
+          markerset.add(populateMarker(doc));
+          notifyListeners();
+        });
+      },
+    );
   }
 
   void setMarkerMap() {
@@ -40,7 +59,6 @@ class GetMarkers with ChangeNotifier {
   }
 
   void getMarkerData(String category, Set<Marker> markerset) {
-
     db.collection(category).snapshots().listen(
       (snapshot) {
         snapshot.documents.forEach((doc) {

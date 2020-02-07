@@ -123,15 +123,15 @@ class _EntryItemState extends State<EntryItem> {
                     
                     FlatButton(
                       onPressed: () {
-                        Navigator.push(
+                        Navigator.pushNamed(
                           context,
-                          new MaterialPageRoute(
-                            builder: (context) =>
-                              new DetailsPage(widget.entry)
-                          ),
+                          // new MaterialPageRoute(
+                          //   builder: (context) =>
+                          //     new DetailsPage(widget.entry)
+                          // ),
                           
-                          // DetailsPage.routeName,
-                           //arguments: widget.entry
+                          DetailsPage.routeName,
+                           arguments: widget.entry
                         );
                         print("details");
                       },

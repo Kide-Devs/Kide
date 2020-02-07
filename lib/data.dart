@@ -11,7 +11,7 @@ List <EventDetail> eventDetails = [
   EventDetail(
     id: "01",
     header: "Rules: ",
-    desc: "Hello world",
+    desc: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
   ),
   EventDetail(
     id: "02",
@@ -21,7 +21,7 @@ List <EventDetail> eventDetails = [
   EventDetail(
     id: "03",
     header: "Slot Booking: ",
-    desc: "Lorem Ipsum",
+    desc: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
   ),
   EventDetail(
     id: "04",

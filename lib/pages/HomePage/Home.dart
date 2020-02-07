@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kide/config/Viewport.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(HomePage());
 
@@ -52,7 +53,6 @@ class HomePage extends StatelessWidget {
               )
             ),
             Container( height: 30),
-            
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -71,7 +71,6 @@ class HomePage extends StatelessWidget {
                     color: Colors.white,
                     endIndent: ViewPort.screenWidth * 0.33,
                   ),
-                  
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 0, 8, 0.0),
                     child: Row(
@@ -93,6 +92,7 @@ class HomePage extends StatelessWidget {
                         RaisedButton(
                           padding: EdgeInsets.fromLTRB(8.0, 0, 8, 0),
                           onPressed: () {
+                            launch('tel:\\8456841773');
                             print("register");
                           },
                           textColor: Colors.white70,
@@ -106,7 +106,6 @@ class HomePage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  
                 ],
               ),
             )

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1066898268203",
+    "firebase_url": "https://kide-dev.firebaseio.com",
+    "project_id": "kide-dev",
+    "storage_bucket": "kide-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1066898268203:android:8cc8b215e10b8e76114a6e",
+        "android_client_info": {
+          "package_name": "com.example.kide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1066898268203-318p6phe43palce1al06ct6vl1ht8bb9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kide",
+            "certificate_hash": "1a8bf8e4854edc27c7ac2941b3241e1199fe4ed9"
+          }
+        },
+        {
+          "client_id": "1066898268203-9126rkc55heho671jrfqea8eg20a7fhj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzTSYfl_YZdwwVvK6xfW65QlOdJ5-c-5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1066898268203-9126rkc55heho671jrfqea8eg20a7fhj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -24,7 +24,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // Markers Listner
     final _getMarkers = Provider.of<GetMarkers>(context);
+    //for markers
     _getMarkers.markers.length == 0 ? _getMarkers.setMarkers() : _getMarkers.setMarkerMap();
+    //for suggested markers
+    if(_getMarkers.suggestedMarkers.length == 0) _getMarkers.setSuggestedMarkers();
+
     // University Listener
     final _university = Provider.of<University>(context);
     ViewPort().init(context);

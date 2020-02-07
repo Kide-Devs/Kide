@@ -4,10 +4,10 @@ import 'package:kide/pages/MapsPage/models/FilterCategory.dart';
 import 'package:kide/pages/MapsPage/widgets/SearchBar.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:kide/pages/MapsPage/assets/mapMarkers.dart';
-import 'dart:math' as math;
-
 import 'package:kide/pages/MapsPage/models/FilterCategories.dart';
+import 'package:provider/provider.dart';
+import 'package:kide/providers/getMarkers.dart';
+import 'dart:math' as math;
 
 void main() => runApp(MapsPage());
 
@@ -17,13 +17,13 @@ class MapsPage extends StatefulWidget {
 }
 
 class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
-  final key = GlobalKey<ScaffoldState>(debugLabel: '_mapScreenkey');
   //Google Maps controller
   GoogleMapController mapController;
   //Latitude and Lingitude of KIIT
   final LatLng _center = const LatLng(20.354890, 85.815120);
 
-  Set<Marker> _markers = markers[categoriesAll.label];
+  Set<Marker> _markers;
+  bool _initialLoad = true;
   List<FilterCategory> _categories = categories;
   FilterCategory _categoriesAll = categoriesAll;
   //Animating FAB
@@ -75,13 +75,13 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
   }
 
   //Filtering the markers
-  _addSearchFilter(FilterCategory category) {
+  _addSearchFilter(FilterCategory category, GetMarkers getMarkers) {
     setState(() {
       category.toggle();
       if (category.isToggled == true) {
-        _markers = _markers.union(markers[category.label]);
+        _markers = _markers.union(getMarkers.markers[category.label]);
       } else {
-        _markers = _markers.difference(markers[category.label]);
+        _markers = _markers.difference(getMarkers.markers[category.label]);
       }
     });
   }
@@ -93,8 +93,6 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
       _categoriesAll.isToggled = false;
     });
   }
-
-  // Future<List<Marker>> _getAllMarkers(String text) {}
 
   void _getSearchResult() async {
     Marker searchedMarker = await Navigator.push(
@@ -111,31 +109,35 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    //Listner
+    final _getMarkers = Provider.of<GetMarkers>(context);
+    if (_initialLoad) _markers = _getMarkers.markers['all'];
+    _initialLoad = false;
+
     return Scaffold(
-      key: key,
-      body: Stack(
-        children: [
-          GoogleMap(
-            onMapCreated: _onMapCreated,
-            markers: _markers,
-            initialCameraPosition: CameraPosition(
-              target: _center,
-              zoom: 18.0,
-              tilt: 60,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            GoogleMap(
+              onMapCreated: _onMapCreated,
+              markers: _markers,
+              initialCameraPosition: CameraPosition(
+                target: _center,
+                zoom: 18.0,
+                tilt: 60,
+              ),
+              buildingsEnabled: true,
+              mapToolbarEnabled: true,
+              myLocationEnabled: true,
+              myLocationButtonEnabled: false,
+              compassEnabled: true,
+              zoomGesturesEnabled: true,
+              rotateGesturesEnabled: true,
+              tiltGesturesEnabled: true,
+              indoorViewEnabled: true,
+              padding: const EdgeInsets.only(top: 64.0, right: 0.0),
             ),
-            buildingsEnabled: true,
-            mapToolbarEnabled: true,
-            myLocationEnabled: true,
-            myLocationButtonEnabled: false,
-            compassEnabled: true,
-            zoomGesturesEnabled: true,
-            rotateGesturesEnabled: true,
-            tiltGesturesEnabled: true,
-            indoorViewEnabled: true,
-            padding: const EdgeInsets.only(top: 96.0, right: 0.0),
-          ),
-          SafeArea(
-            child: Padding(
+            Padding(
               padding: const EdgeInsets.all(16.0),
               child: Material(
                 borderRadius: BorderRadius.circular(8.0),
@@ -162,24 +164,24 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
                 ),
               ),
             ),
-          ),
-          Positioned(
-            bottom: 64,
-            child: MaterialButton(
-              elevation: 8,
-              shape: CircleBorder(),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.my_location,
-                  color: Colors.blue,
+            Positioned(
+              bottom: 64,
+              child: MaterialButton(
+                elevation: 8,
+                shape: CircleBorder(),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.my_location,
+                    color: Colors.blue,
+                  ),
                 ),
+                color: Colors.white,
+                onPressed: _currentLocation,
               ),
-              color: Colors.white,
-              onPressed: _currentLocation,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       floatingActionButton: Column(
         mainAxisSize: MainAxisSize.min,
@@ -191,7 +193,8 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
             child: ScaleTransition(
               scale: CurvedAnimation(
                 parent: _controller,
-                curve: Interval(0.0, 1.0 - (index+1) / _categories.length / 2.0,
+                curve: Interval(
+                    0.0, 1.0 - (index + 1) / _categories.length / 2.0,
                     curve: Curves.easeOut),
               ),
               child: FloatingActionButton(
@@ -204,7 +207,7 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
                         ? Colors.white
                         : Colors.black),
                 onPressed: () {
-                  _addSearchFilter(_categories[index]);
+                  _addSearchFilter(_categories[index], _getMarkers);
                 },
                 tooltip: _categories[index].label,
               ),
@@ -223,7 +226,7 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
                     _controller.forward();
                     _clearSearchFilter();
                   } else {
-                    _addSearchFilter(categoriesAll);
+                    _addSearchFilter(categoriesAll, _getMarkers);
                     _controller.reverse();
                   }
                 },

@@ -39,7 +39,7 @@ dev_dependencies:
 
 flutter_icons:
   android: true
-  image_path_android: lib/assets/Icon/kide_logoxxxhdpi.png
+  image_path: "./lib/assets/Icon/kide_logoxxxhdpi.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -49,6 +49,10 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  fonts:
+    - family:  CustomIcons
+      fonts:
+       - asset: ./lib/fonts/CustomIcons.ttf
 
   # To add assets to your application, add an assets section, like this:
   assets:
@@ -57,6 +61,8 @@ flutter:
    - ./lib/pages/EventsPage/assets/bookmark.svg
    - ./lib/assets/Icon/kide_logoxxxhdpi.png
    - ./lib/assets/Icon/kide_logoldpi.png
+   - ./lib/assets/Icon/kide_logo.svg
+   - ./lib/assets/Icon/kide_logo_bottom.svg
    - ./lib/assets/contact.jpg
    - ./lib/assets/events.jpg
    - ./lib/assets/maps.jpg

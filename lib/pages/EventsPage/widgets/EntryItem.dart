@@ -1,9 +1,13 @@
 import 'package:kide/config/Viewport.dart';
 import 'package:kide/pages/EventsPage/widgets/ExpansionTitle.dart';
+import 'package:kide/pages/EventsPage/DetailsPage.dart';
 import 'package:kide/models/SubEvent.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:kide/providers/bookmarks.dart';
+
+import '../../../data.dart';
+
 
 class EntryItem extends StatefulWidget {
   EntryItem(this.entry);
@@ -119,6 +123,16 @@ class _EntryItemState extends State<EntryItem> {
                     
                     FlatButton(
                       onPressed: () {
+                        Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                            builder: (context) =>
+                              new DetailsPage(widget.entry)
+                          ),
+                          
+                          // DetailsPage.routeName,
+                           //arguments: widget.entry
+                        );
                         print("details");
                       },
                       textColor: Colors.white,

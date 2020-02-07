@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kide/pages/ContactsPage/ContactList.dart';
 import 'package:kide/pages/EventsPage/BookmarksPage.dart';
+import 'package:kide/providers/university.dart';
 import 'package:kide/providers/bookmarks.dart';
 import 'package:kide/providers/getMarkers.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider( create: (context) => Router()),
         ChangeNotifierProvider( create: (context) => Bookmarks()),
         ChangeNotifierProvider( create: (context) => GetMarkers()),
+        ChangeNotifierProvider( create: (context) => University()),
       ],
       child: MaterialApp(
         title: 'Kide',

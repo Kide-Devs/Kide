@@ -10,7 +10,7 @@ class SubEvent {
   final String location;
   final String linkDetails;
   final String linkRegister;
-  final List<String> university;
+  final List<String> universities;
   bool isBookmarked;
   final List<EventDetail> details;
 
@@ -23,7 +23,7 @@ class SubEvent {
     @required this.location,
     @required this.linkDetails,
     @required this.linkRegister,
-    @required this.university,
+    @required this.universities,
     this.isBookmarked,
     @required this.details
   });

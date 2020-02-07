@@ -33,7 +33,7 @@ List <EventDetail> eventDetails = [
 List<SubEvent> subEvents = [
   SubEvent(
     id: Key("0001"),
-    name: "Alankar",
+    name: "KIIT vs SRM",
     date: "1st March 2020",
     time: "09:00 PM",
     description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
@@ -42,11 +42,11 @@ List<SubEvent> subEvents = [
     linkDetails: "www.google.com",
     linkRegister: "www.facebook.com",
     details: eventDetails,
-    university: ["KIIT", "SRM"]
+    universities: ["KIIT", "SRM"]
   ),
   SubEvent(
     id: Key("0002"),
-    name: "Alankar1",
+    name: "BITS vs VIT",
     date: "2nd March 2020",
     time: "09:00 PM",
     description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
@@ -55,11 +55,11 @@ List<SubEvent> subEvents = [
     linkDetails: "www.google.com",
     linkRegister: "www.facebook.com",
     details: eventDetails,
-    university: ["BITS", "VIT"]
+    universities: ["BITS", "VIT"]
   ),
   SubEvent(
     id: Key("0003"),
-    name: "Alankar2",
+    name: "NIT RKL vs IIT KGP",
     date: "3rd March 2020",
     time: "09:00 PM",
     description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
@@ -68,11 +68,11 @@ List<SubEvent> subEvents = [
     linkDetails: "www.google.com",
     linkRegister: "www.facebook.com",
     details: eventDetails,
-    university: ["NIIT RKL", "IIT KGP"]
+    universities: ["NIT RKL", "IIT KGP"]
   ),
   SubEvent(
     id: Key("0004"),
-    name: "Alankar3",
+    name: "Utkal vs Jadavpur",
     date: "4th March 2020",
     time: "09:00 PM",
     description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
@@ -81,8 +81,13 @@ List<SubEvent> subEvents = [
     linkDetails: "www.google.com",
     linkRegister: "www.facebook.com",
     details: eventDetails,
-    university: ["UTKAL University", "Jadavpur University"]
+    universities: ["Utkal University", "Jadavpur University"]
   )
+];
+
+List<String> universities = [
+  "KIIT", "Utkal University", "Jadavpur University", "BITS",
+  "NIT RKL", "IIT KGP", "VIT", "SRM"
 ];
 
 List<EventCategory> eventCategories = [

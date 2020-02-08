@@ -30,7 +30,7 @@ List <EventDetail> eventDetails = [
   ),
 ];
 
-List<SubEvent> subEvents = [
+Iterable<SubEvent> subEvents = [
   SubEvent(
     id: Key("0001"),
     name: "KIIT vs SRM",
@@ -82,6 +82,32 @@ List<SubEvent> subEvents = [
     linkRegister: "www.facebook.com",
     details: eventDetails,
     universities: ["Utkal University", "Jadavpur University"]
+  ),
+  SubEvent(
+    id: Key("0005"),
+    name: "KIIT vs Jadavpur",
+    date: "4th March 2020",
+    time: "09:00 PM",
+    description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
+    location: "Campus 6, Seminar Hall 1",
+    isBookmarked: false,
+    linkDetails: "www.google.com",
+    linkRegister: "www.facebook.com",
+    details: eventDetails,
+    universities: ["KIIT", "Jadavpur University"]
+  ),
+  SubEvent(
+    id: Key("0006"),
+    name: "KIIT vs IIT KGP",
+    date: "4th March 2020",
+    time: "09:00 PM",
+    description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
+    location: "Campus 6, Seminar Hall 1",
+    isBookmarked: false,
+    linkDetails: "www.google.com",
+    linkRegister: "www.facebook.com",
+    details: eventDetails,
+    universities: ["KIIT", "IIT KGP"]
   )
 ];
 

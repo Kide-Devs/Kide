@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kide/config/Viewport.dart';
 import 'package:kide/models/SubEvent.dart';
 
 class ExpansionTitle extends StatelessWidget {
@@ -15,11 +16,16 @@ class ExpansionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ViewPort().init(context);
+
+    print(ViewPort.screenWidth * 0.025);
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
         Container(
           height: 65,
-          width: MediaQuery.of(context).size.width ,
+          width: ViewPort.screenWidth ,
           padding: const EdgeInsets.fromLTRB(10.0, 35.0, 0.0, 0.0),
           child: exp ? Text(
               root.name.toUpperCase()
@@ -29,13 +35,18 @@ class ExpansionTitle extends StatelessWidget {
                 root.name.toUpperCase(),
               ),
             ),
-          ),
-          Icon(
+        ),
+        Container(
+          // color: Colors.blue,
+          height: 65,
+          width: ViewPort.screenWidth ,
+          padding: EdgeInsets.fromLTRB(ViewPort.screenWidth * 0.025, 35.0, 0.0, 0.0),
+          child: Icon(
             exp ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
             color: Colors.amberAccent,
             size: 24.0,
-            semanticLabel: 'Text to announce in accessibility modes',
-          )
+          ),
+        ),
       ],
     );
   }

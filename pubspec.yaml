@@ -64,7 +64,10 @@ flutter:
    - ./lib/assets/events.jpg
    - ./lib/assets/maps.jpg
    - ./lib/pages/HomePage/assets/KIUG_KIIT.jpg
-
+   - ./lib/assets/KIIT.jpg
+   - ./lib/assets/KISS.png
+   - ./lib/assets/Founder_sir.jpeg
+   
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

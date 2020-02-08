@@ -139,7 +139,7 @@ class _EntryItemState extends State<EntryItem> {
                           // ),
                           
                           DetailsPage.routeName,
-                           arguments: widget.entry
+                          arguments: widget.entry
                         );
                         print("details");
                       },

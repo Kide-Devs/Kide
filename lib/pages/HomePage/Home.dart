@@ -3,8 +3,8 @@ import 'package:kide/config/Viewport.dart';
 import 'package:kide/providers/getMarkers.dart';
 import 'package:provider/provider.dart';
 import 'package:kide/providers/university.dart';
-import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:kide/data.dart';
 
 void main() => runApp(HomePage());
 
@@ -89,14 +89,14 @@ class _HomePageState extends State<HomePage> {
                     height: 2,
                     color: Color.fromRGBO(0, 112, 240, 87),
                   ),
-                  items: <String>["Select University", "hello", "KIIT", "VIT", "SRM", "BITS"]
-                  .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  })
-                  .toList(),
+                  items: ["Select Your University", ...universities].map<DropdownMenuItem<String>>(
+                    (String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }
+                  ).toList(),
                   onChanged: (String newVal) => _university.setUniversity(newVal),
                 ),
               ),
@@ -197,18 +197,25 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 0, 8, 0.0),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Icon(
                           Icons.bubble_chart,
                           color: Color.fromRGBO(0, 112, 240, 100),
                           size: 24.0,
                         ),
-                        Text(
-                          "  Keep you Particiaption Letter & College ID",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w200,
+                        Container(width: 4,),
+                        Flexible(
+                          child: Text(
+                            "Keep your Participation Letter & College ID.",
+                            textAlign: TextAlign.left,
+                            
+                            style: TextStyle(
+                              height: 1.5,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w200,
+                            ),
                           ),
                         ),
                       ],
@@ -257,18 +264,24 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 0, 8, 0.0),
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Icon(
                           Icons.bubble_chart,
                           color: Color.fromRGBO(0, 112, 240, 100),
                           size: 24.0,
                         ),
-                        Text(
-                          "  Keep you Particiaption Letter & College ID",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w200,
+                        Container(width: 4,),
+                        Flexible(
+                          child: Text(
+                            "Keep your Participation Letter & College ID.",
+                            textAlign: TextAlign.left,
+                            
+                            style: TextStyle(
+                              height: 1.5,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w200,
+                            ),
                           ),
                         ),
                       ],
@@ -317,18 +330,23 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 0, 8, 0.0),
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Icon(
                           Icons.bubble_chart,
                           color: Color.fromRGBO(0, 112, 240, 100),
                           size: 24.0,
                         ),
-                        Text(
-                          "  Keep you Particiaption Letter & College ID",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w200,
+                        Container(width: 4,),
+                        Flexible(
+                          child: Text(
+                            "Keep your Participation Letter & College ID.",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              height: 1.5,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w200,
+                            ),
                           ),
                         ),
                       ],

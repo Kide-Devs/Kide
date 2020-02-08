@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kide/config/Viewport.dart';
 import 'package:kide/models/Event.dart';
 import 'package:kide/data.dart';
 import 'package:kide/pages/EventsPage/BookmarksPage.dart';
@@ -18,6 +19,7 @@ class EventsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ViewPort().init(context);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.collections_bookmark),
@@ -70,7 +72,7 @@ class EventsPage extends StatelessWidget {
                       _eventList.eventCategories[position].name.toUpperCase(),
                       style: TextStyle(
                         color: Colors.white,
-                        letterSpacing: 20,
+                        letterSpacing: ViewPort.screenWidth * 0.05,
                         fontWeight: FontWeight.w600
                       ),
                     ),

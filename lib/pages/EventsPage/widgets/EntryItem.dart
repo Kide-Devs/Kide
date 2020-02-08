@@ -32,16 +32,24 @@ class _EntryItemState extends State<EntryItem> {
     return false;
   }
 
+  double setSpacing(int len, double vw){
+    if(len <= 11)
+      return vw * 0.05;
+    else if (len > 11 && len <= 14)
+      return vw * 0.01;
+    else return 2;
+  }
+
   Widget _buildTiles(SubEvent root, BuildContext context) {
     final _bookmarksState = Provider.of<Bookmarks>(context);
     ViewPort().init(context);
-
+    double _spacing = setSpacing(root.name.length, ViewPort.screenWidth);
     return Theme(
         data: ThemeData(
           textTheme: TextTheme(
             subhead: TextStyle(
                 color: Colors.white,
-                letterSpacing: exp == true ? 5 : 20,
+                letterSpacing: exp ? 5 : _spacing,
                 fontWeight: FontWeight.w600),
           ),
           unselectedWidgetColor: Colors.amber,

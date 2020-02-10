@@ -3,7 +3,8 @@ import 'package:kide/models/Contact.dart';
 import 'package:kide/models/EmergencyContact.dart';
 import 'package:kide/models/EventCategory.dart';
 import 'package:kide/models/ContactCategory.dart';
-import 'package:kide/models/MoreDetailsModel.dart';
+import 'package:kide/models/More.dart';
+import 'package:kide/models/MoreInfo.dart';
 import 'package:kide/models/SubEvent.dart';
 import 'package:flutter/material.dart';
 import 'package:kide/models/EventDetail.dart';
@@ -31,31 +32,68 @@ List <EventDetail> eventDetails = [
   ),
 ];
 
-List<MoreDetailsModel> moreDetails = [
-  MoreDetailsModel(
+List <MoreInfo> kiss = [
+MoreInfo(
+  id: "01",
+  header: "AIM",
+  desc: "Our aim is to break the vicious cycle of poverty and social isolation and to restore hope for a better future. We believe that every person has the right to access resources and opportunities in order to live and develop with dignity and to become an active and contributing member of our society."
+  ),
+  MoreInfo(
+  id: "02",
+  header: "OUR VISION",
+  desc: "To build up KISS as a preferred centre of learning for the poorest of the poor indigenous (tribal) sections of the society with a focus on formal education aimed at providing sustainable livelihood and scope for all-round development."
+  ),
+  MoreInfo(
+  id: "03",
+  header: "OUR MISSION",
+  desc: "1) To eradicate poverty and empower the disadvantaged sections of the society through holistic education and providing them with sustainable livelihood\n\n2) To be a complete solution to pervasive poverty in the lowest strata of the society\n\n3) To prepare underprivileged children and youth as ‘change agents’ for their community\n\n4) To preserve tribal heritage, culture and values\n\n5) To assist in the process of social integration and personal realization of underprivileged children and young people.\n\n6) To encourage and popularize voluntary work."
+  ),
+];
+
+List <MoreInfo> kiit = [
+MoreInfo(
+  id: "01",
+  header: "OUR VISION",
+  desc: "To create an advanced centre of professional learning of international standing where pursuit of knowledge and excellence shall reign supreme, unfettered by the barriers of nationality, language, cultural plurality and religion."
+  ),
+  MoreInfo(
+  id: "02",
+  header: "MISSION",
+  desc: "1) Imparting value based quality education of international standard and imbibing skill for solving real life problems.\n\n2) Inculcating global perspective in attitude.\n\n3) Creating leadership qualities with futuristic vision.\n\n4) Fostering spirit of entrepreneurship and realisation of societal responsibilities.\n\n5) Cultivating adaptation of ethics, morality and healthy practices in professional life.\n\n6) Instilling habit of continual learning.\n\n7) Encouraging and supporting creative abilities and research temperament.\n\n8) Establishing and promoting close interaction with industries and other utility sectors and keep abreast with state-of-the-art technology."
+  ),
+];
+
+List <MoreInfo> founderSir = [
+MoreInfo(
+  id: "01",
+  header: "A BRIEF PROFILE",
+  desc: "Achyuta Samanta, after obtaining Master’s Degree in Chemistry in 1987 from Utkal University, started his career at 22 years of age. He has 30 years of teaching experience to his credit so far. \n\nProf. Samanta went on to serve KIIT  as its first Chancellor and has had the distinction of being the youngest Chancellor of any Indian University. He served University Grants Commission (UGC) as Member for two consecutive terms (2008-11 & 2011-2014) and was a Member of the Executive Committee of All Indian Council for Technical Education (AICTE). He was also member of several other Government of India bodies like, NCTE, ISTE, ISCA, COIR BOARD, CAPART and many more. He has been a Member on the Academic Council of Central University, Silchar, Assam and the Central University, Odisha. He was the first Indian to be Member of both UGC and AICTE simultaneously and the first Odia to become Member of UGC and many other statutory bodies. Currently he is the President of World Congress of Poets 2019. He has delivered nearly 100 motivational speeches, including convocation addresses and foundation day lectures, in different institutions and organizations across the country and the globe.\n\nProf. Samanta has been conferred with 33 Honoris Causa Doctorate awards from different University across the globe. He has also been decorated with prestigious Civilian Awards from many countries including, Gusi Peace Prize International, the highest Civilian Award from Bahrain besides over 50 national and international and over 200 State honors and accolades.\n\nHe is the Founder of Kalinga Institute of Industrial Technology (KIIT ) and Kalinga Institute of Social Sciences (KISS), Bhubaneswar – the fully free and fully residential tribal institute. Starting modestly with an initial seed capital of Rs 5000/-, KIIT has grown into one of the most promising Universities imparting professional education in the Country with global acclaim having 27,000 students from across the country and abroad. KIIT also runs a 2000 bedded multispecialty hospital and an attached Medical College. KISS has become the largest Residential Tribal Institute in the World and is home for 50,000 tribal children (30,000 pursing education and 20,000 passed out). Both KIIT and KISS found place in the Limca Book of Records as well as Guinness World Records in many counts.\n\nProf. Achyuta Samanta, who had lost his father at the age of four, before he could know the significance of the world, was pushed into the mire of abject poverty.  Today, he is a legend, an iconic educationist, an emblem of service to humanity, a beacon of light for social transformation, and a redeemer of the fallen, the oppressed and the marginalized. With huge contributions in the field of education, health, art, culture, literature, rural development, social service and spiritualism his journey in life is not only awe-inspiring but soul-awakening for millions of poverty-stricken youths all over the globe. He has converted the remote village ‘Kalarabank’, Cuttack into a Smart Village and the entire Manpur Panchayat into a model Panchayat (cluster of villages).\n\nHe has already started working to establish 12 branches of KISS in different districts, besides establishing KISS-Delhi for the underprivileged sections of the society. Besides providing around 10,000 direct employment in KIIT and KISS, he has created over 1,00,000 indirect employment and more than 100 successful entrepreneurs across the country. His hobby is to give happiness and smiling face to the millions of poor.\n\nProf. Samanta has been working relentlessly for Zero Poverty, Zero Hunger and Zero Illiteracy."
+  ),
+
+];
+
+List<More> more = [
+  More(
     id: "01",
-    header: "KISS",
-    aim: "Our aim is to break the vicious cycle of poverty and social isolation and to restore hope for a better future. We believe that every person has the right to access resources and opportunities in order to live and develop with dignity and to become an active and contributing member of our society.",
-    mission: "To build up KISS as a preferred centre of learning for the poorest of the poor indigenous (tribal) sections of the society with a focus on formal education aimed at providing sustainable livelihood and scope for all-round development.",
-    asset_route: "lib/assets/KISS.png",
+    moreName: "KISS",
+    pageFormat: kiss,
+    assetRoute: "lib/assets/KISS.png",
     link: "https://kiss.ac.in/"
   ),
-  MoreDetailsModel(
+  More(
     id: "02",
-    header: "KIIT",
-    aim: "To create an advanced centre of professional learning of international standing where pursuit of knowledge and excellence shall reign supreme, unfettered by the barriers of nationality, language, cultural plurality and religion.",
-    mission: "1) Imparting value based quality education of international standard and imbibing skill for solving real life problems.\n\n2) Inculcating global perspective in attitude.\n\n3) Creating leadership qualities with futuristic vision.\n\n4) Fostering spirit of entrepreneurship and realisation of societal responsibilities.\n\n5) Cultivating adaptation of ethics, morality and healthy practices in professional life.\n\n6) Instilling habit of continual learning.\n\n7) Encouraging and supporting creative abilities and research temperament.\n\n8) Establishing and promoting close interaction with industries and other utility sectors and keep abreast with state-of-the-art technology.",
-    asset_route: "lib/assets/KIIT.jpg",
+    moreName: "KIIT",
+    pageFormat: kiit,
+    assetRoute: "lib/assets/KIIT.jpg",
     link: "https://kiit.ac.in/"
   ),
-  // MoreDetailsModel(
-  //   id: "03",
-  //   header: "Our Founder",
-  //   aim: "Achyuta Samanta, after obtaining Master’s Degree in Chemistry in 1987 from Utkal University, started his career at 22 years of age. He has 30 years of teaching experience to his credit so far. Prof. Samanta went on to serve KIIT  as its first Chancellor and has had the distinction of being the youngest Chancellor of any Indian University. He served University Grants Commission (UGC) as Member for two consecutive terms (2008-11 & 2011-2014) and was a Member of the Executive Committee of All Indian Council for Technical Education (AICTE). He was also member of several other Government of India bodies like, NCTE, ISTE, ISCA, COIR BOARD, CAPART and many more. He has been a Member on the Academic Council of Central University, Silchar, Assam and the Central University, Odisha. He was the first Indian to be Member of both UGC and AICTE simultaneously and the first Odia to become Member of UGC and many other statutory bodies. Presently, he is the General President of Indian Science Congress Association (ISCA). He has delivered nearly 100 motivational speeches, including convocation addresses and foundation day lectures, in different institutions and organizations across the country and the globe.",
-  //   mission: "",
-  //   asset_route: "lib/assets/Founder_sir.jpeg",
-  //   link: "https://achyutasamanta.com/"
-  // ),
+  More(
+    id: "03",
+    moreName: "Our Founder",
+    pageFormat: founderSir,
+    assetRoute: "lib/assets/Founder_sir.jpeg",
+    link: "https://achyutasamanta.com/"
+  ),
 ];
 
 Iterable<SubEvent> subEvents = [

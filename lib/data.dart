@@ -66,9 +66,6 @@ Iterable<SubEvent> subEvents = [
     time: "09:00 PM",
     description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
     location: "Campus 6, Seminar Hall 1",
-    isBookmarked: false,
-    linkDetails: "www.google.com",
-    linkRegister: "www.facebook.com",
     details: eventDetails,
     universities: ["KIIT", "SRM"]
   ),
@@ -79,9 +76,6 @@ Iterable<SubEvent> subEvents = [
     time: "09:00 PM",
     description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
     location: "Campus 6, Seminar Hall 1",
-    isBookmarked: false,
-    linkDetails: "www.google.com",
-    linkRegister: "www.facebook.com",
     details: eventDetails,
     universities: ["BITS", "VIT"]
   ),
@@ -92,9 +86,6 @@ Iterable<SubEvent> subEvents = [
     time: "09:00 PM",
     description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
     location: "Campus 6, Seminar Hall 1",
-    isBookmarked: false,
-    linkDetails: "www.google.com",
-    linkRegister: "www.facebook.com",
     details: eventDetails,
     universities: ["NIT RKL", "IIT KGP"]
   ),
@@ -105,9 +96,6 @@ Iterable<SubEvent> subEvents = [
     time: "09:00 PM",
     description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
     location: "Campus 6, Seminar Hall 1",
-    isBookmarked: false,
-    linkDetails: "www.google.com",
-    linkRegister: "www.facebook.com",
     details: eventDetails,
     universities: ["Utkal University", "Jadavpur University"]
   ),
@@ -118,9 +106,6 @@ Iterable<SubEvent> subEvents = [
     time: "09:00 PM",
     description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
     location: "Campus 6, Seminar Hall 1",
-    isBookmarked: false,
-    linkDetails: "www.google.com",
-    linkRegister: "www.facebook.com",
     details: eventDetails,
     universities: ["KIIT", "Jadavpur University"]
   ),
@@ -131,9 +116,6 @@ Iterable<SubEvent> subEvents = [
     time: "09:00 PM",
     description: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet.",
     location: "Campus 6, Seminar Hall 1",
-    isBookmarked: false,
-    linkDetails: "www.google.com",
-    linkRegister: "www.facebook.com",
     details: eventDetails,
     universities: ["KIIT", "IIT KGP"]
   )

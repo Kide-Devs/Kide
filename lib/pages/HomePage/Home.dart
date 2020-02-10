@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kide/config/Viewport.dart';
 import 'package:kide/providers/getMarkers.dart';
+import 'package:kide/providers/getEvents.dart';
 import 'package:provider/provider.dart';
-import 'package:kide/providers/university.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:kide/data.dart';
 
 void main() => runApp(HomePage());
 
@@ -29,8 +28,11 @@ class _HomePageState extends State<HomePage> {
     //for suggested markers
     if(_getMarkers.suggestedMarkers.length == 0) _getMarkers.setSuggestedMarkers();
 
-    // University Listener
-    final _university = Provider.of<University>(context);
+    // Events Listener
+    final _getEvents = Provider.of<GetEvents>(context);
+    //for Events
+    if(_getEvents.eventList.length == 0) _getEvents.setEvents();
+
     ViewPort().init(context);
 
     return _getMarkers.markers.length > 0 ? Padding(
@@ -78,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                 child: DropdownButton(
                   isExpanded: true,
                   isDense: true,
-                  value: _university.university,
+                  value: _getEvents.university,
                   icon: Icon(Icons.keyboard_arrow_down),
                   iconSize: 24,
                   elevation: 16,
@@ -89,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                     height: 2,
                     color: Color.fromRGBO(0, 112, 240, 87),
                   ),
-                  items: ["Select Your University", ...universities].map<DropdownMenuItem<String>>(
+                  items: ["Select Your University", ..._getEvents.universities].map<DropdownMenuItem<String>>(
                     (String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -97,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                       );
                     }
                   ).toList(),
-                  onChanged: (String newVal) => _university.setUniversity(newVal),
+                  onChanged: (String newVal) => _getEvents.setUniversity(newVal),
                 ),
               ),
             ),

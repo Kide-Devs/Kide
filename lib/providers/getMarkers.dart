@@ -6,7 +6,7 @@ class GetMarkers with ChangeNotifier {
   //Create Firebase Instance
   Firestore db = Firestore.instance;
 
-  //i=Initialize the marker set
+  //Initialize the marker set
   Set<Marker> _campuses = {};
   Set<Marker> _food = {};
   Set<Marker> _gates = {};
@@ -32,7 +32,6 @@ class GetMarkers with ChangeNotifier {
     getMarkerData('hostels', _hostels);
 
     setMarkerMap();
-    // notifyListeners();
   }
 
   void setSuggestedMarkers() {

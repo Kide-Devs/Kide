@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:kide/config/Viewport.dart';
-import 'package:kide/models/Event.dart';
-import 'package:kide/data.dart';
+import 'package:kide/providers/getEvents.dart';
 import 'package:kide/pages/EventsPage/BookmarksPage.dart';
 import 'package:kide/pages/EventsPage/SubEvents.dart';
-import 'package:kide/providers/bookmarks.dart';
 import 'package:provider/provider.dart';
 void main() => runApp(EventsPage());
 
 class EventsPage extends StatelessWidget {
-  final _eventList =  Event(
-    id: "01",
-    name: "KIITFEST 6.0",
-    startDate: "1st March 2020",
-    endDate: "4th March 2020",
-    eventCategories: eventCategories
-  );
+  
+  // final _eventList =  Event(
+  //   id: "01",
+  //   name: "KIITFEST 6.0",
+  //   startDate: "1st March 2020",
+  //   endDate: "4th March 2020",
+  //   eventCategories: eventCategories
+  // );
 
   @override
   Widget build(BuildContext context) {
+
+    final _getEvents = Provider.of<GetEvents>(context);
     ViewPort().init(context);
+  print("sub events ${_getEvents.eventCategories}");
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.collections_bookmark),
@@ -43,7 +45,7 @@ class EventsPage extends StatelessWidget {
               onTap: ()  {
                 Navigator.of(context).pushNamed(
                   SubEvents.routeName,
-                  arguments: _eventList.eventCategories[position]
+                  arguments: _getEvents.eventCategories[position]
                 );
                 print('Card tapped.');
               },
@@ -69,7 +71,7 @@ class EventsPage extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      _eventList.eventCategories[position].name.toUpperCase(),
+                      _getEvents.eventCategories[position].name.toUpperCase(),
                       style: TextStyle(
                         color: Colors.white,
                         letterSpacing: ViewPort.screenWidth * 0.05,
@@ -83,7 +85,7 @@ class EventsPage extends StatelessWidget {
             margin: const EdgeInsets.fromLTRB(0.0, 14.0, 0.0, 14.0),
           );
         },
-        itemCount: _eventList.eventCategories.length,
+        itemCount: _getEvents.eventCategories.length,
         padding: const EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 16.0),
       ),
     );

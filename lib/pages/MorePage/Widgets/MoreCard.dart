@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kide/pages/MorePage/MoreDetails.dart';
-import 'package:kide/models/MoreDetailsModel.dart';
+import 'package:kide/models/More.dart';
 
 class MoreCard extends StatelessWidget{
-MoreCard(this._details);
-final MoreDetailsModel _details;
+MoreCard(this._more);
+final More _more;
   @override
   Widget build(BuildContext context){
     return Card(
@@ -17,12 +17,12 @@ final MoreDetailsModel _details;
         onTap:(){
           Navigator.of(context).pushNamed(
             MoreDetails.routeName,
-            arguments: _details,
+            arguments: _more,
           );
           print('More Card tapped');
         },
       child: Center(
-        child: Text(_details.header,
+        child: Text(_more.moreName,
           style: TextStyle(
             color: Colors.white,
             fontSize: 15.0

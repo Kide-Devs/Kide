@@ -18,8 +18,8 @@ class MorePage extends StatelessWidget {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
                 delegate: SliverChildListDelegate(
                   [
-                    for(int i=0;i<moreDetails.length;i++)
-                      MoreCard(moreDetails[i])
+                    for(int i=0;i<more.length;i++)
+                      MoreCard(more[i])
                   ],
                 ),
               )

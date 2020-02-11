@@ -22,7 +22,7 @@ class Page3 extends StatelessWidget {
                 new Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text("Get to know What's Happening",
-                    style: Theme.of(context).textTheme.display1.copyWith(color: Colors.white70),
+                    style: Theme.of(context).textTheme.display1.copyWith(color: Colors.black87),
                     textAlign: TextAlign.center,
                   ),
                 ),

@@ -59,13 +59,13 @@ flutter:
    - ./lib/assets/fire.svg
    - ./lib/assets/police.svg
    - ./lib/assets/pharmacy.svg
+   - ./lib/assets/maps.jpg
    - ./lib/assets/Icon/kide_logoxxxhdpi.png
    - ./lib/assets/Icon/kide_logoldpi.png
    - ./lib/assets/Icon/kide_logo.svg
    - ./lib/assets/Icon/kide_logo_bottom.svg
    - ./lib/assets/contact.jpg
    - ./lib/assets/events.jpg
-   - ./lib/assets/onBoarding_svg/maps.eps
    - ./lib/pages/HomePage/assets/KIUG_KIIT.jpg
    - ./lib/assets/KIIT.jpg
    - ./lib/assets/KISS.png

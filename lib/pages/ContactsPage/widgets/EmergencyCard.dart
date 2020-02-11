@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
 class EmergencyCard extends StatelessWidget{
-  const EmergencyCard(this.iconData, this.name, this.number, {this.backgroundColor = Colors.red});
+  const EmergencyCard(this.iconAsset, this.name, this.number, {this.backgroundColor = Colors.red});
   final Color backgroundColor;
-  final IconData iconData;
+  final String iconAsset;
   final String name;
   final String number;
 
   @override
   Widget build(BuildContext context){
+    //final _svgAsset = "./lib/assets/fire.svg";
     return new Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0)
@@ -27,10 +29,20 @@ class EmergencyCard extends StatelessWidget{
           padding:  const EdgeInsets.fromLTRB(0, 0.0, 0, 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            //crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              new Icon(
-                iconData,
-                color: Colors.white,
+              // new Icon(
+              //   iconData,
+              //   color: Colors.white,
+              // ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 8, 3, 8),
+                child: SvgPicture.asset(iconAsset,
+                  alignment: Alignment.center,
+                  width: 20,
+                  fit: BoxFit.scaleDown,
+                  color: Colors.white,
+                ),
               ),
               Center(
                 child: Text(name,

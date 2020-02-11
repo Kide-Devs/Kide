@@ -210,19 +210,19 @@ List<EventCategory> eventCategories = [
 List<EmergencyContact> emergency = [
   EmergencyContact(
     color: Colors.red, 
-    icon: Icons.local_hospital, 
+    iconAsset: "./lib/assets/pharmacy.svg", 
     emergency: 'Hospital', 
     number: '108'
   ),
   EmergencyContact(
     color: Colors.red, 
-    icon: Icons.local_hospital, 
+    iconAsset: "./lib/assets/police.svg", 
     emergency: 'Police', 
     number: '100'
   ),
   EmergencyContact(
     color: Colors.red, 
-    icon: Icons.local_hospital, 
+    iconAsset: "./lib/assets/fire.svg", 
     emergency: 'Fire Brigade', 
     number: '101'
   ),

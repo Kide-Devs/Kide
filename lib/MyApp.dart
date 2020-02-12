@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:kide/pages/ContactsPage/ContactList.dart';
 import 'package:kide/pages/EventsPage/BookmarksPage.dart';
 import 'package:kide/pages/EventsPage/DetailsPage.dart';
+import 'package:kide/pages/HomePage/MoreHome.dart';
 import 'package:kide/pages/MorePage/MoreDetails.dart';
 import 'package:kide/providers/getEvents.dart';
 import 'package:kide/providers/bookmarks.dart';
 import 'package:kide/providers/getMarkers.dart';
+import 'package:kide/util/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:kide/pages/ContactsPage/Contacts.dart';
 import 'package:kide/pages/EventsPage/Events.dart';
@@ -18,7 +20,7 @@ import 'package:kide/widgets/BottomNav.dart';
 
 
 class MyApp extends StatelessWidget {
-  
+  static const routeName = '/root';
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -29,15 +31,16 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider( create: (context) => GetMarkers()),
       ],
       child: MaterialApp(
-        title: 'Kide',
+        title: KIDE_L_CAPS,
         theme: ThemeData.dark(),
-        home: MyHomePage(title: 'KIDE'),
+        home: MyHomePage(title: KIDE_CAPS),
         routes: {
           SubEvents.routeName: (context) => SubEvents(),
           BookmarksPage.routeName: (context) => BookmarksPage(),
           ContactList.routeName: (context) => ContactList(),
           DetailsPage.routeName: (context) => DetailsPage(),
           MoreDetails.routeName: (context) => MoreDetails(),
+          MoreHome.routeName: (context) => MoreHome(),
         },
       ),
     );
@@ -64,11 +67,11 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
 
   final List<String> _tabNames = [
-    "Maps",
-    "Contacts",
-    "Home",
-    "Events",
-    "More"
+    MAPS,
+    CONTACTS,
+    HOME,
+    EVENTS,
+    MORE
   ];
   
   @override

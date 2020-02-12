@@ -27,14 +27,18 @@ class ExpansionTitle extends StatelessWidget {
           height: 65,
           width: ViewPort.screenWidth ,
           padding: const EdgeInsets.fromLTRB(10.0, 35.0, 0.0, 0.0),
-          child: exp ? Text(
-              root.name.toUpperCase()
-            ) : 
-            Center(
-              child: Text(
-                root.name.toUpperCase(),
-              ),
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 1350),
+            curve: Curves.easeInOut,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                    root.name.toUpperCase()
+                  ),
+              ],
             ),
+          )
         ),
         Container(
           // color: Colors.blue,

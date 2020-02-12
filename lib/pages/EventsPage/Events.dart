@@ -3,6 +3,7 @@ import 'package:kide/config/Viewport.dart';
 import 'package:kide/providers/getEvents.dart';
 import 'package:kide/pages/EventsPage/BookmarksPage.dart';
 import 'package:kide/pages/EventsPage/SubEvents.dart';
+import 'package:kide/util/constants.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(EventsPage());
@@ -57,7 +58,7 @@ class EventsPage extends StatelessWidget {
                     image: DecorationImage(
                       fit: BoxFit.cover,
                       image: AssetImage(
-                        './lib/assets/event.jpg',
+                        EVENTS_PAGE_EVENT_JPG,
                       ),
                     ),
                   ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kide/config/Viewport.dart';
 import 'package:kide/pages/MapsPage/Maps.dart';
+import 'package:kide/util/constants.dart';
 import '../../models/SubEvent.dart';
 import 'package:kide/widgets/HeaderWidget.dart';
 
@@ -19,56 +20,58 @@ class DetailsPage extends StatelessWidget {
             color: Colors.white,
             fontSize: 15.0,
           ),
-        )),
-        backgroundColor: Color.fromRGBO(18, 18, 18, 1.0),
-        body: Padding(
-          padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
-          child: Container(
-              child: CustomScrollView(slivers: <Widget>[
-            SliverList(
-              delegate: SliverChildListDelegate([
-                HeaderWidget("Date", 15.0),
-                Divider(
-                  color: Colors.white,
-                  endIndent: ViewPort.screenWidth * 0.55,
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
-                  child: HeaderWidget(_subEvent.date, 12),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                  child: HeaderWidget("Venue", 15.0),
-                ),
-                Divider(
-                  color: Colors.white,
-                  endIndent: ViewPort.screenWidth * 0.55,
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 35),
-                  child: HeaderWidget(_subEvent.location, 12),
-                ),
-                HeaderWidget("Time", 15),
-                Divider(
-                  color: Colors.white,
-                  endIndent: ViewPort.screenWidth * 0.55,
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 35),
-                  child: HeaderWidget(_subEvent.time, 12),
-                ),
-                Row(
-                  children: <Widget>[
-                    HeaderWidget("Description", 15),
-                    Spacer(),
-                    Container(
-                      height: 30,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: RaisedButton(
-                          child: Text(
-                            'GO TO EVENT',
-                            style: TextStyle(
+        )
+      ),
+      backgroundColor: Color.fromRGBO(18, 18, 18, 1.0),
+      body : Padding(
+        padding: const EdgeInsets.fromLTRB(12, 0 , 12 , 0 ),
+        child: Container(
+          child: CustomScrollView(
+            slivers: <Widget>[
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    HeaderWidget("Date",15.0),
+                    Divider(
+                      color: Colors.white,
+                      endIndent: ViewPort.screenWidth*0.55,
+                      ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0 , 0 , 12 ),
+                      child: HeaderWidget(_subEvent.date, 12),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 20 , 0 ,0 ),
+                      child: HeaderWidget("Venue", 15.0),
+                    ),
+                    Divider(
+                      color: Colors.white,
+                      endIndent: ViewPort.screenWidth*0.55,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0 , 0 ,35 ),
+                        child: HeaderWidget(_subEvent.location, 12),
+                      ),
+                      HeaderWidget("Time", 15),
+                      Divider(
+                      color: Colors.white,
+                      endIndent: ViewPort.screenWidth*0.55,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0 , 0 ,35 ),
+                        child: HeaderWidget(_subEvent.time, 12),
+                      ),
+                      Row(
+                        children: <Widget>[
+                        HeaderWidget("Description", 15),
+                        Spacer(),
+                        Container(
+                          height: 30,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top:10.0),
+                            child: RaisedButton(
+                              child: Text(GO_TO_EVENT,
+                              style: TextStyle(
                                 //fontWeight: FontWeight.,
                                 fontSize: 10),
                           ),

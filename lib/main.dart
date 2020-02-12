@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:kide/pages/OnBoarding/OnBoarding.dart';
+import 'package:kide/util/constants.dart';
 import './MyApp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,8 +9,8 @@ void main() {
   runApp(new MaterialApp(
     home: new SplashScreen(),
     routes: <String, WidgetBuilder>{
-      '/OnBoarding': (BuildContext context) => new OnboardingMainPage(),
-      '/MyApp': (BuildContext context) => new MyApp()
+      OnboardingMainPage.routeName: (BuildContext context) => new OnboardingMainPage(),
+      MyApp.routeName: (BuildContext context) => new MyApp()
     },
   ));
 }
@@ -26,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     var _duration = new Duration(seconds: 2);
 
-    if (firstTime != null && !firstTime) {
+     if (firstTime != null && !firstTime) {
       // Not first time
       return new Timer(_duration, navigationMyApp);
     } else {
@@ -37,11 +38,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationMyApp() {
-    Navigator.of(context).pushReplacementNamed('/MyApp');
+    Navigator.of(context).pushNamed(MyApp.routeName);
   }
 
   void navigationOnBoarding() {
-    Navigator.of(context).pushReplacementNamed('/OnBoarding');
+    Navigator.of(context).pushNamed(OnboardingMainPage.routeName);
   }
 
   @override
@@ -62,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Stack(
             children: <Widget>[
               Center(
-                child: new Image.asset('lib/assets/Icon/kide_logoldpi.png',
+                child: new Image.asset(MAIN_KIDE_LOGO,
                     width: size.width / 4,
                     height: size.height / 4,
                     fit: BoxFit.contain),
@@ -74,7 +75,7 @@ class _SplashScreenState extends State<SplashScreen> {
             duration: Duration(milliseconds: 4500),
             curve: Curves.easeInOut,
             child: Text(
-              'KIDE',
+              KIDE_CAPS,
               style: TextStyle(
                 fontSize: 20.0,
                 color: Colors.white,

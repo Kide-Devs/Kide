@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kide/config/Viewport.dart';
+import 'package:kide/util/constants.dart';
 import '../../models/SubEvent.dart';
 import 'package:kide/widgets/HeaderWidget.dart';
 
@@ -66,7 +67,7 @@ class DetailsPage extends StatelessWidget{
                           child: Padding(
                             padding: const EdgeInsets.only(top:10.0),
                             child: RaisedButton(
-                              child: Text('GO TO EVENT',
+                              child: Text(GO_TO_EVENT,
                               style: TextStyle(
                                 //fontWeight: FontWeight.,
                                 fontSize: 10

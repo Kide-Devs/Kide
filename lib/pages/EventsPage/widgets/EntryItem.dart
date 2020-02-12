@@ -3,11 +3,9 @@ import 'package:kide/pages/EventsPage/widgets/ExpansionTitle.dart';
 import 'package:kide/pages/EventsPage/DetailsPage.dart';
 import 'package:kide/models/SubEvent.dart';
 import 'package:flutter/material.dart';
+import 'package:kide/util/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:kide/providers/bookmarks.dart';
-
-import '../../../data.dart';
-
 
 class EntryItem extends StatefulWidget {
   EntryItem(this.entry);
@@ -145,7 +143,7 @@ class _EntryItemState extends State<EntryItem> {
                       },
                       textColor: Colors.white,
                       child:
-                          const Text('DETAILS', style: TextStyle(fontSize: 10)),
+                          const Text(DETAILS, style: TextStyle(fontSize: 10)),
                     ),
                     Container(
                       width: 16,
@@ -155,7 +153,7 @@ class _EntryItemState extends State<EntryItem> {
                         print("register");
                       },
                       textColor: Color.fromRGBO(253, 42, 42, 1),
-                      child: const Text('REGISTER',
+                      child: const Text(REGISTER,
                           style: TextStyle(fontSize: 10)),
                       color: Colors.white,
                       shape: RoundedRectangleBorder(
@@ -202,7 +200,7 @@ class _EntryItemState extends State<EntryItem> {
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage(
-                    './lib/assets/event.jpg',
+                    EVENTS_PAGE_EVENT_JPG,
                   ),
                 ),
               ),

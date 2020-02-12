@@ -3,6 +3,7 @@ import 'package:kide/models/EventCategory.dart';
 import 'package:kide/models/SubEvent.dart';
 import 'package:kide/pages/EventsPage/widgets/EntryItem.dart';
 import 'package:kide/providers/getEvents.dart';
+import 'package:kide/util/constants.dart';
 import 'package:provider/provider.dart';
 
 class SubEvents extends StatefulWidget {
@@ -19,7 +20,7 @@ class _SubEventsState extends State<SubEvents> {
     final EventCategory eventCategory = ModalRoute.of(context).settings.arguments;
     
     final Iterable<SubEvent> _subEventList = eventCategory.subEvents.where(
-      (e) => _getEvents.university == "Select Your University" ? true : e.universities.contains(_getEvents.university)
+      (e) => _getEvents.university == SELECT_YOUR_UNIVERSITY ? true : e.universities.contains(_getEvents.university)
     );
 
     return Scaffold(
@@ -41,7 +42,7 @@ class _SubEventsState extends State<SubEvents> {
                     height: 2,
                     color: Color.fromRGBO(0, 112, 240, 87),
                   ),
-                  items: ["Select Your University", ..._getEvents.universities].map<DropdownMenuItem<String>>(
+                  items: [SELECT_YOUR_UNIVERSITY, ..._getEvents.universities].map<DropdownMenuItem<String>>(
                     (String value) {
                       return DropdownMenuItem<String>(
                         value: value,

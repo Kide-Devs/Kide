@@ -3,6 +3,7 @@ import 'package:kide/models/EventCategory.dart';
 import 'package:kide/models/SubEvent.dart';
 import 'package:kide/pages/EventsPage/widgets/EntryItem.dart';
 import 'package:kide/providers/bookmarks.dart';
+import 'package:kide/util/constants.dart';
 import 'package:provider/provider.dart';
 
 class BookmarksPage extends StatelessWidget {
@@ -18,7 +19,7 @@ class BookmarksPage extends StatelessWidget {
     
     return  Scaffold(
         appBar: AppBar(
-          title: Text("Bookmarks"),
+          title: Text(BOOKMARKS),
         ),
         body: ListView.builder(
             itemBuilder: (BuildContext context, int index) =>

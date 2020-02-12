@@ -33,6 +33,11 @@ class _HomePageState extends State<HomePage> {
     //for Events
     if(_getEvents.eventList.length == 0) _getEvents.setEvents();
 
+    bool _isButtonDisabled = true;
+    // void initState(){
+    //   _isButtonDisabled = true;
+    // }
+
     ViewPort().init(context);
 
     return _getMarkers.markers.length > 0 ? Padding(
@@ -103,11 +108,28 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            //_getEvents.university == "Select Your University" ? 
+              // Padding(
+              //   padding: const EdgeInsets.fromLTRB(28.0, 8, 28, 8),
+              //   child: RaisedButton(
+              //     disabledColor: Colors.grey,
+              //     child: Text("PLEASE SELECT A UNIVERSITY"),
+              //     onPressed: () => 
+              //     {
+
+              //     }
+              //   ),
+              // ),
+            //null :
             Padding(
               padding: const EdgeInsets.fromLTRB(28.0, 8, 28, 8),
               child: RaisedButton(
-                child: Text("QUICK OVERVIEW"),
-                onPressed: () => {
+                color: _getEvents.university == "Select Your University" ? Colors.grey : Colors.blueAccent,
+                child: Text( _getEvents.university == "Select Your University" ? "SELECT A UNIVERSITY" : "QUICK OVERVIEW"),
+                onPressed: () => _getEvents.university == "Select Your University" ? {
+
+                } :
+                {
                   Navigator.pushNamed(
                     context,
                     '/MoreHome',

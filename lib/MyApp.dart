@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kide/pages/ContactsPage/ContactList.dart';
 import 'package:kide/pages/EventsPage/BookmarksPage.dart';
 import 'package:kide/pages/EventsPage/DetailsPage.dart';
+import 'package:kide/pages/HomePage/MoreHome.dart';
 import 'package:kide/pages/MorePage/MoreDetails.dart';
 import 'package:kide/providers/getEvents.dart';
 import 'package:kide/providers/bookmarks.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
           ContactList.routeName: (context) => ContactList(),
           DetailsPage.routeName: (context) => DetailsPage(),
           MoreDetails.routeName: (context) => MoreDetails(),
+          MoreHome.routeName: (context) => MoreHome(),
         },
       ),
     );

@@ -36,6 +36,11 @@ class _HomePageState extends State<HomePage> {
     // for Events
     if (_getEvents.eventList.length == 0) _getEvents.setEvents();
 
+    bool _isButtonDisabled = true;
+    // void initState(){
+    //   _isButtonDisabled = true;
+    // }
+
     ViewPort().init(context);
 
     return _getMarkers.markers.length > 0
@@ -98,6 +103,84 @@ class _HomePageState extends State<HomePage> {
                         onChanged: (String newVal) =>
                             _getEvents.setUniversity(newVal),
                       ),
+                    )
+                  ),
+                ]
+              )
+            ),
+            Container( height: 20),
+            InkWell(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(28.0, 8, 28, 8),
+                child: DropdownButton(
+                  isExpanded: true,
+                  isDense: true,
+                  value: _getEvents.university,
+                  icon: Icon(Icons.keyboard_arrow_down),
+                  iconSize: 24,
+                  elevation: 16,
+                  style: TextStyle(
+                    color: Colors.white70,
+                  ),
+                  underline: Container(
+                    height: 2,
+                    color: Color.fromRGBO(0, 112, 240, 87),
+                  ),
+                  items: ["Select Your University", ..._getEvents.universities].map<DropdownMenuItem<String>>(
+                    (String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }
+                  ).toList(),
+                  onChanged: (String newVal) => _getEvents.setUniversity(newVal),
+                ),
+              ),
+            ),
+            //_getEvents.university == "Select Your University" ? 
+              // Padding(
+              //   padding: const EdgeInsets.fromLTRB(28.0, 8, 28, 8),
+              //   child: RaisedButton(
+              //     disabledColor: Colors.grey,
+              //     child: Text("PLEASE SELECT A UNIVERSITY"),
+              //     onPressed: () => 
+              //     {
+
+              //     }
+              //   ),
+              // ),
+            //null :
+            Padding(
+              padding: const EdgeInsets.fromLTRB(28.0, 8, 28, 8),
+              child: RaisedButton(
+                color: _getEvents.university == "Select Your University" ? Colors.grey : Colors.blueAccent,
+                child: Text( _getEvents.university == "Select Your University" ? "SELECT A UNIVERSITY" : "QUICK OVERVIEW"),
+                onPressed: () => _getEvents.university == "Select Your University" ? {
+
+                } :
+                {
+                  Navigator.pushNamed(
+                    context,
+                    '/MoreHome',
+                    // arguments: {_getMarkers, _getEvents},
+                    arguments:  _getEvents,
+                  )
+                }
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Steps for participants: ",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                   Padding(

@@ -14,7 +14,7 @@ import './Page3.dart';
 
 class OnboardingMainPage extends StatefulWidget {
   OnboardingMainPage({Key key}) : super(key: key);
-
+  static const routeName = '/OnBoarding';
   @override
   _OnboardingMainPageState createState() => new _OnboardingMainPageState();
 }

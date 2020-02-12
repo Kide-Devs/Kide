@@ -8,8 +8,8 @@ void main() {
   runApp(new MaterialApp(
     home: new SplashScreen(),
     routes: <String, WidgetBuilder>{
-      '/OnBoarding': (BuildContext context) => new OnboardingMainPage(),
-      '/MyApp': (BuildContext context) => new MyApp()
+      OnboardingMainPage.routeName: (BuildContext context) => new OnboardingMainPage(),
+      MyApp.routeName: (BuildContext context) => new MyApp()
     },
   ));
 }
@@ -37,11 +37,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationMyApp() {
-    Navigator.of(context).pushReplacementNamed('/MyApp');
+    Navigator.of(context).pushNamed(MyApp.routeName);
   }
 
   void navigationOnBoarding() {
-    Navigator.of(context).pushReplacementNamed('/OnBoarding');
+    Navigator.of(context).pushNamed(OnboardingMainPage.routeName);
   }
 
   @override

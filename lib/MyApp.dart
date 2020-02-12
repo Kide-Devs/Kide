@@ -19,7 +19,7 @@ import 'package:kide/widgets/BottomNav.dart';
 
 
 class MyApp extends StatelessWidget {
-  
+  static const routeName = '/root';
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

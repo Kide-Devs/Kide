@@ -94,7 +94,7 @@ class _ContactsPageState extends State<ContactsPage> {
                 staggeredTiles: _staggeredTiles,
                 children: <Widget>[
                   for(int i=0;i<_emergencyContacts.length;i++)
-                    new EmergencyCard(_emergencyContacts[i].icon, _emergencyContacts[i].emergency, _emergencyContacts[i].number),
+                    new EmergencyCard(_emergencyContacts[i].iconAsset, _emergencyContacts[i].emergency, _emergencyContacts[i].number),
                 ],
               ),
               SliverList(

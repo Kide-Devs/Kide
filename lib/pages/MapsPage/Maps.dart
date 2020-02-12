@@ -109,8 +109,17 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    //Listner
+    // Markers Listner
     final _getMarkers = Provider.of<GetMarkers>(context);
+    // for markers
+    _getMarkers.markers.length == 0
+        ? _getMarkers.setMarkers()
+        : _getMarkers.setMarkerMap();
+    // for suggested markers
+    if (_getMarkers.suggestedMarkers.length == 0)
+      _getMarkers.setSuggestedMarkers();
+
+    // Set to all Markers initially
     if (_initialLoad) _markers = _getMarkers.markers['all'];
     _initialLoad = false;
 

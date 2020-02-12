@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import "package:google_maps_flutter/google_maps_flutter.dart";
 
 class GetMarkers with ChangeNotifier {
+  bool _isConnected = true;
   //Create Firebase Instance
   Firestore db = Firestore.instance;
 
@@ -26,16 +28,29 @@ class GetMarkers with ChangeNotifier {
   }
 
   void setMarkers() {
-    getMarkerData('campuses', _campuses);
-    getMarkerData('food', _food);
-    getMarkerData('gates', _gates);
-    getMarkerData('hostels', _hostels);
+    if (_isConnected) {
+      getMarkerData('campuses', _campuses);
+      getMarkerData('food', _food);
+      getMarkerData('gates', _gates);
+      getMarkerData('hostels', _hostels);
 
-    setMarkerMap();
+      setMarkerMap();
+    }
   }
 
   void setSuggestedMarkers() {
-    getSuggestedMarkerData(_suggestedMarkers);
+    if (_isConnected) {
+      getSuggestedMarkerData(_suggestedMarkers);
+    }
+  }
+
+  Future<void> checkConnectivity() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      // Connected to the internet
+      _isConnected = true;
+    }
   }
 
   void getSuggestedMarkerData(List<Marker> markerset) {

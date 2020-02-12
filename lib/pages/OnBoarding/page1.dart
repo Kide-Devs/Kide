@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:kide/config/Viewport.dart';
 
 class Page1 extends StatelessWidget {
- // final String _assets = 'lib/assets/maps.jpg';
+  final String _assets = 'lib/assets/maps.png';
   @override
   Widget build(BuildContext context) {
+    ViewPort().init(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: new Container(
         height: double.infinity,
-        width: double.infinity,
-        // decoration: new BoxDecoration(
-        //   image: DecorationImage(
-        //     image: AssetImage(_assets), 
-        //     fit: BoxFit.cover
-        //   )
-        // ),
         child: Stack(
           children: <Widget>[
             new Positioned.fill(
@@ -28,8 +23,13 @@ class Page1 extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
+                  Image.asset(
+                    _assets,
+                    // height: ViewPort.screenHeight*0.5,
+                    width: ViewPort.screenWidth*0.6,
+                  ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 0, 12, 170),
+                    padding: const EdgeInsets.fromLTRB(12, 0, 12, 80),
                     child: Text('Use our customized map to discover all the must see locations our campus has to offer',
                       style: Theme.of(context).textTheme.body1.copyWith(color: Colors.white70),
                       textAlign: TextAlign.left,

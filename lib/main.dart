@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     var _duration = new Duration(seconds: 2);
 
-    if (firstTime != null && !firstTime) {
+     if (firstTime != null && !firstTime) {
       // Not first time
       return new Timer(_duration, navigationMyApp);
     } else {

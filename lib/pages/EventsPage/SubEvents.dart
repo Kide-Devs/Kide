@@ -5,8 +5,14 @@ import 'package:kide/pages/EventsPage/widgets/EntryItem.dart';
 import 'package:kide/providers/getEvents.dart';
 import 'package:provider/provider.dart';
 
-class SubEvents extends StatelessWidget{
+class SubEvents extends StatefulWidget {
   static const routeName = '/subEvents';
+
+  @override
+  _SubEventsState createState() => _SubEventsState();
+}
+
+class _SubEventsState extends State<SubEvents> {
   @override
   Widget build(BuildContext context) {
     final _getEvents = Provider.of<GetEvents>(context);

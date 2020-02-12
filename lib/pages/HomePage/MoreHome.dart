@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kide/config/Viewport.dart';
 import 'package:kide/providers/getEvents.dart';
 import 'package:kide/providers/getMarkers.dart';
+import 'package:kide/util/constants.dart';
 import 'package:kide/widgets/HeaderWidget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -17,7 +18,7 @@ class MoreHome extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     ViewPort().init(context);
-    final GetEvents _quickEvents =   ModalRoute.of(context).settings.arguments;
+    final GetEvents _quickEvents = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       backgroundColor: Color.fromRGBO(18, 18, 18, 1.0),
       appBar: AppBar(
@@ -109,7 +110,7 @@ class MoreHome extends StatelessWidget{
                                 print("VENUE");
                               },
                               textColor: Colors.white70,
-                              child: const Text('GO TO VENUES',
+                              child: const Text(GO_TO_VENUES,
                                   style: TextStyle(fontSize: 10)),
                               color: Color.fromRGBO(0, 112, 240, 100),
                               shape: RoundedRectangleBorder(
@@ -164,7 +165,7 @@ class MoreHome extends StatelessWidget{
                                 print("VENUE");
                               },
                               textColor: Colors.white70,
-                              child: const Text('GO',
+                              child: const Text(GO,
                                   style: TextStyle(fontSize: 10)),
                               color: Color.fromRGBO(0, 112, 240, 100),
                               shape: RoundedRectangleBorder(

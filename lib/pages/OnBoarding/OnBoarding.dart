@@ -1,4 +1,6 @@
 //import 'package:kide/main.dart';
+import 'package:kide/util/constants.dart';
+
 import './dots_indicator.dart';
 import 'package:flutter/material.dart';
 import './Page1.dart';
@@ -80,7 +82,7 @@ class _OnboardingMainPageState extends State<OnboardingMainPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       FlatButton(
-                        child: Text('SKIP',
+                        child: Text(SKIP,
                           style: TextStyle(
                             color: Color.fromRGBO(255, 255, 255, 0.5)
                           ),
@@ -95,7 +97,7 @@ class _OnboardingMainPageState extends State<OnboardingMainPage> {
                       ),
                       RaisedButton(
                         child: Text(
-                          isDone ? 'DONE' : 'NEXT',
+                          isDone ? DONE : NEXT,
                           style: TextStyle(
                             color: Colors.black
                           ),

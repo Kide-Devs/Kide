@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kide/config/Viewport.dart';
 import 'package:kide/providers/getMarkers.dart';
 import 'package:kide/providers/getEvents.dart';
+import 'package:kide/util/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -50,14 +51,14 @@ class _HomePageState extends State<HomePage> {
         ),
         child: ListView(
           children: <Widget>[
-            Image.asset("./lib/pages/HomePage/assets/KIUG_KIIT.jpg"),
+            Image.asset(HOME_PAGE_ASSET_KHELO_INDIA_JPG),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
                 children: <Widget>[
                   Center(
                     child: Text(
-                      "KHELO INDIA",
+                      KHELO_INDIA,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
@@ -67,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Center(
                     child: Text(
-                      "UNIVERSITY GAMES 2020",
+                      UNIVERSITY_GAMES_2020,
                       style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.w600,
@@ -96,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                     height: 2,
                     color: Color.fromRGBO(0, 112, 240, 87),
                   ),
-                  items: ["Select Your University", ..._getEvents.universities].map<DropdownMenuItem<String>>(
+                  items: [SELECT_YOUR_UNIVERSITY, ..._getEvents.universities].map<DropdownMenuItem<String>>(
                     (String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -111,9 +112,9 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.fromLTRB(28.0, 8, 28, 8),
               child: RaisedButton(
-                color: _getEvents.university == "Select Your University" ? Colors.grey : Colors.blueAccent,
-                child: Text( _getEvents.university == "Select Your University" ? "SELECT A UNIVERSITY" : "QUICK OVERVIEW"),
-                onPressed: () => _getEvents.university == "Select Your University" ? {
+                color: _getEvents.university == SELECT_YOUR_UNIVERSITY ? Colors.grey : Colors.blueAccent,
+                child: Text( _getEvents.university == SELECT_YOUR_UNIVERSITY ? SELECT_A_UNIVERSITY : QUICK_OVERVIEW),
+                onPressed: () => _getEvents.university == SELECT_YOUR_UNIVERSITY ? {
 
                 } :
                 {
@@ -133,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Steps for participants: ",
+                    STEPS_FOR_PARTICIPANTS,
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 18,
@@ -154,7 +155,7 @@ class _HomePageState extends State<HomePage> {
                           size: 24.0,
                         ),
                         Text(
-                          "  Contact ULO: ",
+                          CONTACT_ULO,
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontSize: 14,
@@ -184,7 +185,7 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
                     child: Text(
-                      "Accomodation: ",
+                      ACCOMODATION,
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: 16,
@@ -206,7 +207,7 @@ class _HomePageState extends State<HomePage> {
                         Flexible(
                           child: Container(
                             child: Text(
-                              "Book your room by reaching the alloted accomodation/hostel as instructed by your ULO by showing the above mentioned documents.",
+                              HOME_PAGE_ACCOMODATION_DESC,
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontSize: 14,
@@ -233,7 +234,7 @@ class _HomePageState extends State<HomePage> {
                         Container(width: 4,),
                         Flexible(
                           child: Text(
-                            "Keep your Participation Letter & College ID.",
+                            KEEP_YOUR_PARTICIPATION,
                             textAlign: TextAlign.left,
                             
                             style: TextStyle(
@@ -251,7 +252,7 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
                     child: Text(
-                      "Verification: ",
+                      VERIFICATION,
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: 16,
@@ -273,7 +274,7 @@ class _HomePageState extends State<HomePage> {
                         Flexible(
                           child: Container(
                             child: Text(
-                              "The Verification process is required for each of the participants to actually take part in the event. No student will be allowed to play the games without verification documents. \n\nVenue: \tGandhi Chowk, Campus 6, KIIT.\nTime:    09:00 to 18:00",
+                              HOME_PAGE_VERIFICATION_DESC,
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontSize: 14,
@@ -299,7 +300,7 @@ class _HomePageState extends State<HomePage> {
                         Container(width: 4,),
                         Flexible(
                           child: Text(
-                            "Keep your Participation Letter & College ID.",
+                            KEEP_YOUR_PARTICIPATION,
                             textAlign: TextAlign.left,
                             
                             style: TextStyle(
@@ -318,7 +319,7 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
                     child: Text(
-                      "ID Card Distribution: ",
+                      ID_CARD_DISTRIBUTION,
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: 16,
@@ -340,7 +341,7 @@ class _HomePageState extends State<HomePage> {
                         Flexible(
                           child: Container(
                             child: Text(
-                              "The Verification process is required for each of the participants to actually take part in the event. No student will be allowed to play the games without verification documents. \n\nThe verification process will take place at Gandhi Chowk, Campus 6, KIIT.",
+                              HOME_PAGE_VERIFICATION_PROCESS_IS_REQUIRED,
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontSize: 14,
@@ -365,7 +366,7 @@ class _HomePageState extends State<HomePage> {
                         Container(width: 4,),
                         Flexible(
                           child: Text(
-                            "Keep your Participation Letter & College ID.",
+                            KEEP_YOUR_PARTICIPATION,
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               height: 1.5,

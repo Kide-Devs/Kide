@@ -7,6 +7,7 @@ import 'package:kide/pages/MorePage/MoreDetails.dart';
 import 'package:kide/providers/getEvents.dart';
 import 'package:kide/providers/bookmarks.dart';
 import 'package:kide/providers/getMarkers.dart';
+import 'package:kide/util/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:kide/pages/ContactsPage/Contacts.dart';
 import 'package:kide/pages/EventsPage/Events.dart';
@@ -30,9 +31,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider( create: (context) => GetMarkers()),
       ],
       child: MaterialApp(
-        title: 'Kide',
+        title: KIDE_L_CAPS,
         theme: ThemeData.dark(),
-        home: MyHomePage(title: 'KIDE'),
+        home: MyHomePage(title: KIDE_CAPS),
         routes: {
           SubEvents.routeName: (context) => SubEvents(),
           BookmarksPage.routeName: (context) => BookmarksPage(),
@@ -66,11 +67,11 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
 
   final List<String> _tabNames = [
-    "Maps",
-    "Contacts",
-    "Home",
-    "Events",
-    "More"
+    MAPS,
+    CONTACTS,
+    HOME,
+    EVENTS,
+    MORE
   ];
   
   @override

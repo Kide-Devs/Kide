@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kide/models/ContactCategory.dart';
 import 'package:kide/pages/ContactsPage/widgets/ContactCardDiallable.dart';
+import 'package:kide/util/constants.dart';
 import 'package:kide/widgets/HeaderWidget.dart';
 import 'package:kide/config/Viewport.dart';
 
@@ -15,7 +16,7 @@ class ContactList extends StatelessWidget {
     final _contactList = contactCategory.contacts;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Contact List',
+        title: Text(CONTACT_LIST,
           style: TextStyle(
             fontFamily: 'Roboto',
           ),

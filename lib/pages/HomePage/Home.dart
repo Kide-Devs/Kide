@@ -104,6 +104,20 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Padding(
+              padding: const EdgeInsets.fromLTRB(28.0, 8, 28, 8),
+              child: RaisedButton(
+                child: Text("QUICK OVERVIEW"),
+                onPressed: () => {
+                  Navigator.pushNamed(
+                    context,
+                    '/MoreHome',
+                    // arguments: {_getMarkers, _getEvents},
+                    arguments:  _getEvents,
+                  )
+                }
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,

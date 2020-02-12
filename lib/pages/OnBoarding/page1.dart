@@ -25,7 +25,7 @@ class Page1 extends StatelessWidget {
                   ),
                   Image.asset(
                     MAPS_ASSET_PNG,
-                    // height: ViewPort.screenHeight*0.5,
+                    height: ViewPort.screenHeight*0.5,
                     width: ViewPort.screenWidth*0.6,
                   ),
                   Padding(

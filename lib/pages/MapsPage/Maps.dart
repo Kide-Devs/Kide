@@ -12,6 +12,8 @@ import 'dart:math' as math;
 void main() => runApp(MapsPage());
 
 class MapsPage extends StatefulWidget {
+  final String eventMarker;
+  MapsPage({this.eventMarker});
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -47,6 +49,15 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
     _currentLocation();
   }
 
+  // When event marker is set
+  void _onMapCreatedWithEventMarker(GoogleMapController controller) {
+    mapController = controller;
+    mapController.setMapStyle(null);
+    mapController.setMapStyle(
+        '[{"elementType":"geometry","stylers":[{"color":"#f5f5f5"}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#616161"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#f5f5f5"}]},{"featureType":"administrative.land_parcel","elementType":"labels.text.fill","stylers":[{"color":"#bdbdbd"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#eeeeee"}]},{"featureType":"poi","elementType":"labels.text","stylers":[{"color":"#c6c6c6"}]},{"featureType":"poi","elementType":"labels.text.fill","stylers":[{"color":"#757575"}]},{"featureType":"poi","elementType":"labels.text.stroke","stylers":[{"visibility":"off"}]},{"featureType":"poi.medical","elementType":"geometry.fill","stylers":[{"color":"#ef2110"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#e5e5e5"}]},{"featureType":"poi.park","elementType":"labels.text.fill","stylers":[{"color":"#9e9e9e"}]},{"featureType":"poi.sports_complex","elementType":"geometry.fill","stylers":[{"color":"#7dec5e"}]},{"featureType":"poi.sports_complex","elementType":"labels.text","stylers":[{"color":"#fafafa"}]},{"featureType":"road","elementType":"geometry","stylers":[{"color":"#ffffff"}]},{"featureType":"road.arterial","elementType":"labels.text.fill","stylers":[{"color":"#757575"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#dadada"}]},{"featureType":"road.highway","elementType":"labels.text.fill","stylers":[{"color":"#616161"}]},{"featureType":"road.local","elementType":"labels.text.fill","stylers":[{"color":"#9e9e9e"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"color":"#e5e5e5"}]},{"featureType":"transit.station","elementType":"geometry","stylers":[{"color":"#eeeeee"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#c9c9c9"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#9e9e9e"}]}]');
+    _getPermissions();
+  }
+
   //Requeest permissions for location
   Future<void> _getPermissions() async {
     Map<PermissionGroup, PermissionStatus> permissions =
@@ -72,6 +83,14 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
         tilt: 60,
       ),
     ));
+  }
+
+  CameraPosition _defaultLocation() {
+    return CameraPosition(
+      target: _center,
+      zoom: 18.0,
+      tilt: 60,
+    );
   }
 
   //Filtering the markers
@@ -101,10 +120,21 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
     mapController.animateCamera(CameraUpdate.newCameraPosition(
       CameraPosition(
         target: searchedMarker.position,
-        zoom: 20.0,
+        zoom: 30.0,
         tilt: 60,
       ),
     ));
+  }
+
+  CameraPosition _goToEventLocation(GetMarkers getMarkers) {
+    Marker eventMarkerLoc = getMarkers.markers['all'].singleWhere((loc) {
+      return loc.markerId.value == widget.eventMarker;
+    });
+    print(eventMarkerLoc.markerId.value);
+    return CameraPosition(
+      target: eventMarkerLoc.position,
+      zoom: 30.0,
+    );
   }
 
   @override
@@ -128,13 +158,13 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
         child: Stack(
           children: [
             GoogleMap(
-              onMapCreated: _onMapCreated,
+              onMapCreated: (widget.eventMarker == null)
+                  ? _onMapCreated
+                  : _onMapCreatedWithEventMarker,
               markers: _markers,
-              initialCameraPosition: CameraPosition(
-                target: _center,
-                zoom: 18.0,
-                tilt: 60,
-              ),
+              initialCameraPosition: (widget.eventMarker == null)
+                  ? _defaultLocation()
+                  : _goToEventLocation(_getMarkers),
               buildingsEnabled: true,
               mapToolbarEnabled: true,
               myLocationEnabled: true,

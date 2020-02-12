@@ -23,18 +23,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // Markers Listner
     final _getMarkers = Provider.of<GetMarkers>(context);
-    // for markers
-    _getMarkers.markers.length == 0
-        ? _getMarkers.setMarkers()
-        : _getMarkers.setMarkerMap();
-    // for suggested markers
-    if (_getMarkers.suggestedMarkers.length == 0)
-      _getMarkers.setSuggestedMarkers();
+    //for markers
+    _getMarkers.markers.length == 0 ? _getMarkers.setMarkers() : _getMarkers.setMarkerMap();
+    //for suggested markers
+    if(_getMarkers.suggestedMarkers.length == 0) _getMarkers.setSuggestedMarkers();
 
     // Events Listener
     final _getEvents = Provider.of<GetEvents>(context);
-    // for Events
-    if (_getEvents.eventList.length == 0) _getEvents.setEvents();
+    //for Events
+    if(_getEvents.eventList.length == 0) _getEvents.setEvents();
 
     bool _isButtonDisabled = true;
     // void initState(){
@@ -43,65 +40,38 @@ class _HomePageState extends State<HomePage> {
 
     ViewPort().init(context);
 
-    return _getMarkers.markers.length > 0
-        ? Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-                color: Colors.black12,
-                clipBehavior: Clip.hardEdge,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0)),
-                child: ListView(children: <Widget>[
-                  Image.asset("./lib/pages/HomePage/assets/KIUG_KIIT.jpg"),
-                  Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(children: <Widget>[
-                        Center(
-                            child: Text(
-                          "KHELO INDIA",
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: ViewPort.screenWidth * 0.03),
-                        )),
-                        Center(
-                            child: Text(
-                          "UNIVERSITY GAMES 2020",
-                          style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: ViewPort.screenWidth * 0.02),
-                        )),
-                      ])),
-                  Container(height: 20),
-                  InkWell(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(28.0, 8, 28, 8),
-                      child: DropdownButton(
-                        isExpanded: true,
-                        isDense: true,
-                        value: _getEvents.university,
-                        icon: Icon(Icons.keyboard_arrow_down),
-                        iconSize: 24,
-                        elevation: 16,
-                        style: TextStyle(
-                          color: Colors.white70,
-                        ),
-                        underline: Container(
-                          height: 2,
-                          color: Color.fromRGBO(0, 112, 240, 87),
-                        ),
-                        items: [
-                          "Select Your University",
-                          ..._getEvents.universities
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        onChanged: (String newVal) =>
-                            _getEvents.setUniversity(newVal),
+    return _getMarkers.markers.length > 0 ? Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        color: Colors.black12,
+        clipBehavior: Clip.hardEdge,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0)
+        ),
+        child: ListView(
+          children: <Widget>[
+            Image.asset("./lib/pages/HomePage/assets/KIUG_KIIT.jpg"),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                children: <Widget>[
+                  Center(
+                    child: Text(
+                      "KHELO INDIA",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: ViewPort.screenWidth * 0.03
+                      ),
+                    )
+                  ),
+                  Center(
+                    child: Text(
+                      "UNIVERSITY GAMES 2020",
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: ViewPort.screenWidth * 0.02
                       ),
                     )
                   ),
@@ -138,19 +108,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            //_getEvents.university == "Select Your University" ? 
-              // Padding(
-              //   padding: const EdgeInsets.fromLTRB(28.0, 8, 28, 8),
-              //   child: RaisedButton(
-              //     disabledColor: Colors.grey,
-              //     child: Text("PLEASE SELECT A UNIVERSITY"),
-              //     onPressed: () => 
-              //     {
-
-              //     }
-              //   ),
-              // ),
-            //null :
             Padding(
               padding: const EdgeInsets.fromLTRB(28.0, 8, 28, 8),
               child: RaisedButton(
@@ -183,262 +140,250 @@ class _HomePageState extends State<HomePage> {
                       fontWeight: FontWeight.w800,
                     ),
                   ),
+                  Divider(
+                    color: Colors.white,
+                    endIndent: ViewPort.screenWidth * 0.33,
+                  ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 8, 0.0),
+                    child: Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.bubble_chart,
+                          color: Color.fromRGBO(0, 112, 240, 100),
+                          size: 24.0,
+                        ),
+                        Text(
+                          "  Contact ULO: ",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w200,
+                          ),
+                        ),
+                        Spacer(),
+                        RaisedButton(
+                          padding: EdgeInsets.fromLTRB(8.0, 0, 8, 0),
+                          onPressed: () {
+                            launch('tel:\\8456841773');
+                            print("register");
+                          },
+                          textColor: Colors.white70,
+                          child: const Text('+91 8456841773',
+                              style: TextStyle(fontSize: 10)),
+                          color: Color.fromRGBO(0, 112, 240, 100),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          )
+                        )
+                      ],
+                    ),
+                  ),
+
+  // ---- Sub Section -----------
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
+                    child: Text(
+                      "Accomodation: ",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
+                    child: Divider(
+                      color: Colors.white,
+                      endIndent: ViewPort.screenWidth * 0.33,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 8, 0.0),
+                    child: Row(
+                      children: <Widget>[
+                        Flexible(
+                          child: Container(
+                            child: Text(
+                              "Book your room by reaching the alloted accomodation/hostel as instructed by your ULO by showing the above mentioned documents.",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w200,
+                              ),
+                            ),
+                          ),
+                        ),
+                        
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 8, 0.0),
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(
-                          "Steps for participants: ",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w800,
-                          ),
+                        Icon(
+                          Icons.bubble_chart,
+                          color: Color.fromRGBO(0, 112, 240, 100),
+                          size: 24.0,
                         ),
-                        Divider(
-                          color: Colors.white,
-                          endIndent: ViewPort.screenWidth * 0.33,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 8, 0.0),
-                          child: Row(
-                            children: <Widget>[
-                              Icon(
-                                Icons.bubble_chart,
-                                color: Color.fromRGBO(0, 112, 240, 100),
-                                size: 24.0,
-                              ),
-                              Text(
-                                "  Contact ULO: ",
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w200,
-                                ),
-                              ),
-                              Spacer(),
-                              RaisedButton(
-                                  padding: EdgeInsets.fromLTRB(8.0, 0, 8, 0),
-                                  onPressed: () {
-                                    launch('tel:\\8456841773');
-                                    print("register");
-                                  },
-                                  textColor: Colors.white70,
-                                  child: const Text('+91 8456841773',
-                                      style: TextStyle(fontSize: 10)),
-                                  color: Color.fromRGBO(0, 112, 240, 100),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ))
-                            ],
-                          ),
-                        ),
-
-                        // ---- Sub Section -----------
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
+                        Container(width: 4,),
+                        Flexible(
                           child: Text(
-                            "Accomodation: ",
+                            "Keep your Participation Letter & College ID.",
                             textAlign: TextAlign.left,
+                            
                             style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
+                              height: 1.5,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w200,
                             ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
-                          child: Divider(
-                            color: Colors.white,
-                            endIndent: ViewPort.screenWidth * 0.33,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 8, 0.0),
-                          child: Row(
-                            children: <Widget>[
-                              Flexible(
-                                child: Container(
-                                  child: Text(
-                                    "Book your room by reaching the alloted accomodation/hostel as instructed by your ULO by showing the above mentioned documents.",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w200,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 8, 0.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Icon(
-                                Icons.bubble_chart,
-                                color: Color.fromRGBO(0, 112, 240, 100),
-                                size: 24.0,
-                              ),
-                              Container(
-                                width: 4,
-                              ),
-                              Flexible(
-                                child: Text(
-                                  "Keep your Participation Letter & College ID.",
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    height: 1.5,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w200,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(height: 20),
-                        // ---- Sub Section -----------
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
-                          child: Text(
-                            "Verification: ",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
-                          child: Divider(
-                            color: Colors.white,
-                            endIndent: ViewPort.screenWidth * 0.33,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 8, 0.0),
-                          child: Row(
-                            children: <Widget>[
-                              Flexible(
-                                child: Container(
-                                  child: Text(
-                                    "The Verification process is required for each of the participants to actually take part in the event. No student will be allowed to play the games without verification documents. \n\nVenue: \tGandhi Chowk, Campus 6, KIIT.\nTime:    09:00 to 18:00",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w200,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 8, 0.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Icon(
-                                Icons.bubble_chart,
-                                color: Color.fromRGBO(0, 112, 240, 100),
-                                size: 24.0,
-                              ),
-                              Container(
-                                width: 4,
-                              ),
-                              Flexible(
-                                child: Text(
-                                  "Keep your Participation Letter & College ID.",
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    height: 1.5,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w200,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        Container(height: 20),
-                        // ---- Sub Section -----------
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
-                          child: Text(
-                            "ID Card Distribution: ",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
-                          child: Divider(
-                            color: Colors.white,
-                            endIndent: ViewPort.screenWidth * 0.33,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 8, 0.0),
-                          child: Row(
-                            children: <Widget>[
-                              Flexible(
-                                child: Container(
-                                  child: Text(
-                                    "The Verification process is required for each of the participants to actually take part in the event. No student will be allowed to play the games without verification documents. \n\nThe verification process will take place at Gandhi Chowk, Campus 6, KIIT.",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w200,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 8, 0.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Icon(
-                                Icons.bubble_chart,
-                                color: Color.fromRGBO(0, 112, 240, 100),
-                                size: 24.0,
-                              ),
-                              Container(
-                                width: 4,
-                              ),
-                              Flexible(
-                                child: Text(
-                                  "Keep your Participation Letter & College ID.",
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    height: 1.5,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w200,
-                                  ),
-                                ),
-                              ),
-                            ],
                           ),
                         ),
                       ],
                     ),
-                  )
-                ])))
-        : CircularProgressIndicator();
+                  ),
+                  Container(height: 20),
+  // ---- Sub Section -----------
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
+                    child: Text(
+                      "Verification: ",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
+                    child: Divider(
+                      color: Colors.white,
+                      endIndent: ViewPort.screenWidth * 0.33,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 8, 0.0),
+                    child: Row(
+                      children: <Widget>[
+                        Flexible(
+                          child: Container(
+                            child: Text(
+                              "The Verification process is required for each of the participants to actually take part in the event. No student will be allowed to play the games without verification documents. \n\nVenue: \tGandhi Chowk, Campus 6, KIIT.\nTime:    09:00 to 18:00",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w200,
+                              ),
+                            ),
+                          ),
+                        ),
+                        
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 8, 0.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Icon(
+                          Icons.bubble_chart,
+                          color: Color.fromRGBO(0, 112, 240, 100),
+                          size: 24.0,
+                        ),
+                        Container(width: 4,),
+                        Flexible(
+                          child: Text(
+                            "Keep your Participation Letter & College ID.",
+                            textAlign: TextAlign.left,
+                            
+                            style: TextStyle(
+                              height: 1.5,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w200,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Container(height: 20),
+  // ---- Sub Section -----------
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
+                    child: Text(
+                      "ID Card Distribution: ",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
+                    child: Divider(
+                      color: Colors.white,
+                      endIndent: ViewPort.screenWidth * 0.33,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 8, 0.0),
+                    child: Row(
+                      children: <Widget>[
+                        Flexible(
+                          child: Container(
+                            child: Text(
+                              "The Verification process is required for each of the participants to actually take part in the event. No student will be allowed to play the games without verification documents. \n\nThe verification process will take place at Gandhi Chowk, Campus 6, KIIT.",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w200,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 8, 0.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Icon(
+                          Icons.bubble_chart,
+                          color: Color.fromRGBO(0, 112, 240, 100),
+                          size: 24.0,
+                        ),
+                        Container(width: 4,),
+                        Flexible(
+                          child: Text(
+                            "Keep your Participation Letter & College ID.",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              height: 1.5,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w200,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ]
+        )
+      )
+    )
+    : CircularProgressIndicator();
   }
 }

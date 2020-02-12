@@ -49,7 +49,7 @@ class _EntryItemState extends State<EntryItem> {
           textTheme: TextTheme(
             subhead: TextStyle(
                 color: Colors.white,
-                letterSpacing: exp ? 5 : _spacing,
+                letterSpacing: exp ? 5 : 2,
                 fontWeight: FontWeight.w600),
           ),
           unselectedWidgetColor: Colors.amber,

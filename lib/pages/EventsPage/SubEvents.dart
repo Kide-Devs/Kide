@@ -6,8 +6,14 @@ import 'package:kide/providers/university.dart';
 import 'package:kide/data.dart';
 import 'package:provider/provider.dart';
 
-class SubEvents extends StatelessWidget {
+class SubEvents extends StatefulWidget {
   static const routeName = '/subEvents';
+
+  @override
+  _SubEventsState createState() => _SubEventsState();
+}
+
+class _SubEventsState extends State<SubEvents> {
   @override
   Widget build(BuildContext context) {
     final _university = Provider.of<University>(context);

@@ -31,18 +31,18 @@ class DetailsPage extends StatelessWidget {
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    HeaderWidget("Date",15.0),
+                    HeaderWidget("Date",15.0,Colors.white),
                     Divider(
                       color: Colors.white,
                       endIndent: ViewPort.screenWidth*0.55,
                       ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0 , 0 , 12 ),
-                      child: HeaderWidget(_subEvent.date, 12),
+                      child: HeaderWidget(_subEvent.date, 12,Colors.white),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 20 , 0 ,0 ),
-                      child: HeaderWidget("Venue", 15.0),
+                      child: HeaderWidget("Venue", 15.0,Colors.white),
                     ),
                     Divider(
                       color: Colors.white,
@@ -50,20 +50,20 @@ class DetailsPage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0 , 0 ,35 ),
-                        child: HeaderWidget(_subEvent.location, 12),
+                        child: HeaderWidget(_subEvent.location, 12,Colors.white),
                       ),
-                      HeaderWidget("Time", 15),
+                      HeaderWidget("Time", 15,Colors.white),
                       Divider(
                       color: Colors.white,
                       endIndent: ViewPort.screenWidth*0.55,
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0 , 0 ,35 ),
-                        child: HeaderWidget(_subEvent.time, 12),
+                        child: HeaderWidget(_subEvent.time, 12,Colors.white),
                       ),
                       Row(
                         children: <Widget>[
-                        HeaderWidget("Description", 15),
+                        HeaderWidget("Description", 15,Colors.white),
                         Spacer(),
                         Container(
                           height: 30,
@@ -104,7 +104,7 @@ class DetailsPage extends StatelessWidget {
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                    child: HeaderWidget("DETAILS", 15.0),
+                    child: HeaderWidget("DETAILS", 15.0,Colors.white),
                   ),
                 ),
                 Divider(
@@ -119,7 +119,7 @@ class DetailsPage extends StatelessWidget {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
-                          child: HeaderWidget(_subEvent.details[i].header, 15),
+                          child: HeaderWidget(_subEvent.details[i].header, 15,Colors.white),
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(35, 0, 0, 20),

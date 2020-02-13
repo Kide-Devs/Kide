@@ -3,6 +3,8 @@ import 'package:kide/config/Viewport.dart';
 import 'package:kide/providers/getMarkers.dart';
 import 'package:kide/providers/getEvents.dart';
 import 'package:kide/util/constants.dart';
+import 'package:kide/util/data.dart';
+import 'package:kide/widgets/HeaderWidget.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -20,6 +22,151 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final event = new KheloIndia(
+    totUniversities: 80,
+    food: "food_tent",
+    totGames: 20,
+    totParticipants: 1700,
+    gameAccomodations: {
+      "Hockey": ["KP6", "KP7", "KP8"],
+      "Football": ["KP3", "KP17", "KP5"],
+      "Volleyball": ["KP13", "KP1", "KP15"],
+      "Cricket": ["KP6C", "KP9B", "KP9A"],
+    },
+  );
+
+  void showEventDialog(BuildContext context) async{
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Color(0xff222222),
+          titlePadding: EdgeInsets.fromLTRB(10.0, 10, 10, 2),
+          contentPadding: EdgeInsets.fromLTRB(5.0, 2, 5, 8),
+          title: Center(child: Text("Event Overview")),
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 18
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Divider(
+                indent: 0,
+                endIndent: 0,
+                color: Colors.blueAccent,
+              ),
+              Flexible(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      HeaderWidget("Total Games", 16,Colors.white),
+                      Divider(
+                        indent: ViewPort.screenWidth * 0.02,
+                        endIndent: ViewPort.screenWidth * 0.02,
+                        color: Colors.white38,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 12),
+                        child: HeaderWidget("${event.totGames}", 24,Colors.white),
+                      ),
+                      
+                      HeaderWidget("Total Participating Universities Univers", 16,Colors.white),
+                      Divider(
+                        indent: ViewPort.screenWidth * 0.02,
+                        endIndent: ViewPort.screenWidth * 0.02,
+                        color: Colors.white38,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 12),
+                        child: HeaderWidget("${event.totUniversities}", 24,Colors.white),
+                      ),
+                      
+                      HeaderWidget("Total Participants: ${event.totParticipants}", 16,Colors.white),
+                      Divider(
+                        indent: ViewPort.screenWidth * 0.02,
+                        endIndent: ViewPort.screenWidth * 0.02,
+                        color: Colors.white38,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 12),
+                        child: HeaderWidget("${event.totParticipants}", 24,Colors.white),
+                      ),
+                      
+                      HeaderWidget("Food Stall", 16,Colors.white),
+                      Divider(
+                        indent: ViewPort.screenWidth * 0.02,
+                        endIndent: ViewPort.screenWidth * 0.02,
+                        color: Colors.white38,
+                      ),
+                      HeaderWidget("${event.food.split('_').join(' ')}", 16,Colors.white),
+                      RaisedButton(
+                        color: Colors.blueAccent,
+                        child: Text( "Search on Maps",
+                        style: TextStyle(
+                          color: Colors.white
+                        ),),
+                        onPressed: () => {
+
+                        },
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        )
+                      ),
+                      Divider(
+                        indent: ViewPort.screenWidth * 0.02,
+                        endIndent: ViewPort.screenWidth * 0.02,
+                        color: Colors.white38,
+                      ),
+                      HeaderWidget("Accomodation", 16,Colors.white),
+                      Divider(
+                        indent: ViewPort.screenWidth * 0.02,
+                        endIndent: ViewPort.screenWidth * 0.02,
+                        color: Colors.white38,
+                        thickness: 3,
+                      ),
+                      // ListView(children: <Widget>[
+                      //   event.gameAccomodations.map((k, v) {
+                      //     return Row(
+                      //       children: [
+                      //         Text("$k "),
+                      //         v.forEach((s) => Text("$s"))
+                      //       ]
+                      //     )
+                      //   }).toList()
+                      // ],)
+                      // HeaderWidget("Football", 16,Colors.white),
+                      // Divider(
+                      //   indent: ViewPort.screenWidth * 0.05,
+                      //   endIndent: ViewPort.screenWidth * 0.02,
+                      //   color: Colors.white38,
+                      //   thickness: 0.5,
+                      // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(8.0),
+                      //   child: Row(
+                      //     children: <Widget>[
+                      //       HeaderWidget("Football", 16,Colors.white),
+                      //     ],
+                      //   ),
+                      // ),
+
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          )
+        );
+      }
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     // Markers Listner
@@ -80,6 +227,19 @@ class _HomePageState extends State<HomePage> {
               )
             ),
             Container( height: 20),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(28.0, 8, 28, 8),
+              child: RaisedButton(
+                color: Colors.orangeAccent,
+                child: Text("Event Overview"),
+                onPressed: () => showEventDialog(context),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                )
+                
+              ),
+            ),
+            Container( height: 20),
             InkWell(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(28.0, 8, 28, 8),
@@ -124,7 +284,10 @@ class _HomePageState extends State<HomePage> {
                     // arguments: {_getMarkers, _getEvents},
                     arguments:  _getEvents,
                   )
-                }
+                },
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                )
               ),
             ),
             Padding(

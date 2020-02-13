@@ -39,7 +39,7 @@ class MoreHome extends StatelessWidget{
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget> [
-                            HeaderWidget("COACH",15),
+                            HeaderWidget("COACH",15,Colors.white),
                           ]
                         ),
                          Spacer(),
@@ -95,7 +95,7 @@ class MoreHome extends StatelessWidget{
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget> [
-                            HeaderWidget("FOOD VENUE",15),
+                            HeaderWidget("FOOD VENUE",15,Colors.white),
                           ]
                         ),
                          Spacer(),
@@ -150,7 +150,7 @@ class MoreHome extends StatelessWidget{
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget> [
-                            HeaderWidget("ACCOMODATIONS",15),
+                            HeaderWidget("ACCOMODATIONS",15,Colors.white),
                           ]
                         ),
                          Spacer(),

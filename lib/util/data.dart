@@ -9,6 +9,27 @@ import 'package:kide/models/SubEvent.dart';
 import 'package:flutter/material.dart';
 import 'package:kide/models/EventDetail.dart';
 
+ /// no of univs
+  /// food
+  /// game wise acco
+  /// no of partcpts m/f
+  /// no of games
+class KheloIndia {
+  final int totUniversities;
+  final String food;
+  final Map<String, List<String>> gameAccomodations;
+  final int totParticipants;
+  final int totGames;
+
+  KheloIndia({
+    this.totUniversities,
+    this.food,
+    this.gameAccomodations,
+    this.totParticipants,
+    this.totGames,
+  });
+}
+
 List <EventDetail> eventDetails = [
   EventDetail(
     id: "01",

@@ -31,7 +31,7 @@ class ContactList extends StatelessWidget {
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    HeaderWidget(contactCategory.name,12),
+                    HeaderWidget(contactCategory.name,12, Colors.white),
                     Divider(
                       color: Colors.white,
                       endIndent: ViewPort.screenWidth*0.44,

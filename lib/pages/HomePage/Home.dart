@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                         child: Text(
                             _getEvents.university == SELECT_YOUR_UNIVERSITY
                                 ? SELECT_A_UNIVERSITY
-                                : QUICK_OVERVIEW),
+                                : DASHBOARD),
                         onPressed: () =>
                             _getEvents.university == SELECT_YOUR_UNIVERSITY
                                 ? {}

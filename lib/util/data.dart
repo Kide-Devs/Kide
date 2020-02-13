@@ -6,7 +6,7 @@ import 'package:kide/models/ContactCategory.dart';
 import 'package:kide/models/More.dart';
 import 'package:kide/models/MoreInfo.dart';
 import 'package:kide/models/Official.dart';
-import 'package:kide/models/QuickOverview.dart';
+import 'package:kide/models/DashBoard.dart';
 import 'package:kide/models/SubEvent.dart';
 import 'package:flutter/material.dart';
 import 'package:kide/models/EventDetail.dart';
@@ -34,8 +34,8 @@ List <Official> dummyUni = [
   ),
 ];
 
-List <QuickOverview> overView = [
-  QuickOverview(
+List <DashBoard> overView = [
+  DashBoard(
     totalParticipants: "80",
     officials: dummyUni,
   )

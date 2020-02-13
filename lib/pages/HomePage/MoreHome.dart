@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kide/config/Viewport.dart';
 import 'package:kide/providers/getEvents.dart';
-import 'package:kide/providers/getMarkers.dart';
 import 'package:kide/util/constants.dart';
+import 'package:kide/util/data.dart';
 import 'package:kide/widgets/HeaderWidget.dart';
-import 'package:url_launcher/url_launcher.dart';
-
-// class Arguments {
-//   final GetEvents _quickEvents;
-//   final GetMarkers _quickMarkers;
-
-//   Arguments(this._quickEvents,this._quickMarkers);
-// }
 
 class MoreHome extends StatelessWidget{
   static const routeName = '/MoreHome';
@@ -34,173 +26,93 @@ class MoreHome extends StatelessWidget{
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    Row(
-                      children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget> [
-                            HeaderWidget("COACH",15,Colors.white),
-                          ]
+                    for(int i=0;i<overView.length;i++)
+                    Container(
+                      child:Column(children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            HeaderWidget(TOTAL_PARTICIPANTS, 15, Colors.white),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 12, 8, 0),
+                              child: Text(overView[i].totalParticipants.toString()),
+                            ),
+                          ],
                         ),
-                         Spacer(),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(8,12,8,0),
-                          child: Container(
-                            height: 20,
-                            child: RaisedButton(
-                              padding: EdgeInsets.fromLTRB(8.0, 0, 8, 0),
-                              onPressed: () {
-                                launch('tel:\\123456789');
-                                print("register");
-                              },
-                              textColor: Colors.white70,
-                              child: const Text('+91 123456789',
-                                  style: TextStyle(fontSize: 10)),
-                              color: Color.fromRGBO(0, 112, 240, 100),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              )
-                            )
+                          padding: const EdgeInsets.only(left:8.0),
+                          child: Divider( 
+                            color: Colors.white,
+                            endIndent: ViewPort.screenWidth*0.35,
                           ),
-                        )
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left:8.0),
-                      child: Divider(
-                        color: Colors.white,
-                        endIndent: ViewPort.screenWidth*0.45,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left:8.0),
-
-                      //ENTER COACH INFO HERE 
-
-                      // HERE ----------V-------
-                      child: Text("COACH ANUJEET",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w300
                         ),
-                      ),
-                    ),
-                    
-                    // AGILE (PART_1) !
-
-                   Padding(
-                     padding: const EdgeInsets.only(top:25.0),
-                     child: Row(
-                      children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget> [
-                            HeaderWidget("FOOD VENUE",15,Colors.white),
-                          ]
-                        ),
-                         Spacer(),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(8,12,8,0),
-                          child: Container(
-                            height: 20,
-                            child: RaisedButton(
-                              padding: EdgeInsets.fromLTRB(8.0, 0, 8, 0),
-                              onPressed: () {
-                                //launch('tel:\\123456789');
-                                print("VENUE");
-                              },
-                              textColor: Colors.white70,
-                              child: const Text(GO_TO_VENUES,
-                                  style: TextStyle(fontSize: 10)),
-                              color: Color.fromRGBO(0, 112, 240, 100),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              )
-                            )
+                          padding: const EdgeInsets.only(top:20.0),
+                          child: Row(
+                            children: <Widget>[
+                              HeaderWidget(TOTAL_OFFICIALS, 15, Colors.white),
+                              Spacer(),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 12, 8, 0),
+                                child: Text(overView[i].officials.length.toString()),
+                              ),
+                            ],
                           ),
-                        )
-                      ],
-                  ),
-                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left:8.0),
-                    child: Divider(
-                      color: Colors.white,
-                      endIndent: ViewPort.screenWidth*0.45,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-
-                  //ENTER VENUES HERE 
-
-                  //-----------------------V---------------
-                    child: Text("KP - 6 MESS\n\nKP - 9 MESS"),
-                  ),
-
-
-                //AGILE PART_2 !
-
-
-
-                Padding(
-                     padding: const EdgeInsets.only(top:25.0),
-                     child: Row(
-                      children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget> [
-                            HeaderWidget("ACCOMODATIONS",15,Colors.white),
-                          ]
                         ),
-                         Spacer(),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(8,12,8,0),
-                          child: Container(
-                            height: 20,
-                            child: RaisedButton(
-                              padding: EdgeInsets.fromLTRB(8.0, 0, 8, 0),
-                              onPressed: () {
-                                //launch('tel:\\123456789');
-                                print("VENUE");
-                              },
-                              textColor: Colors.white70,
-                              child: const Text(GO,
-                                  style: TextStyle(fontSize: 10)),
-                              color: Color.fromRGBO(0, 112, 240, 100),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              )
-                            )
+                          padding: const EdgeInsets.only(left:8.0),
+                          child: Divider( 
+                            color: Colors.white,
+                            endIndent: ViewPort.screenWidth*0.35,
                           ),
-                        )
-                      ],
-                  ),
-                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left:8.0),
-                    child: Divider(
-                      color: Colors.white,
-                      endIndent: ViewPort.screenWidth*0.45,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-
-                  //ENTER ACCOMODATIONS HERE 
-
-                  //-----------------------V---------------
-                    child: Text("KP - 7\n\nKP - 10"),
-                  ),
-
-
-                  ],
-                ),
-              ),
-            ]
-          )
+                        ),
+                        // ADDITIONS :
+                        for(int j=0;j<overView[i].officials.length;j++)
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.bubble_chart,
+                                      color: Color.fromRGBO(0, 112, 240, 100),
+                                      size: 24.0,
+                                    ),
+                                    Text(
+                                      overView[i].officials[j].name,
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w200,
+                                      ),
+                                    ),
+                                  ]
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left:24.0),
+                                  child: Text(
+                                    overView[i].officials[j].designation,
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w200,
+                                    ),
+                                  ),
+                                ),
+                              ]
+                            ),
+                          )
+                        ],
+                      )
+                    )
+                ],)
+              )
+            ],
+          ),
         ),
-      )
+    )
   );
-  }
+}
 }

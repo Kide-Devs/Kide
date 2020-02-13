@@ -5,6 +5,8 @@ import 'package:kide/models/EventCategory.dart';
 import 'package:kide/models/ContactCategory.dart';
 import 'package:kide/models/More.dart';
 import 'package:kide/models/MoreInfo.dart';
+import 'package:kide/models/Official.dart';
+import 'package:kide/models/QuickOverview.dart';
 import 'package:kide/models/SubEvent.dart';
 import 'package:flutter/material.dart';
 import 'package:kide/models/EventDetail.dart';
@@ -29,6 +31,35 @@ class KheloIndia {
     this.totGames,
   });
 }
+List <Official> dummyUni = [
+  Official(
+    name: "ANUJEET CHATERJEE",
+    designation: "Male Coach",
+  ),
+  Official(
+    name: "SAPNA CHOUDHARY",
+    designation: "Female Coach",
+  ),
+  Official(
+    name: "AJAY HOODA",
+    designation: "Temp Coach",
+  ),
+  Official(
+    name: "ARKAJYOTI MUKHERJEE",
+    designation: "University Sports Manager (USM)",
+  ),
+  Official(
+    name: "VANSH BHATIA",
+    designation: "University contingent Manager (UCM)",
+  ),
+];
+
+List <QuickOverview> overView = [
+  QuickOverview(
+    totalParticipants: "80",
+    officials: dummyUni,
+  )
+];
 
 List <EventDetail> eventDetails = [
   EventDetail(

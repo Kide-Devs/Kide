@@ -70,7 +70,8 @@ class GetEvents with ChangeNotifier {
         snapshot.documents.forEach((doc) {
           // populate _eventList
           _eventList = doc.data['names'].cast<String>();
-          print(_eventList.length);
+          _eventList = _eventList.toSet().toList();
+          print(_eventList);
         });
         if (_eventList.length != 0)
           _eventList.forEach((e) => getEventCategory(e));
@@ -85,6 +86,7 @@ class GetEvents with ChangeNotifier {
         snapshot.documents.forEach((doc) {
           // populate universityList
           _universities = doc.data['name'].cast<String>();
+          _universities = _universities.toSet().toList();
           print(_universities);
           notifyListeners();
         });

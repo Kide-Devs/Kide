@@ -178,6 +178,7 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
                     _getSearchResult();
                     FocusScope.of(context).requestFocus(new FocusNode());
                   },
+                  enableInteractiveSelection: false,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(16.0),
                     fillColor: Colors.black,

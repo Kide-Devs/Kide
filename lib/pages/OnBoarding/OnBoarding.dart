@@ -15,8 +15,9 @@ import './Page3.dart';
 //     },
 
 class OnboardingMainPage extends StatefulWidget {
+  static const routeName = "/OnBoarding";
   OnboardingMainPage({Key key}) : super(key: key);
-  static const routeName = '/OnBoarding';
+
   @override
   _OnboardingMainPageState createState() => new _OnboardingMainPageState();
 }
@@ -91,7 +92,7 @@ class _OnboardingMainPageState extends State<OnboardingMainPage> {
                           print('Skip pressed');
                           Navigator.popAndPushNamed(
                           context, 
-                          '/root'
+                          '/MyApp'
                           );
                         } 
                       ),
@@ -106,7 +107,7 @@ class _OnboardingMainPageState extends State<OnboardingMainPage> {
                           print('Done pressed');
                         Navigator.popAndPushNamed(
                           context,
-                          '/root'
+                          '/MyApp'
                         );
                         } : (){
                             print('Next pressed');

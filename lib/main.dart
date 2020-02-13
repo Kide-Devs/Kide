@@ -5,6 +5,8 @@ import 'package:kide/util/constants.dart';
 import './MyApp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'SplashScreen.dart';
+
 void main() {
   runApp(new MaterialApp(
     home: new SplashScreen(),
@@ -15,76 +17,4 @@ void main() {
   ));
 }
 
-class SplashScreen extends StatefulWidget {
-  @override
-  _SplashScreenState createState() => new _SplashScreenState();
-}
 
-class _SplashScreenState extends State<SplashScreen> {
-  startTime() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool firstTime = prefs.getBool('first_time');
-
-    var _duration = new Duration(seconds: 2);
-
-     if (firstTime != null && !firstTime) {
-      // Not first time
-      return new Timer(_duration, navigationMyApp);
-    } else {
-      // First time
-      prefs.setBool('first_time', false);
-      return new Timer(_duration, navigationOnBoarding);
-    }
-  }
-
-  void navigationMyApp() {
-    Navigator.of(context).pushNamed(MyApp.routeName);
-  }
-
-  void navigationOnBoarding() {
-    Navigator.of(context).pushNamed(OnboardingMainPage.routeName);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    startTime();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Column(
-        // crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Stack(
-            children: <Widget>[
-              Center(
-                child: new Image.asset(MAIN_KIDE_LOGO,
-                    width: size.width / 4,
-                    height: size.height / 4,
-                    fit: BoxFit.contain),
-              ),
-            ],
-          ),
-          AnimatedOpacity(
-            opacity: 0.8,
-            duration: Duration(milliseconds: 4500),
-            curve: Curves.easeInOut,
-            child: Text(
-              KIDE_CAPS,
-              style: TextStyle(
-                fontSize: 20.0,
-                color: Colors.white,
-                letterSpacing: 25.0,
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}

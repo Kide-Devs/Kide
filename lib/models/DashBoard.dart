@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'Official.dart';
 
-class QuickOverview {
+class DashBoard {
   final String totalParticipants;
   final List<Official> officials;
-  QuickOverview({
+  DashBoard({
     @required this.totalParticipants,
     @required this.officials,
   });

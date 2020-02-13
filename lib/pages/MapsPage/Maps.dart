@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:kide/pages/MapsPage/models/FilterCategory.dart';
 import 'package:kide/pages/MapsPage/widgets/SearchBar.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:kide/pages/MapsPage/models/FilterCategories.dart';
 import 'package:provider/provider.dart';
 import 'package:kide/providers/getMarkers.dart';
+import 'package:location/location.dart';
 import 'dart:math' as math;
 
 void main() => runApp(MapsPage());
@@ -45,7 +44,6 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
     mapController.setMapStyle(null);
     mapController.setMapStyle(
         '[{"elementType":"geometry","stylers":[{"color":"#f5f5f5"}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#616161"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#f5f5f5"}]},{"featureType":"administrative.land_parcel","elementType":"labels.text.fill","stylers":[{"color":"#bdbdbd"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#eeeeee"}]},{"featureType":"poi","elementType":"labels.text","stylers":[{"color":"#c6c6c6"}]},{"featureType":"poi","elementType":"labels.text.fill","stylers":[{"color":"#757575"}]},{"featureType":"poi","elementType":"labels.text.stroke","stylers":[{"visibility":"off"}]},{"featureType":"poi.medical","elementType":"geometry.fill","stylers":[{"color":"#ef2110"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#e5e5e5"}]},{"featureType":"poi.park","elementType":"labels.text.fill","stylers":[{"color":"#9e9e9e"}]},{"featureType":"poi.sports_complex","elementType":"geometry.fill","stylers":[{"color":"#7dec5e"}]},{"featureType":"poi.sports_complex","elementType":"labels.text","stylers":[{"color":"#fafafa"}]},{"featureType":"road","elementType":"geometry","stylers":[{"color":"#ffffff"}]},{"featureType":"road.arterial","elementType":"labels.text.fill","stylers":[{"color":"#757575"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#dadada"}]},{"featureType":"road.highway","elementType":"labels.text.fill","stylers":[{"color":"#616161"}]},{"featureType":"road.local","elementType":"labels.text.fill","stylers":[{"color":"#9e9e9e"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"color":"#e5e5e5"}]},{"featureType":"transit.station","elementType":"geometry","stylers":[{"color":"#eeeeee"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#c9c9c9"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#9e9e9e"}]}]');
-    _getPermissions();
     _currentLocation();
   }
 
@@ -55,26 +53,20 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
     mapController.setMapStyle(null);
     mapController.setMapStyle(
         '[{"elementType":"geometry","stylers":[{"color":"#f5f5f5"}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#616161"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#f5f5f5"}]},{"featureType":"administrative.land_parcel","elementType":"labels.text.fill","stylers":[{"color":"#bdbdbd"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#eeeeee"}]},{"featureType":"poi","elementType":"labels.text","stylers":[{"color":"#c6c6c6"}]},{"featureType":"poi","elementType":"labels.text.fill","stylers":[{"color":"#757575"}]},{"featureType":"poi","elementType":"labels.text.stroke","stylers":[{"visibility":"off"}]},{"featureType":"poi.medical","elementType":"geometry.fill","stylers":[{"color":"#ef2110"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#e5e5e5"}]},{"featureType":"poi.park","elementType":"labels.text.fill","stylers":[{"color":"#9e9e9e"}]},{"featureType":"poi.sports_complex","elementType":"geometry.fill","stylers":[{"color":"#7dec5e"}]},{"featureType":"poi.sports_complex","elementType":"labels.text","stylers":[{"color":"#fafafa"}]},{"featureType":"road","elementType":"geometry","stylers":[{"color":"#ffffff"}]},{"featureType":"road.arterial","elementType":"labels.text.fill","stylers":[{"color":"#757575"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#dadada"}]},{"featureType":"road.highway","elementType":"labels.text.fill","stylers":[{"color":"#616161"}]},{"featureType":"road.local","elementType":"labels.text.fill","stylers":[{"color":"#9e9e9e"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"color":"#e5e5e5"}]},{"featureType":"transit.station","elementType":"geometry","stylers":[{"color":"#eeeeee"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#c9c9c9"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#9e9e9e"}]}]');
-    _getPermissions();
-  }
-
-  //Requeest permissions for location
-  Future<void> _getPermissions() async {
-    Map<PermissionGroup, PermissionStatus> permissions =
-        await PermissionHandler()
-            .requestPermissions([PermissionGroup.location]);
-    PermissionStatus permission = await PermissionHandler()
-        .checkPermissionStatus(PermissionGroup.location);
-    ServiceStatus serviceStatus =
-        await PermissionHandler().checkServiceStatus(PermissionGroup.location);
-    bool isShown = await PermissionHandler()
-        .shouldShowRequestPermissionRationale(PermissionGroup.location);
   }
 
   //Getting the current loaction for the map
   void _currentLocation() async {
-    Position currentLocation = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+    LocationData currentLocation;
+    var location = Location();
+    try {
+      currentLocation = await location.getLocation();
+    } catch (e) {
+      if (e.code == 'PERMISSION_DENIED') {
+        print('Permission denied');
+      }
+      currentLocation = null;
+    }
 
     mapController.animateCamera(CameraUpdate.newCameraPosition(
       CameraPosition(
@@ -224,11 +216,12 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
       ),
       floatingActionButton: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: List.generate(_categories.length, (int index) {
           Widget child = Container(
             height: 70.0,
-            width: 56.0,
-            alignment: FractionalOffset.topCenter,
+            // width: 70.0,
+            alignment: FractionalOffset.topRight,
             child: ScaleTransition(
               scale: CurvedAnimation(
                 parent: _controller,
@@ -236,19 +229,28 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
                     0.0, 1.0 - (index + 1) / _categories.length / 2.0,
                     curve: Curves.easeOut),
               ),
-              child: FloatingActionButton(
+              child: FloatingActionButton.extended(
                 heroTag: null,
                 backgroundColor:
                     categories[index].isToggled ? Colors.black : Colors.white,
-                mini: true,
-                child: Icon(_categories[index].icon,
+                // mini: true,
+                icon: Icon(_categories[index].icon,
                     color: categories[index].isToggled
                         ? Colors.white
                         : Colors.black),
                 onPressed: () {
                   _addSearchFilter(_categories[index], _getMarkers);
                 },
-                tooltip: _categories[index].label,
+                // tooltip: _categories[index].label,
+                // isExtended: true,
+                label: Text(
+                  _categories[index].label,
+                  style: TextStyle(
+                    color: categories[index].isToggled
+                        ? Colors.white
+                        : Colors.black,
+                  ),
+                ),
               ),
             ),
           );

@@ -91,7 +91,7 @@ class _OnboardingMainPageState extends State<OnboardingMainPage> {
                           print('Skip pressed');
                           Navigator.popAndPushNamed(
                           context, 
-                          '/MyApp'
+                          '/root'
                           );
                         } 
                       ),
@@ -106,7 +106,7 @@ class _OnboardingMainPageState extends State<OnboardingMainPage> {
                           print('Done pressed');
                         Navigator.popAndPushNamed(
                           context,
-                          '/MyApp'
+                          '/root'
                         );
                         } : (){
                             print('Next pressed');

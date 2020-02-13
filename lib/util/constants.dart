@@ -43,3 +43,5 @@ const String CONTACT_LIST = "Contact List";
 const String MAIN_KIDE_LOGO = "lib/assets/Icon/kide_logoldpi.png";
 const String KIDE_CAPS = "KIDE";
 const String KIDE_L_CAPS = "Kide";
+const String TOTAL_PARTICIPANTS = "TOTAL PARTICIPANTS: ";
+const String TOTAL_OFFICIALS = "TOTAL OFFICIALS: ";

@@ -58,7 +58,7 @@ class _ContactsPageState extends State<ContactsPage> {
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    HeaderWidget(EMERGENCY_CONTACTS,12),
+                    HeaderWidget(EMERGENCY_CONTACTS,12,Colors.white),
                     Divider(
                       color: Colors.white,
                       endIndent: ViewPort.screenWidth*0.44,
@@ -101,7 +101,7 @@ class _ContactsPageState extends State<ContactsPage> {
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    HeaderWidget(OTHER_CONTACTS,12),
+                    HeaderWidget(OTHER_CONTACTS,12,Colors.white),
                     Divider(
                       color: Colors.white,
                       endIndent: ViewPort.screenWidth*0.44,

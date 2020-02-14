@@ -11,7 +11,7 @@ class MoreDetails extends StatelessWidget{
      final More _moreInformation = ModalRoute.of(context).settings.arguments;
      return Scaffold(
        appBar: AppBar(
-         title: HeaderWidget(_moreInformation.moreName, 15),
+         title: HeaderWidget(_moreInformation.moreName, 15,Colors.white),
        ),
        backgroundColor: Color.fromRGBO(18, 18, 18, 1.0),
         body : Padding(
@@ -43,7 +43,7 @@ class MoreDetails extends StatelessWidget{
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget> [
-                            HeaderWidget(_moreInformation.pageFormat[i].header,15.0),
+                            HeaderWidget(_moreInformation.pageFormat[i].header,15.0,Colors.white),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Divider(
@@ -54,11 +54,11 @@ class MoreDetails extends StatelessWidget{
                             //for(int i=0;i<_moreInformation.pageFormat.length;i++)
                             Padding(
                             padding: const EdgeInsets.fromLTRB(0, 0 , 0 , 12 ),
-                              child: HeaderWidget(_moreInformation.pageFormat[i].desc, 12),
+                              child: HeaderWidget(_moreInformation.pageFormat[i].desc, 12,Colors.white),
                           ),
                       // Padding(
                       //   padding: const EdgeInsets.fromLTRB(0, 20 , 0 ,0 ),
-                      //   child: HeaderWidget("OUR VISION", 15.0),
+                      //   child: HeaderWidget("OUR VISION", 15.0,Colors.white),
                       // ),
                       // Divider(
                       //   color: Colors.white,
@@ -66,7 +66,7 @@ class MoreDetails extends StatelessWidget{
                       //   ),
                        // Padding(
                           //   padding: const EdgeInsets.fromLTRB(0, 0 , 0 ,35 ),
-                          //   child: HeaderWidget(_moreInformation.mission, 12),
+                          //   child: HeaderWidget(_moreInformation.mission, 12,Colors.white),
                           // )
                     ],
                   ),

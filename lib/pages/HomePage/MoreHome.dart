@@ -31,7 +31,7 @@ class MoreHome extends StatelessWidget{
                       child:Column(children: <Widget>[
                         Row(
                           children: <Widget>[
-                            HeaderWidget(TOTAL_PARTICIPANTS, 15),
+                            HeaderWidget(TOTAL_PARTICIPANTS, 15, Colors.white),
                             Spacer(),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(0, 12, 8, 0),
@@ -50,7 +50,7 @@ class MoreHome extends StatelessWidget{
                           padding: const EdgeInsets.only(top:20.0),
                           child: Row(
                             children: <Widget>[
-                              HeaderWidget(TOTAL_OFFICIALS, 15),
+                              HeaderWidget(TOTAL_OFFICIALS, 15, Colors.white),
                               Spacer(),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(0, 12, 8, 0),

@@ -191,7 +191,7 @@ class _HomePageState extends State<HomePage> {
     return _getMarkers.markers.length > 0 ? Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
-        color: Colors.black12,
+        color: Color.fromRGBO(18, 18, 18, 1),
         clipBehavior: Clip.hardEdge,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0)
@@ -200,7 +200,7 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             Image.asset(HOME_PAGE_ASSET_KHELO_INDIA_JPG),
             Padding(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
               child: Column(
                 children: <Widget>[
                   Center(

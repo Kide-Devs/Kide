@@ -85,7 +85,7 @@ class GetEvents with ChangeNotifier {
       (snapshot) {
         snapshot.documents.forEach((doc) {
           // populate universityList
-          _universities = doc.data['name'].cast<String>();
+          _universities = doc.data['names'].cast<String>();
           _universities = _universities.toSet().toList();
           print(_universities);
           notifyListeners();

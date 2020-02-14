@@ -31,17 +31,18 @@ class KheloIndia {
     this.totGames,
   });
 }
+
 List <Official> dummyUni = [
   Official(
     name: "ANUJEET CHATERJEE",
     designation: "Male Coach",
   ),
   Official(
-    name: "SAPNA CHOUDHARY",
+    name: "BISHMAY RANJAN SAHOO",
     designation: "Female Coach",
   ),
   Official(
-    name: "AJAY HOODA",
+    name: "DEEP RAJ",
     designation: "Temp Coach",
   ),
   Official(
@@ -54,12 +55,10 @@ List <Official> dummyUni = [
   ),
 ];
 
-List <DashBoard> overView = [
-  DashBoard(
-    totalParticipants: "80",
-    officials: dummyUni,
-  )
-];
+DashBoard overView = DashBoard(
+  totalParticipants: "80",
+  officials: dummyUni,
+);
 
 List <EventDetail> eventDetails = [
   EventDetail(

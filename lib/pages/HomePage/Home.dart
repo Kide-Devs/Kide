@@ -34,6 +34,106 @@ class _HomePageState extends State<HomePage> {
       "Cricket": ["KP6C", "KP9B", "KP9A"],
     },
   );
+  
+  void showQuickReviewDialog(BuildContext context, String university) async{
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Color(0xff222222),
+          titlePadding: EdgeInsets.fromLTRB(10.0, 10, 10, 2),
+          contentPadding: EdgeInsets.fromLTRB(5.0, 2, 5, 8),
+          title: Center(child: Text(university.toUpperCase())),
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 18
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Divider(
+                indent: 0,
+                endIndent: 0,
+                color: Colors.blueAccent,
+                thickness: 3,
+              ),
+              Flexible(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      HeaderWidget("Total Participants", 16,Colors.white),
+                      Divider(
+                        indent: ViewPort.screenWidth * 0.02,
+                        endIndent: ViewPort.screenWidth * 0.02,
+                        color: Colors.white38,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 12),
+                        child: HeaderWidget(overView.totalParticipants, 24,Colors.white),
+                      ),
+                      
+                      HeaderWidget("Total Officials: ${overView.officials.length}", 16,Colors.white),
+                      Divider(
+                        indent: ViewPort.screenWidth * 0.02,
+                        endIndent: ViewPort.screenWidth * 0.02,
+                        color: Colors.white38,
+                      ),
+                      for(int i = 0; i< overView.officials.length; i++)
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Row(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.bubble_chart,
+                                  color: Color.fromRGBO(0, 112, 240, 100),
+                                  size: 24.0,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left:8.0),
+                                  child: Text(
+                                    overView.officials[i].name,
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white70
+                                    ),
+                                  ),
+                                ),
+                              ]
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(32.0, 2, 0, 12),
+                              child: Text(
+                                overView.officials[i].designation,
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w200,
+                                  color: Colors.white70
+                                ),
+                              ),
+                            ),
+                          ]
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          )
+        );
+      }
+    );
+  }
 
   void showEventDialog(BuildContext context) async{
     showDialog(
@@ -228,7 +328,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Container( height: 20),
             Padding(
-              padding: const EdgeInsets.fromLTRB(18.0, 0, 28, 8),
+              padding: const EdgeInsets.fromLTRB(28.0, 0, 28, 8),
               child: RaisedButton(
                 color: Colors.orangeAccent,
                 child: Text("Event Overview"),
@@ -278,12 +378,7 @@ class _HomePageState extends State<HomePage> {
 
                 } :
                 {
-                  Navigator.pushNamed(
-                    context,
-                    '/MoreHome',
-                    // arguments: {_getMarkers, _getEvents},
-                    arguments:  _getEvents,
-                  )
+                  showQuickReviewDialog(context, _getEvents.university)
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),

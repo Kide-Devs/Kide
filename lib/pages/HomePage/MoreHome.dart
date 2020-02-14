@@ -80,18 +80,21 @@ class MoreHome extends StatelessWidget{
                                       color: Color.fromRGBO(0, 112, 240, 100),
                                       size: 24.0,
                                     ),
-                                    Text(
-                                      overView[i].officials[j].name,
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w200,
+                                    Padding(
+                                      padding: const EdgeInsets.only(left:8.0),
+                                      child: Text(
+                                        overView[i].officials[j].name,
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w200,
+                                        ),
                                       ),
                                     ),
                                   ]
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left:24.0),
+                                  padding: const EdgeInsets.fromLTRB(32.0, 2, 0, 12),
                                   child: Text(
                                     overView[i].officials[j].designation,
                                     textAlign: TextAlign.left,

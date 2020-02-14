@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:kide/config/Viewport.dart';
+import 'package:kide/widgets/HeaderWidget.dart';
 import 'package:provider/provider.dart';
 import 'package:kide/providers/getMarkers.dart';
 
@@ -18,6 +20,7 @@ class _SearchBarState extends State<SearchBar> {
   String _searchText = "";
   List<Marker> _markers;
   bool _initialLoad = true;
+  String _headerText;
 
   _SearchBarState() {
     _searchQuery.addListener(() {
@@ -25,11 +28,13 @@ class _SearchBarState extends State<SearchBar> {
         setState(() {
           _isSearching = false;
           _searchText = "";
+          _headerText = "Places for You";
         });
       } else {
         setState(() {
           _isSearching = true;
           _searchText = _searchQuery.text;
+          _headerText = "Search Results";
         });
       }
     });
@@ -39,6 +44,7 @@ class _SearchBarState extends State<SearchBar> {
   void initState() {
     super.initState();
     _isSearching = false;
+    _headerText = "Places for You";
     _focus.addListener(_onFocusChange);
     // init();
   }
@@ -95,6 +101,8 @@ class _SearchBarState extends State<SearchBar> {
     if (_initialLoad) _markers = _getMarkers.suggestedMarkers;
     _initialLoad = false;
 
+    ViewPort().init(context);
+
     return Scaffold(
       key: key,
       body: SafeArea(
@@ -136,12 +144,21 @@ class _SearchBarState extends State<SearchBar> {
                 ),
               ),
             ),
+            HeaderWidget(_headerText, 18, Colors.white),
+            Divider(
+              indent: ViewPort.screenWidth * 0.02,
+              endIndent: ViewPort.screenWidth * 0.02,
+              color: Colors.blueAccent,
+              thickness: 3,
+            ),
             Expanded(
               child: Container(
                 height: 500,
                 child: ListView(
                   padding: EdgeInsets.symmetric(vertical: 16.0),
-                  children: _isSearching ? _buildSearchList(_getMarkers.markers['all']) : _buildList(),
+                  children: _isSearching
+                      ? _buildSearchList(_getMarkers.markers['all'])
+                      : _buildList(),
                 ),
               ),
             ),
@@ -159,11 +176,13 @@ class ChildItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      key: Key(this.marker.infoWindow.title),
       title: Text(this.marker.infoWindow.title),
       subtitle: Text(this.marker.infoWindow.snippet),
       contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
       isThreeLine: true,
       enabled: true,
+      trailing: Icon(Icons.place, color: Colors.blueAccent),
       onTap: () {
         Navigator.pop(context, marker);
       },

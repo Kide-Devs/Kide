@@ -62,3 +62,4 @@ const String TOTAL_GAMES = "Total Games";
 const String TOTAL_PARTICIPATING_UNIVERSITIES = "Total Participating Universities";
 const String FOOD_STALL = "Food Stall";
 const String SEARCH_ON_MAPS = "Search on Maps";
+const String QUENCH_YOUR_HUNGER = "QUENCH YOUR HUNGER";

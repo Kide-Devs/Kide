@@ -1,3 +1,5 @@
+import 'package:Kide/models/Games.dart';
+import 'package:Kide/providers/getGameDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:Kide/config/Viewport.dart';
 import 'package:Kide/pages/MapsPage/Maps.dart';
@@ -28,62 +30,6 @@ class _HomePageState extends State<HomePage> {
     food: "food_tent",
     totGames: 20,
     totParticipants: 1700,
-    gameAccomodations: {
-      "Archery": [
-        Accomodation(name: "KP6", markerId: "campus_3"),
-      ],
-      "Athletics": [
-        Accomodation(name: "KP6", markerId: "campus_3"),
-      ],
-      "Badminton": [
-        Accomodation(name: "KP6", markerId: "campus_3"),
-      ],
-      "Basketball": [
-        Accomodation(name: "KP6", markerId: "campus_3"),
-      ],
-      "Boxing": [
-        Accomodation(name: "KP6", markerId: "campus_3"),
-      ],
-      "Fencing": [
-        Accomodation(name: "KP6", markerId: "campus_3"),
-      ],
-      "Football": [
-        Accomodation(name: "KP6", markerId: "campus_3"),
-        Accomodation(name: "KP6", markerId: "campus_3"),
-        Accomodation(name: "KP6", markerId: "campus_3"),
-      ],
-      "Hockey": [
-        Accomodation(name: "KP6", markerId: "campus_3"),
-      ],
-      "Judo": [
-        Accomodation(name: "KP6", markerId: "campus_3"),
-      ],
-      "Kabaddi": [
-        Accomodation(name: "KP6", markerId: "campus_3"),
-      ],
-      "Rugby": [
-        Accomodation(name: "KP6", markerId: "campus_3"),
-      ],
-      "Swimming": [
-        Accomodation(name: "KP6", markerId: "campus_3"),
-        Accomodation(name: "KP6", markerId: "campus_3"),
-      ],
-      "Table Tennis": [
-        Accomodation(name: "KP6", markerId: "campus_3"),
-      ],
-      "Tennis": [
-        Accomodation(name: "KP6", markerId: "campus_3"),
-      ],
-      "Vollyball": [
-        Accomodation(name: "KP6", markerId: "campus_3"),
-      ],
-      "Weightlifting": [
-        Accomodation(name: "KP6", markerId: "campus_3"),
-      ],
-      "Wrestling": [
-        Accomodation(name: "KP6", markerId: "campus_3"),
-      ],
-    },
   );
 
   void showQuickReviewDialog(BuildContext context, String university) async {
@@ -91,99 +37,99 @@ class _HomePageState extends State<HomePage> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            backgroundColor: Color(0xff222222),
-            titlePadding: EdgeInsets.fromLTRB(10.0, 10, 10, 2),
-            contentPadding: EdgeInsets.fromLTRB(5.0, 2, 5, 8),
-            title: Center(child: Text(university.toUpperCase())),
-            titleTextStyle: TextStyle(color: Colors.white, fontSize: 18),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Divider(
-                  indent: 0,
-                  endIndent: 0,
-                  color: Colors.blueAccent,
-                  thickness: 3,
-                ),
-                Flexible(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        HeaderWidget(TOTAL_PARTICIPANTS, 16, Colors.white),
-                        Divider(
-                          indent: ViewPort.screenWidth * 0.02,
-                          endIndent: ViewPort.screenWidth * 0.02,
-                          color: Colors.white38,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 12),
-                          child: HeaderWidget(
-                              overView.totalParticipants, 24, Colors.white),
-                        ),
-                        HeaderWidget(
-                            "Total Officials: ${overView.officials.length}",
-                            16,
-                            Colors.white),
-                        Divider(
-                          indent: ViewPort.screenWidth * 0.02,
-                          endIndent: ViewPort.screenWidth * 0.02,
-                          color: Colors.white38,
-                        ),
-                        for (int i = 0; i < overView.officials.length; i++)
+              backgroundColor: Color(0xff222222),
+              titlePadding: EdgeInsets.fromLTRB(10.0, 10, 10, 2),
+              contentPadding: EdgeInsets.fromLTRB(5.0, 2, 5, 8),
+              title: Center(child: Text(university.toUpperCase())),
+              titleTextStyle: TextStyle(color: Colors.white, fontSize: 18),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Divider(
+                    indent: 0,
+                    endIndent: 0,
+                    color: Colors.blueAccent,
+                    thickness: 3,
+                  ),
+                  Flexible(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          HeaderWidget(TOTAL_PARTICIPANTS, 16, Colors.white),
+                          Divider(
+                            indent: ViewPort.screenWidth * 0.02,
+                            endIndent: ViewPort.screenWidth * 0.02,
+                            color: Colors.white38,
+                          ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Row(children: <Widget>[
-                                    Icon(
-                                      Icons.bubble_chart,
-                                      color: Color.fromRGBO(0, 112, 240, 100),
-                                      size: 24.0,
-                                    ),
+                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 12),
+                            child: HeaderWidget(
+                                overView.totalParticipants, 24, Colors.white),
+                          ),
+                          HeaderWidget(
+                              "Total Officials: ${overView.officials.length}",
+                              16,
+                              Colors.white),
+                          Divider(
+                            indent: ViewPort.screenWidth * 0.02,
+                            endIndent: ViewPort.screenWidth * 0.02,
+                            color: Colors.white38,
+                          ),
+                          for (int i = 0; i < overView.officials.length; i++)
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Row(children: <Widget>[
+                                      Icon(
+                                        Icons.bubble_chart,
+                                        color: Color.fromRGBO(0, 112, 240, 100),
+                                        size: 24.0,
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 8.0),
+                                        child: Text(
+                                          overView.officials[i].name,
+                                          softWrap: true,
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.white70),
+                                        ),
+                                      ),
+                                    ]),
                                     Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 8.0),
+                                      padding: const EdgeInsets.fromLTRB(
+                                          32.0, 2, 0, 12),
                                       child: Text(
-                                        overView.officials[i].name,
-                                        softWrap: true,
+                                        overView.officials[i].designation,
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                             fontSize: 14,
-                                            fontWeight: FontWeight.w400,
+                                            fontWeight: FontWeight.w200,
                                             color: Colors.white70),
                                       ),
                                     ),
                                   ]),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        32.0, 2, 0, 12),
-                                    child: Text(
-                                      overView.officials[i].designation,
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w200,
-                                          color: Colors.white70),
-                                    ),
-                                  ),
-                                ]),
-                          ),
-                      ],
+                            ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
-            )
-          );
+                ],
+              ));
         });
   }
 
-  void showEventDialog(BuildContext context) async {
+  void showEventDialog(
+      BuildContext context, Set<GameDetails> gameDetails) async {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -220,9 +166,7 @@ class _HomePageState extends State<HomePage> {
                             child: HeaderWidget(
                                 "${event.totGames}", 24, Colors.white),
                           ),
-                          HeaderWidget(
-                              TOTAL_PARTICIPATING_UNIVERSITIES,
-                              16,
+                          HeaderWidget(TOTAL_PARTICIPATING_UNIVERSITIES, 16,
                               Colors.white),
                           Divider(
                             indent: ViewPort.screenWidth * 0.02,
@@ -267,8 +211,7 @@ class _HomePageState extends State<HomePage> {
                               },
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
-                              )
-                            ),
+                              )),
                           Divider(
                             indent: ViewPort.screenWidth * 0.02,
                             endIndent: ViewPort.screenWidth * 0.02,
@@ -281,8 +224,25 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.white38,
                             thickness: 3,
                           ),
-                          _accomodationListItems(event.gameAccomodations.keys,
-                              event.gameAccomodations.values),
+                          for (int i = 0; i < gameDetails.length; i++)
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: <Widget>[
+                                  Center(
+                                    child: HeaderWidget(
+                                        gameDetails
+                                            .elementAt(i)
+                                            .name
+                                            .toUpperCase(),
+                                        16,
+                                        Colors.white),
+                                  ),
+                                  _listItemBuilder(
+                                      gameDetails.elementAt(i).gameAccomodations),
+                                ],
+                              ),
+                            ),
                         ],
                       ),
                     ),
@@ -292,83 +252,70 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
-  void _goToMaps( String loc ){
-    Navigator.of(context, rootNavigator: true)
-        .pop('dialog');
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-      builder: (context) =>
-          MapsPage(eventMarker: loc)
-      )
+  void _goToMaps(String loc) {
+    Navigator.of(context, rootNavigator: true).pop('dialog');
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => MapsPage(eventMarker: loc)));
+  }
+
+  RaisedButton _buildRaisedButton(String text, String location) {
+    return RaisedButton(
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 8),
+      ),
+      color: Colors.blueAccent,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      onPressed: () {
+        _goToMaps(location);
+      },
     );
   }
 
-  _accomodationListItems(
-      Iterable<String> games, Iterable<List<Accomodation>> hostels) {
+  _listItemBuilder(Map<dynamic, dynamic> games) {
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           for (int i = 0; i < games.length; i++)
-            Container(
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 22.0),
-                    child: Text(games.elementAt(i).toUpperCase(),
-                        style: TextStyle(color: Colors.white)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  width: ViewPort.screenWidth * 0.4,
+                  child: Text(
+                    games.keys.elementAt(i),
+                    style: TextStyle(color: Colors.white),
                   ),
-
-                  for (int j = 0; j < hostels.elementAt(i).length; j++)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(hostels.elementAt(i).elementAt(j).name,
-                              style: TextStyle(color: Colors.white)),
-                          Spacer(),
-                          RaisedButton(
-                            child: Text(
-                              FIND_IN_MAPS,
-                              style: TextStyle(
-                                  fontSize: 8),
-                            ),
-                            color: Colors.blueAccent,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            onPressed: () {
-                              print("Accomodation press");
-                              Navigator.of(context, rootNavigator: true)
-                                  .pop('dialog');
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          MapsPage(eventMarker: hostels.elementAt(i).elementAt(j).markerId)));
-                            },
-                          ),
-                        ],
-                      ),
-                    )
-                ],
-              ),
+                ),
+                Spacer(),
+                _buildRaisedButton(FIND_IN_MAPS, games.values.elementAt(i)),
+              ],
             ),
         ],
       ),
     );
   }
+
+  
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    
     final _getEvents = Provider.of<GetEvents>(context);
     if (_getEvents.eventList.length == 0) _getEvents.setEvents();
+
+    // Get Game details
+    final _getGameDetails = Provider.of<GetGameDetails>(context);
+    if (_getGameDetails.gameDetails.length == 0)
+      _getGameDetails.setGameDetails();
   }
 
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     // Markers Listner
@@ -383,7 +330,9 @@ class _HomePageState extends State<HomePage> {
 
     // Events Listener
     final _getEvents = Provider.of<GetEvents>(context);
-    //for Events
+
+    // Game Details
+    final _getGameDetails = Provider.of<GetGameDetails>(context);
 
     ViewPort().init(context);
 
@@ -423,7 +372,8 @@ class _HomePageState extends State<HomePage> {
                     child: RaisedButton(
                         color: Colors.orangeAccent,
                         child: Text(EVENT_OVERVIEW),
-                        onPressed: () => showEventDialog(context),
+                        onPressed: () => showEventDialog(
+                            context, _getGameDetails.gameDetails),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         )),
@@ -432,32 +382,60 @@ class _HomePageState extends State<HomePage> {
                   InkWell(
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(28.0, 8, 28, 8),
-                      child: DropdownButton(
-                        isExpanded: true,
-                        isDense: true,
-                        value: _getEvents.university,
-                        icon: Icon(Icons.keyboard_arrow_down),
-                        iconSize: 24,
-                        elevation: 16,
-                        style: TextStyle(
-                          color: Colors.white70,
-                        ),
-                        underline: Container(
-                          height: 2,
-                          color: Color.fromRGBO(0, 112, 240, 87),
-                        ),
-                        items: [
-                          SELECT_YOUR_UNIVERSITY,
-                          ..._getEvents.universities
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        onChanged: (String newVal) =>
-                            _getEvents.setUniversity(newVal),
-                      ),
+                      child: (_getEvents.userType == "Participant") ?
+                        DropdownButton(
+                          isExpanded: true,
+                          isDense: true,
+                          value: _getEvents.university,
+                          icon: Icon(Icons.keyboard_arrow_down),
+                          iconSize: 24,
+                          elevation: 16,
+                          style: TextStyle(
+                            color: Colors.white70,
+                          ),
+                          underline: Container(
+                            height: 2,
+                            color: Color.fromRGBO(0, 112, 240, 87),
+                          ),
+                          items: [
+                            SELECT_YOUR_UNIVERSITY,
+                            ..._getEvents.universities
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (String newVal) =>
+                              _getEvents.setUniversity(newVal),
+                        ) : DropdownButton(
+                          isExpanded: true,
+                          isDense: true,
+                          value: _getEvents.uloUniversity,
+                          icon: Icon(Icons.keyboard_arrow_down),
+                          iconSize: 24,
+                          elevation: 16,
+                          style: TextStyle(
+                            color: Colors.white70,
+                          ),
+                          underline: Container(
+                            height: 2,
+                            color: Color.fromRGBO(0, 112, 240, 87),
+                          ),
+                          items: [
+                            SELECT_YOUR_UNIVERSITY,
+                            ..._getEvents.ulo_list.firstWhere((u) {
+                              return u.name == _getEvents.currentULO;
+                            }).universities
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (String newVal) =>
+                              _getEvents.setUloUniversity(newVal),
+                          ),
                     ),
                   ),
                   Padding(
@@ -481,6 +459,7 @@ class _HomePageState extends State<HomePage> {
                           borderRadius: BorderRadius.circular(20),
                         )),
                   ),
+                  (_getEvents.userType == "Participant") ?
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -733,8 +712,32 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ),
+                  ) 
+                  : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Information for ULOs",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        Divider(
+                          color: Colors.white,
+                          endIndent: ViewPort.screenWidth * 0.33,
+                        ),
+                      ]
+                    )
                   )
-                ])))
+                ]
+              )
+            )
+          )
         : CircularProgressIndicator();
   }
 }

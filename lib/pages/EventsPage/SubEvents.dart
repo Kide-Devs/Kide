@@ -1,3 +1,5 @@
+import 'package:Kide/pages/MapsPage/Maps.dart';
+import 'package:Kide/providers/getGameDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:Kide/models/EventCategory.dart';
 import 'package:Kide/models/SubEvent.dart';
@@ -16,7 +18,6 @@ class SubEvents extends StatefulWidget {
 }
 
 class _SubEventsState extends State<SubEvents> {
-  
   @override
   Widget build(BuildContext context) {
     final _getEvents = Provider.of<GetEvents>(context);
@@ -27,6 +28,54 @@ class _SubEventsState extends State<SubEvents> {
         (e) => _getEvents.university == SELECT_YOUR_UNIVERSITY
             ? true
             : e.universities.contains(_getEvents.university));
+
+    final _getGameDetails = Provider.of<GetGameDetails>(context);
+
+    void _goToMaps(String loc) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => MapsPage(eventMarker: loc)));
+    }
+
+    RaisedButton _buildRaisedButton(String text, String location) {
+      return RaisedButton(
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 8),
+        ),
+        color: Colors.blueAccent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        onPressed: () {
+          _goToMaps(location);
+        },
+      );
+    }
+
+    _listItemBuilder(Map<dynamic, dynamic> games) {
+      return Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            for (int i = 0; i < games.length; i++)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    width: ViewPort.screenWidth * 0.5,
+                    child: Text(
+                      games.keys.elementAt(i),
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  Spacer(),
+                  _buildRaisedButton(FIND_IN_MAPS, games.values.elementAt(i)),
+                ],
+              ),
+          ],
+        ),
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -62,11 +111,51 @@ class _SubEventsState extends State<SubEvents> {
           ),
         ),
       ),
-      body: ListView.builder(
-        itemBuilder: (BuildContext context, int index) =>
-            EntryItem(_subEventList.elementAt(index)),
-        itemCount: _subEventList.length,
-        padding: const EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 16.0),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
+        child: ListView(
+          children: <Widget>[
+            Center(
+              child: HeaderWidget(
+                  _getGameDetails.gameDetails.elementAt(1).name.toUpperCase(),
+                  32,
+                  Colors.white),
+            ),
+            Row(
+              children: <Widget>[
+                Text('Food Venue', style: TextStyle(fontWeight: FontWeight.bold)),
+                Spacer(),
+                _buildRaisedButton(QUENCH_YOUR_HUNGER,
+                    _getGameDetails.gameDetails.elementAt(1).food)
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Text('Transportation',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+                Spacer(),
+                _buildRaisedButton(QUENCH_YOUR_HUNGER,
+                    _getGameDetails.gameDetails.elementAt(1).food)
+              ],
+            ),
+            Text('Accomodations', style: TextStyle(fontWeight: FontWeight.bold)),
+            Padding(
+              padding: const EdgeInsets.only(left: 32.0),
+              child: _listItemBuilder(
+                _getGameDetails.gameDetails.elementAt(1).gameAccomodations,
+              ),
+            ),
+            Text('Game Venues', style: TextStyle(fontWeight: FontWeight.bold)),
+            Padding(
+              padding: const EdgeInsets.only(left: 32.0),
+              child: _listItemBuilder(
+                _getGameDetails.gameDetails.elementAt(1).venues,
+              ),
+            ),
+            for (int i = 0; i < _subEventList.length; i++)
+              EntryItem(_subEventList.elementAt(i)),
+          ],
+        ),
       ),
       backgroundColor: Color.fromRGBO(18, 18, 18, 1.0),
     );

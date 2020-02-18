@@ -11,27 +11,17 @@ import 'package:Kide/models/SubEvent.dart';
 import 'package:flutter/material.dart';
 import 'package:Kide/models/EventDetail.dart';
 
-class Accomodation {
-  final String name;
-  final String markerId;
-
-  Accomodation({
-    this.name,
-    this.markerId
-  });
-}
-
 class KheloIndia {
   final int totUniversities;
   final String food;
-  final Map<String, List<Accomodation>> gameAccomodations;
+  // final Map<String, Accomodation> gameAccomodations;
   final int totParticipants;
   final int totGames;
 
   KheloIndia({
     this.totUniversities,
     this.food,
-    this.gameAccomodations,
+    // this.gameAccomodations,
     this.totParticipants,
     this.totGames,
   });
@@ -125,32 +115,54 @@ MoreInfo(
   header: "A BRIEF PROFILE",
   desc: "Achyuta Samanta, after obtaining Master’s Degree in Chemistry in 1987 from Utkal University, started his career at 22 years of age. He has 30 years of teaching experience to his credit so far. \n\nProf. Samanta went on to serve KIIT  as its first Chancellor and has had the distinction of being the youngest Chancellor of any Indian University. He served University Grants Commission (UGC) as Member for two consecutive terms (2008-11 & 2011-2014) and was a Member of the Executive Committee of All Indian Council for Technical Education (AICTE). He was also member of several other Government of India bodies like, NCTE, ISTE, ISCA, COIR BOARD, CAPART and many more. He has been a Member on the Academic Council of Central University, Silchar, Assam and the Central University, Odisha. He was the first Indian to be Member of both UGC and AICTE simultaneously and the first Odia to become Member of UGC and many other statutory bodies. Currently he is the President of World Congress of Poets 2019. He has delivered nearly 100 motivational speeches, including convocation addresses and foundation day lectures, in different institutions and organizations across the country and the globe.\n\nProf. Samanta has been conferred with 33 Honoris Causa Doctorate awards from different University across the globe. He has also been decorated with prestigious Civilian Awards from many countries including, Gusi Peace Prize International, the highest Civilian Award from Bahrain besides over 50 national and international and over 200 State honors and accolades.\n\nHe is the Founder of Kalinga Institute of Industrial Technology (KIIT ) and Kalinga Institute of Social Sciences (KISS), Bhubaneswar – the fully free and fully residential tribal institute. Starting modestly with an initial seed capital of Rs 5000/-, KIIT has grown into one of the most promising Universities imparting professional education in the Country with global acclaim having 27,000 students from across the country and abroad. KIIT also runs a 2000 bedded multispecialty hospital and an attached Medical College. KISS has become the largest Residential Tribal Institute in the World and is home for 50,000 tribal children (30,000 pursing education and 20,000 passed out). Both KIIT and KISS found place in the Limca Book of Records as well as Guinness World Records in many counts.\n\nProf. Achyuta Samanta, who had lost his father at the age of four, before he could know the significance of the world, was pushed into the mire of abject poverty.  Today, he is a legend, an iconic educationist, an emblem of service to humanity, a beacon of light for social transformation, and a redeemer of the fallen, the oppressed and the marginalized. With huge contributions in the field of education, health, art, culture, literature, rural development, social service and spiritualism his journey in life is not only awe-inspiring but soul-awakening for millions of poverty-stricken youths all over the globe. He has converted the remote village ‘Kalarabank’, Cuttack into a Smart Village and the entire Manpur Panchayat into a model Panchayat (cluster of villages).\n\nHe has already started working to establish 12 branches of KISS in different districts, besides establishing KISS-Delhi for the underprivileged sections of the society. Besides providing around 10,000 direct employment in KIIT and KISS, he has created over 1,00,000 indirect employment and more than 100 successful entrepreneurs across the country. His hobby is to give happiness and smiling face to the millions of poor.\n\nProf. Samanta has been working relentlessly for Zero Poverty, Zero Hunger and Zero Illiteracy."
   ),
-
 ];
 
+
+// List <MoreInfo> kIndia = [
+// MoreInfo(
+//   id: "01",
+//   header: "About Khelo India",
+//   desc: "The importance of sports and fitness in one’s life is invaluable. Playing sports inculcates team spirit, develops strategic & analytical thinking, leadership skills, goal setting and risk taking. A fit and healthy individual leads to an equally healthy society and strong nation.\n\nSports is an extremely important component for the overall development of our nation. India, in the last few years has made steady progress in the field of sports. This tremendous potential needs to be showcased at a global platform. It’s time we inspire young talent, give them top-notch infrastructure and training of the highest level. We need to inculcate a strong spirit of participation in sports that enables players to demonstrate their true potential. Only then can India realise its dream of becoming a sports super power.\n\nThe Khelo India programme has been introduced to revive the sports culture in India at the grass-root level by building a strong framework for all sports played in our country and establish India as a great sporting nation."
+//   ),
+// ];
+
+
 List<More> more = [
+  //  More(
+  //   id: "01",
+  //   moreName: "Khelo India",
+  //   pageFormat: kIndia,
+  //   assetRoute: "lib/pages/HomePage/assets/KIUG_KIIT.jpg",
+  //   link: "https://kheloindia.gov.in/",
+  //   color: Color(0x42000000),
+  // ),
   More(
     id: "01",
     moreName: "KISS",
     pageFormat: kiss,
     assetRoute: "lib/assets/KISS.png",
-    link: "https://kiss.ac.in/"
+    link: "https://kiss.ac.in/",
+    color: Color(0xFF282828),
   ),
   More(
     id: "02",
     moreName: "KIIT",
     pageFormat: kiit,
     assetRoute: "lib/assets/KIIT.jpg",
-    link: "https://kiit.ac.in/"
+    link: "https://kiit.ac.in/",
+    color: Color(0xFF282828),
   ),
   More(
     id: "03",
     moreName: "Our Founder",
     pageFormat: founderSir,
     assetRoute: "lib/assets/Founder_sir.jpeg",
-    link: "https://achyutasamanta.com/"
+    link: "https://achyutasamanta.com/",
+    color: Color(0xFF282828),
   ),
 ];
+
+// Gold - 0xFFD4A437
 
 Iterable<SubEvent> subEvents = [
   SubEvent(
@@ -533,17 +545,200 @@ List<Contact> hostelAuthorities = [
   ),
 ];
 
-List<Contact> contactsHelpLine = [
+
+List<Contact> cateringTeam = [
   Contact(
     id: "01",
-    name: "KIIT Contact Us - 1",
-    designation: "HelpDesk 1",
-    number: "6742725113",
+    name: "Ojas kamat tarkar",
+    designation: "Catering Head",
+    number: "9653405601",
   ),
   Contact(
     id: "02",
-    name: "KIIT Contact Us - 2",
-    designation: "HelpDesk 2",
+    name: "Success Pradhan",
+    designation: "KIIT Central Catering Area campus - 13",
+    number: "9078068313",
+  ),
+  Contact(
+    id: "03",
+    name: "Yash Yadav",
+    designation: "KIIT Central Catering Area campus - 13",
+    number: "9982247390",
+  ),
+  Contact(
+    id: "04",
+    name: "Jayesh Sharma",
+    designation: "Kalinga Stadium",
+    number: "8149422913",
+  ),
+  Contact(
+    id: "05",
+    name: "Sagar Mohapatra",
+    designation: "JLN Indoor Cuttack",
+    number: "9777119689",
+  ),
+  Contact(
+    id: "06",
+    name: "Priyabatra Mahankuda",
+    designation: "Multipurpose Sports Hall, Saheed Nagar",
+    number: "965849366",
+  ),
+];
+
+List<Contact> accomodationTeam = [
+  Contact(
+    id: "01",
+    name: "Sonia Chhabria",
+    designation: "Accomodation Head",
+    number: "8169051799",
+  ),
+  Contact(
+    id: "02",
+    name: "Amey Vaidya",
+    designation: "Male Athletes & Support Staff",
+    number: "7588773449",
+  ),
+  Contact(
+    id: "03",
+    name: "Aida Pinto",
+    designation: "Female Athletes & Support Staff",
+    number: "9930343837",
+  ),
+  Contact(
+    id: "04",
+    name: "Sandesh Mane",
+    designation: "Technical Officials, Competition Manager",
+    number: "8828468081",
+  ),
+  Contact(
+    id: "05",
+    name: "Shabnam Yasmin",
+    designation: "VIP & Dignatries",
+    number: "6003633671",
+  ),
+];
+
+
+List<Contact> transportationTeam = [
+  Contact(
+    id: "01",
+    name: "Dhruv Nakti",
+    designation: "Transportation Head",
+    number: "7977387713",
+  ),
+  Contact(
+    id: "02",
+    name: "Dasaratha Reddy",
+    designation: "Transportation Head",
+    number: "7893110879",
+  ),
+  Contact(
+    id: "03",
+    name: "Aman Kumar",
+    designation: "Bhubaneswar Railway Station",
+    number: "8862983694",
+  ),
+  Contact(
+    id: "04",
+    name: "Ayush Shastri",
+    designation: "Bhubaneswar Railway Station",
+    number: "8600104420",
+  ),
+  Contact(
+    id: "05",
+    name: "Chandan Prasad Shukar",
+    designation: "Bhubaneswar Railway Station",
+    number: "6370163695",
+  ),
+   Contact(
+    id: "06",
+    name: "Sairaj Chilap",
+    designation: "Bhubaneswar Railway Station",
+    number: "9833155059",
+  ),
+   Contact(
+    id: "07",
+    name: "Pratik Nanda",
+    designation: "Biju Patnaik International Airport",
+    number: "9777460076",
+  ),
+   Contact(
+    id: "08",
+    name: "Amrit Kumar",
+    designation: "Biju Patnaik International Airport",
+    number: "9113744606",
+  ),
+
+// CARRRY FROM HERERE -------------------------------------------------------------------------------------->
+
+   Contact(
+    id: "09",
+    name: "Pratik Nanda",
+    designation: "Baramunda Bus Stand",
+    number: "9777460076",
+  ),
+   Contact(
+    id: "10",
+    name: "Ankur Borah",
+    designation: "KIIT Campus Shuttle",
+    number: "7577873724",
+  ),
+   Contact(
+    id: "11",
+    name: "Kumar Aayush",
+    designation: "KIIT Campus Shuttle",
+    number: "7609828033",
+  ),
+   Contact(
+    id: "12",
+    name: "Nimisha Umesh",
+    designation: "Outside KIIT Shuttle",
+    number: "9987547510",
+  ),
+   Contact(
+    id: "12",
+    name: "Shabnam Yasmin",
+    designation: "VIP & Dignatries",
+    number: "6003633671",
+  ),
+   Contact(
+    id: "13",
+    name: "Sandesh Mane",
+    designation: "Technical Officials, Competition Manager",
+    number: "8828468081",
+  ),
+];
+
+
+List<Contact> contactsHelpLine = [
+  Contact(
+    id: "01",
+    name: "Catering Helpline",
+    designation: null,
+    number: "9668738412",
+  ),
+  Contact(
+    id: "02",
+    name: "Accomodation Helpline",
+    designation: null,
+    number: "9178738368",
+  ),
+   Contact(
+    id: "03",
+    name: "Transport Helpline",
+    designation: null,
+    number: "9178738291",
+  ),
+  Contact(
+    id: "04",
+    name: "KIIT Helpdesk - 1",
+    designation: null,
+    number: "6742725113",
+  ),
+  Contact(
+    id: "05",
+    name: "KIIT Helpdesk - 2",
+    designation: null,
     number: "6742741389",
   ),
 ];
@@ -551,21 +746,36 @@ List<Contact> contactsHelpLine = [
 List<ContactCategory> contactCategoryList = [
   ContactCategory(
     id: "01",
+    name: "Catering Team",
+    contacts: cateringTeam
+  ),
+  ContactCategory(
+    id: "02",
+    name: "Accomodation Team",
+    contacts: accomodationTeam
+  ),
+  ContactCategory(
+    id: "03",
+    name: "Transportation Team",
+    contacts: transportationTeam
+  ),
+  ContactCategory(
+    id: "04",
     name: "Boy's Hostels",
     contacts: kpHostels
   ),
   ContactCategory(
-    id: "02",
+    id: "05",
     name: "Girl's Hostels",
     contacts: qcHostels
   ),
   ContactCategory(
-    id: "03",
+    id: "06",
     name: "Administration",
     contacts: hostelAuthorities
   ),
   ContactCategory(
-    id: "04",
+    id: "07",
     name: "Helplines",
     contacts: contactsHelpLine
   ),

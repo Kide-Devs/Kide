@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kide/config/Viewport.dart';
-import 'package:kide/models/SubEvent.dart';
+import 'package:Kide/config/Viewport.dart';
+import 'package:Kide/models/SubEvent.dart';
 
 class ExpansionTitle extends StatelessWidget {
   const ExpansionTitle({
@@ -41,7 +41,6 @@ class ExpansionTitle extends StatelessWidget {
           )
         ),
         Container(
-          // color: Colors.blue,
           height: 65,
           width: ViewPort.screenWidth ,
           padding: EdgeInsets.fromLTRB(ViewPort.screenWidth * 0.025, 35.0, 0.0, 0.0),

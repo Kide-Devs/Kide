@@ -74,3 +74,4 @@
 
 # Ignoring App specific values
 *pubspec.lock
+*key.properties

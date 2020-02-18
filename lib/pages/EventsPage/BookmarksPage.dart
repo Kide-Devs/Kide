@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:kide/models/EventCategory.dart';
-import 'package:kide/models/SubEvent.dart';
-import 'package:kide/pages/EventsPage/widgets/EntryItem.dart';
-import 'package:kide/providers/bookmarks.dart';
-import 'package:kide/util/constants.dart';
+import 'package:Kide/pages/EventsPage/widgets/EntryItem.dart';
+import 'package:Kide/providers/bookmarks.dart';
+import 'package:Kide/util/constants.dart';
 import 'package:provider/provider.dart';
 
 class BookmarksPage extends StatelessWidget {
   static const routeName = '/BookmarksPage';
-  // final List<SubEvent> bookmarks;
 
-  // BookmarksPage({this.bookmarks});
-  
   @override
   Widget build(BuildContext context) {
     final _bookmarks = Provider.of<Bookmarks>(context);

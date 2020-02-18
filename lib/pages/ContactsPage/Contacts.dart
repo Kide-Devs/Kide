@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:kide/util/data.dart';
-import 'package:kide/util/constants.dart';
-import 'package:kide/widgets/HeaderWidget.dart';
-import 'package:kide/pages/ContactsPage/widgets/EmergencyCard.dart';
-import 'package:kide/pages/ContactsPage/widgets/CategoryCard.dart';
-import 'package:kide/config/Viewport.dart';
+import 'package:Kide/util/data.dart';
+import 'package:Kide/util/constants.dart';
+import 'package:Kide/widgets/HeaderWidget.dart';
+import 'package:Kide/pages/ContactsPage/widgets/EmergencyCard.dart';
+import 'package:Kide/pages/ContactsPage/widgets/CategoryCard.dart';
+import 'package:Kide/config/Viewport.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 void main() => runApp(ContactsPage());

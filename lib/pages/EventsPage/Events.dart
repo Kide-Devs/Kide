@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:kide/config/Viewport.dart';
-import 'package:kide/providers/getEvents.dart';
-import 'package:kide/pages/EventsPage/BookmarksPage.dart';
-import 'package:kide/pages/EventsPage/SubEvents.dart';
-import 'package:kide/util/constants.dart';
+import 'package:Kide/config/Viewport.dart';
+import 'package:Kide/providers/getEvents.dart';
+import 'package:Kide/pages/EventsPage/BookmarksPage.dart';
+import 'package:Kide/pages/EventsPage/SubEvents.dart';
+import 'package:Kide/util/constants.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(EventsPage());
 
 class EventsPage extends StatelessWidget {
-  // final _eventList =  Event(
-  //   id: "01",
-  //   name: "KIITFEST 6.0",
-  //   startDate: "1st March 2020",
-  //   endDate: "4th March 2020",
-  //   eventCategories: eventCategories
-  // );
 
   @override
   Widget build(BuildContext context) {

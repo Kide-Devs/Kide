@@ -1,4 +1,4 @@
-# kide
+# Kide
 
 A new Flutter project.
 

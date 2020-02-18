@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kide/models/ContactCategory.dart';
-import 'package:kide/pages/ContactsPage/widgets/ContactCardDiallable.dart';
-import 'package:kide/util/constants.dart';
-import 'package:kide/widgets/HeaderWidget.dart';
-import 'package:kide/config/Viewport.dart';
+import 'package:Kide/models/ContactCategory.dart';
+import 'package:Kide/pages/ContactsPage/widgets/ContactCardDiallable.dart';
+import 'package:Kide/util/constants.dart';
+import 'package:Kide/widgets/HeaderWidget.dart';
+import 'package:Kide/config/Viewport.dart';
 
 
 class ContactList extends StatelessWidget {

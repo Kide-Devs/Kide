@@ -12,7 +12,6 @@ class EmergencyCard extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
-    //final _svgAsset = "./lib/assets/fire.svg";
     return new Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0)
@@ -29,12 +28,7 @@ class EmergencyCard extends StatelessWidget{
           padding:  const EdgeInsets.fromLTRB(0, 0.0, 0, 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            //crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              // new Icon(
-              //   iconData,
-              //   color: Colors.white,
-              // ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 8, 3, 8),
                 child: SvgPicture.asset(iconAsset,

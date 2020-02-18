@@ -20,7 +20,6 @@ class DotsIndicator extends AnimatedWidget {
   final ValueChanged<int> onPageSelected;
 
   /// The color of the dots.
-  ///
   /// Defaults to `Colors.white`.
   final Color color;
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kide/pages/MorePage/MoreDetails.dart';
-import 'package:kide/models/More.dart';
+import 'package:Kide/pages/MorePage/MoreDetails.dart';
+import 'package:Kide/models/More.dart';
 
 class MoreCard extends StatelessWidget{
 MoreCard(this._more);

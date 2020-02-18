@@ -1,25 +1,30 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:kide/models/Contact.dart';
-import 'package:kide/models/EmergencyContact.dart';
-import 'package:kide/models/EventCategory.dart';
-import 'package:kide/models/ContactCategory.dart';
-import 'package:kide/models/More.dart';
-import 'package:kide/models/MoreInfo.dart';
-import 'package:kide/models/Official.dart';
-import 'package:kide/models/DashBoard.dart';
-import 'package:kide/models/SubEvent.dart';
+import 'package:Kide/models/Contact.dart';
+import 'package:Kide/models/EmergencyContact.dart';
+import 'package:Kide/models/EventCategory.dart';
+import 'package:Kide/models/ContactCategory.dart';
+import 'package:Kide/models/More.dart';
+import 'package:Kide/models/MoreInfo.dart';
+import 'package:Kide/models/Official.dart';
+import 'package:Kide/models/DashBoard.dart';
+import 'package:Kide/models/SubEvent.dart';
 import 'package:flutter/material.dart';
-import 'package:kide/models/EventDetail.dart';
+import 'package:Kide/models/EventDetail.dart';
 
- /// no of univs
-  /// food
-  /// game wise acco
-  /// no of partcpts m/f
-  /// no of games
+class Accomodation {
+  final String name;
+  final String markerId;
+
+  Accomodation({
+    this.name,
+    this.markerId
+  });
+}
+
 class KheloIndia {
   final int totUniversities;
   final String food;
-  final Map<String, List<String>> gameAccomodations;
+  final Map<String, List<Accomodation>> gameAccomodations;
   final int totParticipants;
   final int totGames;
 

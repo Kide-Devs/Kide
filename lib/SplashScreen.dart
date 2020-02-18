@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:kide/pages/OnBoarding/OnBoarding.dart';
-import 'package:kide/util/constants.dart';
+import 'package:Kide/pages/OnBoarding/OnBoarding.dart';
+import 'package:Kide/util/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'MyApp.dart';

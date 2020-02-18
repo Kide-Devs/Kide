@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:kide/models/MoreInfo.dart';
+import 'package:Kide/models/MoreInfo.dart';
 
 class More {
   final String id;

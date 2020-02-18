@@ -1,10 +1,11 @@
+import 'package:Kide/config/Viewport.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:kide/pages/MapsPage/models/FilterCategory.dart';
-import 'package:kide/pages/MapsPage/widgets/SearchBar.dart';
-import 'package:kide/pages/MapsPage/models/FilterCategories.dart';
+import 'package:Kide/pages/MapsPage/models/FilterCategory.dart';
+import 'package:Kide/pages/MapsPage/widgets/SearchBar.dart';
+import 'package:Kide/pages/MapsPage/models/FilterCategories.dart';
 import 'package:provider/provider.dart';
-import 'package:kide/providers/getMarkers.dart';
+import 'package:Kide/providers/getMarkers.dart';
 import 'package:location/location.dart';
 import 'dart:math' as math;
 
@@ -145,6 +146,8 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
     if (_initialLoad) _markers = _getMarkers.markers['all'];
     _initialLoad = false;
 
+    ViewPort().init(context);
+
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -197,7 +200,7 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
               ),
             ),
             Positioned(
-              bottom: 64,
+              bottom: ViewPort.screenHeight * 0.09,
               child: MaterialButton(
                 elevation: 8,
                 shape: CircleBorder(),
@@ -220,8 +223,7 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: List.generate(_categories.length, (int index) {
           Widget child = Container(
-            height: 70.0,
-            // width: 70.0,
+            height: ViewPort.screenHeight * 0.085,
             alignment: FractionalOffset.topRight,
             child: ScaleTransition(
               scale: CurvedAnimation(
@@ -259,7 +261,7 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
         }).toList()
           ..add(
             Padding(
-              padding: EdgeInsets.only(bottom: 48),
+              padding: EdgeInsets.only(bottom: ViewPort.screenHeight * 0.07),
               child: FloatingActionButton(
                 heroTag: hashCode,
                 child: AnimatedFilterWidget(controller: _controller),
@@ -297,7 +299,7 @@ class AnimatedFilterWidget extends StatelessWidget {
         return Transform(
           transform: Matrix4.rotationZ(_controller.value * 0.5 * math.pi),
           alignment: FractionalOffset.center,
-          child: Icon(_controller.isDismissed ? Icons.search : Icons.close),
+          child: Icon(_controller.isDismissed ? Icons.filter_list : Icons.close),
         );
       },
     );

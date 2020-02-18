@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kide/models/ContactCategory.dart';
-import 'package:kide/pages/ContactsPage/ContactList.dart';
+import 'package:Kide/models/ContactCategory.dart';
+import 'package:Kide/pages/ContactsPage/ContactList.dart';
 
 
 class CategoryCard extends StatelessWidget{

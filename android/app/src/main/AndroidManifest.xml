@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.kide">
+    package="com.kiitdev.Kide">
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
          calls FlutterMain.startInitialization(this); in its onCreate method.
          In most cases you can leave this as-is, but you if you want to provide
@@ -11,12 +11,15 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
+    <!-- Permission for Internet Access -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <!-- Persmission for Contacts -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="kide"
+        android:label="Kide"
         android:icon="@mipmap/ic_launcher">
 
         <meta-data

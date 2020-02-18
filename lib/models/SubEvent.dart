@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:kide/models/EventDetail.dart';
+import 'package:Kide/models/EventDetail.dart';
 
 class SubEvent {
   final Key id;
@@ -19,6 +19,6 @@ class SubEvent {
     this.description,
     @required this.location,
     @required this.universities,
-    @required this.details
+    this.details
   });
 }

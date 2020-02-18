@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kide/assets/Icon/custom_icons_icons.dart';
-import '../providers/router.dart';
+import 'package:Kide/util/constants.dart';
+import 'package:Kide/providers/router.dart';
 import "package:provider/provider.dart";
 
 class BottomNav extends StatelessWidget {
@@ -23,7 +22,7 @@ class BottomNav extends StatelessWidget {
         BottomNavigationBarItem(
           icon: Icon(Icons.map),
           title: Text(
-            'Maps',
+            MAPS,
             style: TextStyle(
               fontSize: 12.0,
             ),
@@ -33,7 +32,7 @@ class BottomNav extends StatelessWidget {
         BottomNavigationBarItem(
           icon: Icon(Icons.perm_contact_calendar),
           title: Text(
-            'Contacts',
+            CONTACTS,
             style: TextStyle(
               fontSize: 12.0,
             ),
@@ -44,13 +43,13 @@ class BottomNav extends StatelessWidget {
           icon: AnimatedContainer(
             duration: Duration(milliseconds: 350),
             child: Image.asset(
-              "./lib/assets/Icon/kide_logoldpi.png",
+              MAIN_KIDE_LOGO,
               width: _currentIndex == 2 ? 34 : 28,
               height: _currentIndex == 2 ? 34 : 28,
             ),
           ),
           title: Text(
-            'KIDE',
+            KIDE_CAPS,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 5.0, letterSpacing: 5),
           ),
@@ -59,7 +58,7 @@ class BottomNav extends StatelessWidget {
         BottomNavigationBarItem(
           icon: Icon(Icons.event_note),
           title: Text(
-            'Events',
+            EVENTS,
             style: TextStyle(
               fontSize: 12.0,
             ),
@@ -69,7 +68,7 @@ class BottomNav extends StatelessWidget {
         BottomNavigationBarItem(
           icon: Icon(Icons.more_horiz),
           title: Text(
-            'More',
+            MORE,
             style: TextStyle(
               fontSize: 12.0,
             ),

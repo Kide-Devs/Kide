@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:kide/models/EventCategory.dart';
+import 'package:Kide/models/EventCategory.dart';
 
 class Event {
   final String id;

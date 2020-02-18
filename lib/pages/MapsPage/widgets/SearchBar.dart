@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:kide/config/Viewport.dart';
-import 'package:kide/widgets/HeaderWidget.dart';
+import 'package:Kide/config/Viewport.dart';
+import 'package:Kide/util/constants.dart';
+import 'package:Kide/widgets/HeaderWidget.dart';
 import 'package:provider/provider.dart';
-import 'package:kide/providers/getMarkers.dart';
+import 'package:Kide/providers/getMarkers.dart';
 
 void main() => runApp(MaterialApp(home: SearchBar()));
 
@@ -28,13 +29,13 @@ class _SearchBarState extends State<SearchBar> {
         setState(() {
           _isSearching = false;
           _searchText = "";
-          _headerText = "Places for You";
+          _headerText = PLACES_FOR_YOU;
         });
       } else {
         setState(() {
           _isSearching = true;
           _searchText = _searchQuery.text;
-          _headerText = "Search Results";
+          _headerText = SEARCH_RESULTS;
         });
       }
     });
@@ -44,7 +45,7 @@ class _SearchBarState extends State<SearchBar> {
   void initState() {
     super.initState();
     _isSearching = false;
-    _headerText = "Places for You";
+    _headerText = PLACES_FOR_YOU;
     _focus.addListener(_onFocusChange);
     // init();
   }
@@ -74,12 +75,11 @@ class _SearchBarState extends State<SearchBar> {
     return _markers.map((marker) => ChildItem(marker)).toList();
   }
 
-  List<ChildItem> _buildSearchList(Set<Marker> allMarkers) {
+  List<Widget> _buildSearchList(Set<Marker> allMarkers) {
     if (_searchText.isEmpty) {
       return _markers.map((marker) => ChildItem(marker)).toList();
     } else {
       List<Marker> _searchList = List();
-      print(allMarkers);
       for (int i = 0; i < allMarkers.length; i++) {
         Marker marker = allMarkers.elementAt(i);
         String title = marker.infoWindow.title;
@@ -90,7 +90,9 @@ class _SearchBarState extends State<SearchBar> {
           _searchList.add(marker);
         }
       }
-      return _searchList.map((marker) => ChildItem(marker)).toList();
+      return _searchList.isNotEmpty
+          ? _searchList.map((marker) => ChildItem(marker)).toList()
+          : [Center(child: Text(NO_SEARCH_RESULT, softWrap: true))];
     }
   }
 
@@ -121,7 +123,7 @@ class _SearchBarState extends State<SearchBar> {
                     contentPadding: EdgeInsets.all(16.0),
                     fillColor: Colors.black,
                     filled: true,
-                    hintText: 'Search for a location',
+                    hintText: SEARCH_FOR_A_LOCATION,
                     prefixIcon: Icon(Icons.search),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -139,8 +141,6 @@ class _SearchBarState extends State<SearchBar> {
                       ),
                     ),
                   ),
-                  // onChanged: ,
-                  // onSubmitted: ,
                 ),
               ),
             ),

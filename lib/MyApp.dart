@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:kide/pages/ContactsPage/ContactList.dart';
-import 'package:kide/pages/EventsPage/BookmarksPage.dart';
-import 'package:kide/pages/EventsPage/DetailsPage.dart';
-import 'package:kide/pages/MorePage/MoreDetails.dart';
-import 'package:kide/providers/getEvents.dart';
-import 'package:kide/providers/bookmarks.dart';
-import 'package:kide/providers/getMarkers.dart';
-import 'package:kide/util/constants.dart';
+import 'package:Kide/pages/ContactsPage/ContactList.dart';
+import 'package:Kide/pages/EventsPage/BookmarksPage.dart';
+import 'package:Kide/pages/EventsPage/DetailsPage.dart';
+import 'package:Kide/pages/MorePage/MoreDetails.dart';
+import 'package:Kide/providers/getEvents.dart';
+import 'package:Kide/providers/bookmarks.dart';
+import 'package:Kide/providers/getMarkers.dart';
+import 'package:Kide/util/constants.dart';
 import 'package:provider/provider.dart';
-import 'package:kide/pages/ContactsPage/Contacts.dart';
-import 'package:kide/pages/EventsPage/Events.dart';
-import 'package:kide/pages/EventsPage/SubEvents.dart';
-import 'package:kide/pages/HomePage/Home.dart';
-import 'package:kide/pages/MapsPage/Maps.dart';
-import 'package:kide/pages/MorePage/More.dart';
-import 'package:kide/providers/router.dart';
-import 'package:kide/widgets/BottomNav.dart';
+import 'package:Kide/pages/ContactsPage/Contacts.dart';
+import 'package:Kide/pages/EventsPage/Events.dart';
+import 'package:Kide/pages/EventsPage/SubEvents.dart';
+import 'package:Kide/pages/HomePage/Home.dart';
+import 'package:Kide/pages/MapsPage/Maps.dart';
+import 'package:Kide/pages/MorePage/More.dart';
+import 'package:Kide/providers/router.dart';
+import 'package:Kide/widgets/BottomNav.dart';
 
 
 class MyApp extends StatelessWidget {

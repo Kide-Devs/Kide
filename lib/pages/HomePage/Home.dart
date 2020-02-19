@@ -58,43 +58,43 @@ class _HomePageState extends State<HomePage> {
 
     return _getMarkers.markers.length > 0
         ? ListView.builder(
-          itemBuilder: (BuildContext context, index) => _buildHomeCard(),
-          itemCount: 5,
-        )
+            itemBuilder: (BuildContext context, index) => _buildSmallCard(),
+            itemCount: 5,
+          )
         : CircularProgressIndicator();
   }
 
-  Column _buildSmallCard(){
+  Column _buildSmallCard() {
     return Column(
       children: <Widget>[
-        Card(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8.0))),
-          clipBehavior: Clip.hardEdge,
-          child: Image.asset(HOME_PAGE_ASSET_KHELO_INDIA_JPG),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            'KIIT Bhubaneswar is hosting Khelo India Games 2020',
-            style: TextStyle(
-              letterSpacing: 2,
-              fontSize: 20,
-              color: Colors.white,
-              height: 1.2,
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'KIIT Bhubaneswar is hosting Khelo India Games 2020',
+                  softWrap: true,
+                  style: TextStyle(
+                    letterSpacing: 0,
+                    fontSize: 16,
+                    color: Colors.white,
+                    height: 1,
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.white60,
-              // height: 0.3,
+            Container(
+              width: 150,
+              // height: 150,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                clipBehavior: Clip.hardEdge,
+                child: Image.asset(HOME_PAGE_ASSET_KHELO_INDIA_JPG),
+              ),
             ),
-          ),
+          ],
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Column _buildHomeCard() {
+  Column _buildLargeCard() {
     return Column(
       children: <Widget>[
         Card(

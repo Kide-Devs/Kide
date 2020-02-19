@@ -1,3 +1,4 @@
+import 'package:Kide/pages/ForYou/ForYou.dart';
 import 'package:Kide/providers/getGameDetails.dart';
 import 'package:Kide/widgets/HeaderWidget.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,6 @@ import 'package:Kide/providers/getMarkers.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:Kide/pages/ContactsPage/Contacts.dart';
-import 'package:Kide/pages/EventsPage/Events.dart';
 import 'package:Kide/pages/EventsPage/SubEvents.dart';
 import 'package:Kide/pages/HomePage/Home.dart';
 import 'package:Kide/pages/MapsPage/Maps.dart';
@@ -62,22 +62,15 @@ class _MyHomePageState extends State<MyHomePage> {
     MapsPage(),
     ContactsPage(),
     HomePage(),
-    EventsPage(),
-    MorePage(),
-  ];
-  final List<Widget> _uloTabs = [
-    MapsPage(),
-    ContactsPage(),
-    HomePage(),
-    EventsPage(),
+    ForYouPage(),
     MorePage(),
   ];
   
   final List<String> _tabNames = [
     MAPS,
     CONTACTS,
-    HOME,
-    EVENTS,
+    "K  I  D  E",
+    "For You",
     MORE
   ];
 

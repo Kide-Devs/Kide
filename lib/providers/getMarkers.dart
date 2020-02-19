@@ -39,6 +39,7 @@ class GetMarkers with ChangeNotifier {
       getMarkerData('sports', _sports);
       getMarkerData('toilets', _toilets);
       getMarkerData('events', _events);
+      getMarkerData('gardens', _events);
 
       setMarkerMap();
     }

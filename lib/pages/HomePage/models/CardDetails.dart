@@ -6,7 +6,7 @@ class CardDetails {
   final String heading;
   final String description;
   final Image image;
-  final int cardType; //1 for latge cards and 0 for small
+  final int cardType; //1 for latge cards and 0 for small cards
 
   CardDetails({
     @required this.heading,

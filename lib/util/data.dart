@@ -35,25 +35,23 @@ List<CardDetails> cardDetails = [
   CardDetails(
     heading: 'KIIT Bhubaneswar is hosting Khelo India Games 2020',
     description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',
-    image: Image.asset(HOME_PAGE_ASSET_KHELO_INDIA_JPG),
+    image: Image.asset('./lib/assets/event.jpg', fit: BoxFit.cover),
     cardType: 1,
   ),
   CardDetails(
     heading: 'KIIT Bhubaneswar is hosting Khelo India Games 2020',
-    description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',
-    image: Image.asset(HOME_PAGE_ASSET_KHELO_INDIA_JPG),
+    image: Image.asset(HOME_PAGE_ASSET_KHELO_INDIA_JPG, fit: BoxFit.cover),
+    cardType: 0,
+  ),
+  CardDetails(
+    heading: 'KIIT Bhubaneswar is hosting Khelo India Games 2020',
+    image: Image.asset('./lib/assets/event.jpg', fit: BoxFit.cover),
     cardType: 0,
   ),
   CardDetails(
     heading: 'KIIT Bhubaneswar is hosting Khelo India Games 2020',
     description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',
-    image: Image.asset(HOME_PAGE_ASSET_KHELO_INDIA_JPG),
-    cardType: 0,
-  ),
-  CardDetails(
-    heading: 'KIIT Bhubaneswar is hosting Khelo India Games 2020',
-    description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',
-    image: Image.asset(HOME_PAGE_ASSET_KHELO_INDIA_JPG),
+    image: Image.asset(HOME_PAGE_ASSET_KHELO_INDIA_JPG, fit: BoxFit.cover),
     cardType: 1,
   ),
 ];
@@ -579,197 +577,17 @@ List<Contact> hostelAuthorities = [
 ];
 
 
-List<Contact> cateringTeam = [
-  Contact(
-    id: "01",
-    name: "Ojas kamat tarkar",
-    designation: "Catering Head",
-    number: "9653405601",
-  ),
-  Contact(
-    id: "02",
-    name: "Success Pradhan",
-    designation: "KIIT Central Catering Area campus - 13",
-    number: "9078068313",
-  ),
-  Contact(
-    id: "03",
-    name: "Yash Yadav",
-    designation: "KIIT Central Catering Area campus - 13",
-    number: "9982247390",
-  ),
-  Contact(
-    id: "04",
-    name: "Jayesh Sharma",
-    designation: "Kalinga Stadium",
-    number: "8149422913",
-  ),
-  Contact(
-    id: "05",
-    name: "Sagar Mohapatra",
-    designation: "JLN Indoor Cuttack",
-    number: "9777119689",
-  ),
-  Contact(
-    id: "06",
-    name: "Priyabatra Mahankuda",
-    designation: "Multipurpose Sports Hall, Saheed Nagar",
-    number: "965849366",
-  ),
-];
-
-List<Contact> accomodationTeam = [
-  Contact(
-    id: "01",
-    name: "Sonia Chhabria",
-    designation: "Accomodation Head",
-    number: "8169051799",
-  ),
-  Contact(
-    id: "02",
-    name: "Amey Vaidya",
-    designation: "Male Athletes & Support Staff",
-    number: "7588773449",
-  ),
-  Contact(
-    id: "03",
-    name: "Aida Pinto",
-    designation: "Female Athletes & Support Staff",
-    number: "9930343837",
-  ),
-  Contact(
-    id: "04",
-    name: "Sandesh Mane",
-    designation: "Technical Officials, Competition Manager",
-    number: "8828468081",
-  ),
-  Contact(
-    id: "05",
-    name: "Shabnam Yasmin",
-    designation: "VIP & Dignatries",
-    number: "6003633671",
-  ),
-];
-
-
-List<Contact> transportationTeam = [
-  Contact(
-    id: "01",
-    name: "Dhruv Nakti",
-    designation: "Transportation Head",
-    number: "7977387713",
-  ),
-  Contact(
-    id: "02",
-    name: "Dasaratha Reddy",
-    designation: "Transportation Head",
-    number: "7893110879",
-  ),
-  Contact(
-    id: "03",
-    name: "Aman Kumar",
-    designation: "Bhubaneswar Railway Station",
-    number: "8862983694",
-  ),
-  Contact(
-    id: "04",
-    name: "Ayush Shastri",
-    designation: "Bhubaneswar Railway Station",
-    number: "8600104420",
-  ),
-  Contact(
-    id: "05",
-    name: "Chandan Prasad Shukar",
-    designation: "Bhubaneswar Railway Station",
-    number: "6370163695",
-  ),
-   Contact(
-    id: "06",
-    name: "Sairaj Chilap",
-    designation: "Bhubaneswar Railway Station",
-    number: "9833155059",
-  ),
-   Contact(
-    id: "07",
-    name: "Pratik Nanda",
-    designation: "Biju Patnaik International Airport",
-    number: "9777460076",
-  ),
-   Contact(
-    id: "08",
-    name: "Amrit Kumar",
-    designation: "Biju Patnaik International Airport",
-    number: "9113744606",
-  ),
-
-// CARRRY FROM HERERE -------------------------------------------------------------------------------------->
-
-   Contact(
-    id: "09",
-    name: "Pratik Nanda",
-    designation: "Baramunda Bus Stand",
-    number: "9777460076",
-  ),
-   Contact(
-    id: "10",
-    name: "Ankur Borah",
-    designation: "KIIT Campus Shuttle",
-    number: "7577873724",
-  ),
-   Contact(
-    id: "11",
-    name: "Kumar Aayush",
-    designation: "KIIT Campus Shuttle",
-    number: "7609828033",
-  ),
-   Contact(
-    id: "12",
-    name: "Nimisha Umesh",
-    designation: "Outside KIIT Shuttle",
-    number: "9987547510",
-  ),
-   Contact(
-    id: "12",
-    name: "Shabnam Yasmin",
-    designation: "VIP & Dignatries",
-    number: "6003633671",
-  ),
-   Contact(
-    id: "13",
-    name: "Sandesh Mane",
-    designation: "Technical Officials, Competition Manager",
-    number: "8828468081",
-  ),
-];
-
+  
 
 List<Contact> contactsHelpLine = [
   Contact(
     id: "01",
-    name: "Catering Helpline",
-    designation: null,
-    number: "9668738412",
-  ),
-  Contact(
-    id: "02",
-    name: "Accomodation Helpline",
-    designation: null,
-    number: "9178738368",
-  ),
-   Contact(
-    id: "03",
-    name: "Transport Helpline",
-    designation: null,
-    number: "9178738291",
-  ),
-  Contact(
-    id: "04",
     name: "KIIT Helpdesk - 1",
     designation: null,
     number: "6742725113",
   ),
   Contact(
-    id: "05",
+    id: "02",
     name: "KIIT Helpdesk - 2",
     designation: null,
     number: "6742741389",
@@ -779,36 +597,21 @@ List<Contact> contactsHelpLine = [
 List<ContactCategory> contactCategoryList = [
   ContactCategory(
     id: "01",
-    name: "Catering Team",
-    contacts: cateringTeam
-  ),
-  ContactCategory(
-    id: "02",
-    name: "Accomodation Team",
-    contacts: accomodationTeam
-  ),
-  ContactCategory(
-    id: "03",
-    name: "Transportation Team",
-    contacts: transportationTeam
-  ),
-  ContactCategory(
-    id: "04",
     name: "Boy's Hostels",
     contacts: kpHostels
   ),
   ContactCategory(
-    id: "05",
+    id: "02",
     name: "Girl's Hostels",
     contacts: qcHostels
   ),
   ContactCategory(
-    id: "06",
+    id: "03",
     name: "Administration",
     contacts: hostelAuthorities
   ),
   ContactCategory(
-    id: "07",
+    id: "04",
     name: "Helplines",
     contacts: contactsHelpLine
   ),

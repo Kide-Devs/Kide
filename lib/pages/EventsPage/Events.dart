@@ -20,16 +20,16 @@ class EventsPage extends StatelessWidget {
     ViewPort().init(context);
     print("sub events ${_getEvents.eventCategories}");
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.collections_bookmark),
-        heroTag: hashCode,
-        onPressed: () {
-          Navigator.of(context).pushNamed(
-            BookmarksPage.routeName,
-          );
-          print('Card tapped.');
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   child: Icon(Icons.collections_bookmark),
+      //   heroTag: hashCode,
+      //   onPressed: () {
+      //     Navigator.of(context).pushNamed(
+      //       BookmarksPage.routeName,
+      //     );
+      //     print('Card tapped.');
+      //   },
+      // ),
       backgroundColor: Color.fromRGBO(18, 18, 18, 1.0),
       body: ListView(
         children: <Widget>[
@@ -75,8 +75,8 @@ class EventsPage extends StatelessWidget {
       child: InkWell(
         splashColor: Colors.blue.withAlpha(30),
         onTap: () {
-          Navigator.of(context).pushNamed(SubEvents.routeName,
-              arguments: _getEvents.eventCategories[position]);
+          // Navigator.of(context).pushNamed(SubEvents.routeName,
+          //     arguments: _getEvents.eventCategories[position]);
           print('Card tapped.');
         },
         child: Stack(children: <Widget>[

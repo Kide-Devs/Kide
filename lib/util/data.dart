@@ -232,48 +232,48 @@ List<String> universities = [
   "NIT RKL", "IIT KGP", "VIT", "SRM"
 ];
 
-List<EventCategory> eventCategories = [
-  EventCategory(
-    id: "001", 
-    name: "Cricket", 
-    subEvents: subEvents,
-  ),
-  EventCategory(
-    id: "001", 
-    name: "Hockey", 
-    subEvents: subEvents,
-  ),
-  EventCategory(
-    id: "001", 
-    name: "Tennis", 
-    subEvents: subEvents,
-  ),
-  EventCategory(
-    id: "001", 
-    name: "Wrestling", 
-    subEvents: subEvents,
-  ),
-  EventCategory(
-    id: "001", 
-    name: "Archery", 
-    subEvents: subEvents,
-  ),
-  EventCategory(
-    id: "001", 
-    name: "Football", 
-    subEvents: subEvents,
-  ),
-  EventCategory(
-    id: "001", 
-    name: "BasketBall", 
-    subEvents: subEvents,
-  ),
-  EventCategory(
-    id: "001", 
-    name: "Badminton", 
-    subEvents: subEvents,
-  )
-];
+// List<EventCategory> eventCategories = [
+//   EventCategory(
+//     id: "001", 
+//     name: "Cricket", 
+//     subEvents: subEvents,
+//   ),
+//   EventCategory(
+//     id: "001", 
+//     name: "Hockey", 
+//     subEvents: subEvents,
+//   ),
+//   EventCategory(
+//     id: "001", 
+//     name: "Tennis", 
+//     subEvents: subEvents,
+//   ),
+//   EventCategory(
+//     id: "001", 
+//     name: "Wrestling", 
+//     subEvents: subEvents,
+//   ),
+//   EventCategory(
+//     id: "001", 
+//     name: "Archery", 
+//     subEvents: subEvents,
+//   ),
+//   EventCategory(
+//     id: "001", 
+//     name: "Football", 
+//     subEvents: subEvents,
+//   ),
+//   EventCategory(
+//     id: "001", 
+//     name: "BasketBall", 
+//     subEvents: subEvents,
+//   ),
+//   EventCategory(
+//     id: "001", 
+//     name: "Badminton", 
+//     subEvents: subEvents,
+//   )
+// ];
 
 List<EmergencyContact> emergency = [
   EmergencyContact(

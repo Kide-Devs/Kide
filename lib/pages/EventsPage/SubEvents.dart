@@ -117,7 +117,7 @@ class _SubEventsState extends State<SubEvents> {
           children: <Widget>[
             Center(
               child: HeaderWidget(
-                  _getGameDetails.gameDetails.elementAt(1).name.toUpperCase(),
+                  _getGameDetails.gameDetails.elementAt(eventCategory.id).name.toUpperCase(),
                   32,
                   Colors.white),
             ),
@@ -126,7 +126,7 @@ class _SubEventsState extends State<SubEvents> {
                 Text('Food Venue', style: TextStyle(fontWeight: FontWeight.bold)),
                 Spacer(),
                 _buildRaisedButton(QUENCH_YOUR_HUNGER,
-                    _getGameDetails.gameDetails.elementAt(1).food)
+                    _getGameDetails.gameDetails.elementAt(eventCategory.id).food)
               ],
             ),
             Row(
@@ -135,21 +135,21 @@ class _SubEventsState extends State<SubEvents> {
                     style: TextStyle(fontWeight: FontWeight.bold)),
                 Spacer(),
                 _buildRaisedButton(QUENCH_YOUR_HUNGER,
-                    _getGameDetails.gameDetails.elementAt(1).food)
+                    _getGameDetails.gameDetails.elementAt(eventCategory.id).food)
               ],
             ),
             Text('Accomodations', style: TextStyle(fontWeight: FontWeight.bold)),
             Padding(
               padding: const EdgeInsets.only(left: 32.0),
               child: _listItemBuilder(
-                _getGameDetails.gameDetails.elementAt(1).gameAccomodations,
+                _getGameDetails.gameDetails.elementAt(eventCategory.id).gameAccomodations,
               ),
             ),
             Text('Game Venues', style: TextStyle(fontWeight: FontWeight.bold)),
             Padding(
               padding: const EdgeInsets.only(left: 32.0),
               child: _listItemBuilder(
-                _getGameDetails.gameDetails.elementAt(1).venues,
+                _getGameDetails.gameDetails.elementAt(eventCategory.id).venues,
               ),
             ),
             for (int i = 0; i < _subEventList.length; i++)

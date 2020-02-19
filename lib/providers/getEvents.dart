@@ -166,7 +166,7 @@ class GetEvents with ChangeNotifier {
           print(_eventList);
         });
         if (_eventList.length != 0)
-          _eventList.forEach((e) => getEventCategory(e));
+          _eventList.asMap().forEach((index, e) => getEventCategory(index, e));
         notifyListeners();
       },
     );
@@ -221,7 +221,7 @@ class GetEvents with ChangeNotifier {
   }
 
 
-  void getEventCategory(String collectionName) {
+  void getEventCategory(int index, String collectionName) {
     db.collection(collectionName).snapshots().listen(
       (snapshot) {
         // resetEventData();
@@ -254,7 +254,7 @@ class GetEvents with ChangeNotifier {
         });
 
         _eventCategories.add(EventCategory(
-            id: collectionName,
+            id: index,
             name: collectionName,
             subEvents: [...subEvents]));
         _eventCategories = _eventCategories.toSet().toList();

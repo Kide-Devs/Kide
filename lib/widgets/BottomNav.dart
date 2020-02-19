@@ -56,9 +56,9 @@ class BottomNav extends StatelessWidget {
           backgroundColor: Colors.black87,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.event_note),
+          icon: Icon(Icons.pin_drop),
           title: Text(
-            EVENTS,
+            "For You",
             style: TextStyle(
               fontSize: 12.0,
             ),

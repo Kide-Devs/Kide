@@ -1,15 +1,11 @@
-import 'package:Kide/models/Games.dart';
+import 'package:Kide/pages/HomePage/models/CardDetails.dart';
 import 'package:Kide/providers/getGameDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:Kide/config/Viewport.dart';
-import 'package:Kide/pages/MapsPage/Maps.dart';
 import 'package:Kide/providers/getMarkers.dart';
 import 'package:Kide/providers/getEvents.dart';
-import 'package:Kide/util/constants.dart';
 import 'package:Kide/util/data.dart';
-import 'package:Kide/widgets/HeaderWidget.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(HomePage());
 
@@ -58,13 +54,16 @@ class _HomePageState extends State<HomePage> {
 
     return _getMarkers.markers.length > 0
         ? ListView.builder(
-            itemBuilder: (BuildContext context, index) => _buildSmallCard(),
-            itemCount: 5,
+            itemBuilder: (BuildContext context, index) =>
+                cardDetails[index].cardType == 1
+                    ? _buildLargeCard(cardDetails[index])
+                    : _buildSmallCard(cardDetails[index]),
+            itemCount: cardDetails.length,
           )
         : CircularProgressIndicator();
   }
 
-  Column _buildSmallCard() {
+  Column _buildSmallCard(CardDetails card) {
     return Column(
       children: <Widget>[
         Row(
@@ -73,13 +72,13 @@ class _HomePageState extends State<HomePage> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'KIIT Bhubaneswar is hosting Khelo India Games 2020',
+                  card.heading,
                   softWrap: true,
                   style: TextStyle(
                     letterSpacing: 0,
                     fontSize: 16,
                     color: Colors.white,
-                    height: 1,
+                    height: 1.3,
                   ),
                 ),
               ),
@@ -91,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 clipBehavior: Clip.hardEdge,
-                child: Image.asset(HOME_PAGE_ASSET_KHELO_INDIA_JPG),
+                child: card.image,
               ),
             ),
           ],
@@ -107,31 +106,31 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Column _buildLargeCard() {
+  Column _buildLargeCard(CardDetails card) {
     return Column(
       children: <Widget>[
         Card(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(8.0))),
           clipBehavior: Clip.hardEdge,
-          child: Image.asset(HOME_PAGE_ASSET_KHELO_INDIA_JPG),
+          child: card.image,
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            'KIIT Bhubaneswar is hosting Khelo India Games 2020',
+            card.heading,
             style: TextStyle(
               letterSpacing: 2,
               fontSize: 20,
               color: Colors.white,
-              height: 1.2,
+              height: 1.3,
             ),
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',
+            card.description,
             style: TextStyle(
               fontSize: 14,
               color: Colors.white60,

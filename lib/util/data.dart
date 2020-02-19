@@ -1,3 +1,4 @@
+import 'package:Kide/pages/HomePage/models/CardDetails.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:Kide/models/Contact.dart';
 import 'package:Kide/models/EmergencyContact.dart';
@@ -10,6 +11,8 @@ import 'package:Kide/models/DashBoard.dart';
 import 'package:Kide/models/SubEvent.dart';
 import 'package:flutter/material.dart';
 import 'package:Kide/models/EventDetail.dart';
+
+import 'constants.dart';
 
 class KheloIndia {
   final int totUniversities;
@@ -26,6 +29,36 @@ class KheloIndia {
     this.totGames,
   });
 }
+
+
+List<CardDetails> cardDetails = [
+  CardDetails(
+    heading: 'KIIT Bhubaneswar is hosting Khelo India Games 2020',
+    description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',
+    image: Image.asset(HOME_PAGE_ASSET_KHELO_INDIA_JPG),
+    cardType: 1,
+  ),
+  CardDetails(
+    heading: 'KIIT Bhubaneswar is hosting Khelo India Games 2020',
+    description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',
+    image: Image.asset(HOME_PAGE_ASSET_KHELO_INDIA_JPG),
+    cardType: 0,
+  ),
+  CardDetails(
+    heading: 'KIIT Bhubaneswar is hosting Khelo India Games 2020',
+    description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',
+    image: Image.asset(HOME_PAGE_ASSET_KHELO_INDIA_JPG),
+    cardType: 0,
+  ),
+  CardDetails(
+    heading: 'KIIT Bhubaneswar is hosting Khelo India Games 2020',
+    description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod',
+    image: Image.asset(HOME_PAGE_ASSET_KHELO_INDIA_JPG),
+    cardType: 1,
+  ),
+];
+
+
 
 List <Official> dummyUni = [
   Official(

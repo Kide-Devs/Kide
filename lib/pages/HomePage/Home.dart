@@ -18,13 +18,13 @@ class _HomePageState extends State<HomePage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final _getEvents = Provider.of<GetEvents>(context);
-    if (_getEvents.eventList.length == 0) _getEvents.setEvents();
+    // final _getEvents = Provider.of<GetEvents>(context);
+    // if (_getEvents.eventList.length == 0) _getEvents.setEvents();
 
-    // Get Game details
-    final _getGameDetails = Provider.of<GetGameDetails>(context);
-    if (_getGameDetails.gameDetails.length == 0)
-      _getGameDetails.setGameDetails();
+    // // Get Game details
+    // final _getGameDetails = Provider.of<GetGameDetails>(context);
+    // if (_getGameDetails.gameDetails.length == 0)
+    //   _getGameDetails.setGameDetails();
   }
 
   @override
@@ -44,11 +44,11 @@ class _HomePageState extends State<HomePage> {
     if (_getMarkers.suggestedMarkers.length == 0)
       _getMarkers.setSuggestedMarkers();
 
-    // Events Listener
-    final _getEvents = Provider.of<GetEvents>(context);
+    // // Events Listener
+    // final _getEvents = Provider.of<GetEvents>(context);
 
-    // Game Details
-    final _getGameDetails = Provider.of<GetGameDetails>(context);
+    // // Game Details
+    // final _getGameDetails = Provider.of<GetGameDetails>(context);
 
     ViewPort().init(context);
 

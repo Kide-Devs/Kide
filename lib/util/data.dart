@@ -154,6 +154,23 @@ MoreInfo(
   ),
 ];
 
+List <MoreInfo> aog = [
+MoreInfo(
+  id: "01",
+  header: "AOG PHILOSOPHY",
+  desc: "Art of Giving is all about creating an unconditional and sustainable abundance of love, peace and happiness and contentment for others through gestures of kindness and generosity. It was founded by Shri Achyuta Samanta on 17 May 2013. The key to peace and happiness lies in unlocking the Art of Giving in each individual. It is a not-for-profit initiative for spreading, supporting and promoting the practice of the art of giving around the world. "
+  ),
+  MoreInfo(
+  id: "02",
+  header: "VISION",
+  desc: "To bring together the sense of peace and happiness among people of all ages, especially children and youth through genuine acts of giving back to the society by the practice of empathy and compassion to the distressed without any discrimination."
+  ),
+  MoreInfo(
+  id: "03",
+  header: "MISSION",
+  desc: "To make people aware and spread the philosophy of the Art of Giving across all sections of human society worldwide through activities of sharing love, care, compassion, wisdom, knowledge, skills and talents."
+  ),
+];
 
 // List <MoreInfo> kIndia = [
 // MoreInfo(
@@ -195,6 +212,14 @@ List<More> more = [
     pageFormat: founderSir,
     assetRoute: "lib/assets/Founder_sir.jpeg",
     link: "https://achyutasamanta.com/",
+    color: Color(0xFF282828),
+  ),
+  More(
+    id: "04",
+    moreName: "Art Of Giving",
+    pageFormat: aog,
+    assetRoute: "lib/assets/AOG-Logo.png",
+    link: "https://artofgiving.in.net/",
     color: Color(0xFF282828),
   ),
 ];

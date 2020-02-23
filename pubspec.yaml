@@ -1,6 +1,6 @@
 name: Kide
 description: A KIIT guide you'd want to use.
-version: 1.0.0+1
+version: 1.0.2+3
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
@@ -40,6 +40,7 @@ flutter:
    - ./lib/assets/Icon/kide_logoxxxhdpi.png #
    - ./lib/assets/maps.png #
    - ./lib/assets/contact.png #
+   - ./lib/assets/AOG-Logo.png
    - ./lib/assets/events.png
    - ./lib/assets/KIIT.jpg #
    - ./lib/assets/KISS.png #

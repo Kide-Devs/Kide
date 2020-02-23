@@ -41,7 +41,9 @@ class MustSeeWidget extends StatelessWidget {
             child: Center(
               child: Text(
                 title,
+                textAlign: TextAlign.center,
                 style: TextStyle(
+                    
                     color: Colors.white,
                     fontWeight: FontWeight.w600),
               ),

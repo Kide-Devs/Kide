@@ -1,3 +1,6 @@
+import 'package:Kide/pages/ForYou/ForYou.dart';
+import 'package:Kide/providers/getGameDetails.dart';
+import 'package:Kide/widgets/HeaderWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:Kide/pages/ContactsPage/ContactList.dart';
 import 'package:Kide/pages/EventsPage/BookmarksPage.dart';
@@ -9,7 +12,6 @@ import 'package:Kide/providers/getMarkers.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:Kide/pages/ContactsPage/Contacts.dart';
-import 'package:Kide/pages/EventsPage/Events.dart';
 import 'package:Kide/pages/EventsPage/SubEvents.dart';
 import 'package:Kide/pages/HomePage/Home.dart';
 import 'package:Kide/pages/MapsPage/Maps.dart';
@@ -26,15 +28,16 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider( create: (context) => Router()),
         ChangeNotifierProvider( create: (context) => Bookmarks()),
-        ChangeNotifierProvider( create: (context) => GetEvents()),
+        // ChangeNotifierProvider( create: (context) => GetEvents()),
         ChangeNotifierProvider( create: (context) => GetMarkers()),
+        ChangeNotifierProvider( create: (context) => GetGameDetails()),
       ],
       child: MaterialApp(
         title: KIDE_L_CAPS,
         theme: ThemeData.dark(),
         home: MyHomePage(title: KIDE_CAPS),
         routes: {
-          SubEvents.routeName: (context) => SubEvents(),
+          // SubEvents.routeName: (context) => SubEvents(),
           BookmarksPage.routeName: (context) => BookmarksPage(),
           ContactList.routeName: (context) => ContactList(),
           DetailsPage.routeName: (context) => DetailsPage(),
@@ -55,28 +58,54 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   final List<Widget> _tabs = [
     MapsPage(),
     ContactsPage(),
     HomePage(),
-    EventsPage(),
+    ForYouPage(),
     MorePage(),
   ];
-
+  
   final List<String> _tabNames = [
     MAPS,
     CONTACTS,
-    HOME,
-    EVENTS,
+    "K  I  D  E",
+    "For You",
     MORE
   ];
+
+  // void showUserSelectionDialog(BuildContext context) async {
+  //   showDialog(
+  //     context: context,
+  //     useRootNavigator: true,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         backgroundColor: Color(0xff222222),
+  //         titlePadding: EdgeInsets.fromLTRB(10.0, 10, 10, 2),
+  //         contentPadding: EdgeInsets.fromLTRB(5.0, 2, 5, 8),
+  //         title: Center(child: Text(EVENT_OVERVIEW)),
+  //         titleTextStyle: TextStyle(color: Colors.white, fontSize: 18),
+  //         shape: RoundedRectangleBorder(
+  //           borderRadius: BorderRadius.circular(20),
+  //         ),
+  //         content: HeaderWidget("Default User Select", 30, Colors.white)
+  //       );
+  //     }
+  //   );
+  // }
+  
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   final _getEvents = Provider.of<GetEvents>(context);
+  //   if (_getEvents.eventList.length == 0) _getEvents.setEvents();
+  // }
   
   @override
   Widget build(BuildContext context) {
     
     final indexState = Provider.of<Router>(context);
-
+    
     return Scaffold(
       appBar: indexState.bottomNavIndex != 0 ? AppBar(
         title: Center(

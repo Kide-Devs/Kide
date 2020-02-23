@@ -1,3 +1,5 @@
+import 'package:Kide/models/ULO.dart';
+import 'package:Kide/util/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,7 @@ class GetEvents with ChangeNotifier {
   bool _isConnected = false;
   bool _fetchFlagCategories = false;
   bool _fetchFlagUniversities = false;
+  bool _fetchFlagULOs = false;
   //Create Firebase Instance
   Firestore db = Firestore.instance;
 
@@ -17,7 +20,65 @@ class GetEvents with ChangeNotifier {
   // List <EventDetail> eventDetails = [];
   // Iterable<SubEvent> subEvents = [];
   List<EventCategory> _eventCategories = [];
+  
+  // ----------------- USER Data Structures ---------------
+  List<ULO> _ulo_list = [];
+  List<String> _uloNameList = [];
+  String _currentULO = "Select Your ID";
+  List<String> _currentULOUnivs = [];
+  String _uloUniversity = SELECT_YOUR_UNIVERSITY;
+  String _userType = "Participant or ULO?";
+  String _locUserType = "Participant or ULO?";
 
+  String get userType {
+    return _userType;
+  }
+
+  String get currentULO {
+    return _currentULO;
+  }
+
+  String get locUserType {
+    return _locUserType;
+  }
+  
+  List<String> get uloNameList {
+    return _uloNameList;
+  }
+  
+  List<String> get currentULOUnivs {
+    return _currentULOUnivs;
+  }
+
+  List<ULO> get ulo_list {
+    return _ulo_list;
+  }
+  
+  String get uloUniversity {
+    return _uloUniversity;
+  }
+
+  void setUloUniversity(String univ) {
+    _uloUniversity = univ;
+    notifyListeners();
+  }
+
+  void setUserType(String type) {
+    _userType = type;
+    notifyListeners();
+  }
+
+  void setCurrentULO(String cur) {
+    _currentULO = cur;
+    notifyListeners();
+  }
+
+  void setLocUserType(String type) {
+    _locUserType = type;
+    notifyListeners();
+  }
+
+  // -----------------------------------------------
   String _university = "Select Your University";
   List<String> _universities = [];
 
@@ -29,6 +90,7 @@ class GetEvents with ChangeNotifier {
     _university = univ;
     notifyListeners();
   }
+  
 
   void unsetUniversity() {
     _university = "Select Your University";
@@ -52,13 +114,20 @@ class GetEvents with ChangeNotifier {
     checkConnectivity();
     if (_isConnected ) {
       print("Set Events");
+
       if (_eventList.length == 0 && _fetchFlagCategories == false){
         getEventList();
         _fetchFlagCategories = true;
       }
+
       if (_universities.length == 0 && _fetchFlagUniversities == false){
         getUniversities();
         _fetchFlagUniversities = true;
+      }
+
+      if (_ulo_list.length == 0 && _fetchFlagULOs == false){
+        getULOs();
+        _fetchFlagULOs = true;
       }
     }
   }
@@ -97,7 +166,7 @@ class GetEvents with ChangeNotifier {
           print(_eventList);
         });
         if (_eventList.length != 0)
-          _eventList.forEach((e) => getEventCategory(e));
+          _eventList.asMap().forEach((index, e) => getEventCategory(index, e));
         notifyListeners();
       },
     );
@@ -117,8 +186,42 @@ class GetEvents with ChangeNotifier {
     );
   }
 
-  void getEventCategory(String collectionName) {
-    print("get cet");
+  void getULOs() {
+    db.collection('ulo_list').snapshots().listen(
+      (snapshot) {
+        snapshot.documents.forEach((doc) {
+          // populate ULOs
+          
+          List<int> tempList =  doc.data['univs'].cast<int>();
+          List<String> unList = [];
+          List<ULO> tempULOList = [];
+          
+          // populating _currentULOUnivs
+          for(int i = 0; i< tempList.length; i++)
+            unList.add(_universities[tempList[i]]);
+          unList.toSet().toList();
+          _currentULOUnivs = unList;
+          
+          //populating _uloNameList
+          _uloNameList.add(doc.data['name']);
+          _uloNameList = _uloNameList.toSet().toList();
+          
+          // populating _ulo_list
+          tempULOList.add(new ULO(
+            name: doc.data['name'],
+            phoneNumber: doc.data['phone_number'],
+            universities: unList,
+          ));
+          _ulo_list.addAll(tempULOList);
+          
+          notifyListeners();
+        });
+      },
+    );
+  }
+
+
+  void getEventCategory(int index, String collectionName) {
     db.collection(collectionName).snapshots().listen(
       (snapshot) {
         // resetEventData();
@@ -151,7 +254,7 @@ class GetEvents with ChangeNotifier {
         });
 
         _eventCategories.add(EventCategory(
-            id: collectionName,
+            id: index,
             name: collectionName,
             subEvents: [...subEvents]));
         _eventCategories = _eventCategories.toSet().toList();

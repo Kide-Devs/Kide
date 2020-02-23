@@ -81,7 +81,7 @@ class _OnboardingMainPageState extends State<OnboardingMainPage> {
                         ),
                         onPressed: () {
                           print('Skip pressed');
-                          Navigator.popAndPushNamed(
+                          Navigator.pushReplacementNamed(
                           context, 
                           '/MyApp'
                           );
@@ -96,7 +96,7 @@ class _OnboardingMainPageState extends State<OnboardingMainPage> {
                         ),
                         onPressed: isDone ? (){
                           print('Done pressed');
-                        Navigator.popAndPushNamed(
+                        Navigator.pushReplacementNamed(
                           context,
                           '/MyApp'
                         );

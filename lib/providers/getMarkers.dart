@@ -77,7 +77,8 @@ class GetMarkers with ChangeNotifier {
       ..addAll(_hostels)
       ..addAll(_sports)
       ..addAll(_toilets)
-      ..addAll(_events);
+      ..addAll(_events)
+      ..addAll(_suggestedMarkers.toSet());
     _markers = {
       'all': _all,
       'campuses': _campuses,
@@ -87,6 +88,7 @@ class GetMarkers with ChangeNotifier {
       'sports': _sports,
       'toilets': _toilets,
       'events': _events,
+      'suggestedMarkers': _suggestedMarkers.toSet()
     };
     // notifyListeners();
   }

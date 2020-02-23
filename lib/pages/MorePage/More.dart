@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:Kide/util/data.dart';
 import 'package:Kide/pages/MorePage/Widgets/MoreCard.dart';
 void main() => runApp(MorePage());
@@ -18,7 +19,7 @@ class MorePage extends StatelessWidget {
                 delegate: SliverChildListDelegate(
                   [
                     for(int i=0;i<more.length;i++)
-                      MoreCard(more[i])
+                      MoreCard(more[i],more[i].color)
                   ],
                 ),
               )

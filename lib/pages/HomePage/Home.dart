@@ -37,12 +37,13 @@ class _HomePageState extends State<HomePage> {
     // Markers Listner
     final _getMarkers = Provider.of<GetMarkers>(context);
     //for markers
+    if (_getMarkers.suggestedMarkers.length == 0)
+      _getMarkers.setSuggestedMarkers();
+      
     _getMarkers.markers.length == 0
         ? _getMarkers.setMarkers()
         : _getMarkers.setMarkerMap();
     //for suggested markers
-    if (_getMarkers.suggestedMarkers.length == 0)
-      _getMarkers.setSuggestedMarkers();
 
     // // Events Listener
     // final _getEvents = Provider.of<GetEvents>(context);

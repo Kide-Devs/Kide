@@ -315,12 +315,6 @@ List<String> universities = [
 List<EmergencyContact> emergency = [
   EmergencyContact(
     color: Colors.red, 
-    iconAsset: "./lib/assets/pharmacy.svg", 
-    emergency: 'Hospital', 
-    number: '108'
-  ),
-  EmergencyContact(
-    color: Colors.red, 
     iconAsset: "./lib/assets/police.svg", 
     emergency: 'Police', 
     number: '100'
@@ -330,6 +324,12 @@ List<EmergencyContact> emergency = [
     iconAsset: "./lib/assets/fire.svg", 
     emergency: 'Fire Brigade', 
     number: '101'
+  ),
+  EmergencyContact(
+    color: Colors.red, 
+    iconAsset: "./lib/assets/pharmacy.svg", 
+    emergency: 'Hospital', 
+    number: '108'
   ),
 ];
 

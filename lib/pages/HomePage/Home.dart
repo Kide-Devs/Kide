@@ -6,6 +6,7 @@ import 'package:Kide/providers/getMarkers.dart';
 import 'package:Kide/providers/getEvents.dart';
 import 'package:Kide/util/data.dart';
 import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() => runApp(HomePage());
 
@@ -15,6 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -26,10 +28,29 @@ class _HomePageState extends State<HomePage> {
     // if (_getGameDetails.gameDetails.length == 0)
     //   _getGameDetails.setGameDetails();
   }
-
+  List<CardDetails> cardDetailsnew = [];
   @override
   void initState() {
     super.initState();
+    getData();
+
+
+  }
+
+  Future<Null> refreshList() async
+  {
+    cardDetails.removeRange(0, 4);
+    await Future.delayed(Duration(seconds: 2));
+
+    setState(() {
+
+getData();
+
+
+    });
+
+    return null;
+
   }
 
   @override
@@ -53,16 +74,29 @@ class _HomePageState extends State<HomePage> {
 
     ViewPort().init(context);
 
-    return _getMarkers.markers.length > 0
-        ? ListView.builder(
+
+
+    return _getMarkers.markers.length > 0?
+        RefreshIndicator(child:
+        ListView.builder(
+
+
             itemBuilder: (BuildContext context, index) =>
-                cardDetails[index].cardType == 1
-                    ? _buildLargeCard(cardDetails[index])
-                    : _buildSmallCard(cardDetails[index]),
-            itemCount: cardDetails.length,
-          )
-        : CircularProgressIndicator();
-  }
+
+            cardDetails[index].cardType == 1
+                ? _buildLargeCard(cardDetails[index])
+                : _buildSmallCard(cardDetails[index]),
+            itemCount: cardDetails.length
+
+        )
+
+            , onRefresh: refreshList):markers.length;
+
+
+
+
+    }
+
 
   Column _buildSmallCard(CardDetails card) {
     return Column(
@@ -84,6 +118,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+
             Container(
               width: 150,
               // height: 150,
@@ -114,7 +149,7 @@ class _HomePageState extends State<HomePage> {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(8.0))),
           clipBehavior: Clip.hardEdge,
-          child: card.image,
+          child:card.image,
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),

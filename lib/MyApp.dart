@@ -19,6 +19,9 @@ import 'package:Kide/pages/MorePage/More.dart';
 import 'package:Kide/providers/router.dart';
 import 'package:Kide/widgets/BottomNav.dart';
 
+import 'pages/EventsPage/BookmarksPage.dart';
+import 'providers/router.dart';
+
 
 class MyApp extends StatelessWidget {
   static const routeName = '/MyApp';

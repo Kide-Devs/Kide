@@ -11,6 +11,7 @@ import 'package:Kide/models/DashBoard.dart';
 import 'package:Kide/models/SubEvent.dart';
 import 'package:flutter/material.dart';
 import 'package:Kide/models/EventDetail.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'constants.dart';
 
@@ -31,37 +32,39 @@ class KheloIndia {
 }
 
 
-List<CardDetails> cardDetails = [
-  CardDetails(
-    heading: 'Welcome to KIIT Deemed to be University!',
-    description: 'To create an advanced centre of professional learning of international standing where pursuit of knowledge and excellence shall reign supreme, unfettered by the barriers of nationality, language, cultural plurality and religion. ',
-    image: Image.asset("./lib/assets/KIIT.jpg", fit: BoxFit.cover),
-    cardType: 1,
-  ),
-  CardDetails(
-    heading: "Kolosseum 2K20 is a Mega B-school fest organized by KIIT School of Management. The Fest is classified into two categories- Business Events and Cultural Events.",
-    image: Image.network('https://static.wixstatic.com/media/4b1354_84b89a8eb50c4a5999b376e430c640f6~mv2.png_srz_629_314_85_22_0.50_1.20_0.00_png_srz', fit: BoxFit.cover),
-    cardType: 0,
-  ),
-  CardDetails(
-    heading: 'KIIT Team From Robotics Society Wins Big At IIT Bhubaneswar',
-    image: Image.network("https://static.kiit.ac.in/news/2020/02/Robotics-Society1.jpg", fit: BoxFit.cover,),
-    cardType: 0,
-  ),
-  CardDetails(
-    heading: 'KSAC Celebrates 17th Foundation Day With Students.',
-    description: 'KIIT Student Activity Centre celebrated the 17th Foundation Day of KIIT Deemed to be a University with Students on 16th February, 2020. The evening “Shaam-e-Mehfil” had a number of cultural events by students dedicated to KIIT and its Founder Dr. Achyuta Samanta.',
-    image: Image.network("https://static.kiit.ac.in/news/2020/02/KSAC-celebrates-1.jpg", fit: BoxFit.cover),
-    cardType: 1,
-  ),
-  CardDetails(
-    heading: 'KSAC Organized FOUNDERS CUP 2020',
-    description: 'Founder’s Cup 2020, Inter-School Oratory competition was organized in KIIT Student Activity Centre on 16th February, 2020 by the Literary Society, Kronicle. Seventy students from different schools participated in the event. It was a three round event where the winners had to qualify each round to emerge winners.',
-    image: Image.network("https://static.kiit.ac.in/news/2020/02/Inter-School-Oratory-competition1.jpg", fit: BoxFit.cover),
-    cardType: 1,
-  ),
-];
 
+int i;
+List<CardDetails> cardDetails = [];
+
+void del()
+{
+  cardDetails.clear();
+}
+
+
+
+void getData()
+{
+
+  cardDetails.toSet().toList();
+
+  var firestore = Firestore.instance;
+  var qn = firestore.collection("blog_post_homepage").getDocuments();
+
+    qn.then((QuerySnapshot snapshot) {
+      snapshot.documents.forEach((f)  {
+        cardDetails.add(CardDetails(heading: f.data['heading'],
+            image:  Image.network(f.data['image'].toString()),
+            cardType: f.data['card'],
+            description: f.data['subheading']));
+      });
+    });
+
+}
+Future getQn()
+{
+  return Firestore.instance.collection("blog_post_homepage").getDocuments();
+}
 
 
 List <Official> dummyUni = [

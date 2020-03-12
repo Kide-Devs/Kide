@@ -10,19 +10,16 @@ class HomePageProvider with ChangeNotifier{
   List<CardDetails> get cardDetails {
     return _cardDetails;
   }
-  Future<Null> refreshList() async
-  {
-
-  Completer<Null> completer=new Completer<Null>();
-  new Future.delayed(Duration(seconds: 1)).then((_){
-    completer.complete();
-    getData();
-  });
-  return completer.future;
-
+  Future<Null> refreshList() async{
+    Completer<Null> completer=new Completer<Null>();
+    new Future.delayed(Duration(seconds: 1)).then((_){
+      completer.complete();
+      getData();
+    });
+    return completer.future;
   }
-  void getData()
-  {
+
+  void getData(){
     List<CardDetails> TempList= [];
     var firestore = Firestore.instance;
     var qn = firestore.collection("blog_post_homepage").getDocuments();

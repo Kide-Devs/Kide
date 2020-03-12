@@ -19,6 +19,7 @@ dependencies:
   cloud_firestore: ^0.13.0+1
   connectivity: ^0.4.6+2
   location: ^2.3.5
+  transparent_image: ^1.0.0
   
 dev_dependencies:
   flutter_launcher_icons: ^0.7.4
@@ -42,6 +43,6 @@ flutter:
    - ./lib/assets/contact.png #
    - ./lib/assets/AOG-Logo.png
    - ./lib/assets/events.png
-   - ./lib/assets/KIIT.jpg #
+   - ./lib/assets/KIIT.jpg
    - ./lib/assets/KISS.png #
    - ./lib/assets/Founder_sir.jpeg #

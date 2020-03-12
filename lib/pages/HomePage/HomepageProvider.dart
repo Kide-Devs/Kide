@@ -19,15 +19,9 @@ class HomePageProvider with ChangeNotifier{
     });
     return completer.future;
   }
-<<<<<<< HEAD
 
   void getData(){
-    List<CardDetails> TempList= [];
-=======
-  void getData()
-  {
     List<CardDetails> _tempList= [];
->>>>>>> 51dcad39247d15ac4e70997ba229f00553183e7c
     var firestore = Firestore.instance;
     var qn = firestore.collection("blog_post_homepage").getDocuments();
 

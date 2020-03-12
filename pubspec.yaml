@@ -1,6 +1,6 @@
 name: Kide
 description: A KIIT guide you'd want to use.
-version: 1.0.2+3
+version: 1.0.3+4
 
 environment:
   sdk: ">=2.2.2 <3.0.0"

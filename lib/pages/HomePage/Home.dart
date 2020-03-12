@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
 
     ViewPort().init(context);
 
-    return _getMarkers.markers.length > 0 && _getCardDetails.cardDetails.length > 0?
+    return _getMarkers.markers.length > 0 && _getCardDetails.cardDetails.length > 0 ?
         RefreshIndicator(
             child: ListView.builder(
                 itemBuilder: (BuildContext context, index) =>
@@ -125,9 +125,22 @@ class _HomePageState extends State<HomePage> {
               // height: 150,
               child: Card(
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 clipBehavior: Clip.hardEdge,
-                child: card.image,
+                child: Stack(
+                  children: <Widget>[
+                    Center(
+                      child: Container( 
+                        width: 50, 
+                        child: Center(child: CircularProgressIndicator()),
+                        padding: EdgeInsets.all(5),
+                      )
+                    ),
+                    Center(
+                      child: card.image
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -150,7 +163,21 @@ class _HomePageState extends State<HomePage> {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(8.0))),
           clipBehavior: Clip.hardEdge,
-          child: card.image,
+          child: Stack(
+            children: <Widget>[
+              Center(
+                child: Container( 
+                  height: 50, 
+                  width:100, 
+                  child: Center(child: CircularProgressIndicator()),
+                  padding: EdgeInsets.all(5),
+                )
+              ),
+              Center(
+                child: card.image
+              ),
+            ],
+          ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),

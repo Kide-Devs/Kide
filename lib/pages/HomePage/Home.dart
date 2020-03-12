@@ -1,9 +1,10 @@
 import 'package:Kide/pages/HomePage/models/CardDetails.dart';
-import 'package:Kide/providers/getGameDetails.dart';
+//import 'package:Kide/providers/getGameDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:Kide/config/Viewport.dart';
 import 'package:Kide/providers/getMarkers.dart';
-import 'package:Kide/providers/getEvents.dart';
+//import 'package:Kide/providers/getEvents.dart';
+import 'package:Kide/pages/HomePage/HomepageProvider.dart';
 import 'package:Kide/util/data.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,7 +17,28 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  /*void getData()
+  {
 
+    cardDetails.toSet().toList();
+
+    var firestore = Firestore.instance;
+    var qn = firestore.collection("blog_post_homepage").getDocuments();
+
+    qn.then((QuerySnapshot snapshot) {
+      snapshot.documents.forEach((f)  {
+        cardDetails.add(CardDetails(heading: f.data['heading'],
+            image:  Image.network(f.data['image'].toString()),
+            cardType: f.data['card'],
+            description: f.data['subheading']));
+      });
+    });
+    if(cardDetails.length>4)
+      {
+        cardDetails.removeRange(0, 4);
+      }
+
+  }*/
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -32,31 +54,15 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    getData();
-
-
   }
 
-  Future<Null> refreshList() async
-  {
-    cardDetails.removeRange(0, 4);
-    await Future.delayed(Duration(seconds: 2));
 
-    setState(() {
-
-getData();
-
-
-    });
-
-    return null;
-
-  }
 
   @override
   Widget build(BuildContext context) {
     // Markers Listner
     final _getMarkers = Provider.of<GetMarkers>(context);
+    final _getCardDetails = Provider.of<HomePageProvider>(context);
     //for markers
     if (_getMarkers.suggestedMarkers.length == 0)
       _getMarkers.setSuggestedMarkers();
@@ -64,6 +70,10 @@ getData();
     _getMarkers.markers.length == 0
         ? _getMarkers.setMarkers()
         : _getMarkers.setMarkerMap();
+
+    // for CardDetails
+    if (_getCardDetails.cardDetails.length == 0)
+      _getCardDetails.getData();
     //for suggested markers
 
     // // Events Listener
@@ -74,27 +84,18 @@ getData();
 
     ViewPort().init(context);
 
-
-
-    return _getMarkers.markers.length > 0?
-        RefreshIndicator(child:
-        ListView.builder(
-
-
-            itemBuilder: (BuildContext context, index) =>
-
-            cardDetails[index].cardType == 1
-                ? _buildLargeCard(cardDetails[index])
-                : _buildSmallCard(cardDetails[index]),
-            itemCount: cardDetails.length
-
+    return _getMarkers.markers.length > 0 && _getCardDetails.cardDetails.length > 0?
+        RefreshIndicator(
+            child: ListView.builder(
+                itemBuilder: (BuildContext context, index) =>
+                _getCardDetails.cardDetails[index].cardType == 1
+                    ? _buildLargeCard(_getCardDetails.cardDetails[index])
+                    : _buildSmallCard(_getCardDetails.cardDetails[index]),
+                itemCount: _getCardDetails.cardDetails.length
+            ),
+            onRefresh: _getCardDetails.refreshList
         )
-
-            , onRefresh: refreshList):markers.length;
-
-
-
-
+        : CircularProgressIndicator();
     }
 
 
@@ -149,7 +150,7 @@ getData();
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(8.0))),
           clipBehavior: Clip.hardEdge,
-          child:card.image,
+          child: card.image,
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),

@@ -1,4 +1,5 @@
 import 'package:Kide/pages/ForYou/ForYou.dart';
+import 'package:Kide/pages/HomePage/HomepageProvider.dart';
 import 'package:Kide/providers/getGameDetails.dart';
 import 'package:Kide/widgets/HeaderWidget.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         // ChangeNotifierProvider( create: (context) => GetEvents()),
         ChangeNotifierProvider( create: (context) => GetMarkers()),
         ChangeNotifierProvider( create: (context) => GetGameDetails()),
+        ChangeNotifierProvider( create: (context) => HomePageProvider()),
       ],
       child: MaterialApp(
         title: KIDE_L_CAPS,

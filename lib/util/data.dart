@@ -43,24 +43,7 @@ void del()
 
 
 
-void getData()
-{
 
-  cardDetails.toSet().toList();
-
-  var firestore = Firestore.instance;
-  var qn = firestore.collection("blog_post_homepage").getDocuments();
-
-    qn.then((QuerySnapshot snapshot) {
-      snapshot.documents.forEach((f)  {
-        cardDetails.add(CardDetails(heading: f.data['heading'],
-            image:  Image.network(f.data['image'].toString()),
-            cardType: f.data['card'],
-            description: f.data['subheading']));
-      });
-    });
-
-}
 Future getQn()
 {
   return Firestore.instance.collection("blog_post_homepage").getDocuments();

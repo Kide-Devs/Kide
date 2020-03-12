@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:Kide/pages/HomePage/models/CardDetails.dart';
@@ -9,18 +11,16 @@ class HomePageProvider with ChangeNotifier{
   List<CardDetails> get cardDetails {
     return _cardDetails;
   }
-  Future<Null> refreshList() async
-  {
-
-    await Future.delayed(Duration(seconds: 6));
-
-    getData();
-
-    return null;
-
+  Future<Null> refreshList() async{
+    Completer<Null> completer=new Completer<Null>();
+    new Future.delayed(Duration(seconds: 1)).then((_){
+      completer.complete();
+      getData();
+    });
+    return completer.future;
   }
-  void getData()
-  {
+
+  void getData(){
     List<CardDetails> _tempList= [];
     var firestore = Firestore.instance;
     var qn = firestore.collection("blog_post_homepage").getDocuments();

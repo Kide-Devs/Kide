@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:Kide/pages/HomePage/models/CardDetails.dart';
@@ -11,11 +13,12 @@ class HomePageProvider with ChangeNotifier{
   Future<Null> refreshList() async
   {
 
-    await Future.delayed(Duration(seconds: 6));
-
+  Completer<Null> completer=new Completer<Null>();
+  new Future.delayed(Duration(seconds: 1)).then((_){
+    completer.complete();
     getData();
-
-    return null;
+  });
+  return completer.future;
 
   }
   void getData()

@@ -42,6 +42,6 @@ flutter:
    - ./lib/assets/contact.png #
    - ./lib/assets/AOG-Logo.png
    - ./lib/assets/events.png
-   - ./lib/assets/KIIT.jpg #
+   - ./lib/assets/KIIT.jpg
    - ./lib/assets/KISS.png #
    - ./lib/assets/Founder_sir.jpeg #

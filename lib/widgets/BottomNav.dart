@@ -1,3 +1,4 @@
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:Kide/providers/router.dart';
@@ -17,7 +18,7 @@ class BottomNav extends StatelessWidget {
         color: Color.fromRGBO(0, 112, 240, 100),
       ),
       currentIndex: _currentIndex,
-      backgroundColor: Colors.black87,
+      backgroundColor: DynamicTheme.of(context).data.backgroundColor,
       items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.map),

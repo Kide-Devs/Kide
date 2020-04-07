@@ -1,3 +1,4 @@
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:Kide/util/data.dart';
@@ -8,7 +9,7 @@ class MorePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(18, 18, 18, 1.0),
+      backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
       body : Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(

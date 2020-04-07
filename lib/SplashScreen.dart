@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:Kide/pages/OnBoarding/OnBoarding.dart';
 import 'package:Kide/util/constants.dart';
@@ -54,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: DynamicTheme.of(context).data.backgroundColor,
       body: Column(
         // crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -91,7 +92,7 @@ class _SplashScreenState extends State<SplashScreen> {
               KIDE_CAPS,
               style: TextStyle(
                 fontSize: 20.0,
-                color: Colors.white,
+                color: DynamicTheme.of(context).data.textTheme.subtitle.color,
                 letterSpacing: 25.0,
               ),
             ),

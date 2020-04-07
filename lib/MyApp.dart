@@ -2,6 +2,7 @@ import 'package:Kide/pages/ForYou/ForYou.dart';
 import 'package:Kide/pages/HomePage/HomepageProvider.dart';
 import 'package:Kide/providers/getGameDetails.dart';
 import 'package:Kide/widgets/HeaderWidget.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:Kide/pages/ContactsPage/ContactList.dart';
 import 'package:Kide/pages/EventsPage/BookmarksPage.dart';
@@ -113,17 +114,19 @@ class _MyHomePageState extends State<MyHomePage> {
     
     return Scaffold(
       appBar: indexState.bottomNavIndex != 0 ? AppBar(
+        backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
         title: Center(
           child: Text(
             _tabNames[indexState.bottomNavIndex],
             textAlign: TextAlign.center,
             style: TextStyle(
               fontFamily: 'Roboto',
+              color: DynamicTheme.of(context).data.textTheme.subtitle.color
             ),
           )
         ),
       ): null,
-      backgroundColor: Color.fromRGBO(18, 18, 18, 1.0),
+      backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
       body: _tabs[indexState.bottomNavIndex],
       bottomNavigationBar: BottomNav(),
     );

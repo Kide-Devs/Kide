@@ -95,7 +95,9 @@ class _HomePageState extends State<HomePage> {
             ),
             onRefresh: _getCardDetails.refreshList
         )
-        : CircularProgressIndicator();
+        : Center(
+          child: CircularProgressIndicator(),
+        );
     }
 
 

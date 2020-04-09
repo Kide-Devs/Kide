@@ -99,7 +99,7 @@ class ForYouPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Container(height: 20,),
+                      Container(height: 24,),
                     ]
                   ),
                 ),

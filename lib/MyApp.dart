@@ -1,5 +1,4 @@
 import 'package:Kide/pages/ForYou/ForYou.dart';
-import 'package:Kide/pages/HomePage/HomepageProvider.dart';
 import 'package:Kide/providers/getGameDetails.dart';
 import 'package:Kide/widgets/HeaderWidget.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
@@ -36,11 +35,11 @@ class MyApp extends StatelessWidget {
         // ChangeNotifierProvider( create: (context) => GetEvents()),
         ChangeNotifierProvider( create: (context) => GetMarkers()),
         ChangeNotifierProvider( create: (context) => GetGameDetails()),
-        ChangeNotifierProvider( create: (context) => HomePageProvider()),
+        //ChangeNotifierProvider( create: (context) => HomePageProvider()),
       ],
       child: MaterialApp(
         title: KIDE_L_CAPS,
-        theme: ThemeData.dark(),
+        theme: DynamicTheme.of(context).data.brightness == Brightness.dark ? ThemeData.dark() : ThemeData.light(),
         home: MyHomePage(title: KIDE_CAPS),
         routes: {
           // SubEvents.routeName: (context) => SubEvents(),
@@ -113,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final indexState = Provider.of<Router>(context);
     
     return Scaffold(
-      appBar: indexState.bottomNavIndex != 0 ? AppBar(
+      appBar: indexState.bottomNavIndex != 0 && indexState.bottomNavIndex != 2 ? AppBar(
         backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
         title: Center(
           child: Text(

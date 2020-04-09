@@ -15,7 +15,7 @@ class BottomNav extends StatelessWidget {
       showUnselectedLabels: true,
       selectedIconTheme: IconThemeData(
         size: 36,
-        color: Color.fromRGBO(0, 112, 240, 100),
+        color: DynamicTheme.of(context).data.iconTheme.color
       ),
       currentIndex: _currentIndex,
       backgroundColor: DynamicTheme.of(context).data.backgroundColor,
@@ -28,7 +28,7 @@ class BottomNav extends StatelessWidget {
               fontSize: 12.0,
             ),
           ),
-          backgroundColor: Colors.black87,
+          backgroundColor: Colors.white,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.perm_contact_calendar),
@@ -54,7 +54,7 @@ class BottomNav extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 5.0, letterSpacing: 5),
           ),
-          backgroundColor: Colors.black87,
+          // backgroundColor: Colors.black87,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.pin_drop),
@@ -64,7 +64,7 @@ class BottomNav extends StatelessWidget {
               fontSize: 12.0,
             ),
           ),
-          backgroundColor: Colors.black87,
+          // backgroundColor: Colors.black87,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.more_horiz),
@@ -74,7 +74,7 @@ class BottomNav extends StatelessWidget {
               fontSize: 12.0,
             ),
           ),
-          backgroundColor: Colors.black87,
+          // backgroundColor: Colors.black87,
         ),
       ],
       onTap: (index) {

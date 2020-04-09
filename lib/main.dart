@@ -11,7 +11,7 @@ void main() {
       if (brightness == Brightness.dark) {
         return ThemeData(
             brightness: brightness,
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.black,
             scaffoldBackgroundColor: Color.fromARGB(255, 55, 55, 55),
             iconTheme: IconThemeData(color: Colors.grey),
             textTheme: TextTheme(

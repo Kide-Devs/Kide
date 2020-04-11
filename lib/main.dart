@@ -12,7 +12,12 @@ void main() {
         return ThemeData(
             brightness: brightness,
             backgroundColor: Colors.black,
-            scaffoldBackgroundColor: Color.fromARGB(255, 55, 55, 55),
+            tabBarTheme: TabBarTheme(
+              labelStyle: TextStyle(
+                color: Colors.white
+              )
+            ),
+            scaffoldBackgroundColor: Color.fromARGB(255, 31, 31, 31),
             iconTheme: IconThemeData(color: Colors.grey),
             textTheme: TextTheme(
               title: TextStyle(color: Colors.white70),
@@ -23,6 +28,11 @@ void main() {
           brightness: brightness,
           backgroundColor: Color(0xFFF9F9F9),
           scaffoldBackgroundColor: Colors.white,
+          tabBarTheme: TabBarTheme(
+            labelStyle: TextStyle(
+              color: Colors.black
+            )
+          ),
           iconTheme: IconThemeData(
             color: Colors.black
           ),
@@ -38,6 +48,7 @@ void main() {
       }
     },
     themedWidgetBuilder: (context, theme) => MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: theme,
       home: new SplashScreen(),
       routes: <String, WidgetBuilder>{

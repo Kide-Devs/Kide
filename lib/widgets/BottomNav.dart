@@ -13,11 +13,13 @@ class BottomNav extends StatelessWidget {
     return BottomNavigationBar(
       showSelectedLabels: true,
       showUnselectedLabels: true,
-      selectedIconTheme: IconThemeData(
-        size: 36,
-        color: DynamicTheme.of(context).data.iconTheme.color
-      ),
       currentIndex: _currentIndex,
+      unselectedIconTheme: IconThemeData(
+        color: DynamicTheme.of(context).data.textTheme.subtitle.color
+      ),
+      selectedIconTheme: IconThemeData(
+        color: Colors.blueAccent
+      ),
       backgroundColor: DynamicTheme.of(context).data.backgroundColor,
       items: [
         BottomNavigationBarItem(
@@ -26,9 +28,10 @@ class BottomNav extends StatelessWidget {
             MAPS,
             style: TextStyle(
               fontSize: 12.0,
+              color: DynamicTheme.of(context).data.textTheme.subtitle.color
             ),
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: DynamicTheme.of(context).data.backgroundColor,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.perm_contact_calendar),
@@ -36,9 +39,10 @@ class BottomNav extends StatelessWidget {
             CONTACTS,
             style: TextStyle(
               fontSize: 12.0,
+              color: DynamicTheme.of(context).data.textTheme.subtitle.color
             ),
           ),
-          backgroundColor: Colors.black87,
+          backgroundColor: DynamicTheme.of(context).data.backgroundColor,
         ),
         BottomNavigationBarItem(
           icon: AnimatedContainer(
@@ -52,9 +56,10 @@ class BottomNav extends StatelessWidget {
           title: Text(
             KIDE_CAPS,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 5.0, letterSpacing: 5),
+            style: TextStyle(fontSize: 5.0, letterSpacing: 5, 
+              color: DynamicTheme.of(context).data.textTheme.subtitle.color),
           ),
-          // backgroundColor: Colors.black87,
+          backgroundColor: DynamicTheme.of(context).data.backgroundColor,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.pin_drop),
@@ -62,9 +67,10 @@ class BottomNav extends StatelessWidget {
             "For You",
             style: TextStyle(
               fontSize: 12.0,
+              color: DynamicTheme.of(context).data.textTheme.subtitle.color
             ),
           ),
-          // backgroundColor: Colors.black87,
+          backgroundColor: DynamicTheme.of(context).data.backgroundColor,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.more_horiz),
@@ -72,9 +78,10 @@ class BottomNav extends StatelessWidget {
             MORE,
             style: TextStyle(
               fontSize: 12.0,
+              color: DynamicTheme.of(context).data.textTheme.subtitle.color
             ),
           ),
-          // backgroundColor: Colors.black87,
+          backgroundColor: DynamicTheme.of(context).data.backgroundColor,
         ),
       ],
       onTap: (index) {

@@ -113,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
     
     return Scaffold(
       appBar: indexState.bottomNavIndex != 0 && indexState.bottomNavIndex != 2 ? AppBar(
-        backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
+        backgroundColor: DynamicTheme.of(context).data.backgroundColor,
         title: Center(
           child: Text(
             _tabNames[indexState.bottomNavIndex],

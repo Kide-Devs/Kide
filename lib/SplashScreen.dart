@@ -40,7 +40,6 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.of(context).pushReplacementNamed(OnboardingMainPage.routeName);
   }
 
-
   double _opacityAnimator(double op) {
     setState(() => _opacity = op == 0.5 ? 1.0 : 1.0);
     return _opacity;

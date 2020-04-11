@@ -50,7 +50,7 @@ class _ContactsPageState extends State<ContactsPage> {
     // Offset _offset = Offset(0.95, 0.55);
     ViewPort().init(context);
     return Scaffold(
-      backgroundColor: DynamicTheme.of(context).data.backgroundColor,
+      backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
       body : Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(

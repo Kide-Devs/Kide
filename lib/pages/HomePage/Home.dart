@@ -1,3 +1,5 @@
+import 'package:Kide/pages/HomePage/widgets/PostsPage.dart';
+import 'package:Kide/util/constants.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -8,38 +10,75 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  ScrollController controller;
+  ScrollController _scrollController;
+  TabController _tabController;
   @override
   void initState() {
+    
+    _scrollController = ScrollController();
+    _tabController = TabController(
+      vsync: this,
+      length: 3
+    );
     super.initState();
-    controller = ScrollController();
+  }
+
+  _changeBrightness() {
+    DynamicTheme.of(context).setBrightness(
+      Theme.of(context).brightness == Brightness.dark
+        ? Brightness.light
+        : Brightness.dark
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new Scaffold(
       backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
       body: new NestedScrollView(
-        controller: this.controller,
+        controller: _scrollController,
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             new SliverAppBar(
-              stretch: true,
+              actions: <Widget>[
+                
+                IconButton(
+                  icon: Icon(Icons.mode_edit, color: DynamicTheme.of(context).data.iconTheme.color,),
+                  onPressed: _changeBrightness,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+              ],
+              title: new Text(KIDE_CAPS, style: TextStyle(
+                color: DynamicTheme.of(context).data.textTheme.subtitle.color
+              ),),
+              centerTitle: true,
+              backgroundColor: DynamicTheme.of(context).data.backgroundColor,
               pinned: true,
               floating: true,
               forceElevated: innerBoxIsScrolled,
-              title: new TabBar(
-                tabs: <Tab>[
-                  new Tab(text: "News Alerts",),
-                  new Tab(text: "Events",),
-                  new Tab(text: "Blogs",),
-                ]
+              bottom: new TabBar(
+                labelColor: DynamicTheme.of(context).data.tabBarTheme.labelStyle.color,
+                tabs: <Widget>[
+                  new Tab(text: "News"),
+                  new Tab(text: "Blogs"),
+                  new Tab(text: "Events"),
+                ],
+                controller: _tabController,
               ),
             )
           ];
         }, 
-        body: Container()
-      )
+        body: new TabBarView(
+          controller: _tabController,
+          children: <Widget>[
+            new PostsPage(postType: "News"),
+            new PostsPage(postType: "Blogs",),
+            new PostsPage(postType: "Events",)
+          ]
+        )
+      ),
     );
   }
 }

@@ -81,12 +81,12 @@ class _HomePageState extends State<HomePage>
           },
           body: new TabBarView(
             controller: _tabController, children: <Widget>[
-            new PostsPage(postType: "News"),
+            new PostsPage(postType: "news"),
             new PostsPage(
-              postType: "Blogs",
+              postType: "blogs",
             ),
             new PostsPage(
-              postType: "Events",
+              postType: "events",
             )
           ])),
     );

@@ -1,13 +1,14 @@
 
+import 'package:Kide/pages/HomePage/PostDetailsPage.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 
 class PostCard extends StatefulWidget {
 
-  final String title, subtitle, image, body, date, id;
+  final String title, subtitle, image, body, date, id, views, likes;
 
   PostCard(
-    {this.id, this.title, this.subtitle, this.image, this.body, this.date}
+    {this.id, this.title, this.subtitle, this.image, this.body, this.date, this.likes, this.views}
   );
 
   @override
@@ -24,7 +25,20 @@ class _PostCardState extends State<PostCard> {
       elevation: 3,
       child: InkWell(
         onTap: () {
-
+          Navigator.push(
+            context, 
+            MaterialPageRoute(
+              builder: (context) => PostDetailsPage(
+                body: widget.body,
+                title: widget.title,
+                subtitle: widget.subtitle,
+                date: widget.date,
+                image: widget.image,
+                likes: widget.likes,
+                views: widget.views,
+              )
+            )
+          );
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,13 +130,13 @@ class _PostCardState extends State<PostCard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "334 Views",
+                    "${widget.views.toString()} Views",
                     style: TextStyle(
                       color: Colors.blue[400]
                     ),
                   ),
                   Text(
-                    "120 likes",
+                    "${widget.likes.toString()} likes",
                     style: TextStyle(
                       color: Colors.blue[400]
                     ),
@@ -130,6 +144,29 @@ class _PostCardState extends State<PostCard> {
                 ],
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.favorite_border),
+                  onPressed: () {
+
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.bookmark_border),
+                  onPressed: () {
+
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.share),
+                  onPressed: () {
+
+                  },
+                )
+              ],
+            )
           ],
         ),
       ),

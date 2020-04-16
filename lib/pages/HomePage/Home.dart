@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage>
                 actions: <Widget>[
                   IconButton(
                     icon: Icon(
-                      Icons.mode_edit,
+                      Icons.remove_red_eye,
                       color: DynamicTheme.of(context).data.iconTheme.color,
                     ),
                     onPressed: _changeBrightness,

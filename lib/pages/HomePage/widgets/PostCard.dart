@@ -69,7 +69,8 @@ class _PostCardState extends State<PostCard> {
                           padding: EdgeInsets.only(
                             top: deviceHeight * 0.125,
                             left: 8.0,
-                            right: 8.0                            
+                            right: 8.0,
+                            bottom: 3                           
                           ),
                           child: Text(
                             widget.title,

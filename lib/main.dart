@@ -22,7 +22,9 @@ void main() {
             textTheme: TextTheme(
               title: TextStyle(color: Colors.white70),
               subtitle: TextStyle(color: Color.fromARGB(255, 187, 187, 187)),
-            ));
+            ),
+            cardColor: Color.fromARGB(255, 43, 43, 43)
+          );
       } else {
         return ThemeData(
           brightness: brightness,

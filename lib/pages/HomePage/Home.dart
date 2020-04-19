@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage>
               postType: "blogs",
             ),
             new PostsPage(
-              postType: "events",
+              postType: "events_home",
             )
           ])),
     );

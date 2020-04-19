@@ -11,58 +11,118 @@ class PostsPage extends StatefulWidget {
 }
 
 class _PostsPageState extends State<PostsPage> {
-  _buildBlogPosts() {
-    return ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text("Blog ${index.toString()}"),
-          );
-        });
+  List<DocumentSnapshot> posts = [];
+  bool isLoading = false, isLoadingNext = false;
+  bool hasMore = true;
+  int documentLimit = 5;
+  DocumentSnapshot lastDocument;
+  ScrollController _scrollController = ScrollController();
+  Firestore firestore = Firestore.instance;
+
+  @override
+  void initState() {
+    getPosts();
+    _scrollController.addListener(listScrollListener);
+    super.initState();
   }
 
-  _buildNewsPosts() {
-    return ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text("News ${index.toString()}"),
-          );
+  getPosts() async {
+    print("Inside getPosts()");
+    if (lastDocument == null) {
+      setState(() {
+        isLoading = true;
+      });
+    } else {
+      setState(() {
+        setState(() {
+          isLoadingNext = true;
         });
-  }
+      });
+    }
 
-  _buildEventPosts() {
-    return StreamBuilder(
-      stream: Firestore.instance.collection("events_home").snapshots(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return ListView.builder(itemBuilder: (context, index) {
-            return PostCard(
-              title: snapshot.data.documents[index]['title'],
-              subtitle: snapshot.data.documents[index]['subtitle'],
-              body: snapshot.data.documents[index]['body'],
-              image: snapshot.data.documents[index]['imageUrl'],
-              likes: snapshot.data.documents[index]['likes'].toString(),
-              views: snapshot.data.documents[index]['views'].toString(),
-            );
+    QuerySnapshot querySnapshot;
+    if (lastDocument == null) {
+      querySnapshot = await firestore
+          .collection(widget.postType)
+          .orderBy('title')
+          .limit(documentLimit)
+          .getDocuments()
+          .then((snapshot) {
+        setState(() {
+          posts.addAll(snapshot.documents);
+          lastDocument = posts.last;
+        });
+        print("First time fetch");
+        if (snapshot.documents.length < documentLimit) {
+          setState(() {
+            hasMore = false;
           });
-        } else {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
         }
-      },
-    );
+      }).catchError((e) {
+        print(e);
+      });
+    } else {
+      querySnapshot = await firestore
+          .collection(widget.postType)
+          .orderBy('title')
+          .startAtDocument(lastDocument)
+          .limit(documentLimit)
+          .getDocuments()
+          .then((snapshot) {
+        setState(() {
+          posts.addAll(snapshot.documents);
+          lastDocument = posts.last;
+        });
+        print("nth time fetch");
+        if (snapshot.documents.length < documentLimit) {
+          setState(() {
+            hasMore = false;
+          });
+        }
+      }).catchError((e) {
+        print(e);
+      });
+    }
+
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  listScrollListener() {
+    double maxScroll = _scrollController.position.maxScrollExtent;
+    double currentScroll = _scrollController.position.pixels;
+    double delta = MediaQuery.of(context).size.height * 0.20;
+    if (maxScroll - currentScroll <= delta) {
+      getPosts();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (widget.postType == "blogs") {
-      return _buildBlogPosts();
-    } else if (widget.postType == "news") {
-      return _buildNewsPosts();
-    } else if (widget.postType == "events") {
-      return _buildEventPosts();
-    }
+    return Container(
+      child: isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : ListView.builder(
+              controller: _scrollController,
+              itemCount: posts.length,
+              itemBuilder: (context, index) {
+                return (index == posts.length - 1)
+                    ? !hasMore
+                        ? SizedBox()
+                        : Center(child: CircularProgressIndicator())
+                    : PostCard(
+                        title: posts[index].data['title'],
+                        subtitle: posts[index].data['subtitle'],
+                        body: posts[index].data['body'],
+                        image: posts[index].data['imageUrl'],
+                        likes: posts[index].data['likes'].toString(),
+                        views: posts[index].data['views'].toString(),
+                      );
+              },
+            ),
+    );
   }
 }

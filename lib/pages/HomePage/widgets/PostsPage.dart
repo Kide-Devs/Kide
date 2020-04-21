@@ -21,6 +21,7 @@ class _PostsPageState extends State<PostsPage> {
 
   @override
   void initState() {
+    print("Inside initState()");
     getPosts();
     _scrollController.addListener(listScrollListener);
     super.initState();
@@ -100,6 +101,7 @@ class _PostsPageState extends State<PostsPage> {
 
   @override
   Widget build(BuildContext context) {
+    print("Inside build()");
     return Container(
       child: isLoading
           ? Center(

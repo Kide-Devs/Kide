@@ -17,6 +17,8 @@ class PostCard extends StatefulWidget {
 
 class _PostCardState extends State<PostCard> {
 
+  
+
   @override
   Widget build(BuildContext context) {
     final deviceHeight = MediaQuery.of(context).size.height;
@@ -92,8 +94,10 @@ class _PostCardState extends State<PostCard> {
                               height: 1.25,
                               fontSize: deviceHeight * 0.03,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white
+                              color: Colors.white,
                             ),
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         )
                       ],
@@ -123,6 +127,12 @@ class _PostCardState extends State<PostCard> {
                   fontSize: deviceHeight * 0.02
                 ),
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                widget.date.toString()
+              )
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),

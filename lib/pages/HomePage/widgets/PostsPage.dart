@@ -10,7 +10,7 @@ class PostsPage extends StatefulWidget {
   _PostsPageState createState() => _PostsPageState();
 }
 
-class _PostsPageState extends State<PostsPage> {
+class _PostsPageState extends State<PostsPage> with AutomaticKeepAliveClientMixin<PostsPage> {
   List<DocumentSnapshot> posts = [];
   bool isLoading = false, isLoadingNext = false;
   bool hasMore = true;
@@ -27,7 +27,10 @@ class _PostsPageState extends State<PostsPage> {
     super.initState();
   }
 
-  getPosts() async {
+  @override
+  get wantKeepAlive => true;
+
+  Future<void> getPosts() async {
     print("Inside getPosts()");
     if (lastDocument == null) {
       setState(() {
@@ -45,7 +48,7 @@ class _PostsPageState extends State<PostsPage> {
     if (lastDocument == null) {
       querySnapshot = await firestore
           .collection(widget.postType)
-          .orderBy('title')
+          .orderBy('date')
           .limit(documentLimit)
           .getDocuments()
           .then((snapshot) {
@@ -65,7 +68,7 @@ class _PostsPageState extends State<PostsPage> {
     } else {
       querySnapshot = await firestore
           .collection(widget.postType)
-          .orderBy('title')
+          .orderBy('date')
           .startAtDocument(lastDocument)
           .limit(documentLimit)
           .getDocuments()
@@ -107,24 +110,29 @@ class _PostsPageState extends State<PostsPage> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : ListView.builder(
-              controller: _scrollController,
-              itemCount: posts.length,
-              itemBuilder: (context, index) {
-                return (index == posts.length - 1)
-                    ? !hasMore
-                        ? SizedBox()
-                        : Center(child: CircularProgressIndicator())
-                    : PostCard(
-                        title: posts[index].data['title'],
-                        subtitle: posts[index].data['subtitle'],
-                        body: posts[index].data['body'],
-                        image: posts[index].data['imageUrl'],
-                        likes: posts[index].data['likes'].toString(),
-                        views: posts[index].data['views'].toString(),
-                      );
-              },
-            ),
+          : RefreshIndicator(
+              child: ListView.builder(
+              padding: const EdgeInsets.only(top: 5),
+                controller: _scrollController,
+                itemCount: posts.length,
+                itemBuilder: (context, index) {
+                  return (index == posts.length - 1)
+                      ? !hasMore
+                          ? SizedBox()
+                          : Center(child: CircularProgressIndicator())
+                      : PostCard(
+                          title: posts[index].data['title'],
+                          subtitle: posts[index].data['subtitle'],
+                          body: posts[index].data['body'],
+                          image: posts[index].data['imageUrl'],
+                          likes: posts[index].data['likes'].toString(),
+                          views: posts[index].data['views'].toString(),
+                          date: posts[index].data['date'].toString(),
+                        );
+                },
+              ),
+              onRefresh: getPosts,
+          ),
     );
   }
 }

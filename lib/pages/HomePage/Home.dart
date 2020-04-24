@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin<HomePage> {
   ScrollController _scrollController;
   TabController _tabController;
   @override
@@ -26,6 +26,9 @@ class _HomePageState extends State<HomePage>
             ? Brightness.light
             : Brightness.dark);
   }
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {

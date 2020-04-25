@@ -94,10 +94,8 @@ class _PostsPageState extends State<PostsPage> with AutomaticKeepAliveClientMixi
   }
 
   listScrollListener() {
-    double maxScroll = _scrollController.position.maxScrollExtent;
-    double currentScroll = _scrollController.position.pixels;
-    double delta = MediaQuery.of(context).size.height * 0.20;
-    if (maxScroll - currentScroll <= delta) {
+    if (_scrollController.offset >= _scrollController.position.maxScrollExtent && !_scrollController.position.outOfRange) {
+      print("At the end of list");
       getPosts();
     }
   }

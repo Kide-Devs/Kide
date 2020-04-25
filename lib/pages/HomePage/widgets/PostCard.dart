@@ -17,8 +17,6 @@ class PostCard extends StatefulWidget {
 
 class _PostCardState extends State<PostCard> {
 
-  
-
   @override
   Widget build(BuildContext context) {
     final deviceHeight = MediaQuery.of(context).size.height;

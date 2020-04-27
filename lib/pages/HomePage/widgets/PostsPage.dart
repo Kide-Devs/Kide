@@ -14,7 +14,7 @@ class _PostsPageState extends State<PostsPage> with AutomaticKeepAliveClientMixi
   List<DocumentSnapshot> posts = [];
   bool isLoading = false, isLoadingNext = false;
   bool hasMore = true;
-  int documentLimit = 5;
+  int documentLimit = 6;
   DocumentSnapshot lastDocument;
   ScrollController _scrollController = ScrollController();
   Firestore firestore = Firestore.instance;
@@ -48,7 +48,7 @@ class _PostsPageState extends State<PostsPage> with AutomaticKeepAliveClientMixi
     if (lastDocument == null) {
       querySnapshot = await firestore
           .collection(widget.postType)
-          .orderBy('date')
+          .orderBy('date', descending: true)
           .limit(documentLimit)
           .getDocuments()
           .then((snapshot) {
@@ -57,7 +57,7 @@ class _PostsPageState extends State<PostsPage> with AutomaticKeepAliveClientMixi
           lastDocument = posts.last;
         });
         print("First time fetch");
-        if (snapshot.documents.length < documentLimit) {
+        if (snapshot.documents.length < documentLimit - 1) {
           setState(() {
             hasMore = false;
           });
@@ -68,7 +68,7 @@ class _PostsPageState extends State<PostsPage> with AutomaticKeepAliveClientMixi
     } else {
       querySnapshot = await firestore
           .collection(widget.postType)
-          .orderBy('date')
+          .orderBy('date', descending: true)
           .startAtDocument(lastDocument)
           .limit(documentLimit)
           .getDocuments()
@@ -78,7 +78,7 @@ class _PostsPageState extends State<PostsPage> with AutomaticKeepAliveClientMixi
           lastDocument = posts.last;
         });
         print("nth time fetch");
-        if (snapshot.documents.length < documentLimit) {
+        if (snapshot.documents.length < documentLimit - 1) {
           setState(() {
             hasMore = false;
           });
@@ -91,6 +91,10 @@ class _PostsPageState extends State<PostsPage> with AutomaticKeepAliveClientMixi
     setState(() {
       isLoading = false;
     });
+
+
+    // Other technique
+
   }
 
   listScrollListener() {

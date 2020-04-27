@@ -21,6 +21,7 @@ dependencies:
   location: ^2.3.5
   transparent_image: ^1.0.0
   dynamic_theme:
+  intl:
   
 dev_dependencies:
   flutter_launcher_icons: ^0.7.4

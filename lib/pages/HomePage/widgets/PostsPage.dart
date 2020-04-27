@@ -125,7 +125,7 @@ class _PostsPageState extends State<PostsPage> with AutomaticKeepAliveClientMixi
                           image: posts[index].data['imageUrl'],
                           likes: posts[index].data['likes'].toString(),
                           views: posts[index].data['views'].toString(),
-                          date: posts[index].data['date'].toString(),
+                          date: posts[index].data['date'],
                         );
                 },
               ),

@@ -10,7 +10,8 @@ class PostsPage extends StatefulWidget {
   _PostsPageState createState() => _PostsPageState();
 }
 
-class _PostsPageState extends State<PostsPage> with AutomaticKeepAliveClientMixin<PostsPage> {
+class _PostsPageState extends State<PostsPage>
+    with AutomaticKeepAliveClientMixin<PostsPage> {
   List<DocumentSnapshot> posts = [];
   bool isLoading = false, isLoadingNext = false;
   bool hasMore = true;
@@ -18,7 +19,7 @@ class _PostsPageState extends State<PostsPage> with AutomaticKeepAliveClientMixi
   DocumentSnapshot lastDocument;
   ScrollController _scrollController = ScrollController();
   Firestore firestore = Firestore.instance;
-
+  Firestore fire2 = Firestore.instance;
   @override
   void initState() {
     print("Inside initState()");
@@ -52,9 +53,24 @@ class _PostsPageState extends State<PostsPage> with AutomaticKeepAliveClientMixi
           .limit(documentLimit)
           .getDocuments()
           .then((snapshot) {
-        setState(() {
+        setState(() async {
           posts.addAll(snapshot.documents);
           lastDocument = posts.last;
+
+          await fire2
+              .collection(widget.postType)
+              .orderBy('date', descending: true)
+              .startAfter(snapshot.documents)
+              .limit(documentLimit)
+              .getDocuments()
+              .then((newS) {
+            if (newS.documents.isEmpty) {
+              setState(() {
+                hasMore = false;
+              });
+              return;
+            }
+          });
         });
         print("First time fetch");
         if (snapshot.documents.length < documentLimit - 1) {
@@ -72,11 +88,26 @@ class _PostsPageState extends State<PostsPage> with AutomaticKeepAliveClientMixi
           .startAtDocument(lastDocument)
           .limit(documentLimit)
           .getDocuments()
-          .then((snapshot) {
+          .then((snapshot) async {
         setState(() {
           posts.addAll(snapshot.documents);
           lastDocument = posts.last;
         });
+        await fire2
+            .collection(widget.postType)
+            .orderBy('date', descending: true)
+            .startAfter(snapshot.documents)
+            .limit(documentLimit)
+            .getDocuments()
+            .then((newS) {
+          if (newS.documents.isEmpty) {
+            setState(() {
+              hasMore = false;
+            });
+            return;
+          }
+        });
+
         print("nth time fetch");
         if (snapshot.documents.length < documentLimit - 1) {
           setState(() {
@@ -92,13 +123,13 @@ class _PostsPageState extends State<PostsPage> with AutomaticKeepAliveClientMixi
       isLoading = false;
     });
 
-
     // Other technique
-
   }
 
   listScrollListener() {
-    if (_scrollController.offset >= _scrollController.position.maxScrollExtent && !_scrollController.position.outOfRange) {
+    if (_scrollController.offset >=
+            _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange) {
       print("At the end of list");
       getPosts();
     }
@@ -114,7 +145,7 @@ class _PostsPageState extends State<PostsPage> with AutomaticKeepAliveClientMixi
             )
           : RefreshIndicator(
               child: ListView.builder(
-              padding: const EdgeInsets.only(top: 5),
+                padding: const EdgeInsets.only(top: 5),
                 controller: _scrollController,
                 itemCount: posts.length,
                 itemBuilder: (context, index) {
@@ -134,7 +165,7 @@ class _PostsPageState extends State<PostsPage> with AutomaticKeepAliveClientMixi
                 },
               ),
               onRefresh: getPosts,
-          ),
+            ),
     );
   }
 }

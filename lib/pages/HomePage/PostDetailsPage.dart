@@ -114,8 +114,8 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                           widget.body,
                           textAlign: TextAlign.justify,
                           style: TextStyle(
-                            fontSize: 18.0,
-                            height: 1.1
+                            fontSize: deviceHeight * 0.0245,
+                            height: 1.2
                           ),
                         ),
                       )

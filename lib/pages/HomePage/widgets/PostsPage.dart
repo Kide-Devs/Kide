@@ -90,6 +90,7 @@ class _PostsPageState extends State<PostsPage>
                   controller: _scrollController,
                   itemBuilder: (context, index) {
                     return PostCard(
+                        id: posts[index].data['id'],
                         title: posts[index].data['title'],
                         subtitle: posts[index].data['subtitle'],
                         image: posts[index].data['imageUrl'],

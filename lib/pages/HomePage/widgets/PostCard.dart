@@ -3,9 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart' as p;
 
 class PostCard extends StatefulWidget {
-  final String title, subtitle, image, body, id, views, likes;
+  String title, subtitle, image, body, id, views, likes;
   final date;
 
   PostCard(
@@ -23,6 +25,35 @@ class PostCard extends StatefulWidget {
 }
 
 class _PostCardState extends State<PostCard> {
+
+  bool isLiked, isSaved;
+
+  getDefaults() async {
+    final Future<Database> database = openDatabase(
+      p.join(await getDatabasesPath(), 'kide.db'),
+      onCreate: (db, version) {
+        return db.execute(
+          "CREATE TABLE likes(id TEXT)"
+        );
+      },
+      version: 1
+    );
+
+    final Database db = await database;
+    final List<Map<String, dynamic>> maps = await db.query('likes');
+
+    var map = maps.firstWhere((map) => map['id'] == widget.id);
+    setState(() {
+      isLiked = map['id'] == widget.id;
+    });
+  }
+
+  @override
+  void initState() { 
+    getDefaults();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var date = (widget.date as Timestamp).toDate();
@@ -150,7 +181,9 @@ class _PostCardState extends State<PostCard> {
               children: <Widget>[
                 IconButton(
                   icon: Icon(Icons.favorite_border),
-                  onPressed: () {},
+                  onPressed: () {
+                    
+                  },
                 ),
                 IconButton(
                   icon: Icon(Icons.bookmark_border),

@@ -12,160 +12,94 @@ class PostsPage extends StatefulWidget {
 
 class _PostsPageState extends State<PostsPage>
     with AutomaticKeepAliveClientMixin<PostsPage> {
+  Firestore firestore = Firestore.instance;
   List<DocumentSnapshot> posts = [];
-  bool isLoading = false, isLoadingNext = false;
+  bool isLoading = false;
   bool hasMore = true;
-  int documentLimit = 6;
+  int documentLimit = 5;
   DocumentSnapshot lastDocument;
   ScrollController _scrollController = ScrollController();
-  Firestore firestore = Firestore.instance;
-  Firestore fire2 = Firestore.instance;
+
   @override
   void initState() {
-    print("Inside initState()");
-    getPosts();
-    _scrollController.addListener(listScrollListener);
+    fetchPosts();
+    _scrollController.addListener(() {
+      double maxScroll = _scrollController.position.maxScrollExtent;
+      double currentScroll = _scrollController.position.pixels;
+      double delta = MediaQuery.of(context).size.height * 0.20;
+      if (maxScroll - currentScroll <= delta) {
+        fetchPosts();
+      }
+    });
     super.initState();
+  }
+
+  fetchPosts() async {
+    if (!hasMore) {
+      print("No more posts");
+      return;
+    }
+    if (isLoading) {
+      return;
+    }
+    setState(() {
+      isLoading = true;
+    });
+    QuerySnapshot querySnapshot;
+    if (lastDocument == null) {
+      querySnapshot = await firestore
+          .collection('${widget.postType}')
+          .orderBy('date')
+          .limit(documentLimit)
+          .getDocuments();
+    } else {
+      querySnapshot = await firestore
+          .collection('${widget.postType}')
+          .orderBy('date')
+          .startAfterDocument(lastDocument)
+          .limit(documentLimit)
+          .getDocuments();
+      print("Success");
+    }
+    if (querySnapshot.documents.length < documentLimit) {
+      hasMore = false;
+    }
+
+    lastDocument = querySnapshot.documents[querySnapshot.documents.length - 1];
+    posts.addAll(querySnapshot.documents);
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
   get wantKeepAlive => true;
 
-  Future<void> getPosts() async {
-    print("Inside getPosts()");
-    if (lastDocument == null) {
-      setState(() {
-        isLoading = true;
-      });
-    } else {
-      setState(() {
-        setState(() {
-          isLoadingNext = true;
-        });
-      });
-    }
-
-    QuerySnapshot querySnapshot;
-    if (lastDocument == null) {
-      querySnapshot = await firestore
-          .collection(widget.postType)
-          .orderBy('date', descending: true)
-          .limit(documentLimit)
-          .getDocuments()
-          .then((snapshot) {
-        setState(() async {
-          posts.addAll(snapshot.documents);
-          lastDocument = posts.last;
-
-          await fire2
-              .collection(widget.postType)
-              .orderBy('date', descending: true)
-              .startAfter(snapshot.documents)
-              .limit(documentLimit)
-              .getDocuments()
-              .then((newS) {
-            if (newS.documents.isEmpty) {
-              setState(() {
-                hasMore = false;
-              });
-              return;
-            }
-          });
-        });
-        print("First time fetch");
-        if (snapshot.documents.length < documentLimit - 1) {
-          setState(() {
-            hasMore = false;
-          });
-        }
-      }).catchError((e) {
-        print(e);
-      });
-    } else {
-      querySnapshot = await firestore
-          .collection(widget.postType)
-          .orderBy('date', descending: true)
-          .startAtDocument(lastDocument)
-          .limit(documentLimit)
-          .getDocuments()
-          .then((snapshot) async {
-        setState(() {
-          posts.addAll(snapshot.documents);
-          lastDocument = posts.last;
-        });
-        await fire2
-            .collection(widget.postType)
-            .orderBy('date', descending: true)
-            .startAfter(snapshot.documents)
-            .limit(documentLimit)
-            .getDocuments()
-            .then((newS) {
-          if (newS.documents.isEmpty) {
-            setState(() {
-              hasMore = false;
-            });
-            return;
-          }
-        });
-
-        print("nth time fetch");
-        if (snapshot.documents.length < documentLimit - 1) {
-          setState(() {
-            hasMore = false;
-          });
-        }
-      }).catchError((e) {
-        print(e);
-      });
-    }
-
-    setState(() {
-      isLoading = false;
-    });
-
-    // Other technique
-  }
-
-  listScrollListener() {
-    if (_scrollController.offset >=
-            _scrollController.position.maxScrollExtent &&
-        !_scrollController.position.outOfRange) {
-      print("At the end of list");
-      getPosts();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    print("Inside build()");
-    return Container(
-      child: isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : RefreshIndicator(
-              child: ListView.builder(
-                padding: const EdgeInsets.only(top: 5),
-                controller: _scrollController,
-                itemCount: posts.length,
-                itemBuilder: (context, index) {
-                  return (index == posts.length - 1)
-                      ? !hasMore
-                          ? SizedBox()
-                          : Center(child: CircularProgressIndicator())
-                      : PostCard(
-                          title: posts[index].data['title'],
-                          subtitle: posts[index].data['subtitle'],
-                          body: posts[index].data['body'],
-                          image: posts[index].data['imageUrl'],
-                          likes: posts[index].data['likes'].toString(),
-                          views: posts[index].data['views'].toString(),
-                          date: posts[index].data['date'],
-                        );
-                },
-              ),
-              onRefresh: getPosts,
-            ),
+    return Column(
+      children: <Widget>[
+        Expanded(
+          child: posts.length == 0
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : ListView.builder(
+                padding: EdgeInsets.zero,
+                  itemCount: posts.length,
+                  controller: _scrollController,
+                  itemBuilder: (context, index) {
+                    return PostCard(
+                        title: posts[index].data['title'],
+                        subtitle: posts[index].data['subtitle'],
+                        image: posts[index].data['imageUrl'],
+                        body: posts[index].data['body'],
+                        date: posts[index].data['date'],
+                        likes: posts[index].data['likes'].toString(),
+                        views: posts[index].data['views'].toString());
+                  }),
+        ),
+      ],
     );
   }
 }

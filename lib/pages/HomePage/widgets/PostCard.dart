@@ -54,7 +54,7 @@ class _PostCardState extends State<PostCard> {
                 ? Stack(
                     children: <Widget>[
                       Container(
-                        height: deviceHeight * 0.3,
+                        height: deviceHeight * 0.32,
                         width: double.infinity,
                         decoration: BoxDecoration(
                             color: Colors.transparent,
@@ -63,7 +63,7 @@ class _PostCardState extends State<PostCard> {
                                 image: NetworkImage(widget.image))),
                       ),
                       Container(
-                        height: deviceHeight * 0.3,
+                        height: deviceHeight * 0.32,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             gradient: LinearGradient(
@@ -128,8 +128,7 @@ class _PostCardState extends State<PostCard> {
               ),
             ),
             Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(formattedDate)),
+                padding: const EdgeInsets.all(8.0), child: Text(formattedDate)),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(

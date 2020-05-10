@@ -112,9 +112,10 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
                         child: Text(
                           widget.body,
+                          textAlign: TextAlign.justify,
                           style: TextStyle(
                             fontSize: 18.0,
-                            height: 1.0
+                            height: 1.1
                           ),
                         ),
                       )

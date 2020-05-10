@@ -1,12 +1,15 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 
 class PostDetailsPage extends StatefulWidget {
 
-  final String title, body, image, subtitle, date, likes, views;
+  final String title, body, image, subtitle, date, likes, views, postType, id;
 
   PostDetailsPage({
+    this.id,
+    this.postType,
     this.title,
     this.body,
     this.image,
@@ -21,6 +24,24 @@ class PostDetailsPage extends StatefulWidget {
 }
 
 class _PostDetailsPageState extends State<PostDetailsPage> {
+
+  incrementViews() {
+    Firestore firestore = Firestore.instance;
+    int views = int.parse(widget.views);
+    views++;
+
+    firestore.collection('${widget.postType}').document(widget.id).updateData({
+      'views': views
+    });
+    
+  }
+
+  @override
+  void initState() {
+    incrementViews();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final deviceHeight = MediaQuery.of(context).size.height;
@@ -83,9 +104,9 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                             Spacer(),
                             Chip(
                               backgroundColor: DynamicTheme.of(context).data.cardColor,
-                              avatar: Icon(Icons.favorite, color: Colors.blue[300],),
+                              avatar: Icon(Icons.remove_red_eye, color: Colors.blue[300],),
                               label: Text(
-                                "${widget.likes} likes",
+                                "${widget.views} views",
                                 textAlign: TextAlign.justify,
                                 style: TextStyle(
                                   color: DynamicTheme.of(context).data.textTheme.subtitle.color

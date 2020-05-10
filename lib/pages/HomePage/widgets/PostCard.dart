@@ -3,11 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as p;
 
 class PostCard extends StatefulWidget {
-  String title, subtitle, image, body, id, views, likes;
+  String title, subtitle, image, body, id, views, likes, postType;
   final date;
 
   PostCard(
@@ -18,39 +17,18 @@ class PostCard extends StatefulWidget {
       this.body,
       this.date,
       this.likes,
-      this.views});
+      this.views,
+      this.postType});
 
   @override
   _PostCardState createState() => _PostCardState();
 }
 
 class _PostCardState extends State<PostCard> {
-
   bool isLiked, isSaved;
 
-  getDefaults() async {
-    final Future<Database> database = openDatabase(
-      p.join(await getDatabasesPath(), 'kide.db'),
-      onCreate: (db, version) {
-        return db.execute(
-          "CREATE TABLE likes(id TEXT)"
-        );
-      },
-      version: 1
-    );
-
-    final Database db = await database;
-    final List<Map<String, dynamic>> maps = await db.query('likes');
-
-    var map = maps.firstWhere((map) => map['id'] == widget.id);
-    setState(() {
-      isLiked = map['id'] == widget.id;
-    });
-  }
-
   @override
-  void initState() { 
-    getDefaults();
+  void initState() {
     super.initState();
   }
 
@@ -68,6 +46,8 @@ class _PostCardState extends State<PostCard> {
               context,
               MaterialPageRoute(
                   builder: (context) => PostDetailsPage(
+                    id: widget.id,
+                        postType: widget.postType,
                         body: widget.body,
                         title: widget.title,
                         subtitle: widget.subtitle,
@@ -147,7 +127,7 @@ class _PostCardState extends State<PostCard> {
                     ),
                   ),
             SizedBox(
-              height: 6.0,
+              height: 10.0,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -155,45 +135,38 @@ class _PostCardState extends State<PostCard> {
                 widget.subtitle != null ? widget.subtitle : widget.body,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: deviceHeight * 0.02),
-              ),
-            ),
-            Padding(
-                padding: const EdgeInsets.all(8.0), child: Text(formattedDate)),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    "${widget.views.toString()} Views",
-                    style: TextStyle(color: Colors.blue[400]),
-                  ),
-                  Text(
-                    "${widget.likes.toString()} likes",
-                    style: TextStyle(color: Colors.blue[400]),
-                  ),
-                ],
+                style: TextStyle(fontSize: deviceHeight * 0.021),
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.favorite_border),
-                  onPressed: () {
-                    
-                  },
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      formattedDate,
+                      style: TextStyle(
+                          color: Colors.blue[400],
+                          fontSize: deviceHeight * 0.023),
+                    )),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        "${widget.views.toString()} Views",
+                        style: TextStyle(
+                            color: Colors.blue[400],
+                            fontSize: deviceHeight * 0.023),
+                      ),
+                    ],
+                  ),
                 ),
-                IconButton(
-                  icon: Icon(Icons.bookmark_border),
-                  onPressed: () {},
-                ),
-                IconButton(
-                  icon: Icon(Icons.share),
-                  onPressed: () {},
-                )
               ],
+            ),
+            SizedBox(
+              height: 10,
             )
           ],
         ),

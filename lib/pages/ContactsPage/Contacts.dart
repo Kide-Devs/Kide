@@ -1,4 +1,3 @@
-import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:Kide/util/data.dart';
@@ -50,7 +49,7 @@ class _ContactsPageState extends State<ContactsPage> {
     // Offset _offset = Offset(0.95, 0.55);
     ViewPort().init(context);
     return Scaffold(
-      backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
+      backgroundColor: Color.fromRGBO(18, 18, 18, 1.0),
       body : Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
@@ -59,7 +58,7 @@ class _ContactsPageState extends State<ContactsPage> {
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    HeaderWidget(EMERGENCY_CONTACTS, 12, DynamicTheme.of(context).data.textTheme.subtitle.color),
+                    HeaderWidget(EMERGENCY_CONTACTS,12,Colors.white),
                     Divider(
                       color: Colors.white,
                       endIndent: ViewPort.screenWidth*0.44,

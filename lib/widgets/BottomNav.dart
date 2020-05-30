@@ -1,4 +1,3 @@
-import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:Kide/providers/router.dart';
@@ -13,14 +12,12 @@ class BottomNav extends StatelessWidget {
     return BottomNavigationBar(
       showSelectedLabels: true,
       showUnselectedLabels: true,
-      currentIndex: _currentIndex,
-      unselectedIconTheme: IconThemeData(
-        color: DynamicTheme.of(context).data.textTheme.subtitle.color
-      ),
       selectedIconTheme: IconThemeData(
-        color: Colors.blueAccent
+        size: 36,
+        color: Color.fromRGBO(0, 112, 240, 100),
       ),
-      backgroundColor: DynamicTheme.of(context).data.backgroundColor,
+      currentIndex: _currentIndex,
+      backgroundColor: Colors.black87,
       items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.map),
@@ -28,10 +25,9 @@ class BottomNav extends StatelessWidget {
             MAPS,
             style: TextStyle(
               fontSize: 12.0,
-              color: DynamicTheme.of(context).data.textTheme.subtitle.color
             ),
           ),
-          backgroundColor: DynamicTheme.of(context).data.backgroundColor,
+          backgroundColor: Colors.black87,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.perm_contact_calendar),
@@ -39,10 +35,9 @@ class BottomNav extends StatelessWidget {
             CONTACTS,
             style: TextStyle(
               fontSize: 12.0,
-              color: DynamicTheme.of(context).data.textTheme.subtitle.color
             ),
           ),
-          backgroundColor: DynamicTheme.of(context).data.backgroundColor,
+          backgroundColor: Colors.black87,
         ),
         BottomNavigationBarItem(
           icon: AnimatedContainer(
@@ -56,10 +51,9 @@ class BottomNav extends StatelessWidget {
           title: Text(
             KIDE_CAPS,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 5.0, letterSpacing: 5, 
-              color: DynamicTheme.of(context).data.textTheme.subtitle.color),
+            style: TextStyle(fontSize: 5.0, letterSpacing: 5),
           ),
-          backgroundColor: DynamicTheme.of(context).data.backgroundColor,
+          backgroundColor: Colors.black87,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.pin_drop),
@@ -67,10 +61,9 @@ class BottomNav extends StatelessWidget {
             "For You",
             style: TextStyle(
               fontSize: 12.0,
-              color: DynamicTheme.of(context).data.textTheme.subtitle.color
             ),
           ),
-          backgroundColor: DynamicTheme.of(context).data.backgroundColor,
+          backgroundColor: Colors.black87,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.more_horiz),
@@ -78,10 +71,9 @@ class BottomNav extends StatelessWidget {
             MORE,
             style: TextStyle(
               fontSize: 12.0,
-              color: DynamicTheme.of(context).data.textTheme.subtitle.color
             ),
           ),
-          backgroundColor: DynamicTheme.of(context).data.backgroundColor,
+          backgroundColor: Colors.black87,
         ),
       ],
       onTap: (index) {

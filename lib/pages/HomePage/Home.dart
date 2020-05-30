@@ -1,215 +1,97 @@
-import 'package:Kide/pages/HomePage/models/CardDetails.dart';
-//import 'package:Kide/providers/getGameDetails.dart';
+import 'package:Kide/pages/HomePage/widgets/PostsPage.dart';
+import 'package:Kide/util/constants.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:Kide/config/Viewport.dart';
-import 'package:Kide/providers/getMarkers.dart';
-//import 'package:Kide/providers/getEvents.dart';
-import 'package:Kide/pages/HomePage/HomepageProvider.dart';
-import 'package:Kide/util/data.dart';
-import 'package:provider/provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-void main() => runApp(HomePage());
 
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  /*void getData()
-  {
-
-    cardDetails.toSet().toList();
-
-    var firestore = Firestore.instance;
-    var qn = firestore.collection("blog_post_homepage").getDocuments();
-
-    qn.then((QuerySnapshot snapshot) {
-      snapshot.documents.forEach((f)  {
-        cardDetails.add(CardDetails(heading: f.data['heading'],
-            image:  Image.network(f.data['image'].toString()),
-            cardType: f.data['card'],
-            description: f.data['subheading']));
-      });
-    });
-    if(cardDetails.length>4)
-      {
-        cardDetails.removeRange(0, 4);
-      }
-
-  }*/
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // final _getEvents = Provider.of<GetEvents>(context);
-    // if (_getEvents.eventList.length == 0) _getEvents.setEvents();
-
-    // // Get Game details
-    // final _getGameDetails = Provider.of<GetGameDetails>(context);
-    // if (_getGameDetails.gameDetails.length == 0)
-    //   _getGameDetails.setGameDetails();
-  }
-  List<CardDetails> cardDetailsnew = [];
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin<HomePage> {
+  ScrollController _scrollController;
+  TabController _tabController;
   @override
   void initState() {
+    _scrollController = ScrollController();
+    _tabController = TabController(vsync: this, length: 3);
     super.initState();
   }
 
+  _changeBrightness() {
+    DynamicTheme.of(context).setBrightness(
+        Theme.of(context).brightness == Brightness.dark
+            ? Brightness.light
+            : Brightness.dark);
+  }
 
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
-    // Markers Listner
-    final _getMarkers = Provider.of<GetMarkers>(context);
-    final _getCardDetails = Provider.of<HomePageProvider>(context);
-    //for markers
-    if (_getMarkers.suggestedMarkers.length == 0)
-      _getMarkers.setSuggestedMarkers();
-      
-    _getMarkers.markers.length == 0
-        ? _getMarkers.setMarkers()
-        : _getMarkers.setMarkerMap();
-
-    // for CardDetails
-    if (_getCardDetails.cardDetails.length == 0)
-      _getCardDetails.getData();
-    //for suggested markers
-
-    // // Events Listener
-    // final _getEvents = Provider.of<GetEvents>(context);
-
-    // // Game Details
-    // final _getGameDetails = Provider.of<GetGameDetails>(context);
-
-    ViewPort().init(context);
-
-    return _getMarkers.markers.length > 0 && _getCardDetails.cardDetails.length > 0 ?
-        RefreshIndicator(
-            child: ListView.builder(
-                itemBuilder: (BuildContext context, index) =>
-                _getCardDetails.cardDetails[index].cardType == 1
-                    ? _buildLargeCard(_getCardDetails.cardDetails[index])
-                    : _buildSmallCard(_getCardDetails.cardDetails[index]),
-                itemCount: _getCardDetails.cardDetails.length
-            ),
-            onRefresh: _getCardDetails.refreshList
-        )
-        : CircularProgressIndicator();
-    }
-
-
-  Column _buildSmallCard(CardDetails card) {
-    return Column(
-      children: <Widget>[
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  card.heading,
-                  softWrap: true,
-                  style: TextStyle(
-                    letterSpacing: 0,
-                    fontSize: 16,
-                    color: Colors.white,
-                    height: 1.3,
+    return new Scaffold(
+      backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
+      body: new NestedScrollView(
+          controller: _scrollController,
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              new SliverAppBar(
+                expandedHeight: 100,
+                actions: <Widget>[
+                  IconButton(
+                    icon: Icon(
+                      Icons.remove_red_eye,
+                      color: DynamicTheme.of(context).data.iconTheme.color,
+                    ),
+                    onPressed: _changeBrightness,
                   ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                ],
+                title: new Text(
+                  KIDE_CAPS,
+                  style: TextStyle(
+                      color: DynamicTheme.of(context)
+                          .data
+                          .textTheme
+                          .subtitle
+                          .color),
                 ),
-              ),
-            ),
-
-            Container(
-              width: 150,
-              // height: 150,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                clipBehavior: Clip.hardEdge,
-                child: Stack(
-                  children: <Widget>[
-                    Center(
-                      child: Container( 
-                        width: 50, 
-                        child: Center(child: CircularProgressIndicator()),
-                        padding: EdgeInsets.all(5),
-                      )
-                    ),
-                    Center(
-                      child: card.image
-                    ),
+                centerTitle: true,
+                backgroundColor: DynamicTheme.of(context).data.backgroundColor,
+                pinned: true,
+                floating: true,
+                forceElevated: innerBoxIsScrolled,
+                bottom: new TabBar(
+                  labelColor: DynamicTheme.of(context)
+                      .data
+                      .tabBarTheme
+                      .labelStyle
+                      .color,
+                  tabs: <Widget>[
+                    new Tab(text: "News"),
+                    new Tab(text: "Blogs"),
+                    new Tab(text: "Events"),
                   ],
+                  controller: _tabController,
                 ),
               ),
+            ];
+          },
+          body: new TabBarView(
+            controller: _tabController, children: <Widget>[
+            new PostsPage(postType: "news"),
+            new PostsPage(
+              postType: "blogs",
             ),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Divider(
-            color: Colors.white38,
-            thickness: 2,
-          ),
-        )
-      ],
-    );
-  }
-
-  Column _buildLargeCard(CardDetails card) {
-    return Column(
-      children: <Widget>[
-        Card(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8.0))),
-          clipBehavior: Clip.hardEdge,
-          child: Stack(
-            children: <Widget>[
-              Center(
-                child: Container( 
-                  height: 50, 
-                  width:100, 
-                  child: Center(child: CircularProgressIndicator()),
-                  padding: EdgeInsets.all(5),
-                )
-              ),
-              Center(
-                child: card.image
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            card.heading,
-            style: TextStyle(
-              letterSpacing: 2,
-              fontSize: 20,
-              color: Colors.white,
-              height: 1.3,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            card.description,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.white60,
-              // height: 0.3,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Divider(
-            color: Colors.white38,
-            thickness: 2,
-          ),
-        )
-      ],
+            new PostsPage(
+              postType: "events_home",
+            )
+          ])),
     );
   }
 }

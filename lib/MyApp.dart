@@ -1,7 +1,7 @@
 import 'package:Kide/pages/ForYou/ForYou.dart';
+import 'package:Kide/pages/HomePage/HomepageProvider.dart';
 import 'package:Kide/providers/getGameDetails.dart';
 import 'package:Kide/widgets/HeaderWidget.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:Kide/pages/ContactsPage/ContactList.dart';
 import 'package:Kide/pages/EventsPage/BookmarksPage.dart';
@@ -35,11 +35,11 @@ class MyApp extends StatelessWidget {
         // ChangeNotifierProvider( create: (context) => GetEvents()),
         ChangeNotifierProvider( create: (context) => GetMarkers()),
         ChangeNotifierProvider( create: (context) => GetGameDetails()),
-        //ChangeNotifierProvider( create: (context) => HomePageProvider()),
+        ChangeNotifierProvider( create: (context) => HomePageProvider()),
       ],
       child: MaterialApp(
         title: KIDE_L_CAPS,
-        theme: DynamicTheme.of(context).data.brightness == Brightness.dark ? ThemeData.dark() : ThemeData.light(),
+        theme: ThemeData.dark(),
         home: MyHomePage(title: KIDE_CAPS),
         routes: {
           // SubEvents.routeName: (context) => SubEvents(),
@@ -112,20 +112,18 @@ class _MyHomePageState extends State<MyHomePage> {
     final indexState = Provider.of<Router>(context);
     
     return Scaffold(
-      appBar: indexState.bottomNavIndex != 0 && indexState.bottomNavIndex != 2 ? AppBar(
-        backgroundColor: DynamicTheme.of(context).data.backgroundColor,
+      appBar: indexState.bottomNavIndex != 0 ? AppBar(
         title: Center(
           child: Text(
             _tabNames[indexState.bottomNavIndex],
             textAlign: TextAlign.center,
             style: TextStyle(
               fontFamily: 'Roboto',
-              color: DynamicTheme.of(context).data.textTheme.subtitle.color
             ),
           )
         ),
       ): null,
-      backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
+      backgroundColor: Color.fromRGBO(18, 18, 18, 1.0),
       body: _tabs[indexState.bottomNavIndex],
       bottomNavigationBar: BottomNav(),
     );

@@ -1,5 +1,4 @@
 import 'package:Kide/pages/ForYou/widgets/MustSeeWidget.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:Kide/config/Viewport.dart';
 // import 'package:Kide/providers/getEvents.dart';
@@ -14,7 +13,7 @@ class ForYouPage extends StatelessWidget {
   Widget build(BuildContext context) {
     ViewPort().init(context);
     return Scaffold(
-      backgroundColor: DynamicTheme.of(context).data.backgroundColor,
+      backgroundColor: Color.fromRGBO(18, 18, 18, 1.0),
       body: ListView(
         children: <Widget>[
           Padding(
@@ -29,7 +28,6 @@ class ForYouPage extends StatelessWidget {
                         "MUST SEE PLACES",
                         style: TextStyle(
                           fontSize: 20,
-                          color: DynamicTheme.of(context).data.textTheme.subtitle.color,
                           fontWeight: FontWeight.w600,
                           letterSpacing: ViewPort.screenWidth * 0.01),
                         )
@@ -39,7 +37,6 @@ class ForYouPage extends StatelessWidget {
                         "IN KIIT CAMPUS",
                         style: TextStyle(
                           fontSize: 10,
-                          color: DynamicTheme.of(context).data.textTheme.subtitle.color,
                           fontWeight: FontWeight.w600,
                           letterSpacing: ViewPort.screenWidth * 0.02),
                         )

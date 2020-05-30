@@ -1,4 +1,4 @@
-// import 'package:Kide/pages/HomePage/models/CardDetails.dart';
+import 'package:Kide/pages/HomePage/models/CardDetails.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:Kide/models/Contact.dart';
 import 'package:Kide/models/EmergencyContact.dart';
@@ -34,11 +34,11 @@ class KheloIndia {
 
 
 int i;
-// List<CardDetails> cardDetails = [];
+List<CardDetails> cardDetails = [];
 
 void del()
 {
-  // cardDetails.clear();
+  cardDetails.clear();
 }
 
 

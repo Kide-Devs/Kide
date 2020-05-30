@@ -23,7 +23,7 @@ class MustSeeWidget extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(8.0)
             ),
           ),
-          //clipBehavior: Clip.hardEdge,
+          clipBehavior: Clip.hardEdge,
           child: Image.network(
             src, 
             fit: BoxFit.cover,
@@ -33,8 +33,8 @@ class MustSeeWidget extends StatelessWidget {
         ),
         InkWell(
           child: Container(
-            width: ViewPort.screenWidth * 0.44,
-            height: 205.0,
+            width: ViewPort.screenWidth * 0.45,
+            height: 210.0,
             decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.64),
                 borderRadius: BorderRadius.circular(8.0)),

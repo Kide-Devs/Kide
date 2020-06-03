@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     var _duration = new Duration(seconds: 2);
 
-     if (firstTime != null && !firstTime) {
+    if (firstTime != null && !firstTime) {
       // Not first time
       return new Timer(_duration, navigationMyApp);
     } else {
@@ -44,6 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
     setState(() => _opacity = op == 0.5 ? 1.0 : 1.0);
     return _opacity;
   }
+
   @override
   void initState() {
     super.initState();
@@ -73,16 +74,20 @@ class _SplashScreenState extends State<SplashScreen> {
                       curve: Curves.easeInOut,
                       width: size.width / (4 * _opacityAnimator(_opacity)),
                       height: size.height / (4.0 * _opacityAnimator(_opacity)),
-                      child: Image.asset(MAIN_KIDE_LOGO,
+                      child: Image.asset(
+                        MAIN_KIDE_LOGO,
                         gaplessPlayback: true,
-                        fit: BoxFit.contain),
-                    )
+                        fit: BoxFit.contain,
+                      ),
+                    ),
                   ),
                 ),
               ),
             ],
           ),
-          Container(height: 20,),
+          Container(
+            height: 20,
+          ),
           AnimatedOpacity(
             opacity: 0.8,
             duration: Duration(milliseconds: 4500),
@@ -91,13 +96,17 @@ class _SplashScreenState extends State<SplashScreen> {
               KIDE_CAPS,
               style: TextStyle(
                 fontSize: 20.0,
+                fontFamily: "Michroma",
                 color: DynamicTheme.of(context).data.textTheme.subtitle.color,
-                letterSpacing: 25.0,
+                letterSpacing: 20.0,
               ),
             ),
           ),
           Container(height: 20),
-          CircularProgressIndicator(),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.3,
+            child: LinearProgressIndicator(),
+          ),
         ],
       ),
     );

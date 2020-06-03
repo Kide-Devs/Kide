@@ -46,19 +46,21 @@ class _PostCardState extends State<PostCard> {
       child: InkWell(
         onTap: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => PostDetailsPage(
-                        id: widget.id,
-                        postType: widget.postType,
-                        body: widget.body,
-                        title: widget.title,
-                        subtitle: widget.subtitle,
-                        date: formattedDate.toString(),
-                        image: widget.image,
-                        likes: widget.likes,
-                        views: widget.views,
-                      )));
+            context,
+            MaterialPageRoute(
+              builder: (context) => PostDetailsPage(
+                id: widget.id,
+                postType: widget.postType,
+                body: widget.body,
+                title: widget.title,
+                subtitle: widget.subtitle,
+                date: formattedDate.toString(),
+                image: widget.image,
+                likes: widget.likes,
+                views: widget.views,
+              ),
+            ),
+          );
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +70,8 @@ class _PostCardState extends State<PostCard> {
                 ? Stack(
                     children: <Widget>[
                       Hero(
-                        tag: widget.image,  // Any tag that needs to be unique like URL of image.
+                        tag: widget.image,
+                        // Any tag that needs to be unique like URL of image.
                         child: Container(
                           height: deviceHeight * 0.32,
                           width: double.infinity,
@@ -107,43 +110,43 @@ class _PostCardState extends State<PostCard> {
                       Container(
                         height: deviceHeight * 0.32,
                         decoration: BoxDecoration(
-                            color: Colors.white,
-                            gradient: LinearGradient(
-                                begin: FractionalOffset.bottomCenter,
-                                end: FractionalOffset.center,
-                                colors: [
-                                  Colors.black.withOpacity(0.55),
-                                  Colors.black.withOpacity(0.15)
-                                ],
-                                stops: [
-                                  0.5,
-                                  3
-                                ])),
+                          color: Colors.white,
+                          gradient: LinearGradient(
+                            begin: FractionalOffset.bottomCenter,
+                            end: FractionalOffset.center,
+                            colors: [
+                              Colors.black.withOpacity(0.55),
+                              Colors.black.withOpacity(0.15)
+                            ],
+                            stops: [0.5, 3],
+                          ),
+                        ),
                         alignment: Alignment.bottomCenter,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             Padding(
                               padding: EdgeInsets.only(
-                                  top: deviceHeight * 0.125,
-                                  left: 8.0,
-                                  right: 8.0,
-                                  bottom: 3),
+                                top: deviceHeight * 0.125,
+                                left: 8.0,
+                                right: 8.0,
+                                bottom: 3,
+                              ),
                               child: Text(
                                 widget.title,
                                 style: TextStyle(
-                                  height: 1.25,
-                                  fontSize: deviceHeight * 0.03,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: deviceHeight * 0.026,
+                                  fontFamily: "Quicksand",
+                                  fontWeight: FontWeight.w700,
                                   color: Colors.white,
                                 ),
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                            )
+                            ),
                           ],
                         ),
-                      )
+                      ),
                     ],
                   )
                 : Padding(
@@ -152,9 +155,11 @@ class _PostCardState extends State<PostCard> {
                     child: Text(
                       widget.title,
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: deviceHeight * 0.023,
-                          color: Colors.black),
+                        fontFamily: "Quicksand",
+                        fontWeight: FontWeight.bold,
+                        fontSize: deviceHeight * 0.023,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
             SizedBox(
@@ -166,20 +171,26 @@ class _PostCardState extends State<PostCard> {
                 widget.subtitle != null ? widget.subtitle : widget.body,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: deviceHeight * 0.021),
+                style: TextStyle(
+                  fontFamily: "Quicksand",
+                  fontWeight: FontWeight.w500,
+                  fontSize: deviceHeight * 0.021,
+                ),
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      formattedDate,
-                      style: TextStyle(
-                          color: Colors.blue[400],
-                          fontSize: deviceHeight * 0.023),
-                    )),
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    formattedDate,
+                    style: TextStyle(
+                      color: Colors.lightBlueAccent.shade100,
+                      fontSize: deviceHeight * 0.023,
+                    ),
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -188,8 +199,9 @@ class _PostCardState extends State<PostCard> {
                       Text(
                         "${widget.views.toString()} Views",
                         style: TextStyle(
-                            color: Colors.blue[400],
-                            fontSize: deviceHeight * 0.023),
+                          color: Colors.lightBlueAccent.shade100,
+                          fontSize: deviceHeight * 0.023,
+                        ),
                       ),
                     ],
                   ),

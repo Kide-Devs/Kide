@@ -47,7 +47,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
     final deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blue[500],
+        backgroundColor: Theme.of(context).iconTheme.color,
         child: Icon(Icons.share),
         onPressed: () {
           // TODO : SHARE
@@ -56,7 +56,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            backgroundColor: Theme.of(context).backgroundColor,
+            backgroundColor: Colors.grey.shade700,
             elevation: 0,
             centerTitle: true,
             leading: Padding(
@@ -119,84 +119,91 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
             ),
           ),
           SliverList(
-            delegate: SliverChildBuilderDelegate((context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Chip(
-                            backgroundColor:
-                                DynamicTheme.of(context).data.cardColor,
-                            avatar: Icon(
-                              Icons.access_time,
-                              color: Colors.blue[300],
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Chip(
+                              backgroundColor:
+                                  DynamicTheme.of(context).data.cardColor,
+                              avatar: Icon(
+                                Icons.access_time,
+                                color: Colors.lightBlueAccent.shade100,
+                              ),
+                              label: Text(
+                                widget.date,
+                                style: TextStyle(
+                                    color: DynamicTheme.of(context)
+                                        .data
+                                        .textTheme
+                                        .subtitle
+                                        .color),
+                              ),
                             ),
-                            label: Text(
-                              widget.date,
-                              style: TextStyle(
-                                  color: DynamicTheme.of(context)
-                                      .data
-                                      .textTheme
-                                      .subtitle
-                                      .color),
-                            ),
-                          ),
-                          Spacer(),
-                          Chip(
-                            backgroundColor:
-                                DynamicTheme.of(context).data.cardColor,
-                            avatar: Icon(
-                              Icons.remove_red_eye,
-                              color: Colors.blue[300],
-                            ),
-                            label: Text(
-                              "${widget.views} views",
-                              textAlign: TextAlign.justify,
-                              style: TextStyle(
-                                  color: DynamicTheme.of(context)
-                                      .data
-                                      .textTheme
-                                      .subtitle
-                                      .color),
-                            ),
-                          )
-                        ],
+                            Spacer(),
+                            Chip(
+                              backgroundColor:
+                                  DynamicTheme.of(context).data.cardColor,
+                              avatar: Icon(
+                                Icons.remove_red_eye,
+                                color: Colors.lightBlueAccent.shade100,
+                              ),
+                              label: Text(
+                                "${widget.views} views",
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                    color: DynamicTheme.of(context)
+                                        .data
+                                        .textTheme
+                                        .subtitle
+                                        .color),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        widget.title,
-                        style: TextStyle(
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          widget.title,
+                          style: TextStyle(
                             fontSize: 25.0,
-                            color: Colors.blue[700],
-                            fontWeight: FontWeight.bold,
-                            height: 1.2),
+                            fontFamily: "PlayfairDisplay",
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 10),
-                      child: Text(
-                        widget.body,
-                        textAlign: TextAlign.justify,
-                        style: TextStyle(
-                            fontSize: deviceHeight * 0.0245, height: 1.2),
-                      ),
-                    )
-                  ],
-                ),
-              );
-            }, childCount: 1),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0,
+                          vertical: 10,
+                        ),
+                        child: Text(
+                          widget.body,
+                          textAlign: TextAlign.justify,
+                          style: TextStyle(
+                            fontSize: deviceHeight * 0.0245,
+                            fontFamily: "Quicksand",
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              },
+              childCount: 1,
+            ),
           ),
         ],
       ),

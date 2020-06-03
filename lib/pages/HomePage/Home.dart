@@ -1,6 +1,7 @@
 import 'package:Kide/pages/HomePage/widgets/PostsPage.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -10,9 +11,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin<HomePage> {
+    with
+        SingleTickerProviderStateMixin,
+        AutomaticKeepAliveClientMixin<HomePage> {
   ScrollController _scrollController;
   TabController _tabController;
+
   @override
   void initState() {
     _scrollController = ScrollController();
@@ -55,11 +59,12 @@ class _HomePageState extends State<HomePage>
                 title: new Text(
                   KIDE_CAPS,
                   style: TextStyle(
-                      color: DynamicTheme.of(context)
-                          .data
-                          .textTheme
-                          .subtitle
-                          .color),
+                    color:
+                        DynamicTheme.of(context).data.textTheme.subtitle1.color,
+                    fontFamily: "Michroma",
+                    fontWeight: FontWeight.w300,
+                    fontSize: 25,
+                  ),
                 ),
                 centerTitle: true,
                 backgroundColor: DynamicTheme.of(context).data.backgroundColor,
@@ -72,6 +77,11 @@ class _HomePageState extends State<HomePage>
                       .tabBarTheme
                       .labelStyle
                       .color,
+                  labelStyle: TextStyle(
+                    fontFamily: "Quicksand",
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16
+                  ),
                   tabs: <Widget>[
                     new Tab(text: "News"),
                     new Tab(text: "Blogs"),
@@ -82,8 +92,7 @@ class _HomePageState extends State<HomePage>
               ),
             ];
           },
-          body: new TabBarView(
-            controller: _tabController, children: <Widget>[
+          body: new TabBarView(controller: _tabController, children: <Widget>[
             new PostsPage(postType: "news"),
             new PostsPage(
               postType: "blogs",

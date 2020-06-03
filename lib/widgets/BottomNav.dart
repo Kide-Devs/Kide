@@ -53,12 +53,7 @@ class BottomNav extends StatelessWidget {
               height: _currentIndex == 2 ? 34 : 28,
             ),
           ),
-          title: Text(
-            KIDE_CAPS,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 5.0, letterSpacing: 5, 
-              color: DynamicTheme.of(context).data.textTheme.subtitle.color),
-          ),
+          title: Container(),
           backgroundColor: DynamicTheme.of(context).data.backgroundColor,
         ),
         BottomNavigationBarItem(

@@ -1,6 +1,9 @@
 import 'package:Kide/pages/HomePage/PostDetailsPage.dart';
+import 'package:Kide/util/constants.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:path/path.dart' as p;
@@ -46,7 +49,7 @@ class _PostCardState extends State<PostCard> {
               context,
               MaterialPageRoute(
                   builder: (context) => PostDetailsPage(
-                    id: widget.id,
+                        id: widget.id,
                         postType: widget.postType,
                         body: widget.body,
                         title: widget.title,
@@ -64,14 +67,42 @@ class _PostCardState extends State<PostCard> {
             widget.image != null
                 ? Stack(
                     children: <Widget>[
-                      Container(
-                        height: deviceHeight * 0.32,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: NetworkImage(widget.image))),
+                      Hero(
+                        tag: widget.image,  // Any tag that needs to be unique like URL of image.
+                        child: Container(
+                          height: deviceHeight * 0.32,
+                          width: double.infinity,
+                          child: CachedNetworkImage(
+                            imageUrl: widget.image,
+                            fit: BoxFit.fill,
+                            placeholder: (context, url) => Stack(
+                              alignment: Alignment.center,
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 40),
+                                  child: Image.asset(
+                                    POSTCARD_IMAGE_PLACEHOLDER_ASSET_PNG,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: deviceHeight * 0.32,
+                                  width: double.infinity,
+                                  child: LinearProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation(
+                                      Colors.grey.withOpacity(0.5),
+                                    ),
+                                    backgroundColor: Colors.transparent,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            errorWidget: (context, url, error) => SizedBox(
+                              child: Icon(Icons.warning),
+                              width: 90,
+                              height: 90,
+                            ),
+                          ),
+                        ),
                       ),
                       Container(
                         height: deviceHeight * 0.32,

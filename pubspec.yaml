@@ -20,6 +20,7 @@ dependencies:
   connectivity: ^0.4.6+2
   location: ^2.3.5
   transparent_image: ^1.0.0
+  cached_network_image:
   dynamic_theme:
   intl:
   sqflite:
@@ -49,3 +50,4 @@ flutter:
    - ./lib/assets/KIIT.jpg
    - ./lib/assets/KISS.png #
    - ./lib/assets/Founder_sir.jpeg #
+   - ./lib/assets/image-placeholder.png

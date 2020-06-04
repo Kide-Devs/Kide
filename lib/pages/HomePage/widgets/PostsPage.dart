@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PostsPage extends StatefulWidget {
   final String postType;
+
   PostsPage({this.postType});
 
   @override
@@ -49,24 +50,30 @@ class _PostsPageState extends State<PostsPage>
     if (lastDocument == null) {
       querySnapshot = await firestore
           .collection('${widget.postType}')
-          .orderBy('date')
+          .orderBy('timestamp', descending: true)
           .limit(documentLimit)
           .getDocuments();
     } else {
       querySnapshot = await firestore
           .collection('${widget.postType}')
-          .orderBy('date')
-          .startAfterDocument(lastDocument)
+          .orderBy('timestamp', descending: true)
+          .endAtDocument(lastDocument)
           .limit(documentLimit)
           .getDocuments();
+
       print("Success");
     }
     if (querySnapshot.documents.length < documentLimit) {
       hasMore = false;
     }
 
-    lastDocument = querySnapshot.documents[querySnapshot.documents.length - 1];
-    posts.addAll(querySnapshot.documents);
+    lastDocument = querySnapshot.documents[0];
+    
+    if (lastDocument == null) {
+      posts.addAll(querySnapshot.documents);
+    } else {
+      posts.insertAll(0, querySnapshot.documents);
+    }
     setState(() {
       isLoading = false;
     });
@@ -80,28 +87,31 @@ class _PostsPageState extends State<PostsPage>
     return Column(
       children: <Widget>[
         Expanded(
-            child: posts.length == 0
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : RefreshIndicator(
-                    child: ListView.builder(
-                        padding: EdgeInsets.zero,
-                        itemCount: posts.length,
-                        controller: _scrollController,
-                        itemBuilder: (context, index) {
-                          return PostCard(
-                              postType: widget.postType,
-                              id: posts[index].data['id'],
-                              title: posts[index].data['title'],
-                              subtitle: posts[index].data['subtitle'],
-                              image: posts[index].data['imageUrl'],
-                              body: posts[index].data['body'],
-                              date: posts[index].data['date'],
-                              likes: posts[index].data['likes'].toString(),
-                              views: posts[index].data['views'].toString());
-                        }),
-                    onRefresh: fetchPosts)),
+          child: posts.length == 0
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : RefreshIndicator(
+                  child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: posts.length,
+                      controller: _scrollController,
+                      itemBuilder: (context, index) {
+                        return PostCard(
+                          postType: widget.postType,
+                          id: posts[index].data['id'],
+                          title: posts[index].data['title'],
+                          subtitle: posts[index].data['subtitle'],
+                          image: posts[index].data['imageUrl'],
+                          body: posts[index].data['body'],
+                          date: posts[index].data['date'],
+                          likes: posts[index].data['likes'].toString(),
+                          views: posts[index].data['views'].toString(),
+                        );
+                      }),
+                  onRefresh: fetchPosts,
+                ),
+        ),
       ],
     );
   }

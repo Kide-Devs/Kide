@@ -201,7 +201,8 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                             fontFamily: "Quicksand",
                           ),
                         ),
-                      )
+                      ),
+                      SizedBox(height: 70),
                     ],
                   ),
                 );

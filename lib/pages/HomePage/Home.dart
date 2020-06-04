@@ -39,69 +39,65 @@ class _HomePageState extends State<HomePage>
     return new Scaffold(
       backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
       body: new NestedScrollView(
-          controller: _scrollController,
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              new SliverAppBar(
-                expandedHeight: 100,
-                actions: <Widget>[
-                  IconButton(
-                    icon: Icon(
-                      Icons.remove_red_eye,
-                      color: DynamicTheme.of(context).data.iconTheme.color,
-                    ),
-                    onPressed: _changeBrightness,
+        controller: _scrollController,
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            new SliverAppBar(
+              expandedHeight: 100,
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(
+                    Icons.remove_red_eye,
+                    color: DynamicTheme.of(context).data.iconTheme.color,
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                ],
-                title: new Text(
-                  KIDE_CAPS,
-                  style: TextStyle(
-                    color:
-                        DynamicTheme.of(context).data.textTheme.subtitle1.color,
-                    fontFamily: "Michroma",
-                    fontWeight: FontWeight.w300,
-                    fontSize: 25,
-                  ),
+                  onPressed: _changeBrightness,
                 ),
-                centerTitle: true,
-                backgroundColor: DynamicTheme.of(context).data.backgroundColor,
-                pinned: true,
-                floating: true,
-                forceElevated: innerBoxIsScrolled,
-                bottom: new TabBar(
-                  indicatorColor: DynamicTheme.of(context).data.indicatorColor,
-                  labelColor: DynamicTheme.of(context)
-                      .data
-                      .tabBarTheme
-                      .labelStyle
-                      .color,
-                  labelStyle: TextStyle(
-                    fontFamily: "Quicksand",
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16
-                  ),
-                  tabs: <Widget>[
-                    new Tab(text: "News"),
-                    new Tab(text: "Blogs"),
-                    new Tab(text: "Events"),
-                  ],
-                  controller: _tabController,
+                SizedBox(
+                  width: 10,
+                ),
+              ],
+              title: new Text(
+                KIDE_CAPS,
+                style: TextStyle(
+                  color:
+                      DynamicTheme.of(context).data.textTheme.subtitle1.color,
+                  fontFamily: "Michroma",
+                  fontWeight: FontWeight.w300,
+                  fontSize: 25,
                 ),
               ),
-            ];
-          },
-          body: new TabBarView(controller: _tabController, children: <Widget>[
-            new PostsPage(postType: "news"),
-            new PostsPage(
-              postType: "blogs",
+              centerTitle: true,
+              backgroundColor: DynamicTheme.of(context).data.backgroundColor,
+              pinned: true,
+              floating: true,
+              forceElevated: innerBoxIsScrolled,
+              bottom: new TabBar(
+                indicatorColor: DynamicTheme.of(context).data.indicatorColor,
+                labelColor:
+                    DynamicTheme.of(context).data.tabBarTheme.labelStyle.color,
+                labelStyle: TextStyle(
+                    fontFamily: "Quicksand",
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16),
+                tabs: <Widget>[
+                  new Tab(text: "News"),
+                  new Tab(text: "Blogs"),
+                  new Tab(text: "Events"),
+                ],
+                controller: _tabController,
+              ),
             ),
-            new PostsPage(
-              postType: "events_home",
-            )
-          ])),
+          ];
+        },
+        body: new TabBarView(
+          controller: _tabController,
+          children: <Widget>[
+            new PostsPage(postType: "news"),
+            new PostsPage(postType: "blogs"),
+            new PostsPage(postType: "events_home")
+          ],
+        ),
+      ),
     );
   }
 }

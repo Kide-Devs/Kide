@@ -133,7 +133,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                           children: <Widget>[
                             Chip(
                               backgroundColor:
-                                  DynamicTheme.of(context).data.cardColor,
+                                  DynamicTheme.of(context).data.backgroundColor,
                               avatar: Icon(
                                 Icons.access_time,
                                 color: Colors.lightBlueAccent.shade100,
@@ -151,7 +151,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                             Spacer(),
                             Chip(
                               backgroundColor:
-                                  DynamicTheme.of(context).data.cardColor,
+                                  DynamicTheme.of(context).data.backgroundColor,
                               avatar: Icon(
                                 Icons.remove_red_eye,
                                 color: Colors.lightBlueAccent.shade100,

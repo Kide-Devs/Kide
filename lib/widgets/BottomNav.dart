@@ -18,7 +18,7 @@ class BottomNav extends StatelessWidget {
         color: DynamicTheme.of(context).data.textTheme.subtitle.color
       ),
       selectedIconTheme: IconThemeData(
-        color: Colors.blueAccent
+        color: Colors.blueAccent.shade100
       ),
       backgroundColor: DynamicTheme.of(context).data.backgroundColor,
       items: [
@@ -34,7 +34,7 @@ class BottomNav extends StatelessWidget {
           backgroundColor: DynamicTheme.of(context).data.backgroundColor,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.perm_contact_calendar),
+          icon: Icon(Icons.contacts),
           title: Text(
             CONTACTS,
             style: TextStyle(

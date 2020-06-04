@@ -19,7 +19,7 @@ void main() {
             title: TextStyle(color: Colors.white70),
             subtitle: TextStyle(color: Color.fromARGB(255, 187, 187, 187)),
           ),
-          cardColor: Color.fromARGB(255, 43, 43, 43),
+          cardColor: Color.fromARGB(255, 93, 93, 93),
         );
       } else {
         return ThemeData(
@@ -32,6 +32,7 @@ void main() {
             title: TextStyle(color: Colors.white),
             subtitle: TextStyle(color: Colors.black),
           ),
+          cardColor: Color.fromARGB(255, 200, 200, 220),
         );
       }
     },

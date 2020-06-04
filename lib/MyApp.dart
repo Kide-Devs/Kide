@@ -119,10 +119,12 @@ class _MyHomePageState extends State<MyHomePage> {
             _tabNames[indexState.bottomNavIndex],
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontFamily: 'Roboto',
+              fontFamily: 'EncodeSans',
+              fontWeight: FontWeight.w600,
+              letterSpacing: 2,
               color: DynamicTheme.of(context).data.textTheme.subtitle.color
             ),
-          )
+          ),
         ),
       ): null,
       backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,

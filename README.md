@@ -27,7 +27,7 @@ A personalized KIIT guide.
 
   - #### Schema
   
-        - String id, String name, String date, String time, String description, String location, bool isBookmarked, String link_details, String link_register
+        - String id, String name, String date, String time, Number timestamp, String description, String location, bool isBookmarked, String link_details, String link_register
 
 ### Developers
 

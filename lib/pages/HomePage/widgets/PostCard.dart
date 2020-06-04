@@ -42,7 +42,7 @@ class _PostCardState extends State<PostCard> {
     final deviceHeight = MediaQuery.of(context).size.height;
     return Container(
       margin: EdgeInsets.only(left: 10, right: 10, top: 10),
-      color: DynamicTheme.of(context).data.backgroundColor,
+      color: DynamicTheme.of(context).data.scaffoldBackgroundColor,
       //elevation: 3,
       child: InkWell(
         onTap: () {
@@ -190,7 +190,7 @@ class _PostCardState extends State<PostCard> {
                   child: Text(
                     formattedDate,
                     style: TextStyle(
-                      color: Colors.lightBlueAccent.shade100,
+                      color: DynamicTheme.of(context).data.indicatorColor,
                       fontSize: deviceHeight * 0.023,
                     ),
                   ),
@@ -203,7 +203,7 @@ class _PostCardState extends State<PostCard> {
                       Text(
                         "${widget.views.toString()} Views",
                         style: TextStyle(
-                          color: Colors.lightBlueAccent.shade100,
+                          color: DynamicTheme.of(context).data.indicatorColor,
                           fontSize: deviceHeight * 0.023,
                         ),
                       ),

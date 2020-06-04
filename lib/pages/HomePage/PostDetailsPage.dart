@@ -132,41 +132,45 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Chip(
-                              backgroundColor:
-                                  DynamicTheme.of(context).data.backgroundColor,
+                              backgroundColor: DynamicTheme.of(context)
+                                  .data
+                                  .scaffoldBackgroundColor,
                               avatar: Icon(
                                 Icons.access_time,
-                                color: Colors.lightBlueAccent.shade100,
+                                color: DynamicTheme.of(context)
+                                    .data
+                                    .indicatorColor,
                               ),
                               label: Text(
                                 widget.date,
                                 style: TextStyle(
-                                    color: DynamicTheme.of(context)
-                                        .data
-                                        .textTheme
-                                        .subtitle
-                                        .color),
+                                  color: DynamicTheme.of(context)
+                                      .data
+                                      .indicatorColor,
+                                ),
                               ),
                             ),
                             Spacer(),
                             Chip(
-                              backgroundColor:
-                                  DynamicTheme.of(context).data.backgroundColor,
+                              backgroundColor: DynamicTheme.of(context)
+                                  .data
+                                  .scaffoldBackgroundColor,
                               avatar: Icon(
                                 Icons.remove_red_eye,
-                                color: Colors.lightBlueAccent.shade100,
+                                color: DynamicTheme.of(context)
+                                    .data
+                                    .indicatorColor,
                               ),
                               label: Text(
                                 "${widget.views} views",
                                 textAlign: TextAlign.justify,
                                 style: TextStyle(
-                                    color: DynamicTheme.of(context)
-                                        .data
-                                        .textTheme
-                                        .subtitle
-                                        .color),
+                                  color: DynamicTheme.of(context)
+                                      .data
+                                      .indicatorColor,
+                                ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),

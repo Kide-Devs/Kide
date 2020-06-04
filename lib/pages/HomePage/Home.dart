@@ -72,6 +72,7 @@ class _HomePageState extends State<HomePage>
                 floating: true,
                 forceElevated: innerBoxIsScrolled,
                 bottom: new TabBar(
+                  indicatorColor: DynamicTheme.of(context).data.indicatorColor,
                   labelColor: DynamicTheme.of(context)
                       .data
                       .tabBarTheme

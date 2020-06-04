@@ -18,7 +18,7 @@ class BottomNav extends StatelessWidget {
         color: DynamicTheme.of(context).data.textTheme.subtitle.color
       ),
       selectedIconTheme: IconThemeData(
-        color: Colors.blueAccent.shade100
+        color: DynamicTheme.of(context).data.indicatorColor
       ),
       backgroundColor: DynamicTheme.of(context).data.backgroundColor,
       items: [

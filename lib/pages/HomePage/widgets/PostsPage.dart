@@ -18,7 +18,7 @@ class _PostsPageState extends State<PostsPage>
   bool isLoading = false;
   bool hasMore = true;
   int documentLimit = 5;
-  DocumentSnapshot lastDocument;
+  DocumentSnapshot lastDocumentFetchedOnScroll, lastDocumentFetchedOnRefresh;
   ScrollController _scrollController = ScrollController();
 
   @override
@@ -46,8 +46,9 @@ class _PostsPageState extends State<PostsPage>
     setState(() {
       isLoading = true;
     });
+
     QuerySnapshot querySnapshot;
-    if (lastDocument == null) {
+    if (lastDocumentFetchedOnScroll == null) {
       querySnapshot = await firestore
           .collection('${widget.postType}')
           .orderBy('timestamp', descending: true)
@@ -57,23 +58,56 @@ class _PostsPageState extends State<PostsPage>
       querySnapshot = await firestore
           .collection('${widget.postType}')
           .orderBy('timestamp', descending: true)
-          .endAtDocument(lastDocument)
+          .startAfterDocument(lastDocumentFetchedOnScroll)
           .limit(documentLimit)
           .getDocuments();
-
       print("Success");
     }
     if (querySnapshot.documents.length < documentLimit) {
       hasMore = false;
     }
 
-    lastDocument = querySnapshot.documents[0];
-    
-    if (lastDocument == null) {
-      posts.addAll(querySnapshot.documents);
-    } else {
-      posts.insertAll(0, querySnapshot.documents);
+    lastDocumentFetchedOnScroll = querySnapshot.documents[querySnapshot.documents.length - 1];
+    posts.addAll(querySnapshot.documents);
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  onPostHomeRefresh() async {
+    if (!hasMore) {
+      print("No more posts");
+      return;
     }
+
+    if (isLoading) {
+      return;
+    }
+
+    setState(() {
+      isLoading = true;
+    });
+
+    QuerySnapshot querySnapshot;
+    if (lastDocumentFetchedOnScroll == null) {
+      querySnapshot = await firestore
+          .collection('${widget.postType}')
+          .orderBy('timestamp', descending: true)
+          .limit(documentLimit)
+          .getDocuments();
+    } else {
+      querySnapshot = await firestore
+          .collection('${widget.postType}')
+          .orderBy('timestamp', descending: true)
+          .endBeforeDocument(lastDocumentFetchedOnRefresh)
+          .limit(documentLimit)
+          .getDocuments();
+      print("Success");
+    }
+
+    lastDocumentFetchedOnRefresh = querySnapshot.documents[0];
+    posts.insertAll(0, querySnapshot.documents);
+
     setState(() {
       isLoading = false;
     });
@@ -109,7 +143,7 @@ class _PostsPageState extends State<PostsPage>
                           views: posts[index].data['views'].toString(),
                         );
                       }),
-                  onRefresh: fetchPosts,
+                  onRefresh: () => onPostHomeRefresh(),
                 ),
         ),
       ],

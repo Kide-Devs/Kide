@@ -75,21 +75,13 @@ class _PostsPageState extends State<PostsPage>
   }
 
   onPostHomeRefresh() async {
-    if (!hasMore) {
-      print("No more posts");
-      return;
-    }
-
-    if (isLoading) {
-      return;
-    }
 
     setState(() {
       isLoading = true;
     });
 
     QuerySnapshot querySnapshot;
-    if (lastDocumentFetchedOnScroll == null) {
+    if (lastDocumentFetchedOnRefresh == null) {
       querySnapshot = await firestore
           .collection('${widget.postType}')
           .orderBy('timestamp', descending: true)

@@ -94,7 +94,7 @@ class _PostsPageState extends State<PostsPage>
           .endBeforeDocument(lastDocumentFetchedOnRefresh)
           .limit(documentLimit)
           .getDocuments();
-      print("Success");
+      print("Success"); // Debugging Text
     }
 
     lastDocumentFetchedOnRefresh = querySnapshot.documents[0];
@@ -135,7 +135,7 @@ class _PostsPageState extends State<PostsPage>
                           views: posts[index].data['views'].toString(),
                         );
                       }),
-                  onRefresh: () => onPostHomeRefresh(),
+                  onRefresh: onPostHomeRefresh,
                 ),
         ),
       ],

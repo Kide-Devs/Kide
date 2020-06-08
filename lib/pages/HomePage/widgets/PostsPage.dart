@@ -67,7 +67,12 @@ class _PostsPageState extends State<PostsPage>
       hasMore = false;
     }
 
-    lastDocumentFetchedOnScroll = querySnapshot.documents[querySnapshot.documents.length - 1];
+    lastDocumentFetchedOnScroll = querySnapshot.documents.length != 0
+        ? querySnapshot.documents[querySnapshot.documents.length - 1]
+        : lastDocumentFetchedOnScroll;
+    lastDocumentFetchedOnRefresh = querySnapshot.documents.length != 0
+        ? querySnapshot.documents[0]
+        : lastDocumentFetchedOnRefresh;
     posts.addAll(querySnapshot.documents);
     setState(() {
       isLoading = false;
@@ -83,23 +88,24 @@ class _PostsPageState extends State<PostsPage>
     QuerySnapshot querySnapshot;
     if (lastDocumentFetchedOnRefresh == null) {
       querySnapshot = await firestore
-          .collection('${widget.postType}')
-          .orderBy('timestamp', descending: true)
+          .collection('story-collection')
+          .orderBy('up-since', descending: true)
           .limit(documentLimit)
           .getDocuments();
     } else {
       querySnapshot = await firestore
-          .collection('${widget.postType}')
-          .orderBy('timestamp', descending: true)
+          .collection('story-collection')
+          .orderBy('up-since', descending: true)
           .endBeforeDocument(lastDocumentFetchedOnRefresh)
           .limit(documentLimit)
           .getDocuments();
-      print("Success"); // Debugging Text
     }
 
-    lastDocumentFetchedOnRefresh = querySnapshot.documents[0];
-    posts.insertAll(0, querySnapshot.documents);
+    lastDocumentFetchedOnRefresh = querySnapshot.documents.length != 0
+        ? querySnapshot.documents[0]
+        : lastDocumentFetchedOnRefresh;
 
+    posts.insertAll(0, querySnapshot.documents);
     setState(() {
       isLoading = false;
     });
@@ -135,7 +141,7 @@ class _PostsPageState extends State<PostsPage>
                           views: posts[index].data['views'].toString(),
                         );
                       }),
-                  onRefresh: onPostHomeRefresh,
+                  onRefresh: () => onPostHomeRefresh(),
                 ),
         ),
       ],

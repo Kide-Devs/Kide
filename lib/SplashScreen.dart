@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:Kide/pages/Auth/Login.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:Kide/pages/OnBoarding/OnBoarding.dart';
@@ -27,13 +28,17 @@ class _SplashScreenState extends State<SplashScreen> {
       return new Timer(_duration, navigationMyApp);
     } else {
       // First time
-      prefs.setBool('first_time', false);
-      return new Timer(_duration, navigationOnBoarding);
+      // prefs.setBool('first_time', false); TODO
+      return new Timer(_duration, this.navigationUserAuth);
     }
   }
 
   void navigationMyApp() {
     Navigator.of(context).pushReplacementNamed(MyApp.routeName);
+  }
+  
+  void navigationUserAuth() {
+    Navigator.of(context).pushReplacementNamed(LoginPage.routeName);
   }
 
   void navigationOnBoarding() {

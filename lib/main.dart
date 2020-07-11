@@ -1,3 +1,4 @@
+import 'package:Kide/pages/Auth/Login.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:Kide/pages/OnBoarding/OnBoarding.dart';
@@ -43,7 +44,8 @@ void main() {
       routes: <String, WidgetBuilder>{
         OnboardingMainPage.routeName: (BuildContext context) =>
             new OnboardingMainPage(),
-        MyApp.routeName: (BuildContext context) => new MyApp()
+        MyApp.routeName: (BuildContext context) => new MyApp(),
+        LoginPage.routeName: (BuildContext context) => new LoginPage(),
       },
     ),
   ));

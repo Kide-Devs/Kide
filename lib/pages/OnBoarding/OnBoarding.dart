@@ -4,6 +4,7 @@ import 'package:Kide/pages/OnBoarding/dots_indicator.dart';
 import 'package:Kide/pages/OnBoarding/page1.dart';
 import 'package:Kide/pages/OnBoarding/page2.dart';
 import 'package:Kide/pages/OnBoarding/page3.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingMainPage extends StatefulWidget {
   static const routeName = "/OnBoarding";
@@ -80,8 +81,11 @@ class _OnboardingMainPageState extends State<OnboardingMainPage> {
                               style: TextStyle(
                                   color: Color.fromRGBO(255, 255, 255, 0.5)),
                             ),
-                            onPressed: () {
+                            onPressed: () async {
+                              SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
                               print('Skip pressed');
+                              prefs.setBool('first_time', false);
                               Navigator.pushReplacementNamed(context, '/MyApp');
                             }),
                         RaisedButton(
@@ -90,8 +94,11 @@ class _OnboardingMainPageState extends State<OnboardingMainPage> {
                             style: TextStyle(color: Colors.black),
                           ),
                           onPressed: isDone
-                              ? () {
+                              ? () async {
+                                  SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
                                   print('Done pressed');
+                                  prefs.setBool('first_time', false);
                                   Navigator.pushReplacementNamed(
                                       context, '/MyApp');
                                 }

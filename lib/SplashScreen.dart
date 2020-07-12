@@ -28,7 +28,6 @@ class _SplashScreenState extends State<SplashScreen> {
       return new Timer(_duration, navigationMyApp);
     } else {
       // First time
-      // prefs.setBool('first_time', false); TODO
       return new Timer(_duration, this.navigationUserAuth);
     }
   }
@@ -39,10 +38,6 @@ class _SplashScreenState extends State<SplashScreen> {
   
   void navigationUserAuth() {
     Navigator.of(context).pushReplacementNamed(LoginPage.routeName);
-  }
-
-  void navigationOnBoarding() {
-    Navigator.of(context).pushReplacementNamed(OnboardingMainPage.routeName);
   }
 
   double _opacityAnimator(double op) {

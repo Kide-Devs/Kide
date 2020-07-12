@@ -1,10 +1,12 @@
 import 'dart:ui';
 
+import 'package:Kide/pages/Auth/SignUp.dart';
+import 'package:Kide/pages/OnBoarding/OnBoarding.dart';
 import 'package:Kide/util/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flare_flutter/flare_actor.dart';
-import 'package:flare_flutter/flare_controller.dart';
-import 'package:flare_loading/flare_loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class WeirdTextFieldPainter extends CustomPainter {
   @override
@@ -110,9 +112,9 @@ class WeirdButtonPainter extends CustomPainter {
 }
 
 class WeirdAuthButton extends StatelessWidget {
-  const WeirdAuthButton({Key key, this.onTap}) : super(key: key);
+  const WeirdAuthButton({Key key, this.onTap, this.text}) : super(key: key);
 
-  final onTap;
+  final onTap, text;
 
   @override
   Widget build(BuildContext context) {
@@ -121,12 +123,12 @@ class WeirdAuthButton extends StatelessWidget {
       child: GestureDetector(
         child: Container(
           height: 36,
-          width: MediaQuery.of(context).size.width * 0.25,
+          width: 100,
           child: Center(
             child: Text(
-              "Login",
+              text,
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 17,
                 fontFamily: "EncodeSans",
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
@@ -153,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  String gussAnimation = 'idle';
+  String gussAnimation = 'idle', msgToUser = '';
   int inputSelection = 0;
 
   @override
@@ -244,26 +246,95 @@ class _LoginPageState extends State<LoginPage> {
                               gussAnimation = 'cover_eyes_in';
                             }),
                           ),
-                          WeirdAuthButton(onTap: () {
-                            setState(() {
-                              if (_emailController.text.trim() != '' &&
-                                  _passwordController.text.trim() != '') {
-                                gussAnimation = 'success';
-                              } else {
-                                gussAnimation = 'fail';
+                          WeirdAuthButton(
+                            text: "Login",
+                            onTap: () async {
+                              FirebaseAuth _auth = FirebaseAuth.instance;
+
+                              String email = _emailController.text,
+                                  password = _passwordController.text;
+
+                              if (email.trim() == '' || password.trim() == '') {
+                                setState(() {
+                                  gussAnimation = 'fail';
+                                  msgToUser = "Fill all the details";
+                                });
+                                return null;
                               }
-                            });
 
+                              var _result;
+                              try {
+                                _result =
+                                    await _auth.signInWithEmailAndPassword(
+                                        email: email, password: password);
+                              } on PlatformException {
+                                setState(() {
+                                  msgToUser = "Invalid Credentials!";
+                                  gussAnimation = 'fail';
+                                });
+                                return null;
+                              }
 
-                          }),
+                              setState(() {
+                                gussAnimation = 'success';
+                              });
+                              Navigator.of(context).pushReplacementNamed(
+                                  OnboardingMainPage.routeName);
+                            },
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 20, bottom: 20),
+                            child: Text(
+                              msgToUser,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.redAccent.shade200,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ],
                 ),
               ),
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "Not a registered user, ",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Quicksand',
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    GestureDetector(
+                      child: Text(
+                        "Sign Up",
+                        style: TextStyle(
+                          color: Colors.lightBlueAccent.shade100,
+                          fontFamily: 'Quicksand',
+                          fontSize: 17,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => SignUpPage()),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
             ],
-          )
+          ),
         ],
       ),
     );

@@ -152,8 +152,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                     msgToUser = "Email already registered!";
                                     gussAnimation = 'fail';
                                   });
-                                  return null;
                                 }
+                                return null;
                               }
 
                               setState(() {

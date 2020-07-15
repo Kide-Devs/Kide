@@ -152,6 +152,11 @@ class _SignUpPageState extends State<SignUpPage> {
                                     msgToUser = "Email already registered!";
                                     gussAnimation = 'fail';
                                   });
+                                } else if (e.code == 'ERROR_WEAK_PASSWORD') {
+                                  setState(() {
+                                    msgToUser = "Password at least 6 chars!";
+                                    gussAnimation = 'fail';
+                                  });
                                 }
                                 return null;
                               }
@@ -172,7 +177,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           Padding(
                             padding: EdgeInsets.only(top: 14, bottom: 14),
-                            child: Container(
+                            child: msgToUser != '' ? Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 color: Colors.redAccent,
@@ -187,7 +192,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                            ),
+                            ): Container(),
                           ),
                         ],
                       ),

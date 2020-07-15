@@ -56,56 +56,67 @@ class _SplashScreenState extends State<SplashScreen> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: DynamicTheme.of(context).data.backgroundColor,
-      body: Column(
-        // crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: Stack(
         children: <Widget>[
-          Stack(
+          Column(
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Center(
-                child: AnimatedOpacity(
-                  opacity: _opacityAnimator(_opacity),
-                  duration: Duration(milliseconds: 1700),
-                  curve: Curves.easeInOut,
-                  child: Opacity(
-                    opacity: 1.0,
-                    child: AnimatedContainer(
-                      duration: Duration(milliseconds: 1350),
+              Stack(
+                children: <Widget>[
+                  Center(
+                    child: AnimatedOpacity(
+                      opacity: _opacityAnimator(_opacity),
+                      duration: Duration(milliseconds: 1700),
                       curve: Curves.easeInOut,
-                      width: size.width / (4 * _opacityAnimator(_opacity)),
-                      height: size.height / (4.0 * _opacityAnimator(_opacity)),
-                      child: Image.asset(
-                        MAIN_KIDE_LOGO,
-                        gaplessPlayback: true,
-                        fit: BoxFit.contain,
+                      child: Opacity(
+                        opacity: 1.0,
+                        child: AnimatedContainer(
+                          duration: Duration(milliseconds: 1350),
+                          curve: Curves.easeInOut,
+                          width: size.width / (4 * _opacityAnimator(_opacity)),
+                          height: size.height / (4.0 * _opacityAnimator(_opacity)),
+                          child: Image.asset(
+                            MAIN_KIDE_LOGO,
+                            gaplessPlayback: true,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
                       ),
                     ),
                   ),
+                ],
+              ),
+              Container(
+                height: 20,
+              ),
+              AnimatedOpacity(
+                opacity: 0.8,
+                duration: Duration(milliseconds: 4500),
+                curve: Curves.easeInOut,
+                child: Text(
+                  KIDE_CAPS,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontFamily: "Michroma",
+                    color: DynamicTheme.of(context).data.textTheme.subtitle.color,
+                    letterSpacing: 20.0,
+                  ),
                 ),
+              ),
+              Container(height: 20),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.3,
+                child: LinearProgressIndicator(),
               ),
             ],
           ),
-          Container(
-            height: 20,
-          ),
-          AnimatedOpacity(
-            opacity: 0.8,
-            duration: Duration(milliseconds: 4500),
-            curve: Curves.easeInOut,
-            child: Text(
-              KIDE_CAPS,
-              style: TextStyle(
-                fontSize: 20.0,
-                fontFamily: "Michroma",
-                color: DynamicTheme.of(context).data.textTheme.subtitle.color,
-                letterSpacing: 20.0,
-              ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 20),
+              child: Text(VERSION),
             ),
-          ),
-          Container(height: 20),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.3,
-            child: LinearProgressIndicator(),
           ),
         ],
       ),

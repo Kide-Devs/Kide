@@ -1,3 +1,4 @@
+const String VERSION = "2.1.0+11n";
 const String MAPS =  "Maps";
 const String CONTACTS =  "Contacts";
 const String HOME =  "Home";

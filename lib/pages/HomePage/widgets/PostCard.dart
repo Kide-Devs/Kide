@@ -76,7 +76,6 @@ class _PostCardState extends State<PostCard> {
                     tag: widget.image,
                     // Any tag that needs to be unique like URL of image.
                     child: Container(
-                      height: deviceHeight * 0.32,
                       width: double.infinity,
                       child: CachedNetworkImage(
                         imageUrl: widget.image,

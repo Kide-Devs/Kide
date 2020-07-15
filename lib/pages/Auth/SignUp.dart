@@ -171,14 +171,21 @@ class _SignUpPageState extends State<SignUpPage> {
                             },
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 20, bottom: 20),
-                            child: Text(
-                              msgToUser,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.redAccent.shade200,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
+                            padding: EdgeInsets.only(top: 14, bottom: 14),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.redAccent,
+                              ),
+                              padding: EdgeInsets.all(6),
+                              child: Text(
+                                msgToUser,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
                           ),

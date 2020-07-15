@@ -77,6 +77,7 @@ class _PostCardState extends State<PostCard> {
                     // Any tag that needs to be unique like URL of image.
                     child: Container(
                       width: double.infinity,
+                      height: deviceHeight * 0.32,
                       child: CachedNetworkImage(
                         imageUrl: widget.image,
                         fit: BoxFit.fill,
@@ -177,7 +178,7 @@ class _PostCardState extends State<PostCard> {
                 style: TextStyle(
                   fontFamily: "Quicksand",
                   fontWeight: FontWeight.w500,
-                  fontSize: deviceHeight * 0.021,
+                  fontSize: deviceHeight * 0.02,
                 ),
               ),
             ),

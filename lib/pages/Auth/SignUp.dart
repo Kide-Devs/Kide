@@ -144,12 +144,16 @@ class _SignUpPageState extends State<SignUpPage> {
                                 _result =
                                     await _auth.createUserWithEmailAndPassword(
                                         email: email, password: password);
-                              } on PlatformException {
-                                setState(() {
-                                  msgToUser = "Email already registered!";
-                                  gussAnimation = 'fail';
-                                });
-                                return null;
+                              } on PlatformException catch (e) {
+                                print("Registration Error Code:");
+                                print(e.code);
+                                if (e.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
+                                  setState(() {
+                                    msgToUser = "Email already registered!";
+                                    gussAnimation = 'fail';
+                                  });
+                                  return null;
+                                }
                               }
 
                               setState(() {

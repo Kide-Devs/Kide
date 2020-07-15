@@ -19,11 +19,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   startTime() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool firstTime = prefs.getBool('first_time');
+    bool loggedOut = prefs.getBool('loggedOut');
 
     var _duration = new Duration(seconds: 2);
 
-    if (firstTime != null && !firstTime) {
+    if (loggedOut != null && !loggedOut) {
       // Not first time
       return new Timer(_duration, navigationMyApp);
     } else {

@@ -9,7 +9,8 @@ import 'package:intl/intl.dart';
 import 'package:path/path.dart' as p;
 
 class PostCard extends StatefulWidget {
-  String title, subtitle, image, body, id, views, likes, postType;
+
+  final String title, subtitle, image, body, id, views, likes, postType;
   final date;
 
   PostCard(

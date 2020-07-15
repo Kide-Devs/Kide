@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Login.dart';
 
@@ -171,28 +172,35 @@ class _SignUpPageState extends State<SignUpPage> {
                                 "fullName": fullName,
                                 "email": email,
                               });
-                              Navigator.of(context).pushReplacementNamed(
-                                  OnboardingMainPage.routeName);
+                              SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.setBool('loggedOut', false);
+                              Navigator.of(context)
+                                  .pushReplacement(MaterialPageRoute(
+                                builder: (context) => OnboardingMainPage(),
+                              ));
                             },
                           ),
                           Padding(
                             padding: EdgeInsets.only(top: 14, bottom: 14),
-                            child: msgToUser != '' ? Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.redAccent,
-                              ),
-                              padding: EdgeInsets.all(6),
-                              child: Text(
-                                msgToUser,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ): Container(),
+                            child: msgToUser != ''
+                                ? Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.redAccent,
+                                    ),
+                                    padding: EdgeInsets.all(6),
+                                    child: Text(
+                                      msgToUser,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  )
+                                : Container(),
                           ),
                         ],
                       ),

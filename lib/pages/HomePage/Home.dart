@@ -1,4 +1,6 @@
 import 'package:Kide/pages/HomePage/widgets/PostsPage.dart';
+import 'package:Kide/pages/MorePage/More.dart';
+import 'package:Kide/pages/Preferences/PreferencesPage.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -47,13 +49,17 @@ class _HomePageState extends State<HomePage>
               actions: <Widget>[
                 IconButton(
                   icon: Icon(
-                    Icons.remove_red_eye,
+                    Icons.more_vert,
                     color: DynamicTheme.of(context).data.iconTheme.color,
                   ),
-                  onPressed: _changeBrightness,
+                  onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => PreferencesPage(),
+                    ),
+                  ), //_changeBrightness,
                 ),
                 SizedBox(
-                  width: 10,
+                  width: 5,
                 ),
               ],
               title: new Text(

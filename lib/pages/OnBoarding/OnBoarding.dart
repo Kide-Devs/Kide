@@ -1,3 +1,4 @@
+import 'package:Kide/MyApp.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:Kide/pages/OnBoarding/dots_indicator.dart';
@@ -85,8 +86,11 @@ class _OnboardingMainPageState extends State<OnboardingMainPage> {
                               SharedPreferences prefs =
                                   await SharedPreferences.getInstance();
                               print('Skip pressed');
-                              prefs.setBool('first_time', false);
-                              Navigator.pushReplacementNamed(context, '/MyApp');
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => MyApp(),
+                                ),
+                              );
                             }),
                         RaisedButton(
                           child: Text(
@@ -94,13 +98,12 @@ class _OnboardingMainPageState extends State<OnboardingMainPage> {
                             style: TextStyle(color: Colors.black),
                           ),
                           onPressed: isDone
-                              ? () async {
-                                  SharedPreferences prefs =
-                                      await SharedPreferences.getInstance();
+                              ? () {
                                   print('Done pressed');
-                                  prefs.setBool('first_time', false);
-                                  Navigator.pushReplacementNamed(
-                                      context, '/MyApp');
+                                  Navigator.of(context)
+                                      .pushReplacement(MaterialPageRoute(
+                                    builder: (context) => MyApp(),
+                                  ));
                                 }
                               : () {
                                   print('Next pressed');

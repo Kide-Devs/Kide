@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:Kide/MyApp.dart';
 import 'package:Kide/pages/Auth/SignUp.dart';
 import 'package:Kide/pages/OnBoarding/OnBoarding.dart';
 import 'package:Kide/util/constants.dart';
@@ -7,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WeirdTextFieldPainter extends CustomPainter {
   @override
@@ -275,31 +277,41 @@ class _LoginPageState extends State<LoginPage> {
                                 return null;
                               }
 
-                              setState(() {
-                                gussAnimation = 'success';
-                              });
-                              Navigator.of(context).pushReplacementNamed(
-                                  OnboardingMainPage.routeName);
+                              if (this.mounted) {
+                                setState(() {
+                                  gussAnimation = 'success';
+                                });
+                              }
+                              SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.setBool('loggedOut', false);
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => MyApp(),
+                                ),
+                              );
                             },
                           ),
                           Padding(
                             padding: EdgeInsets.only(top: 14, bottom: 14),
-                            child: msgToUser != '' ? Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.redAccent,
-                              ),
-                              padding: EdgeInsets.all(6),
-                              child: Text(
-                                msgToUser,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ): Container(),
+                            child: msgToUser != ''
+                                ? Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.redAccent,
+                                    ),
+                                    padding: EdgeInsets.all(6),
+                                    child: Text(
+                                      msgToUser,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  )
+                                : Container(),
                           ),
                         ],
                       ),

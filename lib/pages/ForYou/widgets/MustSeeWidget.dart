@@ -1,4 +1,6 @@
 import 'package:Kide/pages/MapsPage/Maps.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:Kide/config/Viewport.dart';
 
@@ -16,50 +18,44 @@ class MustSeeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ViewPort().init(context);
-    return Stack(
-      children: [
-        Card(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8.0)
-            ),
-          ),
-          //clipBehavior: Clip.hardEdge,
-          child: Image.network(
-            src, 
-            fit: BoxFit.cover,
-            width: ViewPort.screenWidth * 0.43,
-            height: 200,
-          ),
+    return Stack(alignment: Alignment.center, children: [
+      ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: CachedNetworkImage(
+          imageUrl: src,
+          fit: BoxFit.cover,
+          width: ViewPort.screenWidth * 0.43,
+          height: 200,
         ),
-        InkWell(
-          child: Container(
-            width: ViewPort.screenWidth * 0.44,
-            height: 205.0,
-            decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.64),
-                borderRadius: BorderRadius.circular(8.0)),
-            child: Center(
-              child: Text(
-                title,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600),
+      ),
+      InkWell(
+        child: Container(
+          width: ViewPort.screenWidth * 0.44,
+          height: 205.0,
+          decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.64),
+              borderRadius: BorderRadius.circular(8.0)),
+          child: Center(
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+                fontFamily: "Quicksand",
+                fontSize: 16,
               ),
             ),
           ),
-          onTap: () {
-            print("Sugg tap : $marker");
-            Navigator.push(
+        ),
+        onTap: () {
+          print("Sugg tap : $marker");
+          Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => MapsPage(eventMarker: marker)
-              )
-            );
-          },
-        ),
-      ]
-    );
+                  builder: (context) => MapsPage(eventMarker: marker)));
+        },
+      ),
+    ]);
   }
 }

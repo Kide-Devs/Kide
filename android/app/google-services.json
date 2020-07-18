@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "721601491310-k4ftsv5q0kejh9rciqot8gbsa8jh79r8.apps.googleusercontent.com",
+          "client_id": "721601491310-ofkm3cnf49fpeino5irh6ul2c1n2m2en.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.kiitdev.Kide",
-            "certificate_hash": "8acd6a5b9fc0ce9c3daf770208e7431eea9c85f7"
+            "certificate_hash": "6b38932e69944046f7af8d028eb96bbb7794e826"
           }
         },
         {

@@ -1,39 +1,39 @@
-
+import 'package:Kide/util/constants.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class PostDetailsPage extends StatefulWidget {
-
   final String title, body, image, subtitle, date, likes, views, postType, id;
 
-  PostDetailsPage({
-    this.id,
-    this.postType,
-    this.title,
-    this.body,
-    this.image,
-    this.subtitle,
-    this.date,
-    this.likes,
-    this.views
-  });
+  PostDetailsPage(
+      {this.id,
+      this.postType,
+      this.title,
+      this.body,
+      this.image,
+      this.subtitle,
+      this.date,
+      this.likes,
+      this.views});
 
   @override
   _PostDetailsPageState createState() => _PostDetailsPageState();
 }
 
 class _PostDetailsPageState extends State<PostDetailsPage> {
-
   incrementViews() {
     Firestore firestore = Firestore.instance;
     int views = int.parse(widget.views);
     views++;
 
-    firestore.collection('${widget.postType}').document(widget.id).updateData({
-      'views': views
-    });
-    
+    firestore
+        .collection('${widget.postType}')
+        .document(widget.id)
+        .updateData({'views': views});
   }
 
   @override
@@ -47,35 +47,75 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
     final deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blue[500],
+        backgroundColor: Theme.of(context).iconTheme.color,
         child: Icon(Icons.share),
-        onPressed: () {},
+        onPressed: () {
+          // TODO : SHARE
+        },
       ),
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            backgroundColor: Colors.blue[300],
+            backgroundColor: Colors.grey.shade700,
+            elevation: 0,
             centerTitle: true,
             leading: Padding(
               padding: const EdgeInsets.all(12.0),
-              child: Material(
-                elevation: 0,
-                borderRadius: BorderRadius.circular(50),
-                child: InkWell(
-                  child: Icon(Icons.arrow_back, size: 30, color: Colors.blue[300],),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: Material(
+                  color: Colors.transparent,
+                  elevation: 0,
+                  borderRadius: BorderRadius.circular(50),
+                  child: InkWell(
+                    child: Icon(
+                      Icons.arrow_back,
+                      size: 30,
+                      color: Colors.white,
+                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
                 ),
               ),
             ),
             expandedHeight: deviceHeight * 0.31,
             pinned: true,
-            flexibleSpace: new FlexibleSpaceBar(
-              background: widget.image != null ? Image.network(
-                widget.image,
-                fit: BoxFit.fill,
-              ) : SizedBox()
+            stretch: true,
+            flexibleSpace: FlexibleSpaceBar(
+              background: widget.image != null
+                  ? Hero(
+                      tag: widget.image,
+                      child: Stack(
+                        children: <Widget>[
+                          CachedNetworkImage(
+                            imageUrl: widget.image,
+                            fit: BoxFit.fill,
+                            errorWidget: (context, url, error) => SizedBox(
+                              child: Icon(Icons.warning),
+                              width: 90,
+                              height: 90,
+                            ),
+                          ),
+                          Container(
+                            width: double.maxFinite,
+                            height: deviceHeight * 0.18,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.black54,
+                                  Colors.transparent,
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : SizedBox(),
             ),
           ),
           SliverList(
@@ -92,61 +132,84 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Chip(
-                              backgroundColor: DynamicTheme.of(context).data.cardColor,
-                              avatar: Icon(Icons.access_time, color: Colors.blue[300],),
+                              backgroundColor: DynamicTheme.of(context)
+                                  .data
+                                  .scaffoldBackgroundColor,
+                              avatar: Icon(
+                                Icons.access_time,
+                                color: DynamicTheme.of(context)
+                                    .data
+                                    .indicatorColor,
+                              ),
                               label: Text(
                                 widget.date,
                                 style: TextStyle(
-                                  color: DynamicTheme.of(context).data.textTheme.subtitle.color
+                                  color: DynamicTheme.of(context)
+                                      .data
+                                      .indicatorColor,
                                 ),
                               ),
                             ),
                             Spacer(),
                             Chip(
-                              backgroundColor: DynamicTheme.of(context).data.cardColor,
-                              avatar: Icon(Icons.remove_red_eye, color: Colors.blue[300],),
+                              backgroundColor: DynamicTheme.of(context)
+                                  .data
+                                  .scaffoldBackgroundColor,
+                              avatar: Icon(
+                                Icons.remove_red_eye,
+                                color: DynamicTheme.of(context)
+                                    .data
+                                    .indicatorColor,
+                              ),
                               label: Text(
                                 "${widget.views} views",
                                 textAlign: TextAlign.justify,
                                 style: TextStyle(
-                                  color: DynamicTheme.of(context).data.textTheme.subtitle.color
+                                  color: DynamicTheme.of(context)
+                                      .data
+                                      .indicatorColor,
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
-                      SizedBox(height: 10.0,),
+                      SizedBox(
+                        height: 10.0,
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           widget.title,
                           style: TextStyle(
                             fontSize: 25.0,
-                            color: Colors.blue[700],
-                            fontWeight: FontWeight.bold,
-                            height: 1.2
+                            fontFamily: "PlayfairDisplay",
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0,
+                          vertical: 10,
+                        ),
                         child: Text(
                           widget.body,
                           textAlign: TextAlign.justify,
                           style: TextStyle(
                             fontSize: deviceHeight * 0.0245,
-                            height: 1.2
+                            fontFamily: "Quicksand",
                           ),
                         ),
-                      )
+                      ),
+                      SizedBox(height: 70),
                     ],
                   ),
                 );
               },
-              childCount: 1
+              childCount: 1,
             ),
-          )
+          ),
         ],
       ),
     );

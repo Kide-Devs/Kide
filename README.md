@@ -1,34 +1,44 @@
 # Kide
-## v1.0.3
+`v2.1.0+11n`
 
-A new Flutter project.
+A personalized KIIT guide.
 
 ## Nomenclature
 
 - ### Event
-    - The Entire Event/Fest e.g. KIITFEST
-    - #### Schema
+
+  - The Entire Event/Fest e.g. KIITFEST
+
+  - #### Schema
+
         - String id, String name, List<"EventCategory"> eventCategories, String startDate, String endDate
+
 - ### EventCategory
-    - Category in the Event e.g. Luminare, ElectroNerd, Builder.io, etc
-    - #### Schema
-        - String id, String name, List<"SubEvent"> subEvents
+
+  - Category in the Event e.g. Luminare, ElectroNerd, Builder.io, etc.
+
+  - #### Schema
+
+    - String id, String name, List<"SubEvent"> subEvents
+
 - ### SubEvent
-    - Event inside of an Event Category
-    - #### Schema
-        - String id, String name, String date, String time, String description, String location, bool isBookmarked, String link_details, String link_register
 
+  - Event inside of an Event Category
 
+  - #### Schema
+  
+        - String id, String name, String date, String time, Number timestamp, String description, String location, bool isBookmarked, String link_details, String link_register
 
-## Getting Started
+### Developers
 
-This project is a starting point for a Flutter application.
+- [Cryptonex7](https://github.com/Cryptonex7)
 
-A few resources to get you started if this is your first Flutter project:
+- [A4k9](https://github.com/A4k9)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- [ritesh-sharma33](https://github.com/ritesh-sharma33)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [arkajyotiMukherjee](https://github.com/arkajyotiMukherjee)
+
+- [NikhilCodes](https://github.com/NikhilCodes)
+
+- [gaurav0991](https://github.com/gaurav0991)

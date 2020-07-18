@@ -18,7 +18,7 @@ class BottomNav extends StatelessWidget {
         color: DynamicTheme.of(context).data.textTheme.subtitle.color
       ),
       selectedIconTheme: IconThemeData(
-        color: Colors.blueAccent
+        color: DynamicTheme.of(context).data.indicatorColor
       ),
       backgroundColor: DynamicTheme.of(context).data.backgroundColor,
       items: [
@@ -34,7 +34,7 @@ class BottomNav extends StatelessWidget {
           backgroundColor: DynamicTheme.of(context).data.backgroundColor,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.perm_contact_calendar),
+          icon: Icon(Icons.contacts),
           title: Text(
             CONTACTS,
             style: TextStyle(
@@ -53,12 +53,7 @@ class BottomNav extends StatelessWidget {
               height: _currentIndex == 2 ? 34 : 28,
             ),
           ),
-          title: Text(
-            KIDE_CAPS,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 5.0, letterSpacing: 5, 
-              color: DynamicTheme.of(context).data.textTheme.subtitle.color),
-          ),
+          title: Container(),
           backgroundColor: DynamicTheme.of(context).data.backgroundColor,
         ),
         BottomNavigationBarItem(

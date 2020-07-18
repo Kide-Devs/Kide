@@ -15,15 +15,18 @@ dependencies:
   shared_preferences: ^0.5.4+6
   google_maps_flutter: ^0.5.11
   geolocator: ^5.1.4+2
-  permission_handler: '^4.2.0+hotfix.3'
+  permission_handler:
   cloud_firestore: ^0.13.0+1
   connectivity: ^0.4.6+2
-  location: ^2.3.5
+  location:
   transparent_image: ^1.0.0
+  cached_network_image:
   dynamic_theme:
   intl:
   sqflite:
-  
+  flare_flutter:
+  firebase_auth:
+
 dev_dependencies:
   flutter_launcher_icons: ^0.7.4
   flutter_test:
@@ -49,3 +52,35 @@ flutter:
    - ./lib/assets/KIIT.jpg
    - ./lib/assets/KISS.png #
    - ./lib/assets/Founder_sir.jpeg #
+   - ./lib/assets/image-placeholder.png
+   - ./lib/assets/flares/Guss.flr
+
+  fonts:
+    - family: Quicksand
+      fonts:
+        - asset: ./lib/fonts/Quicksand/Quicksand-Bold.ttf
+        - asset: ./lib/fonts/Quicksand/Quicksand-Light.ttf
+        - asset: ./lib/fonts/Quicksand/Quicksand-Medium.ttf
+        - asset: ./lib/fonts/Quicksand/Quicksand-Regular.ttf
+        - asset: ./lib/fonts/Quicksand/Quicksand-SemiBold.ttf
+
+    - family: PlayfairDisplay
+      fonts:
+        - asset: ./lib/fonts/PlayfairDisplay/PlayfairDisplay-Bold.otf
+        - asset: ./lib/fonts/PlayfairDisplay/PlayfairDisplay-Regular.otf
+        - asset: ./lib/fonts/PlayfairDisplay/PlayfairDisplay-Black.otf
+        - asset: ./lib/fonts/PlayfairDisplay/PlayfairDisplaySC-Black.otf
+        - asset: ./lib/fonts/PlayfairDisplay/PlayfairDisplaySC-Bold.otf
+
+    - family: EncodeSans
+      fonts:
+        - asset: ./lib/fonts/EncodeSans/EncodeSans-Black.ttf
+        - asset: ./lib/fonts/EncodeSans/EncodeSans-Regular.ttf
+        - asset: ./lib/fonts/EncodeSans/EncodeSans-Thin.ttf
+        - asset: ./lib/fonts/EncodeSans/EncodeSans-Light.ttf
+        - asset: ./lib/fonts/EncodeSans/EncodeSans-Medium.ttf
+        - asset: ./lib/fonts/EncodeSans/EncodeSans-ExtraLight.ttf
+
+    - family: Michroma
+      fonts:
+        - asset: ./lib/fonts/Michroma/Michroma-Regular.ttf

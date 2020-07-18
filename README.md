@@ -3,7 +3,7 @@
 
 A personalized KIIT guide.
 
-## Nomenclature
+<!-- ## Nomenclature
 
 - ### Event
 
@@ -28,6 +28,7 @@ A personalized KIIT guide.
   - #### Schema
   
         - String id, String name, String date, String time, Number timestamp, String description, String location, bool isBookmarked, String link_details, String link_register
+        -->
 
 ### Developers
 

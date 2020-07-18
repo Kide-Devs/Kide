@@ -1,8 +1,5 @@
-import 'dart:ui';
-
 import 'package:Kide/MyApp.dart';
 import 'package:Kide/pages/Auth/SignUp.dart';
-import 'package:Kide/pages/OnBoarding/OnBoarding.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flare_flutter/flare_actor.dart';
@@ -114,9 +111,9 @@ class WeirdButtonPainter extends CustomPainter {
 }
 
 class WeirdAuthButton extends StatelessWidget {
-  const WeirdAuthButton({Key key, this.onTap, this.text}) : super(key: key);
+  const WeirdAuthButton({Key key, this.onTap, this.child}) : super(key: key);
 
-  final onTap, text;
+  final onTap, child;
 
   @override
   Widget build(BuildContext context) {
@@ -127,15 +124,7 @@ class WeirdAuthButton extends StatelessWidget {
           height: 36,
           width: 100,
           child: Center(
-            child: Text(
-              text,
-              style: TextStyle(
-                fontSize: 17,
-                fontFamily: "EncodeSans",
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-              ),
-            ),
+            child: child,
           ),
         ),
         onTap: this.onTap,
@@ -158,7 +147,20 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   String gussAnimation = 'idle', msgToUser = '';
+  bool isLoading = false;
   int inputSelection = 0;
+
+  void showLoadingSpinner() {
+    setState(() {
+      isLoading = true;
+    });
+  }
+
+  void hideLoadingSpinner() {
+    setState(() {
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -249,7 +251,21 @@ class _LoginPageState extends State<LoginPage> {
                             }),
                           ),
                           WeirdAuthButton(
-                            text: "Login",
+                            child: isLoading
+                                ? SizedBox(
+                                    child: CircularProgressIndicator(),
+                                    height: 20,
+                                    width: 20,
+                                  )
+                                : Text(
+                                    "Login",
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontFamily: "EncodeSans",
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                             onTap: () async {
                               FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -264,15 +280,16 @@ class _LoginPageState extends State<LoginPage> {
                                 return null;
                               }
 
-                              var _result;
+                              showLoadingSpinner();
+
                               try {
-                                _result =
-                                    await _auth.signInWithEmailAndPassword(
-                                        email: email, password: password);
+                                await _auth.signInWithEmailAndPassword(
+                                    email: email, password: password);
                               } on PlatformException {
                                 setState(() {
                                   msgToUser = "Invalid Credentials!";
                                   gussAnimation = 'fail';
+                                  isLoading = false;
                                 });
                                 return null;
                               }

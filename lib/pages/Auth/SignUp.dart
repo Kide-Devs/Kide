@@ -20,7 +20,20 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   String gussAnimation = 'idle', msgToUser = '';
+  bool isLoading = false;
   int inputSelection = 0;
+
+  void showLoadingSpinner() {
+    setState(() {
+      isLoading = true;
+    });
+  }
+
+  void hideLoadingSpinner() {
+    setState(() {
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +137,21 @@ class _SignUpPageState extends State<SignUpPage> {
                             }),
                           ),
                           WeirdAuthButton(
-                            text: "Sign Up",
+                            child: isLoading
+                                ? SizedBox(
+                                    child: CircularProgressIndicator(),
+                                    height: 20,
+                                    width: 20,
+                                  )
+                                : Text(
+                                    "Sign Up",
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontFamily: "EncodeSans",
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                             onTap: () async {
                               FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -140,6 +167,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                 });
                                 return null;
                               }
+
+                              showLoadingSpinner();
                               var _result;
                               try {
                                 _result =
@@ -152,11 +181,13 @@ class _SignUpPageState extends State<SignUpPage> {
                                   setState(() {
                                     msgToUser = "Email already registered!";
                                     gussAnimation = 'fail';
+                                    isLoading = false;
                                   });
                                 } else if (e.code == 'ERROR_WEAK_PASSWORD') {
                                   setState(() {
                                     msgToUser = "Password at least 6 chars!";
                                     gussAnimation = 'fail';
+                                    isLoading = false;
                                   });
                                 }
                                 return null;

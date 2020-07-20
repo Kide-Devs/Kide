@@ -53,7 +53,7 @@ flutter:
    - ./lib/assets/KISS.png #
    - ./lib/assets/Founder_sir.jpeg #
    - ./lib/assets/image-placeholder.png
-   - ./lib/assets/flares/Guss.flr
+   - ./lib/assets/flares/LoginPage.flr
 
   fonts:
     - family: Quicksand

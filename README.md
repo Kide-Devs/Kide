@@ -1,5 +1,5 @@
 # Kide
-`v2.1.0+13D`
+`v2.1.1+2D`
 
 A personalized KIIT guide.
 

@@ -27,22 +27,22 @@ class _ContactsPageState extends State<ContactsPage> {
 
   final _emergencyContacts = emergency;
 
-  Future<void> _getPermissions() async {
-    Map<PermissionGroup, PermissionStatus> permissions =
-        await PermissionHandler()
-            .requestPermissions([PermissionGroup.contacts]);
-    PermissionStatus permission = await PermissionHandler()
-        .checkPermissionStatus(PermissionGroup.contacts);
-    ServiceStatus serviceStatus =
-        await PermissionHandler().checkServiceStatus(PermissionGroup.contacts);
-    bool isShown = await PermissionHandler()
-        .shouldShowRequestPermissionRationale(PermissionGroup.contacts);
-  }
+  // Future<void> _getPermissions() async {
+  //   Map<PermissionGroup, PermissionStatus> permissions =
+  //       await PermissionHandler()
+  //           .requestPermissions([PermissionGroup.contacts]);
+  //   PermissionStatus permission = await PermissionHandler()
+  //       .checkPermissionStatus(PermissionGroup.contacts);
+  //   ServiceStatus serviceStatus =
+  //       await PermissionHandler().checkServiceStatus(PermissionGroup.contacts);
+  //   bool isShown = await PermissionHandler()
+  //       .shouldShowRequestPermissionRationale(PermissionGroup.contacts);
+  // }
 
   @override
   void initState() {
     super.initState();
-    _getPermissions();
+    // _getPermissions();
   }
 
   @override
@@ -50,101 +50,102 @@ class _ContactsPageState extends State<ContactsPage> {
     // Offset _offset = Offset(0.95, 0.55);
     ViewPort().init(context);
     return Scaffold(
-      backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
-      body : Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          child: CustomScrollView(
-            slivers: <Widget>[
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    HeaderWidget(EMERGENCY_CONTACTS, 12, DynamicTheme.of(context).data.textTheme.subtitle.color),
-                    Divider(
-                      color: Colors.white,
-                      endIndent: ViewPort.screenWidth*0.44,
-                    ),
-                    // Transform(
-                    //   transform: Matrix4.identity()
-                    //   ..setEntry(1, 3, 0.001) // perspective
-                    //   ..rotateX(_offset.dy)
-                    //   ..rotateY(_offset.dx),
-                    //   alignment: FractionalOffset(0.57,0.57),
-                    //   child: Divider(
-                    //     height: 0.0,
-                    //     color: Colors.white,
-                    //     indent: ViewPort.screenWidth*0.49,
-                    //     endIndent: ViewPort.screenWidth*0.37,
-                    //   ),
-                    // )
-                    // RotationTransition(
-                    //   turns: AlwaysStoppedAnimation(750/360),
-                    //   child: Divider(
-                    //     height: 0.0,
-                    //     color: Colors.white,
-                    //     indent: 95,
-                    //     endIndent: ViewPort.screenWidth*0.55,
-                    //   ),
-                    // ),
-                  ],
-                ),
-              ),
-              SliverStaggeredGrid.count(
-                crossAxisCount: 4,
-                mainAxisSpacing: 4.0,
-                crossAxisSpacing: 4.0,
-                staggeredTiles: _staggeredTiles,
-                children: <Widget>[
-                  for(int i=0;i<_emergencyContacts.length;i++)
-                    new EmergencyCard(_emergencyContacts[i].iconAsset, _emergencyContacts[i].emergency, _emergencyContacts[i].number),
+        backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+              child: CustomScrollView(slivers: <Widget>[
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  HeaderWidget(EMERGENCY_CONTACTS, 12,
+                      DynamicTheme.of(context).data.textTheme.subtitle.color),
+                  Divider(
+                    color: Colors.white,
+                    endIndent: ViewPort.screenWidth * 0.44,
+                  ),
+                  // Transform(
+                  //   transform: Matrix4.identity()
+                  //   ..setEntry(1, 3, 0.001) // perspective
+                  //   ..rotateX(_offset.dy)
+                  //   ..rotateY(_offset.dx),
+                  //   alignment: FractionalOffset(0.57,0.57),
+                  //   child: Divider(
+                  //     height: 0.0,
+                  //     color: Colors.white,
+                  //     indent: ViewPort.screenWidth*0.49,
+                  //     endIndent: ViewPort.screenWidth*0.37,
+                  //   ),
+                  // )
+                  // RotationTransition(
+                  //   turns: AlwaysStoppedAnimation(750/360),
+                  //   child: Divider(
+                  //     height: 0.0,
+                  //     color: Colors.white,
+                  //     indent: 95,
+                  //     endIndent: ViewPort.screenWidth*0.55,
+                  //   ),
+                  // ),
                 ],
               ),
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    HeaderWidget(OTHER_CONTACTS,12,Colors.white),
-                    Divider(
-                      color: Colors.white,
-                      endIndent: ViewPort.screenWidth*0.44,
-                    ),
-                    // Transform(
-                    //   transform: Matrix4.identity()
-                    //   ..setEntry(1, 3, 0.001) // perspective
-                    //   ..rotateX(_offset.dy)
-                    //   ..rotateY(_offset.dx),
-                    //   alignment: FractionalOffset(0.57,0.57),
-                    //   child: Divider(
-                    //     height: 0.0,
-                    //     color: Colors.white,
-                    //     indent: ViewPort.screenWidth*0.49,
-                    //     endIndent: ViewPort.screenWidth*0.37,
-                    //   ),
-                    // )
-                    // RotationTransition(
-                    //   turns: AlwaysStoppedAnimation(750/360),
-                    //   child: Divider(
-                    //     height: 0.0,
-                    //     color: Colors.white,
-                    //     indent: 163.5,
-                    //     endIndent: 175.0,
-                    //   ),
-                    // ),
-                  ],
-                ),
+            ),
+            SliverStaggeredGrid.count(
+              crossAxisCount: 4,
+              mainAxisSpacing: 4.0,
+              crossAxisSpacing: 4.0,
+              staggeredTiles: _staggeredTiles,
+              children: <Widget>[
+                for (int i = 0; i < _emergencyContacts.length; i++)
+                  new EmergencyCard(
+                      _emergencyContacts[i].iconAsset,
+                      _emergencyContacts[i].emergency,
+                      _emergencyContacts[i].number),
+              ],
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  HeaderWidget(OTHER_CONTACTS, 12, Colors.white),
+                  Divider(
+                    color: Colors.white,
+                    endIndent: ViewPort.screenWidth * 0.44,
+                  ),
+                  // Transform(
+                  //   transform: Matrix4.identity()
+                  //   ..setEntry(1, 3, 0.001) // perspective
+                  //   ..rotateX(_offset.dy)
+                  //   ..rotateY(_offset.dx),
+                  //   alignment: FractionalOffset(0.57,0.57),
+                  //   child: Divider(
+                  //     height: 0.0,
+                  //     color: Colors.white,
+                  //     indent: ViewPort.screenWidth*0.49,
+                  //     endIndent: ViewPort.screenWidth*0.37,
+                  //   ),
+                  // )
+                  // RotationTransition(
+                  //   turns: AlwaysStoppedAnimation(750/360),
+                  //   child: Divider(
+                  //     height: 0.0,
+                  //     color: Colors.white,
+                  //     indent: 163.5,
+                  //     endIndent: 175.0,
+                  //   ),
+                  // ),
+                ],
               ),
-              SliverGrid(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                delegate: SliverChildListDelegate(
-                  [
-                    for(int i=0;i<contactCategoryList.length;i++)
-                      CategoryCard(_contactCategories[i]),
-                  ],
-                ),
-              )
-            ]
-          )
-        ),
-      )
-    ); 
+            ),
+            SliverGrid(
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              delegate: SliverChildListDelegate(
+                [
+                  for (int i = 0; i < contactCategoryList.length; i++)
+                    CategoryCard(_contactCategories[i]),
+                ],
+              ),
+            )
+          ])),
+        ));
   }
 }

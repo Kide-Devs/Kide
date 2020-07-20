@@ -2,9 +2,11 @@ import 'package:Kide/util/constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:share/share.dart';
 
 class PostDetailsPage extends StatefulWidget {
   final String title, body, image, subtitle, date, likes, views, postType, id;
@@ -49,8 +51,27 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).iconTheme.color,
         child: Icon(Icons.share),
-        onPressed: () {
+        onPressed: () async {
           // TODO : SHARE
+          print(widget.postType);
+          final DynamicLinkParameters parameters = DynamicLinkParameters(
+              uriPrefix: 'https://kiitdev.page.link',
+              link: Uri.parse(
+                  'https://kiitdev.page.link/post/?id=${widget.id}&type=${widget.postType}'),
+              androidParameters: AndroidParameters(
+                packageName: 'com.kiitdev.Kide',
+              ),
+              socialMetaTagParameters: SocialMetaTagParameters(
+                  description: widget.subtitle,
+                  title: widget.title,
+                  imageUrl: Uri.parse(widget.image)),
+              dynamicLinkParametersOptions: DynamicLinkParametersOptions(
+                  shortDynamicLinkPathLength: ShortDynamicLinkPathLength.short)
+              // NOT ALL ARE REQUIRED ===== HERE AS AN EXAMPLE =====
+              );
+
+          final Uri dynamicUrl = await parameters.buildUrl();
+          Share.share("${dynamicUrl}");
         },
       ),
       body: CustomScrollView(

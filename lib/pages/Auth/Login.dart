@@ -1,8 +1,7 @@
-import 'dart:ui';
+import 'dart:async';
 
 import 'package:Kide/MyApp.dart';
 import 'package:Kide/pages/Auth/SignUp.dart';
-import 'package:Kide/pages/OnBoarding/OnBoarding.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flare_flutter/flare_actor.dart';
@@ -94,7 +93,7 @@ class WeirdButtonPainter extends CustomPainter {
 
     paint.strokeWidth = 2;
     paint.strokeCap = StrokeCap.round;
-    paint.color = Colors.cyan.shade600;
+    paint.color = Colors.cyan.shade500;
 
     final path = Path();
     path
@@ -114,9 +113,9 @@ class WeirdButtonPainter extends CustomPainter {
 }
 
 class WeirdAuthButton extends StatelessWidget {
-  const WeirdAuthButton({Key key, this.onTap, this.text}) : super(key: key);
+  const WeirdAuthButton({Key key, this.onTap, this.child}) : super(key: key);
 
-  final onTap, text;
+  final onTap, child;
 
   @override
   Widget build(BuildContext context) {
@@ -127,15 +126,7 @@ class WeirdAuthButton extends StatelessWidget {
           height: 36,
           width: 100,
           child: Center(
-            child: Text(
-              text,
-              style: TextStyle(
-                fontSize: 17,
-                fontFamily: "EncodeSans",
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-              ),
-            ),
+            child: child,
           ),
         ),
         onTap: this.onTap,
@@ -157,199 +148,173 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  String gussAnimation = 'idle', msgToUser = '';
-  int inputSelection = 0;
+  String rocketAnimation = 'idle', msgToUser = '';
+  bool isLoading = false;
+
+  void showLoadingSpinner() {
+    setState(() {
+      isLoading = true;
+    });
+  }
+
+  void hideLoadingSpinner() {
+    setState(() {
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.black, Colors.indigo],
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-              ),
-            ),
+          FlareActor(
+            'lib/assets/flares/LoginPage.flr',
+            animation: rocketAnimation,
+            fit: BoxFit.cover,
           ),
           ListView(
             physics: BouncingScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(bottom: 20),
-                height: MediaQuery.of(context).size.height * 0.20,
-                child: Center(
-                  child: Image.asset(
-                    MAIN_KIDE_LOGO,
-                    gaplessPlayback: true,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-              Text(
-                KIDE_CAPS,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontFamily: "Michroma",
-                  color: Colors.white,
-                  letterSpacing: 20.0,
-                ),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.6,
-                child: Stack(
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(top: 20, bottom: 20),
-                      child: FlareActor(
-                        'lib/assets/flares/Guss.flr',
-                        animation: gussAnimation,
-                        callback: (name) {
-                          setState(() {
-                            if (gussAnimation == 'cover_eyes_in' &&
-                                inputSelection != 2) {
-                              gussAnimation = 'cover_eyes_out';
-                            } else if (gussAnimation == 'cover_eyes_in' &&
-                                inputSelection == 2) {
-                            } else {
-                              gussAnimation = 'idle';
-                            }
-                          });
-                        },
-                      ),
-                    ),
-                    Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          WeirdTextField(
-                            hintText: "Email",
-                            controller: _emailController,
-                            onTap: () => setState(() {
-                              inputSelection = 1;
-                              if (gussAnimation == 'cover_eyes_in' &&
-                                  inputSelection != 2) {
-                                gussAnimation = 'cover_eyes_out';
-                              }
-                            }),
-                          ),
-                          WeirdTextField(
-                            hintText: "Password",
-                            obscureText: true,
-                            controller: _passwordController,
-                            onTap: () => setState(() {
-                              inputSelection = 2;
-                              gussAnimation = 'cover_eyes_in';
-                            }),
-                          ),
-                          WeirdAuthButton(
-                            text: "Login",
-                            onTap: () async {
-                              FirebaseAuth _auth = FirebaseAuth.instance;
-
-                              String email = _emailController.text,
-                                  password = _passwordController.text;
-
-                              if (email.trim() == '' || password.trim() == '') {
-                                setState(() {
-                                  gussAnimation = 'fail';
-                                  msgToUser = "Fill all the details";
-                                });
-                                return null;
-                              }
-
-                              var _result;
-                              try {
-                                _result =
-                                    await _auth.signInWithEmailAndPassword(
-                                        email: email, password: password);
-                              } on PlatformException {
-                                setState(() {
-                                  msgToUser = "Invalid Credentials!";
-                                  gussAnimation = 'fail';
-                                });
-                                return null;
-                              }
-
-                              if (this.mounted) {
-                                setState(() {
-                                  gussAnimation = 'success';
-                                });
-                              }
-                              SharedPreferences prefs =
-                                  await SharedPreferences.getInstance();
-                              prefs.setBool('loggedOut', false);
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) => MyApp(),
-                                ),
-                              );
-                            },
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 14, bottom: 14),
-                            child: msgToUser != ''
-                                ? Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.redAccent,
-                                    ),
-                                    padding: EdgeInsets.all(6),
-                                    child: Text(
-                                      msgToUser,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  )
-                                : Container(),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Center(
-                child: Row(
+                height: MediaQuery.of(context).size.height * 0.64,
+                padding: EdgeInsets.only(left: 20, right: 20),
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                      "Not a registered user, ",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Quicksand',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    WeirdTextField(
+                      hintText: "Email",
+                      controller: _emailController,
                     ),
-                    GestureDetector(
-                      child: Text(
-                        "Sign Up",
-                        style: TextStyle(
-                          color: Colors.lightBlueAccent.shade100,
-                          fontFamily: 'Quicksand',
-                          fontSize: 17,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => SignUpPage()),
+                    WeirdTextField(
+                      hintText: "Password",
+                      obscureText: true,
+                      controller: _passwordController,
+                    ),
+                    WeirdAuthButton(
+                      child: isLoading
+                          ? SizedBox(
+                              child: CircularProgressIndicator(),
+                              height: 20,
+                              width: 20,
+                            )
+                          : Text(
+                              "Login",
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontFamily: "EncodeSans",
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
+                            ),
+                      onTap: () async {
+                        FirebaseAuth _auth = FirebaseAuth.instance;
+
+                        String email = _emailController.text,
+                            password = _passwordController.text;
+
+                        if (email.trim() == '' || password.trim() == '') {
+                          setState(() {
+                            rocketAnimation = 'fail';
+                            msgToUser = "Fill all the details";
+                          });
+                          return null;
+                        }
+
+                        showLoadingSpinner();
+
+                        try {
+                          await _auth.signInWithEmailAndPassword(
+                              email: email, password: password);
+                        } on PlatformException {
+                          setState(() {
+                            msgToUser = "Invalid Credentials!";
+                            rocketAnimation = 'fail';
+                            isLoading = false;
+                          });
+                          return null;
+                        }
+
+                        if (this.mounted) {
+                          setState(() {
+                            rocketAnimation = 'success';
+                          });
+                        }
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs.setBool('loggedOut', false);
+                        Timer(
+                          Duration(seconds: 4),
+                          () => Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => MyApp(),
+                            ),
+                          ),
                         );
                       },
                     ),
                   ],
+                ),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.18,
+                child: Center(
+                  child: msgToUser != ''
+                      ? Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.red.shade300,
+                          ),
+                          padding: EdgeInsets.all(6),
+                          child: Text(
+                            msgToUser,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        )
+                      : Container(),
+                ),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.10,
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Not a registered user, ",
+                        style: TextStyle(
+                          color: Colors.cyan.shade900,
+                          fontFamily: 'Quicksand',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      GestureDetector(
+                        child: Text(
+                          "Sign Up",
+                          style: TextStyle(
+                            color: Colors.blue.shade700,
+                            fontFamily: 'Quicksand',
+                            fontSize: 17,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                                builder: (context) => SignUpPage()),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

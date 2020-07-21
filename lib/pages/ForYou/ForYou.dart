@@ -2,6 +2,7 @@ import 'package:Kide/pages/ForYou/widgets/MustSeeWidget.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:Kide/config/Viewport.dart';
+
 // import 'package:Kide/providers/getEvents.dart';
 // import 'package:Kide/util/constants.dart';
 // import 'package:provider/provider.dart';
@@ -22,86 +23,105 @@ class ForYouPage extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Center(
-                  child: Column(
-                    children: <Widget>[
-                      Center(
+                  child: Column(children: <Widget>[
+                    Center(
                         child: Text(
-                        "MUST SEE PLACES",
-                        style: TextStyle(
+                      "MUST SEE PLACES",
+                      style: TextStyle(
                           fontSize: 20,
-                          color: DynamicTheme.of(context).data.textTheme.subtitle.color,
+                          color: DynamicTheme.of(context)
+                              .data
+                              .textTheme
+                              .subtitle
+                              .color,
                           fontWeight: FontWeight.w600,
                           letterSpacing: ViewPort.screenWidth * 0.01),
-                        )
-                      ),
-                      Center(
+                    )),
+                    Center(
                         child: Text(
-                        "IN KIIT CAMPUS",
-                        style: TextStyle(
+                      "IN KIIT CAMPUS",
+                      style: TextStyle(
                           fontSize: 10,
-                          color: DynamicTheme.of(context).data.textTheme.subtitle.color,
+                          color: DynamicTheme.of(context)
+                              .data
+                              .textTheme
+                              .subtitle
+                              .color,
                           fontWeight: FontWeight.w600,
                           letterSpacing: ViewPort.screenWidth * 0.02),
-                        )
-                      ),
-                      Divider(thickness: 3, color: Colors.blueAccent,),
-                      Container(height: 24,),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          MustSeeWidget(
-                            src: "https://cdn.kiit.ac.in/main/2017/09/19095700/campus1.jpg",
-                            title: "Sculpture Garden",
-                            marker: "sculpture_garden",
-                          ),
-                          Spacer(),
-                          MustSeeWidget(
-                            src: "https://i.ytimg.com/vi/MNANkwA2gNc/hqdefault.jpg",
-                            title: "KISS Temple",
-                            marker: "kiss_temple",
-                          ),
-                        ],
-                      ),
-                      Container(height: 24,),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          MustSeeWidget(
-                            src: "https://getmyuni.azureedge.net/college-images-test/kiit-school-of-management-ksom-bhubaneswar/fbe0c84d22054965b453a17ea4ad601d.png",
+                    )),
+                    Divider(
+                      thickness: 3,
+                      color: Colors.blueAccent,
+                    ),
+                    Container(
+                      height: 24,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MustSeeWidget(
+                          src:
+                              "https://cdn.kiit.ac.in/main/2017/09/19095700/campus1.jpg",
+                          title: "Sculpture Garden",
+                          marker: "sculpture_garden",
+                        ),
+                        Spacer(),
+                        MustSeeWidget(
+                          src:
+                              "https://i.ytimg.com/vi/MNANkwA2gNc/hqdefault.jpg",
+                          title: "KISS Temple",
+                          marker: "kiss_temple",
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: 24,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MustSeeWidget(
+                            src:
+                                "https://getmyuni.azureedge.net/college-images-test/kiit-school-of-management-ksom-bhubaneswar/fbe0c84d22054965b453a17ea4ad601d.png",
                             title: "KSOM Campus Pond",
-                            marker: "ksom_campus_pond"
-                          ),
-                          Spacer(),
-                          MustSeeWidget(
-                            src: "https://i.ytimg.com/vi/gVlEh_VfFvo/maxresdefault.jpg",
+                            marker: "ksom_campus_pond"),
+                        Spacer(),
+                        MustSeeWidget(
+                            src:
+                                "https://i.ytimg.com/vi/gVlEh_VfFvo/maxresdefault.jpg",
                             title: "Rose Garden",
-                            marker: "rose_garden"
-                          )
-                        ],
-                      ),
-                      Container(height: 24,),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          MustSeeWidget(
-                            src: "https://cdn.kiit.ac.in/main/2017/09/19095658/campus7.jpg",
-                            title: "Convention Center",
-                            marker: "campus_6",
-                          ),
-                          Spacer(),
-                          MustSeeWidget(
-                            src: "https://cdn.kiit.ac.in/main/2017/09/19095653/campus4.jpg",
-                            title: "Kathjodi Campus",
-                            marker: "campus_3",
-                          ),
-                        ],
-                      ),
-                      Container(height: 24,),
-                    ]
-                  ),
+                            marker: "rose_garden")
+                      ],
+                    ),
+                    Container(
+                      height: 24,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MustSeeWidget(
+                          src:
+                              "https://cdn.kiit.ac.in/main/2017/09/19095658/campus7.jpg",
+                          title: "Convention Center",
+                          marker: "campus_6",
+                        ),
+                        Spacer(),
+                        MustSeeWidget(
+                          src:
+                              "https://cdn.kiit.ac.in/main/2017/09/19095653/campus4.jpg",
+                          title: "Kathjodi Campus",
+                          marker: "campus_3",
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: 24,
+                    ),
+                  ]),
                 ),
               ],
             ),

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:Kide/pages/OnBoarding/OnBoarding.dart';
-import 'package:Kide/util/constants.dart';
+import 'package:Kide/util/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flare_flutter/flare_actor.dart';
@@ -89,7 +89,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 fontSize: 17,
                                 fontFamily: "EncodeSans",
                                 fontWeight: FontWeight.w600,
-                                color: Colors.white,
+                                color: AUTH_SUBMIT_COLOR,
                               ),
                             ),
                       onTap: () async {
@@ -165,14 +165,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       ? Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Colors.red.shade300,
+                            color: AUTH_ERROR_BUBBLE_BG,
                           ),
                           padding: EdgeInsets.all(6),
                           child: Text(
                             msgToUser,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AUTH_ERROR_BUBBLE_COLOR,
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                             ),
@@ -191,7 +191,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       Text(
                         "Already a user, ",
                         style: TextStyle(
-                          color: Colors.cyan.shade900,
+                          color: AUTH_MODE_SWITCH_INFO_COLOR,
                           fontFamily: 'Quicksand',
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -201,7 +201,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: Text(
                           "Sign In",
                           style: TextStyle(
-                            color: Colors.blue.shade700,
+                            color: AUTH_MODE_SWITCH_COLOR,
                             fontFamily: 'Quicksand',
                             fontSize: 17,
                             fontWeight: FontWeight.w800,
@@ -210,7 +210,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         onTap: () {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                                builder: (context) => LoginPage()),
+                              builder: (context) => LoginPage(),
+                            ),
                           );
                         },
                       ),

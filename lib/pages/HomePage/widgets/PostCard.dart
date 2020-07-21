@@ -138,7 +138,7 @@ class _PostCardState extends State<PostCard> {
                                 child: Text(
                                   widget.title,
                                   style: TextStyle(
-                                    fontSize: deviceHeight * 0.026,
+                                    fontSize: deviceHeight * 0.020,
                                     fontFamily: "Quicksand",
                                     fontWeight: FontWeight.w700,
                                     color: Colors.white,
@@ -161,7 +161,7 @@ class _PostCardState extends State<PostCard> {
                       style: TextStyle(
                         fontFamily: "Quicksand",
                         fontWeight: FontWeight.bold,
-                        fontSize: deviceHeight * 0.023,
+                        fontSize: deviceHeight * 0.017,
                         color: Colors.black,
                       ),
                     ),
@@ -191,7 +191,7 @@ class _PostCardState extends State<PostCard> {
                     formattedDate,
                     style: TextStyle(
                       color: DynamicTheme.of(context).data.indicatorColor,
-                      fontSize: deviceHeight * 0.023,
+                      fontSize: deviceHeight * 0.015,
                     ),
                   ),
                 ),
@@ -204,7 +204,7 @@ class _PostCardState extends State<PostCard> {
                         "${widget.views.toString()} Views",
                         style: TextStyle(
                           color: DynamicTheme.of(context).data.indicatorColor,
-                          fontSize: deviceHeight * 0.023,
+                          fontSize: deviceHeight * 0.015,
                         ),
                       ),
                     ],

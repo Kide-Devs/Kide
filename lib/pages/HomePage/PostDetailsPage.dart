@@ -69,9 +69,11 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                   shortDynamicLinkPathLength: ShortDynamicLinkPathLength.short)
               // NOT ALL ARE REQUIRED ===== HERE AS AN EXAMPLE =====
               );
-
-          final Uri dynamicUrl = await parameters.buildUrl();
-          Share.share("${dynamicUrl}");
+          final ShortDynamicLink shortDynamicLink =
+              await parameters.buildShortLink();
+          final Uri shortUrl = shortDynamicLink.shortUrl;
+          print(shortUrl);
+          Share.share("${shortUrl}");
         },
       ),
       body: CustomScrollView(

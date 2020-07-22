@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:Kide/MyApp.dart';
 import 'package:Kide/pages/Auth/SignUp.dart';
-import 'package:Kide/util/constants.dart';
+import 'package:Kide/util/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class WeirdTextFieldPainter extends CustomPainter {
 
     paint.strokeWidth = 2;
     paint.strokeCap = StrokeCap.round;
-    paint.color = Colors.cyanAccent.shade200;
+    paint.color = AUTH_INPUT_BORDER_COLOR;
 
     path.lineTo(20, 0);
     path.lineTo(size.width - 20, 0);
@@ -27,7 +27,7 @@ class WeirdTextFieldPainter extends CustomPainter {
     path.lineTo(0, size.height / 2);
     path.lineTo(20, 0);
 
-    canvas.drawPath(path, Paint()..color = Colors.black54);
+    canvas.drawPath(path, Paint()..color = AUTH_INPUT_BG);
 
     canvas.drawLine(Offset(20, 0), Offset(size.width - 20, 0), paint);
     canvas.drawLine(
@@ -65,7 +65,7 @@ class WeirdTextField extends StatelessWidget {
           controller: this.controller,
           onTap: this.onTap,
           style: TextStyle(
-            color: Colors.white,
+            color: AUTH_INPUT_COLOR,
             fontSize: 18,
             fontFamily: "EncodeSans",
           ),
@@ -73,7 +73,7 @@ class WeirdTextField extends StatelessWidget {
             border: InputBorder.none,
             hintText: this.hintText,
             hintStyle: TextStyle(
-              color: Colors.cyan.shade100,
+              color: AUTH_INPUT_HINT_COLOR,
               fontSize: 18,
               fontWeight: FontWeight.w600,
               fontFamily: "EncodeSans",
@@ -93,7 +93,7 @@ class WeirdButtonPainter extends CustomPainter {
 
     paint.strokeWidth = 2;
     paint.strokeCap = StrokeCap.round;
-    paint.color = Colors.cyan.shade500;
+    paint.color = AUTH_SUBMIT_BG;
 
     final path = Path();
     path
@@ -205,7 +205,7 @@ class _LoginPageState extends State<LoginPage> {
                                 fontSize: 17,
                                 fontFamily: "EncodeSans",
                                 fontWeight: FontWeight.w600,
-                                color: Colors.white,
+                                color: AUTH_SUBMIT_COLOR,
                               ),
                             ),
                       onTap: () async {
@@ -264,14 +264,14 @@ class _LoginPageState extends State<LoginPage> {
                       ? Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Colors.red.shade300,
+                            color: AUTH_ERROR_BUBBLE_BG,
                           ),
                           padding: EdgeInsets.all(6),
                           child: Text(
                             msgToUser,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Colors.white,
+                              color: AUTH_ERROR_BUBBLE_COLOR,
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                             ),
@@ -290,7 +290,7 @@ class _LoginPageState extends State<LoginPage> {
                       Text(
                         "Not a registered user, ",
                         style: TextStyle(
-                          color: Colors.cyan.shade900,
+                          color: AUTH_MODE_SWITCH_INFO_COLOR,
                           fontFamily: 'Quicksand',
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -300,7 +300,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text(
                           "Sign Up",
                           style: TextStyle(
-                            color: Colors.blue.shade700,
+                            color: AUTH_MODE_SWITCH_COLOR,
                             fontFamily: 'Quicksand',
                             fontSize: 17,
                             fontWeight: FontWeight.w800,
@@ -309,7 +309,8 @@ class _LoginPageState extends State<LoginPage> {
                         onTap: () {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                                builder: (context) => SignUpPage()),
+                              builder: (context) => SignUpPage(),
+                            ),
                           );
                         },
                       ),

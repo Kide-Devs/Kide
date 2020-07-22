@@ -26,13 +26,6 @@ class _HomePageState extends State<HomePage>
     super.initState();
   }
 
-  _changeBrightness() {
-    DynamicTheme.of(context).setBrightness(
-        Theme.of(context).brightness == Brightness.dark
-            ? Brightness.light
-            : Brightness.dark);
-  }
-
   @override
   bool get wantKeepAlive => true;
 

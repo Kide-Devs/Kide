@@ -1,3 +1,4 @@
+import 'package:Kide/util/colors.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -79,7 +80,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            backgroundColor: Colors.grey.shade700,
+            backgroundColor: POST_APPBAR_BG,
             elevation: 0,
             centerTitle: true,
             leading: Padding(

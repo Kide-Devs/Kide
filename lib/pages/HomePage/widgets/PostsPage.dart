@@ -80,7 +80,6 @@ class _PostsPageState extends State<PostsPage>
   }
 
   onPostHomeRefresh() async {
-
     setState(() {
       isLoading = true;
     });
@@ -131,7 +130,7 @@ class _PostsPageState extends State<PostsPage>
                       itemBuilder: (context, index) {
                         return PostCard(
                           postType: widget.postType,
-                          id: posts[index].data['id'],
+                          id: posts[index].documentID,
                           title: posts[index].data['title'],
                           subtitle: posts[index].data['subtitle'],
                           image: posts[index].data['imageUrl'],

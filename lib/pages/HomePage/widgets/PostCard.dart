@@ -9,7 +9,6 @@ import 'package:intl/intl.dart';
 import 'package:path/path.dart' as p;
 
 class PostCard extends StatefulWidget {
-
   final String title, subtitle, image, body, id, views, likes, postType;
   final date;
 
@@ -70,90 +69,90 @@ class _PostCardState extends State<PostCard> {
           children: <Widget>[
             widget.image != null
                 ? ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Stack(
-                children: <Widget>[
-                  Hero(
-                    tag: widget.image,
-                    // Any tag that needs to be unique like URL of image.
-                    child: Container(
-                      width: double.infinity,
-                      height: deviceHeight * 0.32,
-                      child: CachedNetworkImage(
-                        imageUrl: widget.image,
-                        fit: BoxFit.fill,
-                        placeholder: (context, url) => Stack(
-                          alignment: Alignment.center,
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 40),
-                              child: Image.asset(
-                                POSTCARD_IMAGE_PLACEHOLDER_ASSET_PNG,
-                              ),
-                            ),
-                            SizedBox(
-                              height: deviceHeight * 0.32,
-                              width: double.infinity,
-                              child: LinearProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation(
-                                  Colors.grey.withOpacity(0.5),
-                                ),
-                                backgroundColor: Colors.transparent,
-                              ),
-                            ),
-                          ],
-                        ),
-                        errorWidget: (context, url, error) => SizedBox(
-                          child: Icon(Icons.warning),
-                          width: 90,
-                          height: 90,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: deviceHeight * 0.32,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      gradient: LinearGradient(
-                        begin: FractionalOffset.bottomCenter,
-                        end: FractionalOffset.center,
-                        colors: [
-                          Colors.black.withOpacity(0.55),
-                          Colors.black.withOpacity(0.15)
-                        ],
-                        stops: [0.5, 3],
-                      ),
-                    ),
-                    alignment: Alignment.bottomCenter,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                    borderRadius: BorderRadius.circular(10),
+                    child: Stack(
                       children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: deviceHeight * 0.125,
-                            left: 8.0,
-                            right: 8.0,
-                            bottom: 3,
-                          ),
-                          child: Text(
-                            widget.title,
-                            style: TextStyle(
-                              fontSize: deviceHeight * 0.026,
-                              fontFamily: "Quicksand",
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white,
+                        Hero(
+                          tag: widget.image,
+                          // Any tag that needs to be unique like URL of image.
+                          child: Container(
+                            width: double.infinity,
+                            height: deviceHeight * 0.32,
+                            child: CachedNetworkImage(
+                              imageUrl: widget.image,
+                              fit: BoxFit.fill,
+                              placeholder: (context, url) => Stack(
+                                alignment: Alignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 40),
+                                    child: Image.asset(
+                                      POSTCARD_IMAGE_PLACEHOLDER_ASSET_PNG,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: deviceHeight * 0.32,
+                                    width: double.infinity,
+                                    child: LinearProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation(
+                                        Colors.grey.withOpacity(0.5),
+                                      ),
+                                      backgroundColor: Colors.transparent,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              errorWidget: (context, url, error) => SizedBox(
+                                child: Icon(Icons.warning),
+                                width: 90,
+                                height: 90,
+                              ),
                             ),
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        Container(
+                          height: deviceHeight * 0.32,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            gradient: LinearGradient(
+                              begin: FractionalOffset.bottomCenter,
+                              end: FractionalOffset.center,
+                              colors: [
+                                Colors.black.withOpacity(0.55),
+                                Colors.black.withOpacity(0.15)
+                              ],
+                              stops: [0.5, 3],
+                            ),
+                          ),
+                          alignment: Alignment.bottomCenter,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  top: deviceHeight * 0.125,
+                                  left: 8.0,
+                                  right: 8.0,
+                                  bottom: 3,
+                                ),
+                                child: Text(
+                                  widget.title,
+                                  style: TextStyle(
+                                    fontSize: deviceHeight * 0.020,
+                                    fontFamily: "Quicksand",
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                  ),
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-            )
+                  )
                 : Padding(
                     padding:
                         const EdgeInsets.only(left: 8.0, right: 8.0, top: 15.0),
@@ -162,7 +161,7 @@ class _PostCardState extends State<PostCard> {
                       style: TextStyle(
                         fontFamily: "Quicksand",
                         fontWeight: FontWeight.bold,
-                        fontSize: deviceHeight * 0.023,
+                        fontSize: deviceHeight * 0.017,
                         color: Colors.black,
                       ),
                     ),
@@ -192,7 +191,7 @@ class _PostCardState extends State<PostCard> {
                     formattedDate,
                     style: TextStyle(
                       color: DynamicTheme.of(context).data.indicatorColor,
-                      fontSize: deviceHeight * 0.023,
+                      fontSize: deviceHeight * 0.015,
                     ),
                   ),
                 ),
@@ -205,7 +204,7 @@ class _PostCardState extends State<PostCard> {
                         "${widget.views.toString()} Views",
                         style: TextStyle(
                           color: DynamicTheme.of(context).data.indicatorColor,
-                          fontSize: deviceHeight * 0.023,
+                          fontSize: deviceHeight * 0.015,
                         ),
                       ),
                     ],

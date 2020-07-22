@@ -26,6 +26,10 @@ dependencies:
   sqflite:
   flare_flutter:
   firebase_auth:
+  firebase_dynamic_links: ^0.5.1
+  share: ^0.6.4+3
+
+
 
 dev_dependencies:
   flutter_launcher_icons: ^0.7.4

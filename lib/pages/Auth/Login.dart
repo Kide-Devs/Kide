@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:Kide/MyApp.dart';
 import 'package:Kide/pages/Auth/SignUp.dart';
 import 'package:Kide/util/colors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
@@ -225,8 +226,20 @@ class _LoginPageState extends State<LoginPage> {
                         showLoadingSpinner();
 
                         try {
-                          await _auth.signInWithEmailAndPassword(
+                          var _result = await _auth.signInWithEmailAndPassword(
                               email: email, password: password);
+                          await Firestore.instance
+                              .collection('userInfo')
+                              .document(_result.user.uid)
+                              .get()
+                              .then((value) async {
+                            SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            prefs.setString('Name', value['fullName']);
+                            prefs.setString('Email', value['email']);
+
+                            print(value['fullName']);
+                          });
                         } on PlatformException {
                           setState(() {
                             msgToUser = "Invalid Credentials!";

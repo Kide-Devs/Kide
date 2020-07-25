@@ -145,6 +145,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                         prefs.setBool('loggedOut', false);
+
                         Timer(
                           Duration(seconds: 4),
                           () => Navigator.of(context).pushReplacement(

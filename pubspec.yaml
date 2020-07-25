@@ -28,6 +28,8 @@ dependencies:
   firebase_auth:
   firebase_dynamic_links: ^0.5.1
   share: ^0.6.4+3
+  day_night_switcher:
+  flutter_email_sender:
 
 
 

@@ -2,6 +2,7 @@ import 'package:Kide/pages/Auth/Login.dart';
 import 'package:Kide/pages/HomePage/widgets/PostsPage.dart';
 import 'package:Kide/pages/MorePage/More.dart';
 import 'package:Kide/pages/Preferences/PreferencesPage.dart';
+import 'package:Kide/pages/Profile/profile.dart';
 import 'package:Kide/pages/SettingsPage/settings.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
@@ -47,6 +48,7 @@ class _HomePageState extends State<HomePage>
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
     return new Scaffold(
       drawer: Drawer(
@@ -78,12 +80,12 @@ class _HomePageState extends State<HomePage>
                               height: 8,
                             ),
                             Text(
-                              name,
+                              'name',
                               style: TextStyle(
                                   fontSize: 19, fontFamily: "EncodeSans"),
                             ),
                             Text(
-                              email,
+                              'email',
                               style: TextStyle(
                                   fontSize: 17, fontFamily: "EncodeSans"),
                             )
@@ -214,6 +216,17 @@ class _HomePageState extends State<HomePage>
                   },
                   icon: Icon(Icons.clear_all)),
               actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.person),
+                  color: DynamicTheme.of(context).data.iconTheme.color,
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ProfilePage(),
+                      ),
+                    ); //_changeBrigh
+                  },
+                ),
                 IconButton(
                   icon: Icon(
                     Icons.more_vert,

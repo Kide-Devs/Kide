@@ -1,26 +1,34 @@
 import 'dart:async';
-
+import 'package:Kide/pages/Auth/Login.dart';
 import 'package:Kide/pages/OnBoarding/OnBoarding.dart';
-import 'package:Kide/pages/Profile/AddProfile.dart';
 import 'package:Kide/util/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'Login.dart';
-
-class SignUpPage extends StatefulWidget {
+class AddProfile extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _SignUpPageState();
+  _AddProfileState createState() => _AddProfileState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+class _AddProfileState extends State<AddProfile> {
+  String uid;
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseAuth.instance.currentUser().then((value) {
+      setState(() {
+        uid = value.uid;
+      });
+    });
+  }
+
+  final TextEditingController _rollController = TextEditingController();
+  final TextEditingController _cgpaController = TextEditingController();
+  final TextEditingController _batchController = TextEditingController();
+  final TextEditingController _branchController = TextEditingController();
 
   String rocketAnimation = 'idle', msgToUser = '';
   bool isLoading = false;
@@ -65,17 +73,20 @@ class _SignUpPageState extends State<SignUpPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     WeirdTextField(
-                      hintText: "Full Name",
-                      controller: _nameController,
+                      hintText: "Roll",
+                      controller: _rollController,
                     ),
                     WeirdTextField(
-                      hintText: "Email",
-                      controller: _emailController,
+                      hintText: "CGPA",
+                      controller: _cgpaController,
                     ),
                     WeirdTextField(
-                      hintText: "Password",
-                      obscureText: true,
-                      controller: _passwordController,
+                      hintText: "Batch",
+                      controller: _batchController,
+                    ),
+                    WeirdTextField(
+                      hintText: "Branch",
+                      controller: _branchController,
                     ),
                     WeirdAuthButton(
                       child: isLoading
@@ -85,7 +96,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               width: 20,
                             )
                           : Text(
-                              "Sign Up",
+                              "Continue",
                               style: TextStyle(
                                 fontSize: 17,
                                 fontFamily: "EncodeSans",
@@ -94,64 +105,35 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                             ),
                       onTap: () async {
-                        FirebaseAuth _auth = FirebaseAuth.instance;
-
-                        String email = _emailController.text,
-                            password = _passwordController.text,
-                            fullName = _nameController.text;
-                        if (email.trim() == '' ||
-                            password.trim() == '' ||
-                            fullName.trim() == '') {
+                        if (_rollController.text.trim() == '' ||
+                            _cgpaController.text.trim() == '' ||
+                            _branchController.text.trim() == '' ||
+                            _batchController.text.trim() == '') {
                           setState(() {
                             rocketAnimation = 'fail';
                             msgToUser = "Fill all the details";
                           });
                           return null;
                         }
-
                         showLoadingSpinner();
-                        var _result;
-                        try {
-                          _result = await _auth.createUserWithEmailAndPassword(
-                              email: email, password: password);
-                        } on PlatformException catch (e) {
-                          print("Registration Error Code:");
-                          print(e.code);
-                          if (e.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
-                            setState(() {
-                              msgToUser = "Email already registered!";
-                              rocketAnimation = 'fail';
-                              isLoading = false;
-                            });
-                          } else if (e.code == 'ERROR_WEAK_PASSWORD') {
-                            setState(() {
-                              msgToUser = "Password at least 6 chars!";
-                              rocketAnimation = 'fail';
-                              isLoading = false;
-                            });
-                          }
-                          return null;
-                        }
 
                         setState(() {
                           rocketAnimation = 'success';
                         });
                         await Firestore.instance
                             .collection('userInfo')
-                            .document(_result.user.uid)
-                            .setData({
-                          "fullName": fullName,
-                          "email": email,
+                            .document(uid)
+                            .updateData({
+                              "batch": _batchController.text,
+                              "branch": _branchController.text,
+                              "cgpa": _cgpaController.text,
+                              "roll": _rollController.text,
                         });
-                        SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                        prefs.setBool('loggedOut', false);
-                        prefs.setString('Email', email);
                         Timer(
                           Duration(seconds: 4),
                           () => Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) => AddProfile(),
+                              builder: (context) => OnboardingMainPage(),
                             ),
                           ),
                         );

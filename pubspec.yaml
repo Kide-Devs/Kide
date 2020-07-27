@@ -60,6 +60,7 @@ flutter:
    - ./lib/assets/Founder_sir.jpeg #
    - ./lib/assets/image-placeholder.png
    - ./lib/assets/flares/LoginPage.flr
+   - ./lib/assets/
 
   fonts:
     - family: Quicksand

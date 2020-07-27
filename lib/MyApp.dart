@@ -262,7 +262,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               height: 8,
                             ),
                             Text(
-                              name,
+                              'name',
                               style: TextStyle(
                                   fontSize: 19, fontFamily: "EncodeSans"),
                             ),
@@ -270,7 +270,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               height: 3,
                             ),
                             Text(
-                              email,
+                              'email',
                               style: TextStyle(
                                   fontSize: 17, fontFamily: "EncodeSans"),
                             )

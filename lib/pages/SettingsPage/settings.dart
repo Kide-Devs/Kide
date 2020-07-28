@@ -1,8 +1,11 @@
+import 'package:Kide/pages/Profile/EditProfile.dart';
+import 'package:Kide/pages/Profile/profile.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:day_night_switcher/day_night_switcher.dart';
 // import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:Kide/AboutUsPage.dart/AboutUs.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -64,6 +67,12 @@ class _SettingsState extends State<Settings> {
               child: Column(
                 children: <Widget>[
                   ListTile(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfilePage()));
+                    },
                     leading: Icon(Icons.person),
                     title: Text(
                       "Profile Settings",
@@ -71,8 +80,14 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                   ListTile(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditProfile()));
+                      },
                       title: Text(
-                        "Edit Profile Pic ",
+                        "Edit Profile  ",
                         style: TextStyle(fontFamily: "Quicksand", fontSize: 20),
                       ),
                       leading: Icon(Icons.camera)),
@@ -152,6 +167,10 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                   ListTile(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => AboutUs()));
+                      },
                       title: Text(
                         "About Us",
                         style: TextStyle(fontFamily: "Quicksand", fontSize: 20),

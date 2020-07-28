@@ -6,6 +6,7 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EditProfile extends StatefulWidget {
   @override
@@ -88,7 +89,7 @@ class _EditProfileState extends State<EditProfile> {
             height: 30,
           ),
           ListTile(
-            leading: Icon(Icons.list),
+            leading: Icon(Icons.confirmation_number),
             title: Text(
               'Roll:',
               style: TextStyle(fontSize: 22, fontFamily: "EncodeSans"),
@@ -129,9 +130,9 @@ class _EditProfileState extends State<EditProfile> {
                               .collection('userInfo')
                               .document(uid)
                               .updateData({
-                                "roll":roll,
-                              });
-                              Navigator.of(context).pop();
+                            "roll": roll,
+                          });
+                          Navigator.of(context).pop();
                         },
                         child: Text('Update'),
                       ),
@@ -177,14 +178,17 @@ class _EditProfileState extends State<EditProfile> {
                         child: Text('Cancel'),
                       ),
                       FlatButton(
-                        onPressed: () {
-                           Firestore.instance
+                        onPressed: () async {
+                          Firestore.instance
                               .collection('userInfo')
                               .document(uid)
                               .updateData({
-                                "fullName":name,
-                              });
-                              Navigator.of(context).pop();
+                            "fullName": name,
+                          });
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          prefs.setString('Name', name);
+                          Navigator.of(context).pop();
                         },
                         child: Text('Update'),
                       ),
@@ -232,13 +236,13 @@ class _EditProfileState extends State<EditProfile> {
                       ),
                       FlatButton(
                         onPressed: () {
-                           Firestore.instance
+                          Firestore.instance
                               .collection('userInfo')
                               .document(uid)
                               .updateData({
-                                "cgpa":cgpa,
-                              });
-                              Navigator.of(context).pop();
+                            "cgpa": cgpa,
+                          });
+                          Navigator.of(context).pop();
                         },
                         child: Text('Update'),
                       ),
@@ -285,13 +289,11 @@ class _EditProfileState extends State<EditProfile> {
                       ),
                       FlatButton(
                         onPressed: () {
-                           Firestore.instance
+                          Firestore.instance
                               .collection('userInfo')
                               .document(uid)
-                              .updateData({
-                                "batch":batch
-                              });
-                              Navigator.of(context).pop();
+                              .updateData({"batch": batch});
+                          Navigator.of(context).pop();
                         },
                         child: Text('Update'),
                       ),
@@ -338,13 +340,13 @@ class _EditProfileState extends State<EditProfile> {
                       ),
                       FlatButton(
                         onPressed: () {
-                           Firestore.instance
+                          Firestore.instance
                               .collection('userInfo')
                               .document(uid)
                               .updateData({
-                                "branch":branch,
-                              });
-                              Navigator.of(context).pop();
+                            "branch": branch,
+                          });
+                          Navigator.of(context).pop();
                         },
                         child: Text('Update'),
                       ),

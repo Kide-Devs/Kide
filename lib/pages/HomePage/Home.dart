@@ -5,11 +5,13 @@ import 'package:Kide/pages/Preferences/PreferencesPage.dart';
 import 'package:Kide/pages/Profile/profile.dart';
 import 'package:Kide/pages/SettingsPage/settings.dart';
 import 'package:Kide/util/constants.dart';
+import 'package:auro_avatar/auro_avatar.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
+import 'package:Kide/AboutUsPage.dart/AboutUs.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:share/share.dart';
@@ -70,22 +72,24 @@ class _HomePageState extends State<HomePage>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             ClipRRect(
-                              child: Image.asset(
-                                MAIN_KIDE_LOGO,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.10,
-                              ),
-                            ),
+                                child: InitialNameAvatar(
+                              name,
+                              circleAvatar: true,
+                              backgroundColor: Colors.orange,
+                              foregroundColor: Colors.white,
+                              textSize: 32,
+                              borderColor: Colors.grey,
+                            )),
                             SizedBox(
                               height: 8,
                             ),
                             Text(
-                              'name',
+                              name,
                               style: TextStyle(
                                   fontSize: 19, fontFamily: "EncodeSans"),
                             ),
                             Text(
-                              'email',
+                              email,
                               style: TextStyle(
                                   fontSize: 17, fontFamily: "EncodeSans"),
                             )
@@ -95,6 +99,13 @@ class _HomePageState extends State<HomePage>
                     ),
                   ),
                   ListTile(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => ProfilePage(),
+                        ),
+                      );
+                    },
                     title: Text(
                       "Your Profile",
                       style: TextStyle(fontFamily: "EncodeSans", fontSize: 17),
@@ -140,6 +151,10 @@ class _HomePageState extends State<HomePage>
                             TextStyle(fontFamily: "EncodeSans", fontSize: 16),
                       )),
                   ListTile(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => AboutUs()));
+                    },
                     title: Text(
                       "About Us",
                       style: TextStyle(fontFamily: "EncodeSans", fontSize: 16),
@@ -214,19 +229,11 @@ class _HomePageState extends State<HomePage>
                   onPressed: () {
                     _scaffoldKey.currentState.openDrawer();
                   },
-                  icon: Icon(Icons.clear_all)),
+                  icon: Icon(
+                    Icons.clear_all,
+                    color: DynamicTheme.of(context).data.iconTheme.color,
+                  )),
               actions: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.person),
-                  color: DynamicTheme.of(context).data.iconTheme.color,
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ProfilePage(),
-                      ),
-                    ); //_changeBrigh
-                  },
-                ),
                 IconButton(
                   icon: Icon(
                     Icons.more_vert,

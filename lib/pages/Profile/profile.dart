@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:auro_avatar/auro_avatar.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -83,11 +84,14 @@ class _ProfilePageState extends State<ProfilePage> {
             height: 20,
           ),
           Center(
-            child: CircleAvatar(
-              radius: 75,
-              backgroundImage: AssetImage("lib/assets/male.png"),
-            ),
-          ),
+              child: InitialNameAvatar(
+            name,
+            circleAvatar: true,
+            backgroundColor: Colors.orange,
+            foregroundColor: Colors.white,
+            textSize: 32,
+            borderColor: Colors.grey,
+          )),
           SizedBox(
             height: 10,
           ),

@@ -219,7 +219,9 @@ class _LoginPageState extends State<LoginPage> {
                       onTap: () async {
                         FirebaseAuth _auth = FirebaseAuth.instance;
 
-                        String email = _emailController.text,
+                        String email = widget.emailController != null
+                                ? widget.emailController.text
+                                : _emailController.text,
                             password = _passwordController.text;
 
                         if (email.trim() == '' || password.trim() == '') {

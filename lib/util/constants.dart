@@ -1,4 +1,4 @@
-const String VERSION = "2.1.1+21D";
+const String VERSION = "2.1.1+29D";
 const String MAPS =  "Maps";
 const String CONTACTS =  "Contacts";
 const String HOME =  "Home";

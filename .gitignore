@@ -75,3 +75,5 @@
 # Ignoring App specific values
 *pubspec.lock
 *key.properties
+android/key.properties
+android/app/kide_key.jks

@@ -1,10 +1,10 @@
 import 'package:Kide/pages/Profile/EditProfile.dart';
 import 'package:Kide/util/constants.dart';
+import 'package:Kide/widgets/CircularAvatar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:auro_avatar/auro_avatar.dart';
 import 'package:flutter/rendering.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -92,8 +92,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: [
                   InitialNameAvatar(
                     name,
-                    circleAvatar: true,
-                    backgroundColor: Colors.orange,
+                    backgroundColor: Colors.tealAccent.shade700,
                     foregroundColor: Colors.white,
                     textSize: 32,
                     borderSize: 10,

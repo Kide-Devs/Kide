@@ -5,7 +5,7 @@ import 'package:Kide/pages/Preferences/PreferencesPage.dart';
 import 'package:Kide/pages/Profile/profile.dart';
 import 'package:Kide/pages/SettingsPage/settings.dart';
 import 'package:Kide/util/constants.dart';
-import 'package:auro_avatar/auro_avatar.dart';
+import 'package:Kide/widgets/CircularAvatar.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
@@ -72,25 +72,24 @@ class _HomePageState extends State<HomePage>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             ClipRRect(
-                                child: InitialNameAvatar(
-                              name,
-                              circleAvatar: true,
-                              backgroundColor: Colors.orange,
-                              foregroundColor: Colors.white,
-                              textSize: 32,
-                              borderSize: 5,
-                              borderColor: Colors.grey.withOpacity(0.4),
-                            )),
+                              child: InitialNameAvatar(
+                                name,
+                                backgroundColor: Colors.tealAccent.shade700,
+                                foregroundColor: Colors.white,
+                                textSize: 32,
+                                borderSize: 10,
+                                borderColor: Colors.grey.withOpacity(0.4),
+                              ),
+                            ),
                             SizedBox(
                               height: 8,
                             ),
                             Text(
                               name,
                               style: TextStyle(
-                                fontSize: 19,
-                                fontFamily: "Quicksand",
-                                fontWeight: FontWeight.w600
-                              ),
+                                  fontSize: 19,
+                                  fontFamily: "Quicksand",
+                                  fontWeight: FontWeight.w600),
                             ),
                             Text(
                               email,

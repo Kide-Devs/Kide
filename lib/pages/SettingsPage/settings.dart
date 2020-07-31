@@ -57,7 +57,7 @@ class _SettingsState extends State<Settings> {
           padding: EdgeInsets.only(left: 12, right: 12, top: 15),
           children: <Widget>[
             Text(
-              "Main",
+              "General",
               style: TextStyle(fontSize: 20),
             ),
             SizedBox(

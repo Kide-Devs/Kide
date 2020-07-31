@@ -20,7 +20,7 @@ jobs:
         KEY_JKS: ${{ secrets.KEY_JKS }}
         KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
-    - run: echo $KEY_JKS > android/key.jks && flutter pub get && flutter build apk --release
+    - run: echo -n $KEY_JKS | base64 -di > android/key.jks && flutter pub get && flutter build apk --release
     - uses: actions/upload-artifact@v1
       with:
         name: release-apk

@@ -1,10 +1,12 @@
 import 'package:Kide/pages/Auth/Login.dart';
+import 'package:Kide/pages/Profile/profile.dart';
 import 'package:Kide/pages/SettingsPage/settings.dart';
+import 'package:Kide/widgets/CircularAvatar.dart';
 import 'package:share/share.dart';
 
 import 'package:Kide/pages/ForYou/ForYou.dart';
 import 'package:Kide/providers/getGameDetails.dart';
-import 'package:Kide/widgets/HeaderWidget.dart';
+import 'package:Kide/AboutUsPage.dart/AboutUs.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,14 +16,12 @@ import 'package:Kide/pages/ContactsPage/ContactList.dart';
 import 'package:Kide/pages/EventsPage/BookmarksPage.dart';
 import 'package:Kide/pages/EventsPage/DetailsPage.dart';
 import 'package:Kide/pages/MorePage/MoreDetails.dart';
-import 'package:Kide/providers/getEvents.dart';
 import 'package:Kide/providers/bookmarks.dart';
 import 'package:Kide/providers/getMarkers.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:Kide/pages/ContactsPage/Contacts.dart';
-import 'package:Kide/pages/EventsPage/SubEvents.dart';
 import 'package:Kide/pages/HomePage/Home.dart';
 import 'package:Kide/pages/MapsPage/Maps.dart';
 import 'package:Kide/pages/MorePage/More.dart';
@@ -70,7 +70,7 @@ class _MyAppState extends State<MyApp> {
   Future<void> _handleDeepLink(PendingDynamicLinkData data) async {
     final Uri deepLink = data?.link;
     if (deepLink != null) {
-      print('_handleDeepLink | deeplink: ${deepLink}');
+      print('_handleDeepLink | deeplink: $deepLink');
       var isPost = deepLink.pathSegments.contains('post');
       print(isPost);
       print("-----");
@@ -169,6 +169,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String name = '';
   String email = '';
+
   @override
   void initState() {
     // TODO: implement initState
@@ -200,6 +201,13 @@ class _MyHomePageState extends State<MyHomePage> {
     "For You",
     MORE
   ];
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    fetchName();
+  }
 
   // void showUserSelectionDialog(BuildContext context) async {
   //   showDialog(
@@ -252,17 +260,20 @@ class _MyHomePageState extends State<MyHomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             ClipRRect(
-                              child: Image.asset(
-                                MAIN_KIDE_LOGO,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.10,
+                              child: InitialNameAvatar(
+                                name,
+                                backgroundColor: Colors.orange,
+                                foregroundColor: Colors.white,
+                                textSize: 32,
+                                borderColor: Colors.grey,
+                                borderSize: 10,
                               ),
                             ),
                             SizedBox(
                               height: 8,
                             ),
                             Text(
-                              'name',
+                              name,
                               style: TextStyle(
                                   fontSize: 19, fontFamily: "EncodeSans"),
                             ),
@@ -270,7 +281,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               height: 3,
                             ),
                             Text(
-                              'email',
+                              email,
                               style: TextStyle(
                                   fontSize: 17, fontFamily: "EncodeSans"),
                             )
@@ -280,6 +291,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   ListTile(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => ProfilePage(),
+                        ),
+                      );
+                    },
                     title: Text(
                       "Your Profile",
                       style: TextStyle(fontFamily: "EncodeSans", fontSize: 17),
@@ -317,7 +335,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             await parameters.buildShortLink();
                         final Uri shortUrl = shortDynamicLink.shortUrl;
                         print(shortUrl);
-                        Share.share("${shortUrl}");
+                        Share.share("$shortUrl");
                       },
                       leading: Icon(Icons.archive),
                       title: Text(
@@ -326,6 +344,10 @@ class _MyHomePageState extends State<MyHomePage> {
                             TextStyle(fontFamily: "EncodeSans", fontSize: 16),
                       )),
                   ListTile(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => AboutUs()));
+                    },
                     title: Text(
                       "About Us",
                       style: TextStyle(fontFamily: "EncodeSans", fontSize: 16),
@@ -394,7 +416,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: () {
                     _scaffoldKey.currentState.openDrawer();
                   },
-                  icon: Icon(Icons.clear_all)),
+                  icon: Icon(
+                    Icons.clear_all,
+                    color: DynamicTheme.of(context).data.iconTheme.color,
+                  )),
               backgroundColor: DynamicTheme.of(context).data.backgroundColor,
               title: Center(
                 child: Text(

@@ -126,6 +126,7 @@ class WeirdAuthButton extends StatelessWidget {
         child: Container(
           height: 36,
           width: 100,
+          padding: EdgeInsets.all(5),
           child: Center(
             child: child,
           ),
@@ -137,6 +138,10 @@ class WeirdAuthButton extends StatelessWidget {
 }
 
 class LoginPage extends StatefulWidget {
+  LoginPage({this.emailController});
+
+  final TextEditingController emailController;
+
   static const routeName = "/Login";
 
   @override
@@ -186,7 +191,9 @@ class _LoginPageState extends State<LoginPage> {
                   children: <Widget>[
                     WeirdTextField(
                       hintText: "Email",
-                      controller: _emailController,
+                      controller: widget.emailController == null
+                          ? _emailController
+                          : widget.emailController,
                     ),
                     WeirdTextField(
                       hintText: "Password",
@@ -212,7 +219,9 @@ class _LoginPageState extends State<LoginPage> {
                       onTap: () async {
                         FirebaseAuth _auth = FirebaseAuth.instance;
 
-                        String email = _emailController.text,
+                        String email = widget.emailController != null
+                                ? widget.emailController.text
+                                : _emailController.text,
                             password = _passwordController.text;
 
                         if (email.trim() == '' || password.trim() == '') {
@@ -240,12 +249,28 @@ class _LoginPageState extends State<LoginPage> {
 
                             print(value['fullName']);
                           });
-                        } on PlatformException {
-                          setState(() {
-                            msgToUser = "Invalid Credentials!";
-                            rocketAnimation = 'fail';
-                            isLoading = false;
-                          });
+                        } on PlatformException catch (e) {
+                          print(e.code);
+                          if (e.code == 'ERROR_USER_NOT_FOUND') {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => SignUpPage(
+                                  emailController: _emailController,
+                                ),
+                              ),
+                            );
+//                            setState(() {
+//                              msgToUser = "User not registered";
+//                              rocketAnimation = 'fail';
+//                              isLoading = false;
+//                            });
+                          } else {
+                            setState(() {
+                              msgToUser = "Invalid Credentials!";
+                              rocketAnimation = 'fail';
+                              isLoading = false;
+                            });
+                          }
                           return null;
                         }
 

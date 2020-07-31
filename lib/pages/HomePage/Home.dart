@@ -5,11 +5,13 @@ import 'package:Kide/pages/Preferences/PreferencesPage.dart';
 import 'package:Kide/pages/Profile/profile.dart';
 import 'package:Kide/pages/SettingsPage/settings.dart';
 import 'package:Kide/util/constants.dart';
+import 'package:Kide/widgets/CircularAvatar.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
+import 'package:Kide/AboutUsPage.dart/AboutUs.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:share/share.dart';
@@ -27,6 +29,7 @@ class _HomePageState extends State<HomePage>
   TabController _tabController;
   String name = '';
   String email = '';
+
   @override
   void initState() {
     _scrollController = ScrollController();
@@ -58,7 +61,6 @@ class _HomePageState extends State<HomePage>
           children: <Widget>[
             Expanded(
               child: ListView(
-                padding: EdgeInsets.all(10),
                 children: <Widget>[
                   Container(
                     height: MediaQuery.of(context).size.height * 0.3,
@@ -70,24 +72,31 @@ class _HomePageState extends State<HomePage>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             ClipRRect(
-                              child: Image.asset(
-                                MAIN_KIDE_LOGO,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.10,
+                              child: InitialNameAvatar(
+                                name,
+                                backgroundColor: Colors.tealAccent.shade700,
+                                foregroundColor: Colors.white,
+                                textSize: 32,
+                                borderSize: 10,
+                                borderColor: Colors.grey.withOpacity(0.4),
                               ),
                             ),
                             SizedBox(
                               height: 8,
                             ),
                             Text(
-                              'name',
+                              name,
                               style: TextStyle(
-                                  fontSize: 19, fontFamily: "EncodeSans"),
+                                  fontSize: 19,
+                                  fontFamily: "Quicksand",
+                                  fontWeight: FontWeight.w600),
                             ),
                             Text(
-                              'email',
+                              email,
                               style: TextStyle(
-                                  fontSize: 17, fontFamily: "EncodeSans"),
+                                fontSize: 17,
+                                fontFamily: "Quicksand",
+                              ),
                             )
                           ],
                         ),
@@ -95,6 +104,13 @@ class _HomePageState extends State<HomePage>
                     ),
                   ),
                   ListTile(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => ProfilePage(),
+                        ),
+                      );
+                    },
                     title: Text(
                       "Your Profile",
                       style: TextStyle(fontFamily: "EncodeSans", fontSize: 17),
@@ -140,6 +156,10 @@ class _HomePageState extends State<HomePage>
                             TextStyle(fontFamily: "EncodeSans", fontSize: 16),
                       )),
                   ListTile(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => AboutUs()));
+                    },
                     title: Text(
                       "About Us",
                       style: TextStyle(fontFamily: "EncodeSans", fontSize: 16),
@@ -163,36 +183,39 @@ class _HomePageState extends State<HomePage>
               ),
             ),
             Container(
-                // This align moves the children to the bottom
-                child: Align(
-                    alignment: FractionalOffset.bottomCenter,
-                    // This container holds all the children that will be aligned
-                    // on the bottom and should not scroll with the above ListView
-                    child: Container(
-                        child: Column(
-                      children: <Widget>[
-                        Divider(),
-                        ListTile(
-                            leading: Icon(Icons.help),
-                            title: Text('Help and Feedback')),
-                        ListTile(
-                            onTap: () async {
-                              FirebaseAuth _auth = FirebaseAuth.instance;
-                              await _auth.signOut();
-                              SharedPreferences prefs =
-                                  await SharedPreferences.getInstance();
-                              prefs.setBool('loggedOut', true);
-                              Navigator.of(context).pop();
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => LoginPage(),
-                                ),
-                              );
-                            },
-                            leading: Icon(Icons.exit_to_app),
-                            title: Text('Sign Out'))
-                      ],
-                    )))),
+              // This align moves the children to the bottom
+              child: Align(
+                alignment: FractionalOffset.bottomCenter,
+                // This container holds all the children that will be aligned
+                // on the bottom and should not scroll with the above ListView
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      Divider(),
+                      ListTile(
+                          leading: Icon(Icons.help),
+                          title: Text('Help and Feedback')),
+                      ListTile(
+                          onTap: () async {
+                            FirebaseAuth _auth = FirebaseAuth.instance;
+                            await _auth.signOut();
+                            SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            prefs.setBool('loggedOut', true);
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => LoginPage(),
+                              ),
+                            );
+                          },
+                          leading: Icon(Icons.exit_to_app),
+                          title: Text('Sign Out'))
+                    ],
+                  ),
+                ),
+              ),
+            ),
             SizedBox(height: 3),
             // Align(
             //   alignment: Alignment.bottomCenter,
@@ -211,37 +234,14 @@ class _HomePageState extends State<HomePage>
             new SliverAppBar(
               expandedHeight: 100,
               leading: IconButton(
-                  onPressed: () {
-                    _scaffoldKey.currentState.openDrawer();
-                  },
-                  icon: Icon(Icons.clear_all)),
-              actions: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.person),
+                onPressed: () {
+                  _scaffoldKey.currentState.openDrawer();
+                },
+                icon: Icon(
+                  Icons.clear_all,
                   color: DynamicTheme.of(context).data.iconTheme.color,
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ProfilePage(),
-                      ),
-                    ); //_changeBrigh
-                  },
                 ),
-                IconButton(
-                  icon: Icon(
-                    Icons.more_vert,
-                    color: DynamicTheme.of(context).data.iconTheme.color,
-                  ),
-                  onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => PreferencesPage(),
-                    ),
-                  ), //_changeBrightness,
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-              ],
+              ),
               title: new Text(
                 KIDE_CAPS,
                 style: TextStyle(

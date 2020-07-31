@@ -1,9 +1,11 @@
 import 'package:Kide/pages/Profile/EditProfile.dart';
 import 'package:Kide/util/constants.dart';
+import 'package:Kide/widgets/CircularAvatar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -12,6 +14,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   String uid;
+
   @override
   void initState() {
     super.initState();
@@ -41,6 +44,7 @@ class _ProfilePageState extends State<ProfilePage> {
   String cgpa = '';
   String batch = '';
   String branch = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,88 +65,159 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.edit),
-            color: DynamicTheme.of(context).data.iconTheme.color,
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => EditProfile(),
-                ),
-              ); //_changeBrigh
-            },
-          ),
-        ],
         backgroundColor: DynamicTheme.of(context).data.backgroundColor,
       ),
       backgroundColor: DynamicTheme.of(context).data.backgroundColor,
       body: ListView(
         children: <Widget>[
           SizedBox(
+            height: 50,
+          ),
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.blueGrey.withOpacity(0.3),
+                  Colors.blueGrey.withOpacity(0.2)
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            margin: EdgeInsets.only(left: 12, right: 12),
+            child: Container(
+              transform: Matrix4.translationValues(0, -44, 0),
+              child: Column(
+                children: [
+                  InitialNameAvatar(
+                    name,
+                    backgroundColor: Colors.tealAccent.shade700,
+                    foregroundColor: Colors.white,
+                    textSize: 32,
+                    borderSize: 10,
+                    borderColor: Colors.blueGrey.withOpacity(0.3),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    roll,
+                    style: TextStyle(fontSize: 26, fontFamily: "Quicksand"),
+                  ),
+                  name != '' ? Text(
+                    name,
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontFamily: "Quicksand",
+                        fontWeight: FontWeight.w600),
+                  ) : SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    height: 24,
+                    child: LinearProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation(
+                        Colors.grey.withOpacity(0.5),
+                      ),
+                      backgroundColor: Colors.transparent,
+                    ),
+                  ),
+                  Text(
+                    email,
+                    style: TextStyle(fontSize: 20, fontFamily: "Quicksand"),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
             height: 20,
           ),
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.blueGrey.withOpacity(0.3),
+                  Colors.blueGrey.withOpacity(0.2)
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            margin: EdgeInsets.only(left: 12, right: 12),
+            child: Column(
+              children: <Widget>[
+                ListTile(
+                  leading: Icon(Icons.plus_one),
+                  title: Text(
+                    'CGPA:',
+                    style: TextStyle(fontSize: 22, fontFamily: "EncodeSans"),
+                  ),
+                  trailing: Text(
+                    cgpa,
+                    style: TextStyle(fontSize: 18, fontFamily: "EncodeSans"),
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(Icons.calendar_today),
+                  title: Text(
+                    'Batch:',
+                    style: TextStyle(fontSize: 22, fontFamily: "EncodeSans"),
+                  ),
+                  trailing: Text(
+                    batch,
+                    style: TextStyle(fontSize: 18, fontFamily: "EncodeSans"),
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(Icons.category),
+                  title: Text(
+                    'Branch:',
+                    style: TextStyle(fontSize: 22, fontFamily: "EncodeSans"),
+                  ),
+                  trailing: Text(
+                    branch,
+                    style: TextStyle(fontSize: 18, fontFamily: "EncodeSans"),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 40),
           Center(
-            child: CircleAvatar(
-              radius: 75,
-              backgroundImage: AssetImage("lib/assets/male.png"),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Center(
-            child: Text(
-              roll,
-              style: TextStyle(fontSize: 26, fontFamily: "EncodeSans"),
-            ),
-          ),
-          Center(
-            child: Text(
-              name,
-              style: TextStyle(fontSize: 24, fontFamily: "EncodeSans"),
-            ),
-          ),
-          Center(
-            child: Text(
-              email,
-              style: TextStyle(fontSize: 20, fontFamily: "EncodeSans"),
-            ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          ListTile(
-            leading: Icon(Icons.plus_one),
-            title: Text(
-              'CGPA:',
-              style: TextStyle(fontSize: 22, fontFamily: "EncodeSans"),
-            ),
-            trailing: Text(
-              cgpa,
-              style: TextStyle(fontSize: 18, fontFamily: "EncodeSans"),
-            ),
-          ),
-          ListTile(
-            leading: Icon(Icons.calendar_today),
-            title: Text(
-              'Batch:',
-              style: TextStyle(fontSize: 22, fontFamily: "EncodeSans"),
-            ),
-            trailing: Text(
-              batch,
-              style: TextStyle(fontSize: 18, fontFamily: "EncodeSans"),
-            ),
-          ),
-          ListTile(
-            leading: Icon(Icons.category),
-            title: Text(
-              'Branch:',
-              style: TextStyle(fontSize: 22, fontFamily: "EncodeSans"),
-            ),
-            trailing: Text(
-              branch,
-              style: TextStyle(fontSize: 18, fontFamily: "EncodeSans"),
+            child: GestureDetector(
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 28),
+                decoration: BoxDecoration(
+                  color: Colors.redAccent.shade400,
+                  borderRadius: BorderRadius.circular(50),
+                  // Large enough value
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.redAccent.shade200.withOpacity(0.8),
+                        blurRadius: 20,
+                        offset: Offset(0, 5),
+                        spreadRadius: 1),
+                  ],
+                ),
+                child: Text(
+                  "Edit",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: "Quicksand",
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                    letterSpacing: 2,
+                  ),
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => EditProfile(),
+                  ),
+                ); //_changeBright
+              },
             ),
           ),
         ],

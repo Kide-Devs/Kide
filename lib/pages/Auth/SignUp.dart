@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:Kide/pages/OnBoarding/OnBoarding.dart';
 import 'package:Kide/pages/Profile/AddProfile.dart';
 import 'package:Kide/util/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,6 +12,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'Login.dart';
 
 class SignUpPage extends StatefulWidget {
+  SignUpPage({this.emailController});
+
+  final TextEditingController emailController;
+
   @override
   State<StatefulWidget> createState() => _SignUpPageState();
 }
@@ -21,6 +24,8 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   String rocketAnimation = 'idle', msgToUser = '';
   bool isLoading = false;
@@ -70,12 +75,19 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     WeirdTextField(
                       hintText: "Email",
-                      controller: _emailController,
+                      controller: widget.emailController == null
+                          ? _emailController
+                          : widget.emailController,
                     ),
                     WeirdTextField(
                       hintText: "Password",
                       obscureText: true,
                       controller: _passwordController,
+                    ),
+                    WeirdTextField(
+                      hintText: "Confirm Password",
+                      obscureText: true,
+                      controller: _confirmPasswordController,
                     ),
                     WeirdAuthButton(
                       child: isLoading
@@ -98,6 +110,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
                         String email = _emailController.text,
                             password = _passwordController.text,
+                            confirm = _confirmPasswordController.text,
                             fullName = _nameController.text;
                         if (email.trim() == '' ||
                             password.trim() == '' ||
@@ -105,6 +118,12 @@ class _SignUpPageState extends State<SignUpPage> {
                           setState(() {
                             rocketAnimation = 'fail';
                             msgToUser = "Fill all the details";
+                          });
+                          return null;
+                        } else if (password != confirm) {
+                          setState(() {
+                            rocketAnimation = 'fail';
+                            msgToUser = "Passwords don't match!";
                           });
                           return null;
                         }
@@ -118,11 +137,16 @@ class _SignUpPageState extends State<SignUpPage> {
                           print("Registration Error Code:");
                           print(e.code);
                           if (e.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
-                            setState(() {
-                              msgToUser = "Email already registered!";
-                              rocketAnimation = 'fail';
-                              isLoading = false;
-                            });
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => LoginPage(emailController: _emailController,),
+                              ),
+                            );
+//                            setState(() {
+//                              msgToUser = "Email already registered!";
+//                              rocketAnimation = 'fail';
+//                              isLoading = false;
+//                            });
                           } else if (e.code == 'ERROR_WEAK_PASSWORD') {
                             setState(() {
                               msgToUser = "Password at least 6 chars!";
@@ -147,6 +171,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             await SharedPreferences.getInstance();
                         prefs.setBool('loggedOut', false);
                         prefs.setString('Email', email);
+                        prefs.setString('Name', fullName);
+
                         Timer(
                           Duration(seconds: 4),
                           () => Navigator.of(context).pushReplacement(

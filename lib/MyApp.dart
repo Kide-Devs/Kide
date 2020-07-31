@@ -6,7 +6,7 @@ import 'package:share/share.dart';
 
 import 'package:Kide/pages/ForYou/ForYou.dart';
 import 'package:Kide/providers/getGameDetails.dart';
-import 'package:Kide/AboutUsPage.dart/AboutUs.dart';
+import 'package:Kide/pages/AboutUsPage.dart/AboutUs.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';

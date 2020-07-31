@@ -150,9 +150,10 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
 
     return Scaffold(
       body: SafeArea(
+        bottom: false,
         child: Stack(
           children: [
-            GoogleMap(
+            GoogleMap(              
               onMapCreated: (widget.eventMarker == null)
                   ? _onMapCreated
                   : _onMapCreatedWithEventMarker,
@@ -169,6 +170,7 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
               rotateGesturesEnabled: true,
               tiltGesturesEnabled: true,
               indoorViewEnabled: true,
+              zoomControlsEnabled: false,                
               padding: const EdgeInsets.only(top: 64.0, right: 0.0),
             ),
             Padding(

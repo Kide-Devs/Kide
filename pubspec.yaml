@@ -31,6 +31,7 @@ dependencies:
   day_night_switcher:
   ff_contact_avatar:
   flutter_email_sender:
+  curved_navigation_bar: ^0.3.2
 
 
 

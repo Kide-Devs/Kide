@@ -1,11 +1,11 @@
-name: Flutter CI
+# name: Flutter CI
 
-# This workflow is triggered on pushes to the repository.
+# # This workflow is triggered on pushes to the repository.
 
-on:
-  push:
-    branches:
-    - dev
+# on:
+#   push:
+#     branches:
+#     - dev
     
 # on: push    # Default will running for every branch.
     

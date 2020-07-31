@@ -1,11 +1,14 @@
+import 'package:Kide/pages/Auth/Login.dart';
 import 'package:Kide/pages/Profile/EditProfile.dart';
 import 'package:Kide/pages/Profile/profile.dart';
 import 'package:Kide/util/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:day_night_switcher/day_night_switcher.dart';
 // import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:Kide/AboutUsPage.dart/AboutUs.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -16,7 +19,7 @@ class _SettingsState extends State<Settings> {
   int ct = 0;
   bool isDarkModeEnabled = false;
   @override
-  void initState() {
+  void initState() {    
     super.initState();
   }
 
@@ -176,6 +179,26 @@ class _SettingsState extends State<Settings> {
                         style: TextStyle(fontFamily: "Quicksand", fontSize: 20),
                       ),
                       leading: Icon(Icons.info)),
+                  ListTile(
+                    onTap: () async {
+                      FirebaseAuth _auth = FirebaseAuth.instance;
+                      await _auth.signOut();
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.setBool('loggedOut', true);
+                      Navigator.of(context).pop();
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => LoginPage(),
+                        ),
+                      );
+                    },
+                    leading: Icon(Icons.exit_to_app),
+                    title: Text(
+                      'Sign Out',
+                      style: TextStyle(fontFamily: "Quicksand", fontSize: 20),
+                    ),
+                  )
                 ],
               ),
             ),

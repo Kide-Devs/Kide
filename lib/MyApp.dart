@@ -2,6 +2,7 @@ import 'package:Kide/pages/Auth/Login.dart';
 import 'package:Kide/pages/Profile/profile.dart';
 import 'package:Kide/pages/SettingsPage/settings.dart';
 import 'package:Kide/widgets/CircularAvatar.dart';
+import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:share/share.dart';
 
 import 'package:Kide/pages/ForYou/ForYou.dart';
@@ -169,12 +170,20 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String name = '';
   String email = '';
+  bool isDarkModeEnabled = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     fetchName();
+  }
+
+  _changeBrightness(context) {
+    DynamicTheme.of(context).setBrightness(
+        Theme.of(context).brightness == Brightness.dark
+            ? Brightness.light
+            : Brightness.dark);
   }
 
   void fetchName() async {
@@ -236,9 +245,14 @@ class _MyHomePageState extends State<MyHomePage> {
   //   if (_getEvents.eventList.length == 0) _getEvents.setEvents();
   // }
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
+  int ct = 0;
   @override
   Widget build(BuildContext context) {
+    if (ct == 0) {
+      isDarkModeEnabled =
+          Theme.of(context).brightness == Brightness.dark ? true : false;
+      ct++;
+    }
     final indexState = Provider.of<Router>(context);
     return Scaffold(
       key: _scaffoldKey,
@@ -312,49 +326,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     leading: Icon(Icons.save),
                   ),
                   ListTile(
-                      onTap: () async {
-                        print("Clicked");
-                        final DynamicLinkParameters parameters =
-                            DynamicLinkParameters(
-                                uriPrefix: 'https://kiitdev.page.link',
-                                link: Uri.parse(
-                                    'https://kiitdev.page.link/post/'),
-                                androidParameters: AndroidParameters(
-                                  packageName: 'com.kiitdev.Kide',
-                                ),
-                                socialMetaTagParameters: SocialMetaTagParameters(
-                                    imageUrl: Uri.parse(
-                                        "https://lh3.googleusercontent.com/C60ciedUhQScbWSFG5BY0P1YpA3Js1SLJZKwB0W4csaR5OzfgjjUopGiHeD5Q_krvAw=s180-rw")),
-                                dynamicLinkParametersOptions:
-                                    DynamicLinkParametersOptions(
-                                        shortDynamicLinkPathLength:
-                                            ShortDynamicLinkPathLength.short)
-                                // NOT ALL ARE REQUIRED ===== HERE AS AN EXAMPLE =====
-                                );
-                        final ShortDynamicLink shortDynamicLink =
-                            await parameters.buildShortLink();
-                        final Uri shortUrl = shortDynamicLink.shortUrl;
-                        print(shortUrl);
-                        Share.share("$shortUrl");
-                      },
-                      leading: Icon(Icons.archive),
-                      title: Text(
-                        'Invite Friends',
-                        style:
-                            TextStyle(fontFamily: "EncodeSans", fontSize: 16),
-                      )),
-                  ListTile(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => AboutUs()));
-                    },
-                    title: Text(
-                      "About Us",
-                      style: TextStyle(fontFamily: "EncodeSans", fontSize: 16),
-                    ),
-                    leading: Icon(Icons.info),
-                  ),
-                  ListTile(
                       onTap: () {
                         Navigator.push(
                             context,
@@ -367,6 +338,24 @@ class _MyHomePageState extends State<MyHomePage> {
                         style:
                             TextStyle(fontFamily: "EncodeSans", fontSize: 16),
                       )),
+                  ListTile(
+                    title: Text(
+                      "Dark Mode ",
+                      style: TextStyle(fontFamily: "Quicksand", fontSize: 20),
+                    ),
+                    trailing: Transform.scale(
+                      scale: 0.6,
+                      child: DayNightSwitcher(
+                        isDarkModeEnabled: isDarkModeEnabled,
+                        onStateChanged: (isDarkModeEnabled) {
+                          setState(() {
+                            this.isDarkModeEnabled = isDarkModeEnabled;
+                            _changeBrightness(context);
+                          });
+                        },
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -385,20 +374,53 @@ class _MyHomePageState extends State<MyHomePage> {
                             title: Text('Help and Feedback')),
                         ListTile(
                             onTap: () async {
-                              FirebaseAuth _auth = FirebaseAuth.instance;
-                              await _auth.signOut();
-                              SharedPreferences prefs =
-                                  await SharedPreferences.getInstance();
-                              prefs.setBool('loggedOut', true);
-                              Navigator.of(context).pop();
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => LoginPage(),
-                                ),
-                              );
+                              print("Clicked");
+                              final DynamicLinkParameters parameters =
+                                  DynamicLinkParameters(
+                                      uriPrefix: 'https://kiitdev.page.link',
+                                      link: Uri.parse(
+                                          'https://kiitdev.page.link/post/'),
+                                      androidParameters: AndroidParameters(
+                                        packageName: 'com.kiitdev.Kide',
+                                      ),
+                                      socialMetaTagParameters:
+                                          SocialMetaTagParameters(
+                                              imageUrl: Uri.parse(
+                                                  "https://lh3.googleusercontent.com/C60ciedUhQScbWSFG5BY0P1YpA3Js1SLJZKwB0W4csaR5OzfgjjUopGiHeD5Q_krvAw=s180-rw")),
+                                      dynamicLinkParametersOptions:
+                                          DynamicLinkParametersOptions(
+                                              shortDynamicLinkPathLength:
+                                                  ShortDynamicLinkPathLength
+                                                      .short)
+                                      // NOT ALL ARE REQUIRED ===== HERE AS AN EXAMPLE =====
+                                      );
+                              final ShortDynamicLink shortDynamicLink =
+                                  await parameters.buildShortLink();
+                              final Uri shortUrl = shortDynamicLink.shortUrl;
+                              print(shortUrl);
+                              Share.share("$shortUrl");
                             },
-                            leading: Icon(Icons.exit_to_app),
-                            title: Text('Sign Out'))
+                            leading: Icon(Icons.archive),
+                            title: Text(
+                              'Invite Friends',
+                              style: TextStyle(
+                                  fontFamily: "EncodeSans", fontSize: 16),
+                            )),
+                        ListTile(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AboutUs()));
+                          },
+                          title: Text(
+                            "About Us",
+                            style: TextStyle(
+                                fontFamily: "EncodeSans", fontSize: 16),
+                          ),
+                          leading: Icon(Icons.info),
+                        ),
+                        // Sizex
                       ],
                     )))),
             SizedBox(height: 3),
@@ -438,11 +460,10 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             )
           : null,
-          extendBody: true,
+      extendBody: true,
       backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
       body: _tabs[indexState.bottomNavIndex],
       bottomNavigationBar: BottomNav(),
-      
     );
   }
 }

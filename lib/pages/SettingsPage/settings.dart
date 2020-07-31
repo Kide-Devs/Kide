@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:day_night_switcher/day_night_switcher.dart';
 // import 'package:flutter_email_sender/flutter_email_sender.dart';
-import 'package:Kide/AboutUsPage.dart/AboutUs.dart';
+import 'package:Kide/pages/AboutUsPage.dart/AboutUs.dart';
 
 class Settings extends StatefulWidget {
   @override

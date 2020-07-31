@@ -413,9 +413,11 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             )
           : null,
+          extendBody: true,
       backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
       body: _tabs[indexState.bottomNavIndex],
       bottomNavigationBar: BottomNav(),
+      
     );
   }
 }

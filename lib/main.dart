@@ -5,8 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:Kide/pages/OnBoarding/OnBoarding.dart';
 import 'package:Kide/MyApp.dart';
 import 'package:Kide/SplashScreen.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+   SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown
+  ]);
   runApp(new DynamicTheme(
     defaultBrightness: Brightness.light,
     data: (Brightness brightness) {

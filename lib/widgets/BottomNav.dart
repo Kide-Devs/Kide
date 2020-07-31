@@ -11,6 +11,7 @@ class BottomNav extends StatelessWidget {
     final indexState = Provider.of<Router>(context);
     final int _currentIndex = indexState.bottomNavIndex;
     return CurvedNavigationBar(
+      height: 55,
       index: _currentIndex,
       buttonBackgroundColor: DynamicTheme.of(context).data.backgroundColor,
       color:  DynamicTheme.of(context).data.backgroundColor,

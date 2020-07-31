@@ -151,76 +151,73 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
     return Scaffold(
       body: SafeArea(
         bottom: false,
-        child: Padding(
-          padding: const EdgeInsets.only( bottom:20),
-          child: Stack(
-            children: [
-              GoogleMap(              
-                onMapCreated: (widget.eventMarker == null)
-                    ? _onMapCreated
-                    : _onMapCreatedWithEventMarker,
-                markers: _markers,
-                initialCameraPosition: (widget.eventMarker == null)
-                    ? _defaultLocation()
-                    : _goToEventLocation(_getMarkers),
-                buildingsEnabled: true,
-                mapToolbarEnabled: true,
-                myLocationEnabled: true,
-                myLocationButtonEnabled: false,
-                compassEnabled: true,
-                zoomGesturesEnabled: true,
-                rotateGesturesEnabled: true,
-                tiltGesturesEnabled: true,
-                indoorViewEnabled: true,
-                zoomControlsEnabled: false,                
-                padding: const EdgeInsets.only(top: 64.0, right: 0.0),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Material(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: TextField(
-                    cursorColor: Color(0x0070f0),
-                    onTap: () {
-                      _getSearchResult();
-                      FocusScope.of(context).requestFocus(new FocusNode());
-                    },
-                    enableInteractiveSelection: false,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(16.0),
-                      fillColor: Colors.black,
-                      filled: true,
-                      hintText: 'Search for a location',
-                      prefixIcon: Icon(Icons.search),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                        borderSide: BorderSide(
-                          width: 0,
-                          style: BorderStyle.none,
-                        ),
+        child: Stack(
+          children: [
+            GoogleMap(              
+              onMapCreated: (widget.eventMarker == null)
+                  ? _onMapCreated
+                  : _onMapCreatedWithEventMarker,
+              markers: _markers,
+              initialCameraPosition: (widget.eventMarker == null)
+                  ? _defaultLocation()
+                  : _goToEventLocation(_getMarkers),
+              buildingsEnabled: true,
+              mapToolbarEnabled: true,
+              myLocationEnabled: true,
+              myLocationButtonEnabled: false,
+              compassEnabled: true,
+              zoomGesturesEnabled: true,
+              rotateGesturesEnabled: true,
+              tiltGesturesEnabled: true,
+              indoorViewEnabled: true,
+              zoomControlsEnabled: false,                
+              padding: const EdgeInsets.only(top: 64.0, right: 0.0),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Material(
+                borderRadius: BorderRadius.circular(8.0),
+                child: TextField(
+                  cursorColor: Color(0x0070f0),
+                  onTap: () {
+                    _getSearchResult();
+                    FocusScope.of(context).requestFocus(new FocusNode());
+                  },
+                  enableInteractiveSelection: false,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(16.0),
+                    fillColor: Colors.black,
+                    filled: true,
+                    hintText: 'Search for a location',
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(
+                        width: 0,
+                        style: BorderStyle.none,
                       ),
                     ),
                   ),
                 ),
               ),
-              Positioned(
-                bottom: ViewPort.screenHeight * 0.09,
-                child: MaterialButton(
-                  elevation: 8,
-                  shape: CircleBorder(),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.my_location,
-                      color: Colors.blue,
-                    ),
+            ),
+            Positioned(
+              bottom: ViewPort.screenHeight * 0.09,
+              child: MaterialButton(
+                elevation: 8,
+                shape: CircleBorder(),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.my_location,
+                    color: Colors.blue,
                   ),
-                  color: Colors.white,
-                  onPressed: _currentLocation,
                 ),
+                color: Colors.white,
+                onPressed: _currentLocation,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       floatingActionButton: Column(
@@ -266,7 +263,7 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
         }).toList()
           ..add(
             Padding(
-              padding: EdgeInsets.only(bottom: ViewPort.screenHeight * 0.1),
+              padding: EdgeInsets.only(bottom: ViewPort.screenHeight * 0.07),
               child: FloatingActionButton(
                 heroTag: hashCode,
                 child: AnimatedFilterWidget(controller: _controller),

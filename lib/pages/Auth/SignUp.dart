@@ -108,7 +108,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       onTap: () async {
                         FirebaseAuth _auth = FirebaseAuth.instance;
 
-                        String email = _emailController.text,
+                        String email = widget.emailController != null
+                                ? widget.emailController.text
+                                : _emailController.text,
                             password = _passwordController.text,
                             confirm = _confirmPasswordController.text,
                             fullName = _nameController.text;
@@ -139,7 +141,9 @@ class _SignUpPageState extends State<SignUpPage> {
                           if (e.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                builder: (context) => LoginPage(emailController: _emailController,),
+                                builder: (context) => LoginPage(
+                                  emailController: _emailController,
+                                ),
                               ),
                             );
 //                            setState(() {

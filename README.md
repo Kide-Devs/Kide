@@ -44,3 +44,5 @@ A personalized KIIT guide.
 - [NikhilCodes](https://github.com/NikhilCodes)
 
 - [gaurav0991](https://github.com/gaurav0991)
+
+- [sambitraze](https://github.com/sambitraze)

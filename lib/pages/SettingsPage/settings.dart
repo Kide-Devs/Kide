@@ -19,7 +19,7 @@ class _SettingsState extends State<Settings> {
   int ct = 0;
   bool isDarkModeEnabled = false;
   @override
-  void initState() {    
+  void initState() {
     super.initState();
   }
 
@@ -108,24 +108,24 @@ class _SettingsState extends State<Settings> {
                               print(v);
                             }),
                       )),
-                  ListTile(
-                    title: Text(
-                      "Dark Mode ",
-                      style: TextStyle(fontFamily: "Quicksand", fontSize: 20),
-                    ),
-                    trailing: Transform.scale(
-                      scale: 0.6,
-                      child: DayNightSwitcher(
-                        isDarkModeEnabled: isDarkModeEnabled,
-                        onStateChanged: (isDarkModeEnabled) {
-                          setState(() {
-                            this.isDarkModeEnabled = isDarkModeEnabled;
-                            _changeBrightness(context);
-                          });
-                        },
-                      ),
-                    ),
-                  ),
+                  // ListTile(
+                  //   title: Text(
+                  //     "Dark Mode ",
+                  //     style: TextStyle(fontFamily: "Quicksand", fontSize: 20),
+                  //   ),
+                  //   trailing: Transform.scale(
+                  //     scale: 0.6,
+                  //     child: DayNightSwitcher(
+                  //       isDarkModeEnabled: isDarkModeEnabled,
+                  //       onStateChanged: (isDarkModeEnabled) {
+                  //         setState(() {
+                  //           this.isDarkModeEnabled = isDarkModeEnabled;
+                  //           _changeBrightness(context);
+                  //         });
+                  //       },
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

@@ -50,11 +50,11 @@ class _ContactsPageState extends State<ContactsPage> {
     // Offset _offset = Offset(0.95, 0.55);
     ViewPort().init(context);
     return Scaffold(
-        backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-              child: CustomScrollView(slivers: <Widget>[
+      backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          child: CustomScrollView(slivers: <Widget>[
             SliverList(
               delegate: SliverChildListDelegate(
                 [
@@ -97,9 +97,10 @@ class _ContactsPageState extends State<ContactsPage> {
               children: <Widget>[
                 for (int i = 0; i < _emergencyContacts.length; i++)
                   new EmergencyCard(
-                      _emergencyContacts[i].iconAsset,
-                      _emergencyContacts[i].emergency,
-                      _emergencyContacts[i].number),
+                    _emergencyContacts[i].iconAsset,
+                    _emergencyContacts[i].emergency,
+                    _emergencyContacts[i].number,
+                  ),
               ],
             ),
             SliverList(
@@ -145,7 +146,9 @@ class _ContactsPageState extends State<ContactsPage> {
                 ],
               ),
             )
-          ])),
-        ));
+          ]),
+        ),
+      ),
+    );
   }
 }

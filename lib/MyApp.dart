@@ -109,19 +109,21 @@ class _MyAppState extends State<MyApp> {
             print(title);
             print(body);
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => PostDetailsPage(
-                          id: title.toString(),
-                          postType: postType.toString(),
-                          title: tit.toString(),
-                          body: body.toString(),
-                          image: image.toString(),
-                          subtitle: subtitle.toString(),
-                          likes: likes.toString(),
-                          views: views.toString(),
-                          date: formattedDate,
-                        )));
+              context,
+              MaterialPageRoute(
+                builder: (context) => PostDetailsPage(
+                  id: title.toString(),
+                  postType: postType.toString(),
+                  title: tit.toString(),
+                  body: body.toString(),
+                  image: image.toString(),
+                  subtitle: subtitle.toString(),
+                  likes: likes.toString(),
+                  views: views.toString(),
+                  date: formattedDate,
+                ),
+              ),
+            );
             //  post navigate to the CreatePostViewRoute and pass in the title as the arguments.
           });
         }
@@ -259,11 +261,11 @@ class _MyHomePageState extends State<MyHomePage> {
       key: _scaffoldKey,
       drawer: Drawer(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             Expanded(
               child: ListView(
-                padding: EdgeInsets.all(10),
                 children: <Widget>[
                   Container(
                     height: MediaQuery.of(context).size.height * 0.3,
@@ -277,11 +279,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             ClipRRect(
                               child: InitialNameAvatar(
                                 name,
-                                backgroundColor: Colors.orange,
+                                backgroundColor: Colors.tealAccent.shade700,
                                 foregroundColor: Colors.white,
                                 textSize: 32,
-                                borderColor: Colors.grey,
                                 borderSize: 10,
+                                borderColor: Colors.grey.withOpacity(0.4),
                               ),
                             ),
                             SizedBox(
@@ -290,15 +292,16 @@ class _MyHomePageState extends State<MyHomePage> {
                             Text(
                               name,
                               style: TextStyle(
-                                  fontSize: 19, fontFamily: "EncodeSans"),
-                            ),
-                            SizedBox(
-                              height: 3,
+                                  fontSize: 19,
+                                  fontFamily: "Quicksand",
+                                  fontWeight: FontWeight.w600),
                             ),
                             Text(
                               email,
                               style: TextStyle(
-                                  fontSize: 17, fontFamily: "EncodeSans"),
+                                fontSize: 17,
+                                fontFamily: "Quicksand",
+                              ),
                             )
                           ],
                         ),
@@ -337,7 +340,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       title: Text(
                         'Settings',
                         style:
-                            TextStyle(fontFamily: "EncodeSans", fontSize: 16),
+                        TextStyle(fontFamily: "EncodeSans", fontSize: 16),
                       )),
                   ListTile(
                     title: Text(
@@ -375,31 +378,30 @@ class _MyHomePageState extends State<MyHomePage> {
                           title: Text('Help and Feedback')),
                       ListTile(
                           onTap: () async {
-                            print("Clicked");
                             final DynamicLinkParameters parameters =
-                                DynamicLinkParameters(
-                                    uriPrefix: 'https://kiitdev.page.link',
-                                    link: Uri.parse(
-                                        'https://kiitdev.page.link/post/'),
-                                    androidParameters: AndroidParameters(
-                                      packageName: 'com.kiitdev.Kide',
-                                    ),
-                                    socialMetaTagParameters:
-                                        SocialMetaTagParameters(
-                                            imageUrl: Uri.parse(
-                                                "https://lh3.googleusercontent.com/C60ciedUhQScbWSFG5BY0P1YpA3Js1SLJZKwB0W4csaR5OzfgjjUopGiHeD5Q_krvAw=s180-rw")),
-                                    dynamicLinkParametersOptions:
-                                        DynamicLinkParametersOptions(
-                                            shortDynamicLinkPathLength:
-                                                ShortDynamicLinkPathLength
-                                                    .short)
-                                    // NOT ALL ARE REQUIRED ===== HERE AS AN EXAMPLE =====
-                                    );
+                            DynamicLinkParameters(
+                                uriPrefix: 'https://kiitdev.page.link',
+                                link: Uri.parse(
+                                    'https://kiitdev.page.link/post/'),
+                                androidParameters: AndroidParameters(
+                                  packageName: 'com.kiitdev.Kide',
+                                ),
+                                socialMetaTagParameters:
+                                SocialMetaTagParameters(
+                                    imageUrl: Uri.parse(
+                                        "https://lh3.googleusercontent.com/C60ciedUhQScbWSFG5BY0P1YpA3Js1SLJZKwB0W4csaR5OzfgjjUopGiHeD5Q_krvAw=s180-rw")),
+                                dynamicLinkParametersOptions:
+                                DynamicLinkParametersOptions(
+                                    shortDynamicLinkPathLength:
+                                    ShortDynamicLinkPathLength
+                                        .short)
+                              // NOT ALL ARE REQUIRED ===== HERE AS AN EXAMPLE =====
+                            );
                             final ShortDynamicLink shortDynamicLink =
-                                await parameters.buildShortLink();
+                            await parameters.buildShortLink();
                             final Uri shortUrl = shortDynamicLink.shortUrl;
                             print(shortUrl);
-                            Share.share("$shortUrl");
+                            Share.share("${shortUrl}");
                           },
                           leading: Icon(Icons.archive),
                           title: Text(
@@ -417,11 +419,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         title: Text(
                           "About Us",
                           style:
-                              TextStyle(fontFamily: "EncodeSans", fontSize: 16),
+                          TextStyle(fontFamily: "EncodeSans", fontSize: 16),
                         ),
                         leading: Icon(Icons.info),
                       ),
-                      // Sizex
+                      SizedBox(
+                        height: 55,
+                      )
                     ],
                   ),
                 ),
@@ -438,15 +442,16 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       appBar: indexState.bottomNavIndex != 0 && indexState.bottomNavIndex != 2
           ? AppBar(
-            centerTitle: true,
+              centerTitle: true,
               leading: IconButton(
-                  onPressed: () {
-                    _scaffoldKey.currentState.openDrawer();
-                  },
-                  icon: Icon(
-                    Icons.clear_all,
-                    color: DynamicTheme.of(context).data.iconTheme.color,
-                  )),
+                onPressed: () {
+                  _scaffoldKey.currentState.openDrawer();
+                },
+                icon: Icon(
+                  Icons.clear_all,
+                  color: DynamicTheme.of(context).data.iconTheme.color,
+                ),
+              ),
               backgroundColor: DynamicTheme.of(context).data.backgroundColor,
               title: Text(
                 _tabNames[indexState.bottomNavIndex],
@@ -455,11 +460,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     fontFamily: 'EncodeSans',
                     fontWeight: FontWeight.w600,
                     letterSpacing: 2,
-                    color: DynamicTheme.of(context)
-                        .data
-                        .textTheme
-                        .subtitle
-                        .color),
+                    color:
+                        DynamicTheme.of(context).data.textTheme.subtitle.color),
               ),
             )
           : null,

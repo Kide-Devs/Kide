@@ -49,10 +49,10 @@ class _HomePageState extends State<HomePage>
 
   void fetchName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    name = prefs.getString('Name');
-    email = prefs.getString('Email');
-    print(name);
-    setState(() {});
+    setState(() {
+      name = prefs.getString('Name');
+      email = prefs.getString('Email');
+    });
   }
 
   @override

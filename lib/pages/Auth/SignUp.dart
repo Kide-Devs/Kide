@@ -161,9 +161,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           return null;
                         }
 
-                        setState(() {
-                          rocketAnimation = 'success';
-                        });
                         await Firestore.instance
                             .collection('userInfo')
                             .document(_result.user.uid)

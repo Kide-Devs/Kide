@@ -1,4 +1,5 @@
 import 'package:Kide/config/Viewport.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:Kide/pages/MapsPage/models/FilterCategory.dart';
@@ -13,7 +14,9 @@ void main() => runApp(MapsPage());
 
 class MapsPage extends StatefulWidget {
   final String eventMarker;
+
   MapsPage({this.eventMarker});
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -21,6 +24,7 @@ class MapsPage extends StatefulWidget {
 class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
   //Google Maps controller
   GoogleMapController mapController;
+
   //Latitude and Lingitude of KIIT
   final LatLng _center = const LatLng(20.354890, 85.815120);
 
@@ -28,6 +32,7 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
   bool _initialLoad = true;
   List<FilterCategory> _categories = categories;
   FilterCategory _categoriesAll = categoriesAll;
+
   //Animating FAB
   AnimationController _controller;
 
@@ -153,7 +158,7 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
         bottom: false,
         child: Stack(
           children: [
-            GoogleMap(              
+            GoogleMap(
               onMapCreated: (widget.eventMarker == null)
                   ? _onMapCreated
                   : _onMapCreatedWithEventMarker,
@@ -170,7 +175,7 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
               rotateGesturesEnabled: true,
               tiltGesturesEnabled: true,
               indoorViewEnabled: true,
-              zoomControlsEnabled: false,                
+              zoomControlsEnabled: false,
               padding: const EdgeInsets.only(top: 64.0, right: 0.0),
             ),
             Padding(
@@ -186,7 +191,8 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
                   enableInteractiveSelection: false,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(16.0),
-                    fillColor: Colors.black,
+                    fillColor:
+                        DynamicTheme.of(context).data.scaffoldBackgroundColor,
                     filled: true,
                     hintText: 'Search for a location',
                     prefixIcon: Icon(Icons.search),
@@ -301,7 +307,8 @@ class AnimatedFilterWidget extends StatelessWidget {
         return Transform(
           transform: Matrix4.rotationZ(_controller.value * 0.5 * math.pi),
           alignment: FractionalOffset.center,
-          child: Icon(_controller.isDismissed ? Icons.filter_list : Icons.close),
+          child:
+              Icon(_controller.isDismissed ? Icons.filter_list : Icons.close),
         );
       },
     );

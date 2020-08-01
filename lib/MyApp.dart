@@ -246,6 +246,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // }
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int ct = 0;
+
   @override
   Widget build(BuildContext context) {
     if (ct == 0) {
@@ -360,69 +361,72 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Container(
-                // This align moves the children to the bottom
-                child: Align(
-                    alignment: FractionalOffset.bottomCenter,
-                    // This container holds all the children that will be aligned
-                    // on the bottom and should not scroll with the above ListView
-                    child: Container(
-                        child: Column(
-                      children: <Widget>[
-                        Divider(),
-                        ListTile(
-                            leading: Icon(Icons.help),
-                            title: Text('Help and Feedback')),
-                        ListTile(
-                            onTap: () async {
-                              print("Clicked");
-                              final DynamicLinkParameters parameters =
-                                  DynamicLinkParameters(
-                                      uriPrefix: 'https://kiitdev.page.link',
-                                      link: Uri.parse(
-                                          'https://kiitdev.page.link/post/'),
-                                      androidParameters: AndroidParameters(
-                                        packageName: 'com.kiitdev.Kide',
-                                      ),
-                                      socialMetaTagParameters:
-                                          SocialMetaTagParameters(
-                                              imageUrl: Uri.parse(
-                                                  "https://lh3.googleusercontent.com/C60ciedUhQScbWSFG5BY0P1YpA3Js1SLJZKwB0W4csaR5OzfgjjUopGiHeD5Q_krvAw=s180-rw")),
-                                      dynamicLinkParametersOptions:
-                                          DynamicLinkParametersOptions(
-                                              shortDynamicLinkPathLength:
-                                                  ShortDynamicLinkPathLength
-                                                      .short)
-                                      // NOT ALL ARE REQUIRED ===== HERE AS AN EXAMPLE =====
-                                      );
-                              final ShortDynamicLink shortDynamicLink =
-                                  await parameters.buildShortLink();
-                              final Uri shortUrl = shortDynamicLink.shortUrl;
-                              print(shortUrl);
-                              Share.share("$shortUrl");
-                            },
-                            leading: Icon(Icons.archive),
-                            title: Text(
-                              'Invite Friends',
-                              style: TextStyle(
-                                  fontFamily: "EncodeSans", fontSize: 16),
-                            )),
-                        ListTile(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AboutUs()));
+              // This align moves the children to the bottom
+              child: Align(
+                alignment: FractionalOffset.bottomCenter,
+                // This container holds all the children that will be aligned
+                // on the bottom and should not scroll with the above ListView
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      Divider(),
+                      ListTile(
+                          leading: Icon(Icons.help),
+                          title: Text('Help and Feedback')),
+                      ListTile(
+                          onTap: () async {
+                            print("Clicked");
+                            final DynamicLinkParameters parameters =
+                                DynamicLinkParameters(
+                                    uriPrefix: 'https://kiitdev.page.link',
+                                    link: Uri.parse(
+                                        'https://kiitdev.page.link/post/'),
+                                    androidParameters: AndroidParameters(
+                                      packageName: 'com.kiitdev.Kide',
+                                    ),
+                                    socialMetaTagParameters:
+                                        SocialMetaTagParameters(
+                                            imageUrl: Uri.parse(
+                                                "https://lh3.googleusercontent.com/C60ciedUhQScbWSFG5BY0P1YpA3Js1SLJZKwB0W4csaR5OzfgjjUopGiHeD5Q_krvAw=s180-rw")),
+                                    dynamicLinkParametersOptions:
+                                        DynamicLinkParametersOptions(
+                                            shortDynamicLinkPathLength:
+                                                ShortDynamicLinkPathLength
+                                                    .short)
+                                    // NOT ALL ARE REQUIRED ===== HERE AS AN EXAMPLE =====
+                                    );
+                            final ShortDynamicLink shortDynamicLink =
+                                await parameters.buildShortLink();
+                            final Uri shortUrl = shortDynamicLink.shortUrl;
+                            print(shortUrl);
+                            Share.share("$shortUrl");
                           },
+                          leading: Icon(Icons.archive),
                           title: Text(
-                            "About Us",
+                            'Invite Friends',
                             style: TextStyle(
                                 fontFamily: "EncodeSans", fontSize: 16),
-                          ),
-                          leading: Icon(Icons.info),
+                          )),
+                      ListTile(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AboutUs()));
+                        },
+                        title: Text(
+                          "About Us",
+                          style:
+                              TextStyle(fontFamily: "EncodeSans", fontSize: 16),
                         ),
-                        // Sizex
-                      ],
-                    )))),
+                        leading: Icon(Icons.info),
+                      ),
+                      // Sizex
+                    ],
+                  ),
+                ),
+              ),
+            ),
             SizedBox(height: 3),
             // Align(
             //   alignment: Alignment.bottomCenter,

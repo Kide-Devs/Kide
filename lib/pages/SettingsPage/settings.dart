@@ -187,7 +187,7 @@ class _SettingsState extends State<Settings> {
                           await SharedPreferences.getInstance();
                       prefs.setBool('loggedOut', true);
                       Navigator.of(context).pop();
-                      Navigator.of(context).push(
+                      Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) => LoginPage(),
                         ),

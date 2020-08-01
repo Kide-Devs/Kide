@@ -31,7 +31,7 @@ class _AboutUsState extends State<AboutUs> {
               height: 20,
             ),
             Text(
-              "LoreNisi nulla aliquip amet cillum enim sunt. Sint enim in officia quis voluptate reprehenderit nisi amet. Duis eiusmod ipsum consectetur ex ex ea magna ad eu in. Elit voluptate deserunt excepteur est ipsum sunt sunt commodo. Proident elit ea commodo culpa ipsum ea adipisicing incididunt cupidatat nisi enim duis enim Lorem. Laborum labore est nulla sunt qui voluptate fugiat nostrud tempor voluptate.",
+              "Thank you for using KIDE, the KIIT guide by the students, for the students! We're a small team of Flutter Developers who decided to take the initiative to create an app which could serve as a hub for all the day-to-day student tasks as well as general tasks related to our esteemed university. We hope that our work reflects this ideology and you get to enjoy a seamless user experience with minimal issues. However, we'd love to hear from you. Feel free write your suggestions and queries to us at - kide.kiit@gmail.com",
               style: TextStyle(fontSize: 20, fontFamily: 'EncodeSans'),
             )
           ],

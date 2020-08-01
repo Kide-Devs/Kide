@@ -24,6 +24,7 @@
 **/doc/api/
 .dart_tool/
 .flutter-plugins
+.flutter-plugins-dependencies
 .packages
 .pub-cache/
 .pub/
@@ -76,5 +77,6 @@
 *pubspec.lock
 *key.properties
 android/key.properties
-android/app/kide_key.jks
-.flutter-plugins-dependencies
+android/app/*.jks
+android/*.jks
+*.flutter-plugins-dependencies

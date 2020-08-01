@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:day_night_switcher/day_night_switcher.dart';
 // import 'package:flutter_email_sender/flutter_email_sender.dart';
-import 'package:Kide/AboutUsPage.dart/AboutUs.dart';
+import 'package:Kide/pages/AboutUsPage.dart/AboutUs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends StatefulWidget {
@@ -60,7 +60,7 @@ class _SettingsState extends State<Settings> {
           padding: EdgeInsets.only(left: 12, right: 12, top: 15),
           children: <Widget>[
             Text(
-              "Main",
+              "General",
               style: TextStyle(fontSize: 20),
             ),
             SizedBox(
@@ -187,7 +187,7 @@ class _SettingsState extends State<Settings> {
                           await SharedPreferences.getInstance();
                       prefs.setBool('loggedOut', true);
                       Navigator.of(context).pop();
-                      Navigator.of(context).push(
+                      Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) => LoginPage(),
                         ),

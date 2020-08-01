@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:Kide/MyApp.dart';
 import 'package:Kide/pages/Auth/SignUp.dart';
+import 'package:Kide/pages/PasswordResetPage/password_reset_page.dart';
 import 'package:Kide/util/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -291,6 +292,32 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         );
                       },
+                    ),
+                    SizedBox(height: 10),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: GestureDetector(
+                        child: Text(
+                          "Forgot password?",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: "EncodeSans",
+                            fontWeight: FontWeight.w600,
+                            color: AUTH_SUBMIT_COLOR,
+                          ),
+                        ),
+                        onTap: () {
+                          var email = widget.emailController != null
+                              ? widget.emailController.text
+                              : _emailController.text;
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => PasswordResetPage(),
+                            ),
+                          );
+                          //_auth.confirmPasswordReset(oobCode, newPassword);
+                        },
+                      ),
                     ),
                   ],
                 ),

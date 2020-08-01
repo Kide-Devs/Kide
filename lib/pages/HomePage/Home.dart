@@ -12,7 +12,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
-import 'package:Kide/AboutUsPage.dart/AboutUs.dart';
+import 'package:Kide/pages/AboutUsPage.dart/AboutUs.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:share/share.dart';

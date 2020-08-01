@@ -438,6 +438,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       appBar: indexState.bottomNavIndex != 0 && indexState.bottomNavIndex != 2
           ? AppBar(
+            centerTitle: true,
               leading: IconButton(
                   onPressed: () {
                     _scaffoldKey.currentState.openDrawer();
@@ -447,20 +448,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: DynamicTheme.of(context).data.iconTheme.color,
                   )),
               backgroundColor: DynamicTheme.of(context).data.backgroundColor,
-              title: Center(
-                child: Text(
-                  _tabNames[indexState.bottomNavIndex],
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontFamily: 'EncodeSans',
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: 2,
-                      color: DynamicTheme.of(context)
-                          .data
-                          .textTheme
-                          .subtitle
-                          .color),
-                ),
+              title: Text(
+                _tabNames[indexState.bottomNavIndex],
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontFamily: 'EncodeSans',
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 2,
+                    color: DynamicTheme.of(context)
+                        .data
+                        .textTheme
+                        .subtitle
+                        .color),
               ),
             )
           : null,

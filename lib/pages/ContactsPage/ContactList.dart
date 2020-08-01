@@ -16,6 +16,7 @@ class ContactList extends StatelessWidget {
     final _contactList = contactCategory.contacts;
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(CONTACT_LIST,
           style: TextStyle(
             fontFamily: 'Roboto',

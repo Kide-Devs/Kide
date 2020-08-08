@@ -80,7 +80,7 @@ class _PostCardState extends State<PostCard> {
                             height: deviceHeight * 0.32,
                             child: CachedNetworkImage(
                               imageUrl: widget.image,
-                              fit: BoxFit.fill,
+                              fit: BoxFit.fitWidth,
                               placeholder: (context, url) => Stack(
                                 alignment: Alignment.center,
                                 children: <Widget>[

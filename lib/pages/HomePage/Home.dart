@@ -16,6 +16,7 @@ import 'package:Kide/pages/AboutUsPage.dart/AboutUs.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:share/share.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -151,7 +152,7 @@ class _HomePageState extends State<HomePage>
                         style:
                             TextStyle(fontFamily: "EncodeSans", fontSize: 16),
                       )),
-                      ListTile(
+                  ListTile(
                     title: Text(
                       "Dark Mode ",
                       style: TextStyle(fontFamily: "Quicksand", fontSize: 20),
@@ -183,8 +184,41 @@ class _HomePageState extends State<HomePage>
                     children: <Widget>[
                       Divider(),
                       ListTile(
-                          leading: Icon(Icons.help),
-                          title: Text('Help and Feedback')),
+                        leading: Icon(Icons.help),
+                        title: Text('Help and Feedback'),
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    title: Text('Choose subject'),
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        FlatButton.icon(
+                                            onPressed: () {
+                                              _createEmail('[FEEDBACK]: $name : $email');
+                                            },
+                                            icon: Icon(Icons.feedback),
+                                            label: Text("Feedback")),
+                                        FlatButton.icon(
+                                            onPressed: () {
+                                              _createEmail('[HELP]: $name : $email');
+                                            },
+                                            icon: Icon(Icons.help),
+                                            label: Text("Help")),
+                                      ],
+                                    ),
+                                    actions: [
+                                      FlatButton.icon(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          icon: Icon(Icons.close),
+                                          label: Text("Cancel")),
+                                    ],
+                                  ));
+                        },
+                      ),
                       ListTile(
                           onTap: () async {
                             final DynamicLinkParameters parameters =
@@ -309,5 +343,15 @@ class _HomePageState extends State<HomePage>
         ),
       ),
     );
+  }
+}
+
+void _createEmail(String subject) async {
+  String emailaddress = 'mailto:kide.kiit@gmail.com?subject=$subject';
+
+  if (await canLaunch(emailaddress)) {
+    await launch(emailaddress);
+  } else {
+    throw 'Could not Email';
   }
 }

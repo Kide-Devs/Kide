@@ -124,22 +124,23 @@ class _PostsPageState extends State<PostsPage>
                 )
               : RefreshIndicator(
                   child: ListView.builder(
-                      padding: EdgeInsets.zero,
-                      itemCount: posts.length,
-                      controller: _scrollController,
-                      itemBuilder: (context, index) {
-                        return PostCard(
-                          postType: widget.postType,
-                          id: posts[index].documentID,
-                          title: posts[index].data['title'],
-                          subtitle: posts[index].data['subtitle'],
-                          image: posts[index].data['imageUrl'],
-                          body: posts[index].data['body'],
-                          date: posts[index].data['date'],
-                          likes: posts[index].data['likes'].toString(),
-                          views: posts[index].data['views'].toString(),
-                        );
-                      }),
+                    padding: EdgeInsets.zero,
+                    itemCount: posts.length,
+                    controller: _scrollController,
+                    itemBuilder: (context, index) {
+                      return PostCard(
+                        postType: widget.postType,
+                        id: posts[index].documentID,
+                        title: posts[index].data['title'],
+                        subtitle: posts[index].data['subtitle'],
+                        image: posts[index].data['imageUrl'],
+                        body: posts[index].data['body'],
+                        date: posts[index].data['date'],
+                        likes: posts[index].data['likes'].toString(),
+                        views: posts[index].data['views'].toString(),
+                      );
+                    },
+                  ),
                   onRefresh: () => onPostHomeRefresh(),
                 ),
         ),

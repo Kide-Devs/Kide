@@ -1,26 +1,26 @@
 import 'dart:async';
 
 import 'package:Kide/pages/Auth/Login.dart';
-import 'package:Kide/pages/Profile/AddProfile.dart';
 import 'package:Kide/util/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PasswordResetPage extends StatefulWidget {
+  PasswordResetPage({this.emailController});
+
+  final emailController;
+
   @override
   State<StatefulWidget> createState() => _PasswordResetPageState();
 }
 
 class _PasswordResetPageState extends State<PasswordResetPage> {
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _oobCodeController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
 
   String rocketAnimation = 'idle', msgToUser = '';
   bool isLoading = false, hasSentOobCode = false;
@@ -66,7 +66,9 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
                   children: <Widget>[
                     WeirdTextField(
                       hintText: "Recovery Email",
-                      controller: _emailController,
+                      controller: widget.emailController != null
+                          ? widget.emailController
+                          : _emailController,
                     ),
                     WeirdAuthButton(
                       child: isLoading
@@ -86,7 +88,9 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
                             ),
                       onTap: () async {
                         FirebaseAuth _auth = FirebaseAuth.instance;
-                        String email = _emailController.text;
+                        String email = widget.emailController != null
+                            ? widget.emailController.text
+                            : _emailController.text;
 
                         if (email.trim() == '') {
                           setState(() {
@@ -100,7 +104,7 @@ class _PasswordResetPageState extends State<PasswordResetPage> {
                         try {
                           await _auth.sendPasswordResetEmail(email: email);
                         } on PlatformException catch (e) {
-                          print("Registration Error Code:");
+                          print("Error Code:");
                           print(e.code);
 //                          if (e.code == 'ERROR_WEAK_PASSWORD') {
 //                            setState(() {

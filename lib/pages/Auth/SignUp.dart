@@ -218,7 +218,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "Already a user, ",
+                        "Already a user?, ",
                         style: TextStyle(
                           color: AUTH_MODE_SWITCH_INFO_COLOR,
                           fontFamily: 'Quicksand',

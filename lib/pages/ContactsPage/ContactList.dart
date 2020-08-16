@@ -1,13 +1,12 @@
-import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:flutter/material.dart';
+import 'package:Kide/config/Viewport.dart';
 import 'package:Kide/models/ContactCategory.dart';
 import 'package:Kide/pages/ContactsPage/widgets/ContactCardDiallable.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:Kide/widgets/HeaderWidget.dart';
-import 'package:Kide/config/Viewport.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:flutter/material.dart';
 
 class ContactList extends StatelessWidget {
-  // Offset _offset = Offset(0.95, 0.55);
   static const routeName = '/ContactList';
 
   @override
@@ -40,28 +39,6 @@ class ContactList extends StatelessWidget {
                       color: Colors.white,
                       endIndent: ViewPort.screenWidth * 0.44,
                     ),
-                    // Transform(
-                    //   transform: Matrix4.identity()
-                    //   ..setEntry(1, 3, 0.001) // perspective
-                    //   ..rotateX(_offset.dy)
-                    //   ..rotateY(_offset.dx),
-                    //   alignment: FractionalOffset(0.57,0.57),
-                    //   child: Divider(
-                    //     height: 0.0,
-                    //     color: Colors.white,
-                    //     indent: ViewPort.screenWidth*0.49,
-                    //     endIndent: ViewPort.screenWidth*0.37,
-                    //   ),
-                    // )
-                    // RotationTransition(
-                    //   turns: AlwaysStoppedAnimation(750/360),
-                    //   child: Divider(
-                    //     height: 0.0,
-                    //     color: Colors.white,
-                    //     indent: 163.5,
-                    //     endIndent: 175.0,
-                    //   ),
-                    // ),
                   ],
                 ),
               ),

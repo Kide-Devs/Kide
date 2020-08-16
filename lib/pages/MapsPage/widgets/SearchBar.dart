@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:Kide/config/Viewport.dart';
+import 'package:Kide/providers/getMarkers.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:Kide/widgets/HeaderWidget.dart';
+import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:Kide/providers/getMarkers.dart';
 
 void main() => runApp(MaterialApp(home: SearchBar()));
 
@@ -98,7 +98,7 @@ class _SearchBarState extends State<SearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    //Listner
+    //Listener
     final _getMarkers = Provider.of<GetMarkers>(context);
     if (_initialLoad) _markers = _getMarkers.suggestedMarkers;
     _initialLoad = false;
@@ -171,6 +171,7 @@ class _SearchBarState extends State<SearchBar> {
 
 class ChildItem extends StatelessWidget {
   final Marker marker;
+
   ChildItem(this.marker);
 
   @override

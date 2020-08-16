@@ -22,11 +22,12 @@ class _AboutUsState extends State<AboutUs> {
               height: 20,
             ),
             Center(
-                child: Image.asset(
-              MAIN_KIDE_LOGO,
-              height: 150,
-              width: 150,
-            )),
+              child: Image.asset(
+                MAIN_KIDE_LOGO,
+                height: 150,
+                width: 150,
+              ),
+            ),
             SizedBox(
               height: 20,
             ),

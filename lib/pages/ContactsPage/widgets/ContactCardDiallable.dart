@@ -24,7 +24,6 @@ class ContactCardDiallable extends StatelessWidget {
         child: new InkWell(
           onTap: () {
             launch('tel:\\$number');
-            print('Contact Card tapped');
           },
           child: Center(
             child: Column(

@@ -1,7 +1,7 @@
-import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:flutter/material.dart';
 import 'package:Kide/models/ContactCategory.dart';
 import 'package:Kide/pages/ContactsPage/ContactList.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:flutter/material.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard(this.contactCategory);
@@ -18,13 +18,11 @@ class CategoryCard extends StatelessWidget {
         onTap: () {
           Navigator.of(context)
               .pushNamed(ContactList.routeName, arguments: contactCategory);
-          print('Contact Card tapped');
         },
         child: Center(
           child: Text(
             contactCategory.name,
             textAlign: TextAlign.center,
-            //overflow: TextOverflow.fade,
             style: TextStyle(
               color: DynamicTheme.of(context).data.textTheme.subtitle1.color,
               fontSize: 15.0,

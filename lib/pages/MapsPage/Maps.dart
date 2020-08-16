@@ -68,19 +68,19 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
     try {
       currentLocation = await location.getLocation();
     } catch (e) {
-      if (e.code == 'PERMISSION_DENIED') {
-        print('Permission denied');
-      }
+      if (e.code == 'PERMISSION_DENIED') {}
       currentLocation = null;
     }
 
-    mapController.animateCamera(CameraUpdate.newCameraPosition(
-      CameraPosition(
-        target: LatLng(currentLocation.latitude, currentLocation.longitude),
-        zoom: 18.0,
-        tilt: 60,
+    mapController.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: LatLng(currentLocation.latitude, currentLocation.longitude),
+          zoom: 18.0,
+          tilt: 60,
+        ),
       ),
-    ));
+    );
   }
 
   CameraPosition _defaultLocation() {
@@ -115,20 +115,21 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
     Marker searchedMarker = await Navigator.push(
         context, MaterialPageRoute(builder: (context) => SearchBar()));
 
-    mapController.animateCamera(CameraUpdate.newCameraPosition(
-      CameraPosition(
-        target: searchedMarker.position,
-        zoom: 30.0,
-        tilt: 60,
+    mapController.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: searchedMarker.position,
+          zoom: 30.0,
+          tilt: 60,
+        ),
       ),
-    ));
+    );
   }
 
   CameraPosition _goToEventLocation(GetMarkers getMarkers) {
     Marker eventMarkerLoc = getMarkers.markers['all'].singleWhere((loc) {
       return loc.markerId.value == widget.eventMarker;
     });
-    print(eventMarkerLoc.markerId.value);
     return CameraPosition(
       target: eventMarkerLoc.position,
       zoom: 30.0,
@@ -244,7 +245,6 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
                 heroTag: null,
                 backgroundColor:
                     categories[index].isToggled ? Colors.black : Colors.white,
-                // mini: true,
                 icon: Icon(_categories[index].icon,
                     color: categories[index].isToggled
                         ? Colors.white
@@ -252,8 +252,6 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
                 onPressed: () {
                   _addSearchFilter(_categories[index], _getMarkers);
                 },
-                // tooltip: _categories[index].label,
-                // isExtended: true,
                 label: Text(
                   _categories[index].label,
                   style: TextStyle(

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:Kide/models/SubEvent.dart';
+import 'package:flutter/material.dart';
 
 class Bookmarks with ChangeNotifier{
   List<SubEvent> _bookmarks = [];

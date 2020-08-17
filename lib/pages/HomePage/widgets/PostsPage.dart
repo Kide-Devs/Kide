@@ -1,6 +1,6 @@
 import 'package:Kide/pages/HomePage/widgets/PostCard.dart';
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class PostsPage extends StatefulWidget {
   final String postType;
@@ -37,7 +37,6 @@ class _PostsPageState extends State<PostsPage>
 
   Future<void> fetchPosts() async {
     if (!hasMore) {
-      //print("No more posts"); // [DEBUG]
       return;
     }
     if (isLoading) {
@@ -61,7 +60,6 @@ class _PostsPageState extends State<PostsPage>
           .startAfterDocument(lastDocumentFetchedOnScroll)
           .limit(documentLimit)
           .getDocuments();
-      // print("Success"); // [DEBUG]
     }
 
     if (querySnapshot.documents.length < documentLimit) {

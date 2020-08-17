@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:Kide/models/EventDetail.dart';
+import 'package:flutter/foundation.dart';
 
 class SubEvent {
   final Key id;

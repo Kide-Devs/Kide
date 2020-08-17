@@ -248,11 +248,8 @@ class _LoginPageState extends State<LoginPage> {
                                 await SharedPreferences.getInstance();
                             prefs.setString('Name', value['fullName']);
                             prefs.setString('Email', value['email']);
-
-                            print(value['fullName']);
                           });
                         } on PlatformException catch (e) {
-                          print(e.code);
                           if (e.code == 'ERROR_USER_NOT_FOUND') {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
@@ -261,11 +258,6 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             );
-//                            setState(() {
-//                              msgToUser = "User not registered";
-//                              rocketAnimation = 'fail';
-//                              isLoading = false;
-//                            });
                           } else {
                             setState(() {
                               msgToUser = "Invalid Credentials!";

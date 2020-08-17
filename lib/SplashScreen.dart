@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:Kide/pages/Auth/Login.dart';
+import 'package:Kide/util/constants.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:Kide/pages/OnBoarding/OnBoarding.dart';
-import 'package:Kide/util/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'MyApp.dart';
@@ -35,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void navigationMyApp() {
     Navigator.of(context).pushReplacementNamed(MyApp.routeName);
   }
-  
+
   void navigationUserAuth() {
     Navigator.of(context).pushReplacementNamed(LoginPage.routeName);
   }
@@ -59,7 +58,6 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Stack(
         children: <Widget>[
           Column(
-            // crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Stack(
@@ -75,7 +73,8 @@ class _SplashScreenState extends State<SplashScreen> {
                           duration: Duration(milliseconds: 1350),
                           curve: Curves.easeInOut,
                           width: size.width / (4 * _opacityAnimator(_opacity)),
-                          height: size.height / (4.0 * _opacityAnimator(_opacity)),
+                          height:
+                              size.height / (4.0 * _opacityAnimator(_opacity)),
                           child: Image.asset(
                             MAIN_KIDE_LOGO,
                             gaplessPlayback: true,
@@ -99,7 +98,8 @@ class _SplashScreenState extends State<SplashScreen> {
                   style: TextStyle(
                     fontSize: 20.0,
                     fontFamily: "Michroma",
-                    color: DynamicTheme.of(context).data.textTheme.subtitle.color,
+                    color:
+                        DynamicTheme.of(context).data.textTheme.subtitle.color,
                     letterSpacing: 20.0,
                   ),
                 ),

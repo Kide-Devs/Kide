@@ -1,5 +1,4 @@
 import 'package:Kide/util/colors.dart';
-import 'package:Kide/util/constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
@@ -53,8 +52,6 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
         backgroundColor: Theme.of(context).iconTheme.color,
         child: Icon(Icons.share),
         onPressed: () async {
-          // TODO : SHARE
-          print(widget.postType);
           final DynamicLinkParameters parameters = DynamicLinkParameters(
               uriPrefix: 'https://kiitdev.page.link',
               link: Uri.parse(
@@ -73,7 +70,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
           final ShortDynamicLink shortDynamicLink =
               await parameters.buildShortLink();
           final Uri shortUrl = shortDynamicLink.shortUrl;
-          print(shortUrl);
+
           Share.share("${shortUrl}");
         },
       ),
@@ -112,6 +109,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
                   ? Hero(
                       tag: widget.image,
                       child: Stack(
+                        fit: StackFit.expand,
                         children: <Widget>[
                           CachedNetworkImage(
                             imageUrl: widget.image,

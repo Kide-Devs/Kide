@@ -1,10 +1,10 @@
 import 'package:Kide/MyApp.dart';
-import 'package:Kide/util/constants.dart';
-import 'package:flutter/material.dart';
 import 'package:Kide/pages/OnBoarding/dots_indicator.dart';
 import 'package:Kide/pages/OnBoarding/page1.dart';
 import 'package:Kide/pages/OnBoarding/page2.dart';
 import 'package:Kide/pages/OnBoarding/page3.dart';
+import 'package:Kide/util/constants.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingMainPage extends StatefulWidget {

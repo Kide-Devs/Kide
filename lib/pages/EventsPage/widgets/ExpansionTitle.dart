@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:Kide/config/Viewport.dart';
 import 'package:Kide/models/SubEvent.dart';
+import 'package:flutter/material.dart';
 
 class ExpansionTitle extends StatelessWidget {
   const ExpansionTitle({
@@ -18,7 +18,6 @@ class ExpansionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     ViewPort().init(context);
 
-    print(ViewPort.screenWidth * 0.025);
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.end,

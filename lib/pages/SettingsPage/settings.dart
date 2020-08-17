@@ -1,13 +1,10 @@
+import 'package:Kide/pages/AboutUsPage.dart/AboutUs.dart';
 import 'package:Kide/pages/Auth/Login.dart';
 import 'package:Kide/pages/Profile/EditProfile.dart';
 import 'package:Kide/pages/Profile/profile.dart';
-import 'package:Kide/util/constants.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:day_night_switcher/day_night_switcher.dart';
-// import 'package:flutter_email_sender/flutter_email_sender.dart';
-import 'package:Kide/pages/AboutUsPage.dart/AboutUs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends StatefulWidget {
@@ -18,6 +15,7 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   int ct = 0;
   bool isDarkModeEnabled = false;
+
   @override
   void initState() {
     super.initState();
@@ -72,9 +70,11 @@ class _SettingsState extends State<Settings> {
                   ListTile(
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProfilePage()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProfilePage(),
+                        ),
+                      );
                     },
                     leading: Icon(Icons.person),
                     title: Text(
@@ -83,49 +83,34 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                   ListTile(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => EditProfile()));
-                      },
-                      title: Text(
-                        "Edit Profile  ",
-                        style: TextStyle(fontFamily: "Quicksand", fontSize: 20),
-                      ),
-                      leading: Icon(Icons.camera)),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditProfile(),
+                        ),
+                      );
+                    },
+                    title: Text(
+                      "Edit Profile  ",
+                      style: TextStyle(fontFamily: "Quicksand", fontSize: 20),
+                    ),
+                    leading: Icon(Icons.camera),
+                  ),
                   ListTile(
-                      title: Text(
-                        "Push Notifications ",
-                        style: TextStyle(fontFamily: "Quicksand", fontSize: 20),
+                    title: Text(
+                      "Push Notifications ",
+                      style: TextStyle(fontFamily: "Quicksand", fontSize: 20),
+                    ),
+                    trailing: Container(
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      child: SwitchListTile(
+                        activeColor: Colors.red,
+                        value: true,
+                        onChanged: (v) {},
                       ),
-                      trailing: Container(
-                        width: MediaQuery.of(context).size.width * 0.3,
-                        child: SwitchListTile(
-                            activeColor: Colors.red,
-                            value: true,
-                            onChanged: (v) {
-                              print(v);
-                            }),
-                      )),
-                  // ListTile(
-                  //   title: Text(
-                  //     "Dark Mode ",
-                  //     style: TextStyle(fontFamily: "Quicksand", fontSize: 20),
-                  //   ),
-                  //   trailing: Transform.scale(
-                  //     scale: 0.6,
-                  //     child: DayNightSwitcher(
-                  //       isDarkModeEnabled: isDarkModeEnabled,
-                  //       onStateChanged: (isDarkModeEnabled) {
-                  //         setState(() {
-                  //           this.isDarkModeEnabled = isDarkModeEnabled;
-                  //           _changeBrightness(context);
-                  //         });
-                  //       },
-                  //     ),
-                  //   ),
-                  // ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -143,19 +128,7 @@ class _SettingsState extends State<Settings> {
               child: Column(
                 children: <Widget>[
                   ListTile(
-                    onTap: () async {
-                      // final Email email = Email(
-                      //   body: 'Email body',
-                      //   subject: 'Email subject',
-                      //   recipients: ['example@example.com'],
-                      //   cc: ['cc@example.com'],
-                      //   bcc: ['bcc@example.com'],
-                      //   attachmentPaths: ['/path/to/attachment.zip'],
-                      //   isHTML: false,
-                      // );
-
-                      // await FlutterEmailSender.send(email);
-                    },
+                    onTap: () async {},
                     leading: Icon(Icons.help),
                     title: Text(
                       "Help & Feedback",
@@ -170,15 +143,20 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                   ListTile(
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => AboutUs()));
-                      },
-                      title: Text(
-                        "About Us",
-                        style: TextStyle(fontFamily: "Quicksand", fontSize: 20),
-                      ),
-                      leading: Icon(Icons.info)),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AboutUs(),
+                        ),
+                      );
+                    },
+                    title: Text(
+                      "About Us",
+                      style: TextStyle(fontFamily: "Quicksand", fontSize: 20),
+                    ),
+                    leading: Icon(Icons.info),
+                  ),
                   ListTile(
                     onTap: () async {
                       FirebaseAuth _auth = FirebaseAuth.instance;

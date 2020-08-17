@@ -1,10 +1,10 @@
-import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:flutter/material.dart';
+import 'package:Kide/config/Viewport.dart';
 import 'package:Kide/models/ContactCategory.dart';
 import 'package:Kide/pages/ContactsPage/widgets/ContactCardDiallable.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:Kide/widgets/HeaderWidget.dart';
-import 'package:Kide/config/Viewport.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:flutter/material.dart';
 
 class ContactList extends StatelessWidget {
   static const routeName = '/ContactList';

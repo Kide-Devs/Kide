@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class WeirdTextFieldPainter extends CustomPainter {
@@ -247,11 +248,8 @@ class _LoginPageState extends State<LoginPage> {
                                 await SharedPreferences.getInstance();
                             prefs.setString('Name', value['fullName']);
                             prefs.setString('Email', value['email']);
-
-                            print(value['fullName']);
                           });
                         } on PlatformException catch (e) {
-                          print(e.code);
                           if (e.code == 'ERROR_USER_NOT_FOUND') {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
@@ -260,11 +258,6 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             );
-//                            setState(() {
-//                              msgToUser = "User not registered";
-//                              rocketAnimation = 'fail';
-//                              isLoading = false;
-//                            });
                           } else {
                             setState(() {
                               msgToUser = "Invalid Credentials!";
@@ -306,16 +299,20 @@ class _LoginPageState extends State<LoginPage> {
                             color: AUTH_SUBMIT_COLOR,
                           ),
                         ),
-                        onTap: () {
-                          var email = widget.emailController != null
-                              ? widget.emailController.text
-                              : _emailController.text;
-                          Navigator.of(context).push(
+                        onTap: () async {
+                          await Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => PasswordResetPage(),
+                              builder: (context) => PasswordResetPage(emailController: _emailController,),
                             ),
                           );
-                          //_auth.confirmPasswordReset(oobCode, newPassword);
+                          Fluttertoast.showToast(
+                            msg: "Recovery mail Sent",
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.BOTTOM,
+                            backgroundColor: Colors.black,
+                            textColor: Colors.white,
+                            timeInSecForIosWeb: 10,
+                          );
                         },
                       ),
                     ),
@@ -353,7 +350,7 @@ class _LoginPageState extends State<LoginPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "Not a registered user, ",
+                        "Not a registered user?, ",
                         style: TextStyle(
                           color: AUTH_MODE_SWITCH_INFO_COLOR,
                           fontFamily: 'Quicksand',

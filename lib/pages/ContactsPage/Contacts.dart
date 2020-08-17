@@ -1,12 +1,12 @@
+import 'package:Kide/config/Viewport.dart';
+import 'package:Kide/pages/ContactsPage/widgets/CategoryCard.dart';
+import 'package:Kide/pages/ContactsPage/widgets/EmergencyCard.dart';
+import 'package:Kide/util/constants.dart';
+import 'package:Kide/util/data.dart';
+import 'package:Kide/widgets/HeaderWidget.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:Kide/util/data.dart';
-import 'package:Kide/util/constants.dart';
-import 'package:Kide/widgets/HeaderWidget.dart';
-import 'package:Kide/pages/ContactsPage/widgets/EmergencyCard.dart';
-import 'package:Kide/pages/ContactsPage/widgets/CategoryCard.dart';
-import 'package:Kide/config/Viewport.dart';
 
 List<StaggeredTile> _staggeredTiles = const <StaggeredTile>[
   const StaggeredTile.count(2, 1),
@@ -63,6 +63,7 @@ class _ContactsPageState extends State<ContactsPage> {
                       _emergencyContacts[i].emergency,
                       _emergencyContacts[i].number,
                     ),
+
                 ],
               ),
               SliverList(

@@ -1,21 +1,16 @@
-import 'package:Kide/pages/Auth/Login.dart';
+import 'package:Kide/pages/AboutUsPage.dart/AboutUs.dart';
 import 'package:Kide/pages/HomePage/widgets/PostsPage.dart';
-import 'package:Kide/pages/MorePage/More.dart';
-import 'package:Kide/pages/Preferences/PreferencesPage.dart';
 import 'package:Kide/pages/Profile/profile.dart';
 import 'package:Kide/pages/SettingsPage/settings.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:Kide/widgets/CircularAvatar.dart';
 import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
-import 'package:Kide/pages/AboutUsPage.dart/AboutUs.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:share/share.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
@@ -60,6 +55,7 @@ class _HomePageState extends State<HomePage>
   bool get wantKeepAlive => true;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int ct = 0;
+
   @override
   // ignore: must_call_super
   Widget build(BuildContext context) {
@@ -140,18 +136,16 @@ class _HomePageState extends State<HomePage>
                     leading: Icon(Icons.save),
                   ),
                   ListTile(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Settings()));
-                      },
-                      leading: Icon(Icons.settings),
-                      title: Text(
-                        'Settings',
-                        style:
-                            TextStyle(fontFamily: "EncodeSans", fontSize: 16),
-                      )),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Settings()));
+                    },
+                    leading: Icon(Icons.settings),
+                    title: Text(
+                      'Settings',
+                      style: TextStyle(fontFamily: "EncodeSans", fontSize: 16),
+                    ),
+                  ),
                   ListTile(
                     title: Text(
                       "Dark Mode ",
@@ -188,76 +182,83 @@ class _HomePageState extends State<HomePage>
                         title: Text('Help and Feedback'),
                         onTap: () {
                           showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                    title: Text('Choose subject'),
-                                    content: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        FlatButton.icon(
-                                            onPressed: () {
-                                              _createEmail('[FEEDBACK]: $name : $email');
-                                            },
-                                            icon: Icon(Icons.feedback),
-                                            label: Text("Feedback")),
-                                        FlatButton.icon(
-                                            onPressed: () {
-                                              _createEmail('[HELP]: $name : $email');
-                                            },
-                                            icon: Icon(Icons.help),
-                                            label: Text("Help")),
-                                      ],
-                                    ),
-                                    actions: [
-                                      FlatButton.icon(
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                          icon: Icon(Icons.close),
-                                          label: Text("Cancel")),
-                                    ],
-                                  ));
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text('Choose subject'),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  FlatButton.icon(
+                                    onPressed: () {
+                                      _createEmail(
+                                          '[FEEDBACK]: $name : $email');
+                                    },
+                                    icon: Icon(Icons.feedback),
+                                    label: Text("Feedback"),
+                                  ),
+                                  FlatButton.icon(
+                                    onPressed: () {
+                                      _createEmail('[HELP]: $name : $email');
+                                    },
+                                    icon: Icon(Icons.help),
+                                    label: Text("Help"),
+                                  ),
+                                ],
+                              ),
+                              actions: [
+                                FlatButton.icon(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  icon: Icon(Icons.close),
+                                  label: Text("Cancel"),
+                                ),
+                              ],
+                            ),
+                          );
                         },
                       ),
                       ListTile(
-                          onTap: () async {
-                            final DynamicLinkParameters parameters =
-                                DynamicLinkParameters(
-                                    uriPrefix: 'https://kiitdev.page.link',
-                                    link: Uri.parse(
-                                        'https://kiitdev.page.link/post/'),
-                                    androidParameters: AndroidParameters(
-                                      packageName: 'com.kiitdev.Kide',
-                                    ),
-                                    socialMetaTagParameters:
-                                        SocialMetaTagParameters(
-                                            imageUrl: Uri.parse(
-                                                "https://lh3.googleusercontent.com/C60ciedUhQScbWSFG5BY0P1YpA3Js1SLJZKwB0W4csaR5OzfgjjUopGiHeD5Q_krvAw=s180-rw")),
-                                    dynamicLinkParametersOptions:
-                                        DynamicLinkParametersOptions(
-                                            shortDynamicLinkPathLength:
-                                                ShortDynamicLinkPathLength
-                                                    .short)
-                                    // NOT ALL ARE REQUIRED ===== HERE AS AN EXAMPLE =====
-                                    );
-                            final ShortDynamicLink shortDynamicLink =
-                                await parameters.buildShortLink();
-                            final Uri shortUrl = shortDynamicLink.shortUrl;
-                            print(shortUrl);
-                            Share.share("${shortUrl}");
-                          },
-                          leading: Icon(Icons.archive),
-                          title: Text(
-                            'Invite Friends',
-                            style: TextStyle(
-                                fontFamily: "EncodeSans", fontSize: 16),
-                          )),
+                        onTap: () async {
+                          final DynamicLinkParameters parameters =
+                              DynamicLinkParameters(
+                            uriPrefix: 'https://kiitdev.page.link',
+                            link: Uri.parse('https://kiitdev.page.link/post/'),
+                            androidParameters: AndroidParameters(
+                              packageName: 'com.kiitdev.Kide',
+                            ),
+                            socialMetaTagParameters: SocialMetaTagParameters(
+                              imageUrl: Uri.parse(
+                                  "https://lh3.googleusercontent.com/C60ciedUhQScbWSFG5BY0P1YpA3Js1SLJZKwB0W4csaR5OzfgjjUopGiHeD5Q_krvAw=s180-rw"),
+                            ),
+                            dynamicLinkParametersOptions:
+                                DynamicLinkParametersOptions(
+                              shortDynamicLinkPathLength:
+                                  ShortDynamicLinkPathLength.short,
+                            ),
+                            // NOT ALL ARE REQUIRED ===== HERE AS AN EXAMPLE =====
+                          );
+                          final ShortDynamicLink shortDynamicLink =
+                              await parameters.buildShortLink();
+                          final Uri shortUrl = shortDynamicLink.shortUrl;
+                          print(shortUrl);
+                          Share.share("$shortUrl");
+                        },
+                        leading: Icon(Icons.archive),
+                        title: Text(
+                          'Invite Friends',
+                          style:
+                              TextStyle(fontFamily: "EncodeSans", fontSize: 16),
+                        ),
+                      ),
                       ListTile(
                         onTap: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AboutUs()));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AboutUs(),
+                            ),
+                          );
                         },
                         title: Text(
                           "About Us",
@@ -275,11 +276,6 @@ class _HomePageState extends State<HomePage>
               ),
             ),
             SizedBox(height: 3),
-            // Align(
-            //   alignment: Alignment.bottomCenter,
-            //   child: Text("Version:v2.1.1 "),
-            // ),
-            // SizedBox(height: 10),
           ],
         ),
       ),

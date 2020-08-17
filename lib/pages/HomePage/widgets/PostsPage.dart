@@ -1,6 +1,6 @@
 import 'package:Kide/pages/HomePage/widgets/PostCard.dart';
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 class PostsPage extends StatefulWidget {
   final String postType;
@@ -37,7 +37,6 @@ class _PostsPageState extends State<PostsPage>
 
   Future<void> fetchPosts() async {
     if (!hasMore) {
-      print("No more posts");
       return;
     }
     if (isLoading) {
@@ -61,7 +60,6 @@ class _PostsPageState extends State<PostsPage>
           .startAfterDocument(lastDocumentFetchedOnScroll)
           .limit(documentLimit)
           .getDocuments();
-      print("Success");
     }
 
     if (querySnapshot.documents.length < documentLimit) {
@@ -86,7 +84,6 @@ class _PostsPageState extends State<PostsPage>
     });
 
     QuerySnapshot querySnapshot;
-    print(lastDocumentFetchedOnRefresh.data);
     if (lastDocumentFetchedOnRefresh == null) {
       querySnapshot = await firestore
           .collection('${widget.postType}')
@@ -99,7 +96,6 @@ class _PostsPageState extends State<PostsPage>
           .endBeforeDocument(lastDocumentFetchedOnRefresh)
           .getDocuments();
     }
-    print(querySnapshot.documents);
 
     lastDocumentFetchedOnRefresh = querySnapshot.documents.length != 0
         ? querySnapshot.documents[0]
@@ -145,13 +141,14 @@ class _PostsPageState extends State<PostsPage>
                                 likes: posts[index].data['likes'].toString(),
                                 views: posts[index].data['views'].toString(),
                               ),
-                              Container(
-                                alignment: Alignment.center ,
-                                height: 100,
-                                child: Text(
-                                  'Thats all for now, folks!',
-                                  textAlign: TextAlign.center,
-                                ),
+                              Column(
+                                children: [
+                                  Text(
+                                    'Thats all for now, folks!',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  SizedBox(height: 80),
+                                ],
                               ),
                             ],
                           );

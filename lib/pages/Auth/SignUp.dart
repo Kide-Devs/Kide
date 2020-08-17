@@ -136,8 +136,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           _result = await _auth.createUserWithEmailAndPassword(
                               email: email, password: password);
                         } on PlatformException catch (e) {
-                          print("Registration Error Code:");
-                          print(e.code);
                           if (e.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
@@ -146,11 +144,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                 ),
                               ),
                             );
-//                            setState(() {
-//                              msgToUser = "Email already registered!";
-//                              rocketAnimation = 'fail';
-//                              isLoading = false;
-//                            });
                           } else if (e.code == 'ERROR_WEAK_PASSWORD') {
                             setState(() {
                               msgToUser = "Password at least 6 chars!";
@@ -218,7 +211,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "Already a user, ",
+                        "Already a user?, ",
                         style: TextStyle(
                           color: AUTH_MODE_SWITCH_INFO_COLOR,
                           fontFamily: 'Quicksand',

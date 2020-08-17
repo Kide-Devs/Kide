@@ -1,7 +1,7 @@
+import 'package:Kide/config/Viewport.dart';
 import 'package:Kide/pages/ForYou/widgets/MustSeeWidget.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:Kide/config/Viewport.dart';
 
 class ForYouPage extends StatelessWidget {
   @override

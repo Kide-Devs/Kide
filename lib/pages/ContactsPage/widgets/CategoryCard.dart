@@ -1,7 +1,7 @@
-import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:flutter/material.dart';
 import 'package:Kide/models/ContactCategory.dart';
 import 'package:Kide/pages/ContactsPage/ContactList.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:flutter/material.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard(this.contactCategory);

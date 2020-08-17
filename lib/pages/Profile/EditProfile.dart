@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:Kide/util/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
@@ -72,12 +70,6 @@ class _EditProfileState extends State<EditProfile> {
       body: ListView(
         padding: EdgeInsets.only(left: 12, right: 12),
         children: <Widget>[
-          // Center(
-          //   child: Text(
-          //     widget.isedit?'Edit Profile':'Add Profile Data',
-          //     style: TextStyle(fontSize: 26, fontFamily: "EncodeSans"),
-          //   ),
-          // ),
           SizedBox(
             height: 20,
           ),
@@ -122,7 +114,8 @@ class _EditProfileState extends State<EditProfile> {
                         context: context,
                         builder: (context) => AlertDialog(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18)),
+                            borderRadius: BorderRadius.circular(18),
+                          ),
                           title: Text('Edit Roll'),
                           content: TextFormField(
                             keyboardType: TextInputType.number,
@@ -176,7 +169,8 @@ class _EditProfileState extends State<EditProfile> {
                         context: context,
                         builder: (context) => AlertDialog(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18)),
+                            borderRadius: BorderRadius.circular(18),
+                          ),
                           title: Text('Edit Name'),
                           content: TextFormField(
                             initialValue: name,
@@ -202,7 +196,7 @@ class _EditProfileState extends State<EditProfile> {
                                   "fullName": name,
                                 });
                                 SharedPreferences prefs =
-                                await SharedPreferences.getInstance();
+                                    await SharedPreferences.getInstance();
                                 prefs.setString('Name', name);
                                 Navigator.of(context).pop();
                               },
@@ -232,7 +226,8 @@ class _EditProfileState extends State<EditProfile> {
                         context: context,
                         builder: (context) => AlertDialog(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18)),
+                            borderRadius: BorderRadius.circular(18),
+                          ),
                           title: Text('Edit CGPA'),
                           content: TextFormField(
                             initialValue: cgpa,
@@ -286,7 +281,8 @@ class _EditProfileState extends State<EditProfile> {
                         context: context,
                         builder: (context) => AlertDialog(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18)),
+                            borderRadius: BorderRadius.circular(18),
+                          ),
                           title: Text('Edit Batch'),
                           content: TextFormField(
                             initialValue: batch,
@@ -337,7 +333,8 @@ class _EditProfileState extends State<EditProfile> {
                         context: context,
                         builder: (context) => AlertDialog(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18)),
+                            borderRadius: BorderRadius.circular(18),
+                          ),
                           title: Text('Edit Branch'),
                           content: TextFormField(
                             initialValue: branch,

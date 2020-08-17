@@ -60,6 +60,7 @@ class _HomePageState extends State<HomePage>
   // ignore: must_call_super
   Widget build(BuildContext context) {
     if (ct == 0) {
+      // Checking for darkTheme enabled
       isDarkModeEnabled =
           Theme.of(context).brightness == Brightness.dark ? true : false;
       ct++;
@@ -83,6 +84,7 @@ class _HomePageState extends State<HomePage>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             ClipRRect(
+                              // Using Custom avatar Widget
                               child: InitialNameAvatar(
                                 name,
                                 backgroundColor: Colors.tealAccent.shade700,
@@ -98,9 +100,10 @@ class _HomePageState extends State<HomePage>
                             Text(
                               name,
                               style: TextStyle(
-                                  fontSize: 19,
-                                  fontFamily: "Quicksand",
-                                  fontWeight: FontWeight.w600),
+                                fontSize: 19,
+                                fontFamily: "Quicksand",
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                             Text(
                               email,
@@ -108,7 +111,7 @@ class _HomePageState extends State<HomePage>
                                 fontSize: 17,
                                 fontFamily: "Quicksand",
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),

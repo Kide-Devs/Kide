@@ -1,10 +1,8 @@
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:Kide/util/data.dart';
 import 'package:Kide/pages/MorePage/Widgets/MoreCard.dart';
-
-void main() => runApp(MorePage());
+ 
 
 class MorePage extends StatelessWidget {
   @override

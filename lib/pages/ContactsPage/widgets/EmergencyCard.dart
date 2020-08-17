@@ -20,7 +20,6 @@ class EmergencyCard extends StatelessWidget {
       child: new InkWell(
         onTap: () {
           launch("tel://$number");
-          print('Emergency Card tapped');
         },
         child: new Center(
           child: new Padding(

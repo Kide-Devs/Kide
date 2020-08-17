@@ -8,8 +8,6 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-void main() => runApp(ContactsPage());
-
 List<StaggeredTile> _staggeredTiles = const <StaggeredTile>[
   const StaggeredTile.count(2, 1),
   const StaggeredTile.count(2, 1),
@@ -39,57 +37,61 @@ class _ContactsPageState extends State<ContactsPage> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-          child: CustomScrollView(slivers: <Widget>[
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  HeaderWidget(EMERGENCY_CONTACTS, 12,
-                      DynamicTheme.of(context).data.textTheme.subtitle.color),
-                  Divider(
-                    color: Colors.white,
-                    endIndent: ViewPort.screenWidth * 0.44,
-                  ),
+          child: CustomScrollView(
+            slivers: <Widget>[
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    HeaderWidget(EMERGENCY_CONTACTS, 12,
+                        DynamicTheme.of(context).data.textTheme.subtitle2.color),
+                    Divider(
+                      color: Colors.white,
+                      endIndent: ViewPort.screenWidth * 0.44,
+                    ),
+                  ],
+                ),
+              ),
+              SliverStaggeredGrid.count(
+                crossAxisCount: 4,
+                mainAxisSpacing: 4.0,
+                crossAxisSpacing: 4.0,
+                staggeredTiles: _staggeredTiles,
+                children: <Widget>[
+                  for (int i = 0; i < _emergencyContacts.length; i++)
+                    new EmergencyCard(
+                      _emergencyContacts[i].iconAsset,
+                      _emergencyContacts[i].emergency,
+                      _emergencyContacts[i].number,
+                    ),
+
                 ],
               ),
-            ),
-            SliverStaggeredGrid.count(
-              crossAxisCount: 4,
-              mainAxisSpacing: 4.0,
-              crossAxisSpacing: 4.0,
-              staggeredTiles: _staggeredTiles,
-              children: <Widget>[
-                for (int i = 0; i < _emergencyContacts.length; i++)
-                  new EmergencyCard(
-                    _emergencyContacts[i].iconAsset,
-                    _emergencyContacts[i].emergency,
-                    _emergencyContacts[i].number,
-                  ),
-              ],
-            ),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  HeaderWidget(OTHER_CONTACTS, 12, Colors.white),
-                  Divider(
-                    color: Colors.white,
-                    endIndent: ViewPort.screenWidth * 0.44,
-                  ),
-                ],
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    HeaderWidget(OTHER_CONTACTS, 12, Colors.white),
+                    Divider(
+                      color: Colors.white,
+                      endIndent: ViewPort.screenWidth * 0.44,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            SliverGrid(
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-              delegate: SliverChildListDelegate(
-                [
-                  for (int i = 0; i < contactCategoryList.length; i++)
-                    CategoryCard(_contactCategories[i]),
-                ],
-              ),
-            )
-          ]),
+              SliverGrid(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                delegate: SliverChildListDelegate(//category card generator
+                  [
+                    for (int i = 0; i < contactCategoryList.length; i++)
+                      CategoryCard(_contactCategories[i]),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 }
+  

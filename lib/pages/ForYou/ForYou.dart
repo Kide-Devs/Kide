@@ -3,8 +3,6 @@ import 'package:Kide/pages/ForYou/widgets/MustSeeWidget.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(ForYouPage());
-
 class ForYouPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -28,7 +26,7 @@ class ForYouPage extends StatelessWidget {
                               color: DynamicTheme.of(context)
                                   .data
                                   .textTheme
-                                  .subtitle
+                                  .subtitle2
                                   .color,
                               fontWeight: FontWeight.w600,
                               letterSpacing: ViewPort.screenWidth * 0.01),
@@ -42,7 +40,7 @@ class ForYouPage extends StatelessWidget {
                               color: DynamicTheme.of(context)
                                   .data
                                   .textTheme
-                                  .subtitle
+                                  .subtitle2
                                   .color,
                               fontWeight: FontWeight.w600,
                               letterSpacing: ViewPort.screenWidth * 0.02),

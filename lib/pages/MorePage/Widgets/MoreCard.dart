@@ -20,7 +20,6 @@ class MoreCard extends StatelessWidget {
             MoreDetails.routeName,
             arguments: _more,
           );
-          print('More Card tapped');
         },
         child: Center(
           child: Text(_more.moreName,

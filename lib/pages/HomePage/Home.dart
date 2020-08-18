@@ -1,215 +1,356 @@
-import 'package:Kide/pages/HomePage/models/CardDetails.dart';
-//import 'package:Kide/providers/getGameDetails.dart';
+import 'package:Kide/pages/AboutUsPage.dart/AboutUs.dart';
+import 'package:Kide/pages/HomePage/widgets/PostsPage.dart';
+import 'package:Kide/pages/Profile/profile.dart';
+import 'package:Kide/pages/SettingsPage/settings.dart';
+import 'package:Kide/util/constants.dart';
+import 'package:Kide/widgets/CircularAvatar.dart';
+import 'package:day_night_switcher/day_night_switcher.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:Kide/config/Viewport.dart';
-import 'package:Kide/providers/getMarkers.dart';
-//import 'package:Kide/providers/getEvents.dart';
-import 'package:Kide/pages/HomePage/HomepageProvider.dart';
-import 'package:Kide/util/data.dart';
-import 'package:provider/provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-void main() => runApp(HomePage());
+import 'package:share/share.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  /*void getData()
-  {
+class _HomePageState extends State<HomePage>
+    with
+        SingleTickerProviderStateMixin,
+        AutomaticKeepAliveClientMixin<HomePage> {
+  ScrollController _scrollController;
+  TabController _tabController;
+  String name = '';
+  String email = '';
+  bool isDarkModeEnabled = false;
 
-    cardDetails.toSet().toList();
-
-    var firestore = Firestore.instance;
-    var qn = firestore.collection("blog_post_homepage").getDocuments();
-
-    qn.then((QuerySnapshot snapshot) {
-      snapshot.documents.forEach((f)  {
-        cardDetails.add(CardDetails(heading: f.data['heading'],
-            image:  Image.network(f.data['image'].toString()),
-            cardType: f.data['card'],
-            description: f.data['subheading']));
-      });
-    });
-    if(cardDetails.length>4)
-      {
-        cardDetails.removeRange(0, 4);
-      }
-
-  }*/
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // final _getEvents = Provider.of<GetEvents>(context);
-    // if (_getEvents.eventList.length == 0) _getEvents.setEvents();
-
-    // // Get Game details
-    // final _getGameDetails = Provider.of<GetGameDetails>(context);
-    // if (_getGameDetails.gameDetails.length == 0)
-    //   _getGameDetails.setGameDetails();
-  }
-  List<CardDetails> cardDetailsnew = [];
   @override
   void initState() {
+    _scrollController = ScrollController();
+    _tabController = TabController(vsync: this, length: 3);
+    fetchName();
     super.initState();
   }
 
+  _changeBrightness(context) {
+    DynamicTheme.of(context).setBrightness(
+        Theme.of(context).brightness == Brightness.dark
+            ? Brightness.light
+            : Brightness.dark);
+  }
 
+  void fetchName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      name = prefs.getString('Name');
+      email = prefs.getString('Email');
+    });
+  }
 
   @override
+  bool get wantKeepAlive => true;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  int ct = 0;
+
+  @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
-    // Markers Listner
-    final _getMarkers = Provider.of<GetMarkers>(context);
-    final _getCardDetails = Provider.of<HomePageProvider>(context);
-    //for markers
-    if (_getMarkers.suggestedMarkers.length == 0)
-      _getMarkers.setSuggestedMarkers();
-      
-    _getMarkers.markers.length == 0
-        ? _getMarkers.setMarkers()
-        : _getMarkers.setMarkerMap();
-
-    // for CardDetails
-    if (_getCardDetails.cardDetails.length == 0)
-      _getCardDetails.getData();
-    //for suggested markers
-
-    // // Events Listener
-    // final _getEvents = Provider.of<GetEvents>(context);
-
-    // // Game Details
-    // final _getGameDetails = Provider.of<GetGameDetails>(context);
-
-    ViewPort().init(context);
-
-    return _getMarkers.markers.length > 0 && _getCardDetails.cardDetails.length > 0 ?
-        RefreshIndicator(
-            child: ListView.builder(
-                itemBuilder: (BuildContext context, index) =>
-                _getCardDetails.cardDetails[index].cardType == 1
-                    ? _buildLargeCard(_getCardDetails.cardDetails[index])
-                    : _buildSmallCard(_getCardDetails.cardDetails[index]),
-                itemCount: _getCardDetails.cardDetails.length
-            ),
-            onRefresh: _getCardDetails.refreshList
-        )
-        : CircularProgressIndicator();
+    if (ct == 0) {
+      // Checking for darkTheme enabled
+      isDarkModeEnabled =
+          Theme.of(context).brightness == Brightness.dark ? true : false;
+      ct++;
     }
-
-
-  Column _buildSmallCard(CardDetails card) {
-    return Column(
-      children: <Widget>[
-        Row(
+    return new Scaffold(
+      drawer: Drawer(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  card.heading,
-                  softWrap: true,
-                  style: TextStyle(
-                    letterSpacing: 0,
-                    fontSize: 16,
-                    color: Colors.white,
-                    height: 1.3,
+              child: ListView(
+                children: <Widget>[
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    child: DrawerHeader(
+                      padding: EdgeInsets.all(15),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            ClipRRect(
+                              // Using Custom avatar Widget
+                              child: InitialNameAvatar(
+                                name,
+                                backgroundColor: Colors.tealAccent.shade700,
+                                foregroundColor: Colors.white,
+                                textSize: 32,
+                                borderSize: 10,
+                                borderColor: Colors.grey.withOpacity(0.4),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              name,
+                              style: TextStyle(
+                                fontSize: 19,
+                                fontFamily: "Quicksand",
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(
+                              email,
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontFamily: "Quicksand",
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => ProfilePage(),
+                        ),
+                      );
+                    },
+                    title: Text(
+                      "Your Profile",
+                      style: TextStyle(fontFamily: "EncodeSans", fontSize: 17),
+                    ),
+                    leading: Icon(Icons.person),
+                  ),
+                  ListTile(
+                    title: Text(
+                      "Saved Posts",
+                      style: TextStyle(fontFamily: "EncodeSans", fontSize: 17),
+                    ),
+                    leading: Icon(Icons.save),
+                  ),
+                  ListTile(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Settings()));
+                    },
+                    leading: Icon(Icons.settings),
+                    title: Text(
+                      'Settings',
+                      style: TextStyle(fontFamily: "EncodeSans", fontSize: 16),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      "Dark Mode ",
+                      style: TextStyle(fontFamily: "Quicksand", fontSize: 20),
+                    ),
+                    trailing: Transform.scale(
+                      scale: 0.6,
+                      child: DayNightSwitcher(
+                        isDarkModeEnabled: isDarkModeEnabled,
+                        onStateChanged: (isDarkModeEnabled) {
+                          setState(() {
+                            this.isDarkModeEnabled = isDarkModeEnabled;
+                            _changeBrightness(context);
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              // This align moves the children to the bottom
+              child: Align(
+                alignment: FractionalOffset.bottomCenter,
+                // This container holds all the children that will be aligned
+                // on the bottom and should not scroll with the above ListView
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      Divider(),
+                      ListTile(
+                        leading: Icon(Icons.help),
+                        title: Text('Help and Feedback'),
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text('Choose subject'),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  FlatButton.icon(
+                                    onPressed: () {
+                                      _createEmail(
+                                          '[FEEDBACK]: $name : $email');
+                                    },
+                                    icon: Icon(Icons.feedback),
+                                    label: Text("Feedback"),
+                                  ),
+                                  FlatButton.icon(
+                                    onPressed: () {
+                                      _createEmail('[HELP]: $name : $email');
+                                    },
+                                    icon: Icon(Icons.help),
+                                    label: Text("Help"),
+                                  ),
+                                ],
+                              ),
+                              actions: [
+                                FlatButton.icon(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  icon: Icon(Icons.close),
+                                  label: Text("Cancel"),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                      ListTile(
+                        onTap: () async {
+                          final DynamicLinkParameters parameters =
+                              DynamicLinkParameters(
+                            uriPrefix: 'https://kiitdev.page.link',
+                            link: Uri.parse('https://kiitdev.page.link/post/'),
+                            androidParameters: AndroidParameters(
+                              packageName: 'com.kiitdev.Kide',
+                            ),
+                            socialMetaTagParameters: SocialMetaTagParameters(
+                              imageUrl: Uri.parse(
+                                  "https://lh3.googleusercontent.com/C60ciedUhQScbWSFG5BY0P1YpA3Js1SLJZKwB0W4csaR5OzfgjjUopGiHeD5Q_krvAw=s180-rw"),
+                            ),
+                            dynamicLinkParametersOptions:
+                                DynamicLinkParametersOptions(
+                              shortDynamicLinkPathLength:
+                                  ShortDynamicLinkPathLength.short,
+                            ),
+                            // NOT ALL ARE REQUIRED ===== HERE AS AN EXAMPLE =====
+                          );
+                          final ShortDynamicLink shortDynamicLink =
+                              await parameters.buildShortLink();
+                          final Uri shortUrl = shortDynamicLink.shortUrl;
+                          print(shortUrl);
+                          Share.share("$shortUrl");
+                        },
+                        leading: Icon(Icons.archive),
+                        title: Text(
+                          'Invite Friends',
+                          style:
+                              TextStyle(fontFamily: "EncodeSans", fontSize: 16),
+                        ),
+                      ),
+                      ListTile(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AboutUs(),
+                            ),
+                          );
+                        },
+                        title: Text(
+                          "About Us",
+                          style:
+                              TextStyle(fontFamily: "EncodeSans", fontSize: 16),
+                        ),
+                        leading: Icon(Icons.info),
+                      ),
+                      SizedBox(
+                        height: 55,
+                      )
+                    ],
                   ),
                 ),
               ),
             ),
-
-            Container(
-              width: 150,
-              // height: 150,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                clipBehavior: Clip.hardEdge,
-                child: Stack(
-                  children: <Widget>[
-                    Center(
-                      child: Container( 
-                        width: 50, 
-                        child: Center(child: CircularProgressIndicator()),
-                        padding: EdgeInsets.all(5),
-                      )
-                    ),
-                    Center(
-                      child: card.image
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            SizedBox(height: 3),
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Divider(
-            color: Colors.white38,
-            thickness: 2,
-          ),
-        )
-      ],
+      ),
+      key: _scaffoldKey,
+      backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
+      body: new NestedScrollView(
+        controller: _scrollController,
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            new SliverAppBar(
+              expandedHeight: 100,
+              leading: IconButton(
+                onPressed: () {
+                  _scaffoldKey.currentState.openDrawer();
+                },
+                icon: Icon(
+                  Icons.clear_all,
+                  color: DynamicTheme.of(context).data.iconTheme.color,
+                ),
+              ),
+              title: new Text(
+                KIDE_CAPS,
+                style: TextStyle(
+                  color:
+                      DynamicTheme.of(context).data.textTheme.subtitle1.color,
+                  fontFamily: "Michroma",
+                  fontWeight: FontWeight.w300,
+                  fontSize: 25,
+                ),
+              ),
+              centerTitle: true,
+              backgroundColor: DynamicTheme.of(context).data.backgroundColor,
+              pinned: true,
+              floating: true,
+              forceElevated: innerBoxIsScrolled,
+              bottom: new TabBar(
+                indicatorColor: DynamicTheme.of(context).data.indicatorColor,
+                labelColor:
+                    DynamicTheme.of(context).data.tabBarTheme.labelStyle.color,
+                labelStyle: TextStyle(
+                    fontFamily: "Quicksand",
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16),
+                tabs: <Widget>[
+                  new Tab(text: "News"),
+                  new Tab(text: "Blogs"),
+                  new Tab(text: "Events"),
+                ],
+                controller: _tabController,
+              ),
+            ),
+          ];
+        },
+        body: new TabBarView(
+          controller: _tabController,
+          children: <Widget>[
+            new PostsPage(postType: "news"),
+            new PostsPage(postType: "blogs"),
+            new PostsPage(postType: "events_home")
+          ],
+        ),
+      ),
     );
   }
+}
 
-  Column _buildLargeCard(CardDetails card) {
-    return Column(
-      children: <Widget>[
-        Card(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8.0))),
-          clipBehavior: Clip.hardEdge,
-          child: Stack(
-            children: <Widget>[
-              Center(
-                child: Container( 
-                  height: 50, 
-                  width:100, 
-                  child: Center(child: CircularProgressIndicator()),
-                  padding: EdgeInsets.all(5),
-                )
-              ),
-              Center(
-                child: card.image
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            card.heading,
-            style: TextStyle(
-              letterSpacing: 2,
-              fontSize: 20,
-              color: Colors.white,
-              height: 1.3,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            card.description,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.white60,
-              // height: 0.3,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Divider(
-            color: Colors.white38,
-            thickness: 2,
-          ),
-        )
-      ],
-    );
+void _createEmail(String subject) async {
+  String emailaddress = 'mailto:kide.kiit@gmail.com?subject=$subject';
+
+  if (await canLaunch(emailaddress)) {
+    await launch(emailaddress);
+  } else {
+    throw 'Could not Email';
   }
 }

@@ -36,6 +36,7 @@ class _PostsPageState extends State<PostsPage>
   }
 
   Future<void> fetchPosts() async {
+    // Dynamically Loads post into the list view as you scroll down
     if (!hasMore) {
       return;
     }
@@ -79,6 +80,7 @@ class _PostsPageState extends State<PostsPage>
   }
 
   onPostHomeRefresh() async {
+    // This will execute when we perform pull to refresh action
     setState(() {
       isLoading = true;
     });

@@ -131,13 +131,13 @@ class _HomePageState extends State<HomePage>
                     ),
                     leading: Icon(Icons.person),
                   ),
-                  ListTile(
-                    title: Text(
-                      "Saved Posts",
-                      style: TextStyle(fontFamily: "EncodeSans", fontSize: 17),
-                    ),
-                    leading: Icon(Icons.save),
-                  ),
+                  // ListTile(
+                  //   title: Text(
+                  //     "Saved Posts",
+                  //     style: TextStyle(fontFamily: "EncodeSans", fontSize: 17),
+                  //   ),
+                  //   leading: Icon(Icons.save),
+                  // ),
                   ListTile(
                     onTap: () {
                       Navigator.push(context,

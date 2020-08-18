@@ -1,4 +1,5 @@
 import 'package:Kide/config/Viewport.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:Kide/pages/MapsPage/models/FilterCategory.dart';
@@ -13,7 +14,9 @@ void main() => runApp(MapsPage());
 
 class MapsPage extends StatefulWidget {
   final String eventMarker;
+
   MapsPage({this.eventMarker});
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -21,6 +24,7 @@ class MapsPage extends StatefulWidget {
 class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
   //Google Maps controller
   GoogleMapController mapController;
+
   //Latitude and Lingitude of KIIT
   final LatLng _center = const LatLng(20.354890, 85.815120);
 
@@ -28,6 +32,7 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
   bool _initialLoad = true;
   List<FilterCategory> _categories = categories;
   FilterCategory _categoriesAll = categoriesAll;
+
   //Animating FAB
   AnimationController _controller;
 
@@ -63,19 +68,19 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
     try {
       currentLocation = await location.getLocation();
     } catch (e) {
-      if (e.code == 'PERMISSION_DENIED') {
-        print('Permission denied');
-      }
+      if (e.code == 'PERMISSION_DENIED') {}
       currentLocation = null;
     }
 
-    mapController.animateCamera(CameraUpdate.newCameraPosition(
-      CameraPosition(
-        target: LatLng(currentLocation.latitude, currentLocation.longitude),
-        zoom: 18.0,
-        tilt: 60,
+    mapController.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: LatLng(currentLocation.latitude, currentLocation.longitude),
+          zoom: 18.0,
+          tilt: 60,
+        ),
       ),
-    ));
+    );
   }
 
   CameraPosition _defaultLocation() {
@@ -110,20 +115,21 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
     Marker searchedMarker = await Navigator.push(
         context, MaterialPageRoute(builder: (context) => SearchBar()));
 
-    mapController.animateCamera(CameraUpdate.newCameraPosition(
-      CameraPosition(
-        target: searchedMarker.position,
-        zoom: 30.0,
-        tilt: 60,
+    mapController.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: searchedMarker.position,
+          zoom: 30.0,
+          tilt: 60,
+        ),
       ),
-    ));
+    );
   }
 
   CameraPosition _goToEventLocation(GetMarkers getMarkers) {
     Marker eventMarkerLoc = getMarkers.markers['all'].singleWhere((loc) {
       return loc.markerId.value == widget.eventMarker;
     });
-    print(eventMarkerLoc.markerId.value);
     return CameraPosition(
       target: eventMarkerLoc.position,
       zoom: 30.0,
@@ -150,6 +156,7 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
 
     return Scaffold(
       body: SafeArea(
+        bottom: false,
         child: Stack(
           children: [
             GoogleMap(
@@ -169,6 +176,7 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
               rotateGesturesEnabled: true,
               tiltGesturesEnabled: true,
               indoorViewEnabled: true,
+              zoomControlsEnabled: false,
               padding: const EdgeInsets.only(top: 64.0, right: 0.0),
             ),
             Padding(
@@ -184,7 +192,8 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
                   enableInteractiveSelection: false,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.all(16.0),
-                    fillColor: Colors.black,
+                    fillColor:
+                        DynamicTheme.of(context).data.scaffoldBackgroundColor,
                     filled: true,
                     hintText: 'Search for a location',
                     prefixIcon: Icon(Icons.search),
@@ -236,7 +245,6 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
                 heroTag: null,
                 backgroundColor:
                     categories[index].isToggled ? Colors.black : Colors.white,
-                // mini: true,
                 icon: Icon(_categories[index].icon,
                     color: categories[index].isToggled
                         ? Colors.white
@@ -244,8 +252,6 @@ class _MyAppState extends State<MapsPage> with TickerProviderStateMixin {
                 onPressed: () {
                   _addSearchFilter(_categories[index], _getMarkers);
                 },
-                // tooltip: _categories[index].label,
-                // isExtended: true,
                 label: Text(
                   _categories[index].label,
                   style: TextStyle(
@@ -299,7 +305,8 @@ class AnimatedFilterWidget extends StatelessWidget {
         return Transform(
           transform: Matrix4.rotationZ(_controller.value * 0.5 * math.pi),
           alignment: FractionalOffset.center,
-          child: Icon(_controller.isDismissed ? Icons.filter_list : Icons.close),
+          child:
+              Icon(_controller.isDismissed ? Icons.filter_list : Icons.close),
         );
       },
     );

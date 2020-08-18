@@ -1,10 +1,10 @@
+import 'package:Kide/models/EventCategory.dart';
+import 'package:Kide/models/SubEvent.dart';
 import 'package:Kide/models/ULO.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
-import 'package:Kide/models/EventCategory.dart';
-import 'package:Kide/models/SubEvent.dart';
 // import 'package:Kide/models/EventDetail.dart';
 
 class GetEvents with ChangeNotifier {

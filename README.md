@@ -1,5 +1,5 @@
 # Kide
-`v2.1.1+45D`
+`v2.1.1+46D`
 ![Build Signed APK](https://github.com/Cryptonex7/Kide/workflows/Build%20Signed%20APK/badge.svg?branch=dev)
 
 A personalized KIIT guide.

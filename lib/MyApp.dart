@@ -29,7 +29,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'pages/EventsPage/BookmarksPage.dart';
 import 'pages/HomePage/PostDetailsPage.dart';
-import 'providers/router.dart';
 
 class MyApp extends StatefulWidget {
   static const routeName = '/MyApp';

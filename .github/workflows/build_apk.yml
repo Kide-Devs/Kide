@@ -19,9 +19,12 @@ jobs:
     - run: flutter clean
     - run: flutter packages get
     - run: flutter build apk --debug --split-per-abi
+    - name: Get the version
+      id: get_version
+      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
     - name: Create a Release APK
       uses: ncipollo/release-action@v1
       with:
         artifacts: "build/app/outputs/flutter-apk/*.apk"
-        tag: "preview_${GITHUB_REF##*/}"
+        tag: "preview_${{ steps.get_version.outputs.VERSION }}"
         token: ${{ secrets.GITHUB_TOKEN }}

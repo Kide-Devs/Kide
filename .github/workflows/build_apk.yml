@@ -1,6 +1,6 @@
-name: Build Signed APK
+name: Build APK
 
-on: [push]
+on: [push,pull_request]
 
 jobs:
   build:
@@ -16,10 +16,6 @@ jobs:
       with:
         flutter-version: '1.18.x'
         channel: 'beta'
-      env:
-        KEY_JKS: ${{ secrets.KEY_JKS }}
-        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
     - run: flutter pub get
     - run: flutter build apk --debug --split-per-abi
     - name: Create a Release APK

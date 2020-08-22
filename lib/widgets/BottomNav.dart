@@ -8,7 +8,7 @@ import "package:provider/provider.dart";
 class BottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final indexState = Provider.of<Router>(context);
+    final indexState = Provider.of<BottomNavRouter>(context);
     final int _currentIndex = indexState.bottomNavIndex;
     return CurvedNavigationBar(
       height: 55,

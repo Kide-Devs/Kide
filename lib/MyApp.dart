@@ -126,7 +126,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => Router()),
+        ChangeNotifierProvider(create: (context) => BottomNavRouter()),
         ChangeNotifierProvider(create: (context) => Bookmarks()),
         ChangeNotifierProvider(create: (context) => GetMarkers()),
         ChangeNotifierProvider(create: (context) => GetGameDetails()),
@@ -217,7 +217,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Theme.of(context).brightness == Brightness.dark ? true : false;
       ct++;
     }
-    final indexState = Provider.of<Router>(context);
+    final indexState = Provider.of<BottomNavRouter>(context);
     return Scaffold(
       key: _scaffoldKey,
       drawer: Drawer(

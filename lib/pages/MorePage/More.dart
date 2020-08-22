@@ -1,32 +1,32 @@
-import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:Kide/util/data.dart';
 import 'package:Kide/pages/MorePage/Widgets/MoreCard.dart';
-void main() => runApp(MorePage());
+import 'package:Kide/util/data.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:flutter/material.dart';
 
 class MorePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(18, 18, 18, 1.0),
-      body : Padding(
+      backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
+      body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
           child: CustomScrollView(
             slivers: <Widget>[
               SliverGrid(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
                 delegate: SliverChildListDelegate(
                   [
-                    for(int i=0;i<more.length;i++)
-                      MoreCard(more[i],more[i].color)
+                    for (int i = 0; i < more.length; i++)
+                      MoreCard(more[i], more[i].color)
                   ],
                 ),
-              )
-              ]
-            )
-        )
-      )
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

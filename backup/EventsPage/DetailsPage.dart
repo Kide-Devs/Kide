@@ -5,7 +5,6 @@ import 'package:Kide/util/constants.dart';
 import 'package:Kide/widgets/HeaderWidget.dart';
 import 'package:flutter/material.dart';
 
-
 class DetailsPage extends StatelessWidget {
   static const routeName = '/DetailsPage';
 

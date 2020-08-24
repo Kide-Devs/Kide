@@ -324,7 +324,7 @@ class _HomePageState extends State<HomePage>
                     fontSize: 16),
                 tabs: <Widget>[
                   new Tab(text: "News"),
-                  new Tab(text: "Blogs"),
+                  new Tab(text: "Blog"),
                   new Tab(text: "Events"),
                 ],
                 controller: _tabController,

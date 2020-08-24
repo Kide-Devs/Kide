@@ -15,22 +15,23 @@ dependencies:
   shared_preferences: ^0.5.4+6
   google_maps_flutter: ^0.5.11
   geolocator: ^5.1.4+2
-  permission_handler: null
+  permission_handler:
   cloud_firestore: ^0.13.0+1
   connectivity: ^0.4.6+2
-  location: null
+  location:
   transparent_image: ^1.0.0
-  cached_network_image: null
-  dynamic_theme: null
-  intl: null
-  sqflite: null
-  flare_flutter: null
-  firebase_auth: null
+  cached_network_image:
+  dynamic_theme:
+  intl:
+  sqflite:
+  flare_flutter:
+  firebase_auth:
   firebase_dynamic_links: ^0.5.1
   share: ^0.6.4+3
-  day_night_switcher: null
+  day_night_switcher:
+  webview_flutter:
   fluttertoast:
-  flutter_email_sender: null
+  flutter_email_sender:
   curved_navigation_bar: ^0.3.2
 
 dev_dependencies:

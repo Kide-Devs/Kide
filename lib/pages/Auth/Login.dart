@@ -176,10 +176,16 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          FlareActor(
-            'lib/assets/flares/LoginPage.flr',
-            animation: rocketAnimation,
-            fit: BoxFit.cover,
+          SingleChildScrollView(
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: FlareActor(
+                'lib/assets/flares/LoginPage.flr',
+                animation: rocketAnimation,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           ListView(
             physics: BouncingScrollPhysics(),

@@ -1,3 +1,4 @@
+import 'package:Kide/pages/AvatarPage/AvatarEditor.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
@@ -372,6 +373,45 @@ class _EditProfileState extends State<EditProfile> {
               ],
             ),
           ),
+          SizedBox(height: 30),
+          Center(
+            child: GestureDetector(
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 28),
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent.shade700,
+                  borderRadius: BorderRadius.circular(50),
+                  // Large enough value
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.blue.shade200,
+                      blurRadius: 20,
+                      offset: Offset(0, 5),
+                      spreadRadius: 1,
+                    ),
+                  ],
+                ),
+                child: Text(
+                  "Edit Avatar",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: "Quicksand",
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                    letterSpacing: 2,
+                  ),
+                ),
+              ),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => AvatarEditPage(uid: uid),
+                  ),
+                ); //_changeBright
+              },
+            ),
+          ),
+          SizedBox(height: 30),
         ],
       ),
     );

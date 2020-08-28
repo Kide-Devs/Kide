@@ -47,17 +47,16 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          FlareActor(
-            'lib/assets/flares/LoginPage.flr',
-            animation: rocketAnimation,
-            fit: BoxFit.cover,
-            callback: (name) {
-              if (name == 'success') {
-                setState(() {
-                  rocketAnimation = "after_success";
-                });
-              }
-            },
+          SingleChildScrollView(
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: FlareActor(
+                'lib/assets/flares/LoginPage.flr',
+                animation: rocketAnimation,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           ListView(
             physics: BouncingScrollPhysics(),

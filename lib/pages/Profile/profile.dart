@@ -105,22 +105,24 @@ class _ProfilePageState extends State<ProfilePage> {
                     roll,
                     style: TextStyle(fontSize: 26, fontFamily: "Quicksand"),
                   ),
-                  name != '' ? Text(
-                    name,
-                    style: TextStyle(
-                        fontSize: 24,
-                        fontFamily: "Quicksand",
-                        fontWeight: FontWeight.w600),
-                  ) : SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    height: 24,
-                    child: LinearProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation(
-                        Colors.grey.withOpacity(0.5),
-                      ),
-                      backgroundColor: Colors.transparent,
-                    ),
-                  ),
+                  name != ''
+                      ? Text(
+                          name,
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontFamily: "Quicksand",
+                              fontWeight: FontWeight.w600),
+                        )
+                      : SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          height: 24,
+                          child: LinearProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation(
+                              Colors.grey.withOpacity(0.5),
+                            ),
+                            backgroundColor: Colors.transparent,
+                          ),
+                        ),
                   Text(
                     email,
                     style: TextStyle(fontSize: 20, fontFamily: "Quicksand"),
@@ -194,10 +196,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   // Large enough value
                   boxShadow: [
                     BoxShadow(
-                        color: Colors.redAccent.shade200.withOpacity(0.8),
-                        blurRadius: 20,
-                        offset: Offset(0, 5),
-                        spreadRadius: 1),
+                      color: Colors.redAccent.shade200.withOpacity(0.8),
+                      blurRadius: 20,
+                      offset: Offset(0, 5),
+                      spreadRadius: 1,
+                    ),
                   ],
                 ),
                 child: Text(
@@ -220,7 +223,7 @@ class _ProfilePageState extends State<ProfilePage> {
               },
             ),
           ),
-          SizedBox(height: 30)
+          SizedBox(height: 30),
         ],
       ),
     );

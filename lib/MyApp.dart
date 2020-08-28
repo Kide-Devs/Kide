@@ -20,6 +20,7 @@ import 'package:Kide/widgets/CircularAvatar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -162,10 +163,26 @@ class _MyHomePageState extends State<MyHomePage> {
   String name = '';
   String email = '';
   bool isDarkModeEnabled = false;
+  String url;
+  bool isAv = false;
 
   @override
   void initState() {
-    // TODO: implement initState
+    FirebaseAuth.instance.currentUser().then((value) {
+      Firestore.instance
+          .collection('userInfo')
+          .document(value.uid)
+          .get()
+          .then((val) {
+        setState(() {
+          url = val.data['avatarUrl'];
+          if (url != null)
+            setState(() {
+              isAv = true;
+            });
+        });
+      });
+    });
     super.initState();
     fetchName();
   }
@@ -239,14 +256,22 @@ class _MyHomePageState extends State<MyHomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             ClipRRect(
-                              child: InitialNameAvatar(
-                                name,
-                                backgroundColor: Colors.tealAccent.shade700,
-                                foregroundColor: Colors.white,
-                                textSize: 32,
-                                borderSize: 10,
-                                borderColor: Colors.grey.withOpacity(0.4),
-                              ),
+                              child: isAv
+                                  ? SvgPicture.network(
+                                      url,
+                                      height: 150,
+                                      width: 100,
+                                      alignment: Alignment.topLeft,
+                                    )
+                                  : InitialNameAvatar(
+                                      name,
+                                      backgroundColor:
+                                          Colors.tealAccent.shade700,
+                                      foregroundColor: Colors.white,
+                                      textSize: 32,
+                                      borderSize: 10,
+                                      borderColor: Colors.grey.withOpacity(0.4),
+                                    ),
                             ),
                             SizedBox(
                               height: 8,

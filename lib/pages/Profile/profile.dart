@@ -6,6 +6,7 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -34,6 +35,11 @@ class _ProfilePageState extends State<ProfilePage> {
         cgpa = value.data['cgpa'];
         batch = value.data['batch'];
         branch = value.data['branch'];
+        url = value.data['avatarUrl'];
+        if (url != null)
+          setState(() {
+            isav = true;
+          });
       });
     });
   }
@@ -44,6 +50,8 @@ class _ProfilePageState extends State<ProfilePage> {
   String cgpa = '';
   String batch = '';
   String branch = '';
+  String url;
+  bool isav = false;
 
   @override
   Widget build(BuildContext context) {
@@ -85,18 +93,27 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               borderRadius: BorderRadius.circular(14),
             ),
-            margin: EdgeInsets.only(left: 12, right: 12),
+            margin: EdgeInsets.only(left: 12, right: 12,top: 30),
             child: Container(
-              transform: Matrix4.translationValues(0, -44, 0),
+              transform: Matrix4.translationValues(0, -74, 0),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  InitialNameAvatar(
-                    name,
-                    backgroundColor: Colors.tealAccent.shade700,
-                    foregroundColor: Colors.white,
-                    textSize: 32,
-                    borderSize: 10,
-                    borderColor: Colors.blueGrey.withOpacity(0.3),
+                  isav?CircleAvatar(
+                    radius: 75,
+                    backgroundColor: Colors.transparent,
+                    child: SvgPicture.network(url),
+                  ):
+                  InkWell(
+                    onTap: () => print(isav),
+                    child: InitialNameAvatar(
+                      name,
+                      backgroundColor: Colors.tealAccent.shade700,
+                      foregroundColor: Colors.white,
+                      textSize: 32,
+                      borderSize: 10,
+                      borderColor: Colors.blueGrey.withOpacity(0.3),
+                    ),
                   ),
                   SizedBox(
                     height: 20,

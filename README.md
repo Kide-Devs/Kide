@@ -1,5 +1,5 @@
 # Kide
-`v2.1.1+46D`
+`v2.1.1+47D`
 ![Build APK](https://github.com/Kide-Devs/Kide/workflows/Build%20APK/badge.svg?branch=master)
 
 A personalized KIIT guide.

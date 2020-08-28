@@ -37,50 +37,28 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back,
-              color: DynamicTheme
-                  .of(context)
-                  .data
-                  .textTheme
-                  .subtitle1
-                  .color),
+              color: DynamicTheme.of(context).data.textTheme.subtitle1.color),
           onPressed: () => Navigator.of(context).pop(),
         ),
         elevation: 0,
         title: new Text(
           KIDE_CAPS,
           style: TextStyle(
-            color: DynamicTheme
-                .of(context)
-                .data
-                .textTheme
-                .subtitle1
-                .color,
+            color: DynamicTheme.of(context).data.textTheme.subtitle1.color,
             fontFamily: "Michroma",
             fontWeight: FontWeight.w300,
             fontSize: 25,
           ),
         ),
         centerTitle: true,
-        backgroundColor: DynamicTheme
-            .of(context)
-            .data
-            .backgroundColor,
+        backgroundColor: DynamicTheme.of(context).data.backgroundColor,
       ),
-      backgroundColor: DynamicTheme
-          .of(context)
-          .data
-          .backgroundColor,
+      backgroundColor: DynamicTheme.of(context).data.backgroundColor,
       body: ListView(
         children: [
           SizedBox(
-            height: MediaQuery
-                .of(context)
-                .size
-                .height * 0.3,
-            width: MediaQuery
-                .of(context)
-                .size
-                .width,
+            height: MediaQuery.of(context).size.height * 0.3,
+            width: MediaQuery.of(context).size.width,
             child: Center(
               child: Avatar(
                 width: 300,
@@ -102,15 +80,8 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
           ),
           SizedBox(height: 30),
           SizedBox(
-            height: MediaQuery
-                .of(context)
-                .size
-                .height * 0.65
-            ,
-            width: MediaQuery
-                .of(context)
-                .size
-                .width,
+            height: MediaQuery.of(context).size.height * 0.65,
+            width: MediaQuery.of(context).size.width,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -121,7 +92,8 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
                       color: Colors.indigoAccent,
                       onPressed: () {
                         setState(() {
-                          accessoryIndex = (accessoryIndex+1) % accessories.length;
+                          accessoryIndex =
+                              (accessoryIndex + 1) % accessories.length;
                         });
                       },
                       child: Text("Accessory"),
@@ -130,7 +102,7 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
                       color: Colors.indigoAccent,
                       onPressed: () {
                         setState(() {
-                          hatIndex = (hatIndex+1) % hats.length;
+                          hatIndex = (hatIndex + 1) % hats.length;
                         });
                       },
                       child: Text("Hat"),
@@ -139,7 +111,8 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
                       color: Colors.indigoAccent,
                       onPressed: () {
                         setState(() {
-                          clothingIndex = (clothingIndex+1) % clothingTypes.length;
+                          clothingIndex =
+                              (clothingIndex + 1) % clothingTypes.length;
                         });
                       },
                       child: Text("Clothing"),
@@ -153,7 +126,7 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
                       color: Colors.indigoAccent,
                       onPressed: () {
                         setState(() {
-                          eyebrowIndex = (eyebrowIndex+1) % eyebrows.length;
+                          eyebrowIndex = (eyebrowIndex + 1) % eyebrows.length;
                         });
                       },
                       child: Text("Eyebrow"),
@@ -162,7 +135,7 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
                       color: Colors.indigoAccent,
                       onPressed: () {
                         setState(() {
-                          mouthIndex = (mouthIndex+1) % mouths.length;
+                          mouthIndex = (mouthIndex + 1) % mouths.length;
                         });
                       },
                       child: Text("Mouth"),
@@ -171,7 +144,7 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
                       color: Colors.indigoAccent,
                       onPressed: () {
                         setState(() {
-                          hairIndex = (hairIndex+1) % hairs.length;
+                          hairIndex = (hairIndex + 1) % hairs.length;
                         });
                       },
                       child: Text("Hair"),
@@ -185,7 +158,8 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
                       color: Colors.indigoAccent,
                       onPressed: () {
                         setState(() {
-                          faceHairIndex = (faceHairIndex+1) % facialHairs.length;
+                          faceHairIndex =
+                              (faceHairIndex + 1) % facialHairs.length;
                         });
                       },
                       child: Text("Face Hair"),
@@ -194,7 +168,8 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
                       color: Colors.indigoAccent,
                       onPressed: () {
                         setState(() {
-                          dressColorIndex = (dressColorIndex+1) % clothingColors.length;
+                          dressColorIndex =
+                              (dressColorIndex + 1) % clothingColors.length;
                         });
                       },
                       child: Text("Dress Color"),
@@ -203,7 +178,7 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
                       color: Colors.indigoAccent,
                       onPressed: () {
                         setState(() {
-                          toneIndex = (toneIndex+1) % skinTones.length;
+                          toneIndex = (toneIndex + 1) % skinTones.length;
                         });
                       },
                       child: Text("Tone"),
@@ -217,7 +192,8 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
                       color: Colors.indigoAccent,
                       onPressed: () {
                         setState(() {
-                          hatColorIndex = (hatColorIndex+1) % hatColors.length;
+                          hatColorIndex =
+                              (hatColorIndex + 1) % hatColors.length;
                         });
                       },
                       child: Text("Hat Color"),
@@ -226,7 +202,8 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
                       color: Colors.indigoAccent,
                       onPressed: () {
                         setState(() {
-                          hairColorIndex = (hairColorIndex+1) % hairColors.length;
+                          hairColorIndex =
+                              (hairColorIndex + 1) % hairColors.length;
                         });
                       },
                       child: Text("Hair Color"),
@@ -235,7 +212,7 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
                       color: Colors.indigoAccent,
                       onPressed: () {
                         setState(() {
-                          eyeIndex = (eyeIndex+1) % eyes.length;
+                          eyeIndex = (eyeIndex + 1) % eyes.length;
                         });
                       },
                       child: Text("Eye"),
@@ -257,7 +234,10 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
                     var hatColor = hatColors[hatColorIndex];
                     var skinTone = skinTones[toneIndex];
                     var mouth = mouths[mouthIndex];
-                    await Firestore.instance.collection("userInfo").document(widget.uid).setData({
+                    await Firestore.instance
+                        .collection("userInfo")
+                        .document(widget.uid)
+                        .setData({
                       "avatarUrl": "https://bigheads.io/svg?"
                           "accessory=$accessory&"
                           "body=chest&"

@@ -15,6 +15,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:Kide/pages/attendancePages/attendanceMainPage.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage>
   String name = '';
   String email = '';
   bool isDarkModeEnabled = false;
-  
+
   String url;
   bool isAv = false;
 
@@ -106,21 +107,22 @@ class _HomePageState extends State<HomePage>
                           children: <Widget>[
                             ClipRRect(
                               // Using Custom avatar Widget
-                              child:isAv
+                              child: isAv
                                   ? SvgPicture.network(
                                       url,
                                       height: 150,
                                       width: 100,
                                       alignment: Alignment.topLeft,
                                     )
-                                  :  InitialNameAvatar(
-                                name,
-                                backgroundColor: Colors.tealAccent.shade700,
-                                foregroundColor: Colors.white,
-                                textSize: 32,
-                                borderSize: 10,
-                                borderColor: Colors.grey.withOpacity(0.4),
-                              ),
+                                  : InitialNameAvatar(
+                                      name,
+                                      backgroundColor:
+                                          Colors.tealAccent.shade700,
+                                      foregroundColor: Colors.white,
+                                      textSize: 32,
+                                      borderSize: 10,
+                                      borderColor: Colors.grey.withOpacity(0.4),
+                                    ),
                             ),
                             SizedBox(
                               height: 8,
@@ -193,6 +195,20 @@ class _HomePageState extends State<HomePage>
                           });
                         },
                       ),
+                    ),
+                  ),
+
+                  ListTile(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AttendanceMainPage()));
+                    },
+                    leading: Icon(Icons.assignment_return),
+                    title: Text(
+                      'Attendance',
+                      style: TextStyle(fontFamily: "EncodeSans", fontSize: 16),
                     ),
                   ),
                 ],

@@ -31,6 +31,8 @@ dependencies:
   day_night_switcher: null
   webview_flutter: null
   fluttertoast: null
+  fl_chart: ^0.11.1
+
   flutter_email_sender: null
   curved_navigation_bar: ^0.3.2
 

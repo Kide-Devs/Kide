@@ -35,6 +35,7 @@ dependencies:
 
   flutter_email_sender: null
   curved_navigation_bar: ^0.3.2
+  onesignal_flutter: ^2.6.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.7.4
@@ -94,4 +95,3 @@ flutter:
     - family: Michroma
       fonts:
         - asset: ./lib/fonts/Michroma/Michroma-Regular.ttf
-

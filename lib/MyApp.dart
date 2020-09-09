@@ -31,6 +31,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'pages/EventsPage/BookmarksPage.dart';
 import 'pages/HomePage/PostDetailsPage.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+
+void configOneSignal() {
+  OneSignal.shared.init('90f8e0a4-45e3-4fed-8521-89a8e869b370');
+}
+
+getYI() async {
+  var status = await OneSignal.shared.getPermissionSubscriptionState();
+  var playerId = status.subscriptionStatus.userId;
+  print(playerId);
+}
 
 class MyApp extends StatefulWidget {
   static const routeName = '/MyApp';
@@ -43,8 +54,11 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     // TODO: implement initState
+    configOneSignal();
     super.initState();
     handleDynamicLinks();
+
+    getYI();
   }
 
   Future handleDynamicLinks() async {

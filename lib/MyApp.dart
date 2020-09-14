@@ -10,6 +10,7 @@ import 'package:Kide/pages/MorePage/More.dart';
 import 'package:Kide/pages/MorePage/MoreDetails.dart';
 import 'package:Kide/pages/Profile/profile.dart';
 import 'package:Kide/pages/SettingsPage/settings.dart';
+import 'package:Kide/pages/attendancePages/attendanceMainPage.dart';
 import 'package:Kide/providers/bookmarks.dart';
 import 'package:Kide/providers/getGameDetails.dart';
 import 'package:Kide/providers/getMarkers.dart';
@@ -361,6 +362,19 @@ class _MyHomePageState extends State<MyHomePage> {
                           });
                         },
                       ),
+                    ),
+                  ),
+                  ListTile(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AttendanceMainPage()));
+                    },
+                    leading: Icon(Icons.assignment_return),
+                    title: Text(
+                      'Attendance',
+                      style: TextStyle(fontFamily: "EncodeSans", fontSize: 16),
                     ),
                   ),
                 ],

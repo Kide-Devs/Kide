@@ -106,6 +106,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             ),
                       onTap: () async {
                         FirebaseAuth _auth = FirebaseAuth.instance;
+                        SharedPreferences _prefs =
+                            await SharedPreferences.getInstance();
 
                         String email = widget.emailController != null
                                 ? widget.emailController.text
@@ -113,6 +115,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             password = _passwordController.text,
                             confirm = _confirmPasswordController.text,
                             fullName = _nameController.text;
+                        _prefs.setString("email", email);
+                        _prefs.setString('password', password);
                         if (email.trim() == '' ||
                             password.trim() == '' ||
                             fullName.trim() == '') {

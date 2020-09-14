@@ -1,7 +1,10 @@
 import 'dart:convert';
 
 import 'package:Kide/pages/attendancePages/models.dart';
+import 'package:Kide/pages/attendancePages/sapCredForm.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -33,6 +36,18 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
       SharedPreferences _prefs = await SharedPreferences.getInstance();
       String email = _prefs.getString('email');
       String password = _prefs.getString('password');
+      if (email == null) {
+        FirebaseAuth.instance.currentUser().then((value) async {
+          await Firestore.instance
+              .collection('userInfo')
+              .document(value.uid)
+              .get()
+              .then((data) => {
+                    email = data.data['Sapemail'],
+                    password = data.data['Sappassword']
+                  });
+        });
+      }
       print(email);
       print(password);
       Map map = {"roll_no": email.split('@')[0], "password": password};
@@ -90,12 +105,7 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
               ),
             )
           : _isError == true
-              ? Center(
-                  child: Text(
-                    "Please Sign Up with our SAP credentials",
-                    style: TextStyle(fontSize: 19),
-                  ),
-                )
+              ? sapCredForm()
               : Container(
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
@@ -174,10 +184,10 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
                                     Positioned(
                                         top: 75,
                                         bottom: 0,
-                                        left: 80,
+                                        left: 72,
                                         child: Text(
-                                          "${overall.toString().split('.')[0]}%",
-                                          style: TextStyle(fontSize: 20),
+                                          "${overall.toString().substring(0, 4)}%",
+                                          style: TextStyle(fontSize: 18),
                                         )),
                                   ],
                                 ),

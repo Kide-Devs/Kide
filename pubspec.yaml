@@ -32,7 +32,7 @@ dependencies:
   webview_flutter: null
   fluttertoast: null
   fl_chart: ^0.11.1
-
+  flutter_bcrypt: null
   flutter_email_sender: null
   curved_navigation_bar: ^0.3.2
   onesignal_flutter: ^2.6.1

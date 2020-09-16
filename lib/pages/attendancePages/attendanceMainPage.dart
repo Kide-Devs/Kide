@@ -2,10 +2,13 @@ import 'dart:convert';
 
 import 'package:Kide/pages/attendancePages/models.dart';
 import 'package:Kide/pages/attendancePages/sapCredForm.dart';
+import 'package:Kide/util/colors.dart';
+import 'package:Kide/util/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
@@ -31,29 +34,16 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
   double total = 0;
   String errormsg = '';
   bool _isError = false;
+
   void fetchAttendance() async {
     try {
       SharedPreferences _prefs = await SharedPreferences.getInstance();
       String email = _prefs.getString('email');
       String password = _prefs.getString('password');
-      if (email == null) {
-        FirebaseAuth.instance.currentUser().then((value) async {
-          await Firestore.instance
-              .collection('userInfo')
-              .document(value.uid)
-              .get()
-              .then((data) => {
-                    email = data.data['Sapemail'],
-                    password = data.data['Sappassword']
-                  });
-        });
-      }
-      print(email);
-      print(password);
       Map map = {"roll_no": email.split('@')[0], "password": password};
       var ans = jsonEncode(map);
       var body = await http.post(
-          'https://kide-api.herokuapp.com/api/attendance',
+          ATTENDANCE_API_URL,
           body: ans,
           headers: {"Content-Type": "application/json"});
       var bd = jsonDecode(body.body);
@@ -81,6 +71,7 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
   }
 
   var date = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,16 +79,18 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
         title: new Text(
           "ATTENDANCE",
           style: TextStyle(
-            color: DynamicTheme.of(context).data.textTheme.subtitle1.color,
+            color: Colors.white,
             fontFamily: "Michroma",
             fontWeight: FontWeight.w300,
             fontSize: 23,
           ),
         ),
         centerTitle: true,
-        backgroundColor: DynamicTheme.of(context).data.backgroundColor,
+        backgroundColor:
+            REALLY_NOSTALGIC_BLUE_BG, // DynamicTheme.of(context).data.backgroundColor,
       ),
-      backgroundColor: DynamicTheme.of(context).data.backgroundColor,
+      backgroundColor: REALLY_NOSTALGIC_BLUE_BG,
+      // DynamicTheme.of(context).data.backgroundColor,
       body: _isLoading == true
           ? Center(
               child: CircularProgressIndicator(
@@ -105,7 +98,7 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
               ),
             )
           : _isError == true
-              ? sapCredForm()
+              ? SapCredForm()
               : Container(
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
@@ -114,36 +107,81 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
                     padding: EdgeInsets.all(12),
                     children: [
                       Card(
-                          color: DynamicTheme.of(context)
-                              .data
-                              .scaffoldBackgroundColor,
-                          child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ListTile(
-                                title: Text(
-                                  DateFormat('EEEE').format(date),
-                                  style: TextStyle(
+                        color: Colors.transparent,
+                        shadowColor: Colors.transparent,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                DateFormat('EEEE').format(date),
+                                style: TextStyle(
                                     fontFamily: "Quicksand",
+                                    color: Colors.white),
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "${date.day}",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w900,
+                                          fontSize: 34,
+                                        ),
+                                      ),
+                                      Text(
+                                        date.day % 10 == 1
+                                            ? "st"
+                                            : date.day % 10 == 2 ? "nd" : "th",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w900,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                subtitle: Text(
-                                  DateFormat('d  MMM, yyyy').format(date),
-                                  style: TextStyle(
-                                      fontSize: 24,
+                                  Text(
+                                    "${DateFormat(" MMM, yyyy").format(date)}",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 26,
                                       fontFamily: "Quicksand",
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ))),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+//                          child: ListTile(
+//                            title:
+//                            subtitle:
+//                          ),
+                        ),
+                      ),
                       ListTile(
                         title: Text(
                           "Overall Attendance",
                           style: TextStyle(
                             fontSize: 21,
                             fontFamily: "Quicksand",
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
                       Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        color: Colors.blue[400].withOpacity(0.2),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -182,13 +220,18 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
                                       ),
                                     ),
                                     Positioned(
-                                        top: 75,
-                                        bottom: 0,
-                                        left: 72,
-                                        child: Text(
-                                          "${overall.toString().substring(0, 4)}%",
-                                          style: TextStyle(fontSize: 18),
-                                        )),
+                                      top: 78,
+                                      bottom: 0,
+                                      left: 72,
+                                      child: Text(
+                                        "${overall.toString().substring(0, 4)}%",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w900,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 Column(
@@ -202,7 +245,7 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
                                           width: 20,
                                           height: 20,
                                           decoration: BoxDecoration(
-                                              color: Colors.greenAccent[700],
+                                              color: NOSTALGIC_GREEN,
                                               borderRadius:
                                                   BorderRadius.circular(40)),
                                         ),
@@ -210,6 +253,8 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
                                           "Attended",
                                           style: TextStyle(
                                             fontFamily: "Quicksand",
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                       ),
@@ -225,7 +270,7 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
                                           width: 20,
                                           height: 20,
                                           decoration: BoxDecoration(
-                                              color: Colors.redAccent[400],
+                                              color: NOSTALGIC_RED,
                                               borderRadius:
                                                   BorderRadius.circular(40)),
                                         ),
@@ -233,6 +278,8 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
                                           "Skipped",
                                           style: TextStyle(
                                             fontFamily: "Quicksand",
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                       ),
@@ -245,17 +292,20 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
                               text: TextSpan(
                                 children: <TextSpan>[
                                   TextSpan(
-                                      text: 'Phewwww....You\'re',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: "Quicksand",
-                                      )),
+                                    text: 'Phewwww....You\'re',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: "Quicksand",
+                                    ),
+                                  ),
                                   TextSpan(
-                                      text: ' Safe',
-                                      style: TextStyle(
-                                        color: Colors.lightGreenAccent,
-                                        fontFamily: "Quicksand",
-                                      )),
+                                    text: ' Safe',
+                                    style: TextStyle(
+                                      color: NOSTALGIC_GREEN,
+                                      fontFamily: "Quicksand",
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                   TextSpan(
                                     text: ' !',
                                   ),
@@ -300,6 +350,10 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
 
   _middlePage(total, attended, skipped) {
     return Card(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: BorderSide(width: 1, color: Colors.grey)),
+      color: Colors.transparent,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -309,47 +363,66 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
               style: TextStyle(
                 fontSize: 21,
                 fontFamily: "Quicksand",
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
               ),
             ),
             Text(
               "Total",
               style: TextStyle(
-                fontSize: 21,
+                fontSize: 16,
                 fontFamily: "Quicksand",
+                color: Colors.white,
               ),
             )
           ]),
-          Container(height: 80, child: VerticalDivider(color: Colors.black)),
+          Container(
+            height: 48,
+            width: 2,
+            margin: EdgeInsets.symmetric(vertical: 12),
+            color: Colors.grey,
+          ),
           Column(children: [
             Text(
               attended,
               style: TextStyle(
                 fontSize: 21,
                 fontFamily: "Quicksand",
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
               ),
             ),
             Text(
               "Attended",
               style: TextStyle(
-                fontSize: 21,
+                fontSize: 16,
                 fontFamily: "Quicksand",
+                color: Colors.white,
               ),
             )
           ]),
-          Container(height: 80, child: VerticalDivider(color: Colors.black)),
+          Container(
+            height: 48,
+            width: 2,
+            margin: EdgeInsets.symmetric(vertical: 12),
+            color: Colors.grey,
+          ),
           Column(children: [
             Text(
               skipped,
               style: TextStyle(
                 fontSize: 21,
                 fontFamily: "Quicksand",
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
               ),
             ),
             Text(
               "Skipped",
               style: TextStyle(
-                fontSize: 21,
+                fontSize: 16,
                 fontFamily: "Quicksand",
+                color: Colors.white,
               ),
             )
           ])
@@ -360,54 +433,66 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
 
   subjectCards(title, percentage, teacher) {
     return Padding(
-      padding: const EdgeInsets.only(top: 12),
+      padding: EdgeInsets.only(top: 12),
       child: Card(
-        child: ListTile(
-          title: Text(
-            title,
-            style: TextStyle(
-              fontFamily: "Quicksand",
-            ),
-          ),
-          trailing: Text(
-            percentage.toString() + "%",
-            style: TextStyle(
+        color: Colors.transparent,
+        shadowColor: Colors.lightBlueAccent[100].withOpacity(0.2),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 5),
+          child: ListTile(
+            title: Text(
+              title,
+              style: TextStyle(
                 fontFamily: "Quicksand",
-                color: percentage < 75 ? Colors.red : Colors.green,
-                fontSize: 18),
-          ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 10,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
               ),
-              Container(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                  child: LinearProgressIndicator(
-                    minHeight: 6.2,
-                    value: percentage / 100,
-                    valueColor: AlwaysStoppedAnimation(
-                        percentage < 75 ? Colors.red : Colors.green),
-                    backgroundColor: Colors.black,
+            ),
+            trailing: Text(
+              percentage.toString() + "%",
+              style: TextStyle(
+                fontFamily: "Quicksand",
+                color: percentage < 75 ? NOSTALGIC_RED : NOSTALGIC_GREEN,
+                fontSize: 18,
+              ),
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                    child: LinearProgressIndicator(
+                      minHeight: 6.2,
+                      value: percentage / 100,
+                      valueColor: AlwaysStoppedAnimation(
+                          percentage < 75 ? NOSTALGIC_RED : NOSTALGIC_GREEN),
+                      backgroundColor: Colors.transparent,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                teacher,
-                style: TextStyle(
-                  fontSize: 17,
-                  fontFamily: "Quicksand",
+                SizedBox(
+                  height: 5,
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-            ],
+                Text(
+                  teacher,
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontFamily: "Quicksand",
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -420,13 +505,13 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
       switch (i) {
         case 0:
           return PieChartSectionData(
-              color: Colors.greenAccent[700],
+              color: NOSTALGIC_GREEN,
               value: overall,
               radius: radius,
               showTitle: false);
         case 1:
           return PieChartSectionData(
-              color: Colors.redAccent[400],
+              color: NOSTALGIC_RED,
               value: 100 - overall,
               radius: radius,
               showTitle: false);

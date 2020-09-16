@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:Kide/pages/attendancePages/models.dart';
 import 'package:Kide/pages/attendancePages/sapCredForm.dart';
 import 'package:Kide/util/colors.dart';
+import 'package:Kide/util/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -39,24 +40,10 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
       SharedPreferences _prefs = await SharedPreferences.getInstance();
       String email = _prefs.getString('email');
       String password = _prefs.getString('password');
-      if (email == null) {
-        FirebaseAuth.instance.currentUser().then((value) async {
-          await Firestore.instance
-              .collection('userInfo')
-              .document(value.uid)
-              .get()
-              .then((data) => {
-                    email = data.data['Sapemail'],
-                    password = data.data['Sappassword']
-                  });
-        });
-      }
-      print(email);
-      print(password);
       Map map = {"roll_no": email.split('@')[0], "password": password};
       var ans = jsonEncode(map);
       var body = await http.post(
-          'https://kide-api.herokuapp.com/api/attendance',
+          ATTENDANCE_API_URL,
           body: ans,
           headers: {"Content-Type": "application/json"});
       var bd = jsonDecode(body.body);

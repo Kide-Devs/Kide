@@ -31,3 +31,7 @@ const AUTH_ERROR_BUBBLE_BG = const Color(0xFFE57373);
 const AUTH_ERROR_BUBBLE_COLOR = const Color(0xFFFFFFFF);
 
 const POST_APPBAR_BG = const Color(0xFF616161);
+
+const NOSTALGIC_GREEN = const Color.fromRGBO(50, 250, 170, 1);
+const NOSTALGIC_RED = const Color.fromRGBO(255, 99, 115, 1);
+const REALLY_NOSTALGIC_BLUE_BG = const Color.fromRGBO(22, 28, 52, 1);

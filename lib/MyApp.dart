@@ -303,7 +303,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 fontSize: 17,
                                 fontFamily: "Quicksand",
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),

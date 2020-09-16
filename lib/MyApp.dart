@@ -54,7 +54,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    // TODO: implement initState
     configOneSignal();
     super.initState();
     handleDynamicLinks();
@@ -274,8 +273,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: isAv
                                   ? SvgPicture.network(
                                       url,
-                                      height: 150,
-                                      width: 100,
+                                      height:  (640 / MediaQuery.of(context).size.height) * 150,
+                                      width: (360 / MediaQuery.of(context).size.height) * 100,
                                       alignment: Alignment.topLeft,
                                     )
                                   : InitialNameAvatar(

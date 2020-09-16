@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage>
                               child: isAv
                                   ? SvgPicture.network(
                                       url,
-                                      height:  (640 / MediaQuery.of(context).size.height) * 150,
+                                      height:  (640 / MediaQuery.of(context).size.height) * 100,
                                       width: (360 / MediaQuery.of(context).size.height) * 100,
                                       alignment: Alignment.topLeft,
                                     )

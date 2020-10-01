@@ -85,8 +85,8 @@ flutter run
 
 - Arkajyoti Mukherjee [arkajyotiMukherjee](https://github.com/arkajyotiMukherjee)
 
-- [NikhilCodes](https://github.com/NikhilCodes)
+- Nikhil Nayak [NikhilCodes](https://github.com/NikhilCodes)
 
-- [gaurav0991](https://github.com/gaurav0991)
+- Gaurav Saraf [gaurav0991](https://github.com/gaurav0991)
 
-- [sambitraze](https://github.com/sambitraze)
+- Sambit Majhi [sambitraze](https://github.com/sambitraze)

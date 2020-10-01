@@ -1,5 +1,5 @@
 ## Kide
-`v2.1.1+46D`
+`v2.1.1`
 ![Build APK](https://github.com/Kide-Devs/Kide/workflows/Build%20APK/badge.svg?branch=master)
 
 A KIIT Guide - KIDE is an app for all you university related needs! This app is developed with the plan of making it the one app to rule them all. From guiding new visitors, to seeing all the student activities presently taking place, upto student attendance tracking, All within a single easy to use app made with the power of Flutter.

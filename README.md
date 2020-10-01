@@ -2,6 +2,8 @@
 `v2.1.1`
 ![Build APK](https://github.com/Kide-Devs/Kide/workflows/Build%20APK/badge.svg?branch=master)
 
+## We Are Open for HacktoberFest 2020!
+
 A KIIT Guide - KIDE is an app for all you university related needs! This app is developed with the plan of making it the one app to rule them all. From guiding new visitors, to seeing all the student activities presently taking place, upto student attendance tracking, All within a single easy to use app made with the power of Flutter.
 
 ## Installation:
@@ -75,13 +77,13 @@ flutter run
 
 ### Developers
 
-- [Cryptonex7](https://github.com/Cryptonex7)
+- Anujeet Chatterjee [Cryptonex7](https://github.com/Cryptonex7)
 
-- [A4k9](https://github.com/A4k9)
+- Vansh Bhatia [A4k9](https://github.com/A4k9)
 
-- [ritesh-sharma33](https://github.com/ritesh-sharma33)
+- Ritesh Sharma [ritesh-sharma33](https://github.com/ritesh-sharma33)
 
-- [arkajyotiMukherjee](https://github.com/arkajyotiMukherjee)
+- Arkajyoti Mukherjee [arkajyotiMukherjee](https://github.com/arkajyotiMukherjee)
 
 - [NikhilCodes](https://github.com/NikhilCodes)
 

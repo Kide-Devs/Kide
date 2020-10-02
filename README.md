@@ -29,7 +29,7 @@ flutter run
   - Students can login to their SAP portals directly and access all their SAP related functionality directly from the app itself.
   
   ### More
-  - Get to know more about the university, the associated foundation KISS, as well as our honourable founder and his philosophy the "Art Of Giving"
+  - Get to know more about the university, the associated foundation KISS, as well as our honourable founder and his philosophy the "Art Of Giving".
   
   ### Bonus Feature: Attendance!
   - Through the side drawer, Students can directly track their attendance once they have had their SAP SLcM credentials verified.

@@ -1,3 +1,16 @@
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/'}
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.12.8, 0.99.99]'
+    }
+}
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+
+repositories {
+    maven { url 'https://maven.google.com' }
+}
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -53,6 +66,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resValue "string", "google_maps_key", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
         multiDexEnabled true
+        manifestPlaceholders = [
+          onesignal_app_id: 'PUT_YOUR_ONESIGNAL_APP_ID_HERE',
+          // Project number pulled from dashboard, local value is ignored.
+          onesignal_google_project_number: 'REMOTE'
+      ]
     }
 
     signingConfigs {
@@ -89,6 +107,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     def multidex_version = "2.0.1"
     implementation 'androidx.multidex:multidex:$multidex_version'
+    implementation 'com.onesignal:OneSignal:[3.15.0, 3.99.99]'
 }
 
 apply plugin: 'com.google.gms.google-services'

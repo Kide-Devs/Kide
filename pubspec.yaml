@@ -1,6 +1,6 @@
 name: Kide
 description: A KIIT guide you'd want to use.
-version: 2.1.1+46
+version: 2.1.1+49
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
@@ -29,9 +29,13 @@ dependencies:
   firebase_dynamic_links: ^0.5.1
   share: ^0.6.4+3
   day_night_switcher: null
-  fluttertoast:
+  webview_flutter: null
+  fluttertoast: null
+  fl_chart: ^0.11.1
+  flutter_bcrypt: null
   flutter_email_sender: null
   curved_navigation_bar: ^0.3.2
+  onesignal_flutter: ^2.6.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.7.4
@@ -91,4 +95,3 @@ flutter:
     - family: Michroma
       fonts:
         - asset: ./lib/fonts/Michroma/Michroma-Regular.ttf
-

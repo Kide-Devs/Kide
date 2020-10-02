@@ -23,8 +23,8 @@ A clear and concise description of what you expected to happen.
 ## **Proposed Solution**
 Propose a solution if you have one.
 
-**Screenshots**
+## **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**Additional context**
+## **Additional context**
 Add any other context about the problem here.

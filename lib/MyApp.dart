@@ -228,7 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
     MAPS,
     CONTACTS,
     "K  I  D  E",
-    "For You",
+    "SAP SLcM",
     MORE
   ];
 

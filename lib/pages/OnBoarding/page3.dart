@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:Kide/config/Viewport.dart';
 import 'package:Kide/util/colors.dart';
 import 'package:Kide/util/constants.dart';
+import 'package:flutter/material.dart';
 
 class Page3 extends StatelessWidget {
   @override

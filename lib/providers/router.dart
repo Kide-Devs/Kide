@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Router with ChangeNotifier{
+class BottomNavRouter with ChangeNotifier{
   int _bottomNavIndex = 2;
 
   int get bottomNavIndex {

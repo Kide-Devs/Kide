@@ -1,3 +1,4 @@
+const String VERSION = "2.1.1";
 const String MAPS =  "Maps";
 const String CONTACTS =  "Contacts";
 const String HOME =  "Home";
@@ -19,6 +20,7 @@ const String ONBOARDING_EVENTS_DESC = "The 'For You' Page let's you get a quick 
 const String MAPS_ASSET_PNG = 'lib/assets/maps.png';
 const String CONTACT_ASSET_PNG = 'lib/assets/contact.png';
 const String EVENTS_ASSET_PNG = 'lib/assets/events.png';
+const String POSTCARD_IMAGE_PLACEHOLDER_ASSET_PNG = "lib/assets/image-placeholder.png";
 const String HOME_PAGE_ASSET_KHELO_INDIA_JPG = "./lib/pages/HomePage/assets/KIUG_KIIT.jpg";
 const String KHELO_INDIA = "KHELO INDIA";
 const String UNIVERSITY_GAMES_2020 = "UNIVERSITY GAMES 2020";

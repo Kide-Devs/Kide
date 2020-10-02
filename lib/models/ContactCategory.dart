@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import '../models/Contact.dart';
 
 class ContactCategory {

@@ -46,7 +46,10 @@ class _AboutUsState extends State<AboutUs> {
                   TextSpan(
                     text: 'kide.kiit@gmail.com',
                     style: TextStyle(decoration: TextDecoration.underline, color: Colors.blue),
-                    recognizer: TapGestureRecognizer()..onTap = () => launch('mailto:kide.kiit@gmail.com'),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () async {
+                        if (await canLaunch('mailto:kide.kiit@gmail.com')) launch('mailto:kide.kiit@gmail.com');
+                      },
                   )
                 ],
                 style: TextStyle(fontSize: 20, fontFamily: 'EncodeSans'),

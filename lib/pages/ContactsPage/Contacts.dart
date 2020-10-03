@@ -42,8 +42,14 @@ class _ContactsPageState extends State<ContactsPage> {
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    HeaderWidget(EMERGENCY_CONTACTS, 12,
-                        DynamicTheme.of(context).data.textTheme.subtitle2.color),
+                    HeaderWidget(
+                        EMERGENCY_CONTACTS,
+                        12,
+                        DynamicTheme.of(context)
+                            .data
+                            .textTheme
+                            .subtitle2
+                            .color),
                     Divider(
                       color: Colors.white,
                       endIndent: ViewPort.screenWidth * 0.44,
@@ -63,7 +69,6 @@ class _ContactsPageState extends State<ContactsPage> {
                       _emergencyContacts[i].emergency,
                       _emergencyContacts[i].number,
                     ),
-
                 ],
               ),
               SliverList(
@@ -80,13 +85,15 @@ class _ContactsPageState extends State<ContactsPage> {
               SliverGrid(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2),
-                delegate: SliverChildListDelegate(//category card generator
+                delegate: SliverChildListDelegate(
+                  //category card generator
                   [
                     for (int i = 0; i < contactCategoryList.length; i++)
                       CategoryCard(_contactCategories[i]),
                   ],
                 ),
-              )
+              ),
+              SliverPadding(padding: EdgeInsets.only(bottom: 64.0))
             ],
           ),
         ),
@@ -94,4 +101,3 @@ class _ContactsPageState extends State<ContactsPage> {
     );
   }
 }
-  

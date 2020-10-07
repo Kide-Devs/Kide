@@ -193,7 +193,7 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
                   eyes,
                 ),
                 _AvatarPropertyModifier(
-                  'Skin tone',
+                  'Skin Tone',
                   (index) {
                     setState(() {
                       toneIndex = index;

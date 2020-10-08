@@ -64,18 +64,18 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
               child: Avatar(
                 width: 300,
                 height: 300,
-                accessory: accessories[accessoryIndex],
-                hat: hats[hatIndex],
-                clothingType: clothingTypes[clothingIndex],
-                eyebrow: eyebrows[eyebrowIndex],
-                mouth: mouths[mouthIndex],
-                hair: hairs[hairIndex],
-                facialHair: facialHairs[faceHairIndex],
-                clothingColor: clothingColors[dressColorIndex],
-                skinTone: skinTones[toneIndex],
-                hatColor: hatColors[hatColorIndex],
-                hairColor: hairColors[hairColorIndex],
-                eye: eyes[eyeIndex],
+                accessory: accessories[accessoryIndex].value,
+                hat: hats[hatIndex].value,
+                clothingType: clothingTypes[clothingIndex].value,
+                eyebrow: eyebrows[eyebrowIndex].value,
+                mouth: mouths[mouthIndex].value,
+                hair: hairs[hairIndex].value,
+                facialHair: facialHairs[faceHairIndex].value,
+                clothingColor: clothingColors[dressColorIndex].value,
+                skinTone: skinTones[toneIndex].value,
+                hatColor: hatColors[hatColorIndex].value,
+                hairColor: hairColors[hairColorIndex].value,
+                eye: eyes[eyeIndex].value,
               ),
             ),
           ),
@@ -354,7 +354,7 @@ class _AvatarEditorTab {
 }
 class _AvatarPropertyModifier extends StatelessWidget {
   final String title;
-  final List<String> values;
+  final List<AvatarProperty> values;
   final int currentIndex;
   final Function(int index) indexChangeCallback;
 
@@ -390,7 +390,7 @@ class _AvatarPropertyModifier extends StatelessWidget {
           ),
           Spacer(),
           Text(
-            values[currentIndex],
+            values[currentIndex].title,
             style: TextStyle(
               fontFamily: "Quicksand",
               fontWeight: FontWeight.w500,

@@ -58,7 +58,7 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
       attendanceDetails = attendanceDetails.toSet().toList();
       print(attendanceDetails[0].facultyName);
       overall = overall / (attendanceDetails.length);
-      print("Overall : " + "${overall}");
+      print("Overall : " + "$overall");
       _isLoading = false;
       setState(() {});
     } catch (e) {
@@ -224,7 +224,7 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
                                       bottom: 0,
                                       left: 72,
                                       child: Text(
-                                        "${overall.toString().substring(0, 4)}%",
+                                        "${overall.toStringAsFixed(1)}%",
                                         style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.w900,
@@ -288,7 +288,7 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
                                 )
                               ],
                             ),
-                            RichText(
+                             overall >= 75.00 ? RichText(
                               text: TextSpan(
                                 children: <TextSpan>[
                                   TextSpan(
@@ -302,6 +302,29 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
                                     text: ' Safe',
                                     style: TextStyle(
                                       color: NOSTALGIC_GREEN,
+                                      fontFamily: "Quicksand",
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: ' !',
+                                  ),
+                                ],
+                              ),
+                            ):RichText(
+                              text: TextSpan(
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: 'you\'re in',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: "Quicksand",
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: ' danger',
+                                    style: TextStyle(
+                                      color: NOSTALGIC_RED,
                                       fontFamily: "Quicksand",
                                       fontWeight: FontWeight.w600,
                                     ),

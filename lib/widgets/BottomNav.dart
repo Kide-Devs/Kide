@@ -3,6 +3,7 @@ import 'package:Kide/util/constants.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import "package:provider/provider.dart";
 
 class BottomNav extends StatelessWidget {
@@ -36,8 +37,9 @@ class BottomNav extends StatelessWidget {
             height: _currentIndex == 2 ? 34 : 28,
           ),
         ),
-        Icon(Icons.pin_drop,
-          color:DynamicTheme.of(context).data.textTheme.bodyText1.color),
+        // Icon(Icons.pin_drop,
+        //   color:DynamicTheme.of(context).data.textTheme.bodyText1.color),
+        SvgPicture.asset('lib/assets/icons8-sap.svg',color: DynamicTheme.of(context).data.textTheme.bodyText1.color),
         Icon(Icons.more_horiz,
           color: DynamicTheme.of(context).data.textTheme.bodyText1.color),
       ],

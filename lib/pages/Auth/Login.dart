@@ -176,10 +176,16 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          FlareActor(
-            'lib/assets/flares/LoginPage.flr',
-            animation: rocketAnimation,
-            fit: BoxFit.cover,
+          SingleChildScrollView(
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: FlareActor(
+                'lib/assets/flares/LoginPage.flr',
+                animation: rocketAnimation,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           ListView(
             physics: BouncingScrollPhysics(),
@@ -220,11 +226,15 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                       onTap: () async {
                         FirebaseAuth _auth = FirebaseAuth.instance;
+                        SharedPreferences _prefs =
+                            await SharedPreferences.getInstance();
 
                         String email = widget.emailController != null
                                 ? widget.emailController.text
                                 : _emailController.text,
                             password = _passwordController.text;
+                        _prefs.setString("email", email);
+                        _prefs.setString('password', password);
 
                         if (email.trim() == '' || password.trim() == '') {
                           setState(() {
@@ -302,7 +312,9 @@ class _LoginPageState extends State<LoginPage> {
                         onTap: () async {
                           await Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => PasswordResetPage(emailController: _emailController,),
+                              builder: (context) => PasswordResetPage(
+                                emailController: _emailController,
+                              ),
                             ),
                           );
                           Fluttertoast.showToast(

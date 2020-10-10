@@ -1,4 +1,4 @@
-const String VERSION = "2.1.1+46D";
+const String VERSION = "2.1.1";
 const String MAPS =  "Maps";
 const String CONTACTS =  "Contacts";
 const String HOME =  "Home";
@@ -65,3 +65,4 @@ const String TOTAL_PARTICIPATING_UNIVERSITIES = "Total Participating Universitie
 const String FOOD_STALL = "Food Stall";
 const String SEARCH_ON_MAPS = "Search on Maps";
 const String QUENCH_YOUR_HUNGER = "QUENCH YOUR HUNGER";
+const ATTENDANCE_API_URL = "https://kide-api.herokuapp.com/api/attendance";

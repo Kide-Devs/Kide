@@ -4,14 +4,18 @@ import 'package:Kide/pages/Profile/profile.dart';
 import 'package:Kide/pages/SettingsPage/settings.dart';
 import 'package:Kide/util/constants.dart';
 import 'package:Kide/widgets/CircularAvatar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:share/share.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:Kide/pages/attendancePages/attendanceMainPage.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -28,8 +32,26 @@ class _HomePageState extends State<HomePage>
   String email = '';
   bool isDarkModeEnabled = false;
 
+  String url;
+  bool isAv = false;
+
   @override
   void initState() {
+    FirebaseAuth.instance.currentUser().then((value) {
+      Firestore.instance
+          .collection('userInfo')
+          .document(value.uid)
+          .get()
+          .then((val) {
+        setState(() {
+          url = val.data['avatarUrl'];
+          if (url != null)
+            setState(() {
+              isAv = true;
+            });
+        });
+      });
+    });
     _scrollController = ScrollController();
     _tabController = TabController(vsync: this, length: 3);
     fetchName();
@@ -85,14 +107,22 @@ class _HomePageState extends State<HomePage>
                           children: <Widget>[
                             ClipRRect(
                               // Using Custom avatar Widget
-                              child: InitialNameAvatar(
-                                name,
-                                backgroundColor: Colors.tealAccent.shade700,
-                                foregroundColor: Colors.white,
-                                textSize: 32,
-                                borderSize: 10,
-                                borderColor: Colors.grey.withOpacity(0.4),
-                              ),
+                              child: isAv
+                                  ? SvgPicture.network(
+                                      url,
+                                      height:  (640 / MediaQuery.of(context).size.height) * 100,
+                                      width: (360 / MediaQuery.of(context).size.height) * 100,
+                                      alignment: Alignment.topLeft,
+                                    )
+                                  : InitialNameAvatar(
+                                      name,
+                                      backgroundColor:
+                                          Colors.tealAccent.shade700,
+                                      foregroundColor: Colors.white,
+                                      textSize: 32,
+                                      borderSize: 10,
+                                      borderColor: Colors.grey.withOpacity(0.4),
+                                    ),
                             ),
                             SizedBox(
                               height: 8,
@@ -165,6 +195,20 @@ class _HomePageState extends State<HomePage>
                           });
                         },
                       ),
+                    ),
+                  ),
+
+                  ListTile(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AttendanceMainPage()));
+                    },
+                    leading: Icon(Icons.assignment_return),
+                    title: Text(
+                      'Attendance',
+                      style: TextStyle(fontFamily: "EncodeSans", fontSize: 16),
                     ),
                   ),
                 ],
@@ -324,7 +368,7 @@ class _HomePageState extends State<HomePage>
                     fontSize: 16),
                 tabs: <Widget>[
                   new Tab(text: "News"),
-                  new Tab(text: "Blogs"),
+                  new Tab(text: "Blog"),
                   new Tab(text: "Events"),
                 ],
                 controller: _tabController,

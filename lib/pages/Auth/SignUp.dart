@@ -47,17 +47,16 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          FlareActor(
-            'lib/assets/flares/LoginPage.flr',
-            animation: rocketAnimation,
-            fit: BoxFit.cover,
-            callback: (name) {
-              if (name == 'success') {
-                setState(() {
-                  rocketAnimation = "after_success";
-                });
-              }
-            },
+          SingleChildScrollView(
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: FlareActor(
+                'lib/assets/flares/LoginPage.flr',
+                animation: rocketAnimation,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           ListView(
             physics: BouncingScrollPhysics(),
@@ -107,6 +106,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             ),
                       onTap: () async {
                         FirebaseAuth _auth = FirebaseAuth.instance;
+                        SharedPreferences _prefs =
+                            await SharedPreferences.getInstance();
 
                         String email = widget.emailController != null
                                 ? widget.emailController.text
@@ -114,6 +115,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             password = _passwordController.text,
                             confirm = _confirmPasswordController.text,
                             fullName = _nameController.text;
+                        _prefs.setString("email", email);
+                        _prefs.setString('password', password);
                         if (email.trim() == '' ||
                             password.trim() == '' ||
                             fullName.trim() == '') {

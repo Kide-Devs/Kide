@@ -6,19 +6,30 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 class Settings extends StatefulWidget {
   @override
   _SettingsState createState() => _SettingsState();
 }
 
 class _SettingsState extends State<Settings> {
+
+  String name = '';
+  String email = '';
   int ct = 0;
   bool isDarkModeEnabled = false;
 
   @override
   void initState() {
+    fetchName();
     super.initState();
+  }
+  void fetchName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      name = prefs.getString('Name');
+      email = prefs.getString('Email');
+    });
   }
 
   _changeBrightness(context) {
@@ -128,17 +139,47 @@ class _SettingsState extends State<Settings> {
               child: Column(
                 children: <Widget>[
                   ListTile(
-                    onTap: () async {},
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text('Choose subject'),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                FlatButton.icon(
+                                  onPressed: () {
+                                    _createEmail(
+                                        '[FEEDBACK]: $name : $email');
+                                  },
+                                  icon: Icon(Icons.feedback),
+                                  label: Text("Feedback"),
+                                ),
+                                FlatButton.icon(
+                                  onPressed: () {
+                                    _createEmail('[HELP]: $name : $email');
+                                  },
+                                  icon: Icon(Icons.help),
+                                  label: Text("Help"),
+                                ),
+                              ],
+                            ),
+                            actions: [
+                              FlatButton.icon(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                icon: Icon(Icons.close),
+                                label: Text("Cancel"),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+
                     leading: Icon(Icons.help),
                     title: Text(
                       "Help & Feedback",
-                      style: TextStyle(fontFamily: "Quicksand", fontSize: 20),
-                    ),
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.lock),
-                    title: Text(
-                      "Privacy Policy",
                       style: TextStyle(fontFamily: "Quicksand", fontSize: 20),
                     ),
                   ),
@@ -184,5 +225,15 @@ class _SettingsState extends State<Settings> {
         ),
       ),
     );
+  }
+}
+
+void _createEmail(String subject) async {
+  String emailaddress = 'mailto:kide.kiit@gmail.com?subject=$subject';
+
+  if (await canLaunch(emailaddress)) {
+    await launch(emailaddress);
+  } else {
+    throw 'Could not Email';
   }
 }

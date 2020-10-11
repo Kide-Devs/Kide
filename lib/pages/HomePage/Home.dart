@@ -21,15 +21,14 @@ class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
-
+String name = '';
+String email = '';
 class _HomePageState extends State<HomePage>
     with
         SingleTickerProviderStateMixin,
         AutomaticKeepAliveClientMixin<HomePage> {
   ScrollController _scrollController;
   TabController _tabController;
-  String name = '';
-  String email = '';
   bool isDarkModeEnabled = false;
 
   String url;

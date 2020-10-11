@@ -1,6 +1,6 @@
 name: Build DEBUG APK
 
-on: [push]
+on: [push,pull_request]
 
 jobs:
   build:

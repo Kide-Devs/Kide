@@ -75,20 +75,20 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: new Text(
-          "ATTENDANCE",
-          style: TextStyle(
-            color: Colors.white,
-            fontFamily: "Michroma",
-            fontWeight: FontWeight.w300,
-            fontSize: 23,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor:
-            REALLY_NOSTALGIC_BLUE_BG, // DynamicTheme.of(context).data.backgroundColor,
-      ),
+      // appBar: AppBar(
+      //   title: new Text(
+      //     "ATTENDANCE",
+      //     style: TextStyle(
+      //       color: Colors.white,
+      //       fontFamily: "Michroma",
+      //       fontWeight: FontWeight.w300,
+      //       fontSize: 23,
+      //     ),
+      //   ),
+      //   centerTitle: true,
+      //   backgroundColor:
+      //       REALLY_NOSTALGIC_BLUE_BG, // DynamicTheme.of(context).data.backgroundColor,
+      // ),
       backgroundColor: REALLY_NOSTALGIC_BLUE_BG,
       // DynamicTheme.of(context).data.backgroundColor,
       body: _isLoading == true

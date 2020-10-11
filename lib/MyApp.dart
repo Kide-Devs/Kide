@@ -220,7 +220,7 @@ class _MyHomePageState extends State<MyHomePage> {
     MapsPage(),
     ContactsPage(),
     HomePage(),
-    ForYouPage(),
+    AttendanceMainPage(),
     MorePage(),
   ];
 
@@ -228,7 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
     MAPS,
     CONTACTS,
     "K  I  D  E",
-    "SAP SLcM",
+    "ATTENDANCE",
     MORE
   ];
 

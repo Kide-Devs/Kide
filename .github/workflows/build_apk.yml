@@ -18,7 +18,7 @@ jobs:
     - name: build apk
       uses: steebchen/flutter@v1.1.0
       with:
-        args: build apk --release
+        args: build apk --split-per-abi
     
     - name: Get the version
       id: get_version

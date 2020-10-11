@@ -6,7 +6,6 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
@@ -24,8 +23,8 @@ void main() {
             scaffoldBackgroundColor: Color.fromARGB(255, 31, 31, 31),
             iconTheme: IconThemeData(color: Colors.grey),
             textTheme: TextTheme(
-              title: TextStyle(color: Colors.white70),
-              subtitle: TextStyle(color: Color.fromARGB(255, 187, 187, 187)),
+              headline6: TextStyle(color: Colors.white70),
+              subtitle2: TextStyle(color: Color.fromARGB(255, 187, 187, 187)),
             ),
             cardColor: Color.fromARGB(255, 93, 93, 93),
           );
@@ -38,8 +37,8 @@ void main() {
                 TabBarTheme(labelStyle: TextStyle(color: Colors.black)),
             iconTheme: IconThemeData(color: Colors.black),
             textTheme: TextTheme(
-              title: TextStyle(color: Colors.white),
-              subtitle: TextStyle(color: Colors.black),
+              headline6: TextStyle(color: Colors.white),
+              subtitle2: TextStyle(color: Colors.black),
             ),
             cardColor: Color.fromARGB(255, 200, 200, 220),
           );

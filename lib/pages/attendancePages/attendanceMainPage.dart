@@ -390,6 +390,7 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
                           style: TextStyle(
                             fontSize: 21,
                             fontFamily: "Quicksand",
+                            color: Colors.white,
                           ),
                         ),
                       ),

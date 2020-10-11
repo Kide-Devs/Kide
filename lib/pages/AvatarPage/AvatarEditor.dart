@@ -332,8 +332,10 @@ class __AvatarEditorContainerState extends State<_AvatarEditorContainer>
                 controller: _tabController,
                 children: widget.tabs
                     .map(
-                      (tab) => ListView(
-                        children: tab.modifiers,
+                      (tab) => Scrollbar(
+                        child: ListView(
+                          children: tab.modifiers,
+                        ),
                       ),
                     )
                     .toList(),

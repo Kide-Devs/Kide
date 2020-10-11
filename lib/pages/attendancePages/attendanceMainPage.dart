@@ -23,6 +23,12 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
   @override
   void initState() {
     // TODO: implement initState
+    //  FirebaseAuth.instance.currentUser().then((value) {
+    //   setState(() {
+    //     uid = value.uid;
+    //   });
+    // }).whenComplete(() => getData());
+    // print(uid);
     super.initState();
     fetchAttendance();
   }
@@ -34,13 +40,24 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
   double total = 0;
   String errormsg = '';
   bool _isError = false;
+  String roll;
+  String uid;
+  getData() {
+    Firestore.instance.collection('userInfo').document(uid).get().then((value) {
+      setState(() {
+        roll = value.data['roll'];
+      });
+    });
+  }
 
   void fetchAttendance() async {
     try {
       SharedPreferences _prefs = await SharedPreferences.getInstance();
-      String email = _prefs.getString('email');
+      roll = _prefs.getString('roll');
+      print(roll);
       String password = _prefs.getString('password');
-      Map map = {"roll_no": email.split('@')[0], "password": password};
+      // Map map = {"roll_no": email.split('@')[0], "password": password};
+      Map map = {"roll_no": roll, "password": password};
       var ans = jsonEncode(map);
       var body = await http.post(ATTENDANCE_API_URL,
           body: ans, headers: {"Content-Type": "application/json"});
@@ -56,7 +73,7 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
       attendanceDetails = attendanceDetails.toSet().toList();
       print(attendanceDetails[0].facultyName);
       overall = overall / (attendanceDetails.length);
-      print("Overall : " + "${overall}");
+      print("Overall : " + "$overall");
       _isLoading = false;
       setState(() {});
     } catch (e) {
@@ -73,20 +90,20 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: new Text(
-          "ATTENDANCE",
-          style: TextStyle(
-            color: Colors.white,
-            fontFamily: "Michroma",
-            fontWeight: FontWeight.w300,
-            fontSize: 23,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor:
-            REALLY_NOSTALGIC_BLUE_BG, // DynamicTheme.of(context).data.backgroundColor,
-      ),
+      // appBar: AppBar(
+      //   title: new Text(
+      //     "ATTENDANCE",
+      //     style: TextStyle(
+      //       color: Colors.white,
+      //       fontFamily: "Michroma",
+      //       fontWeight: FontWeight.w300,
+      //       fontSize: 23,
+      //     ),
+      //   ),
+      //   centerTitle: true,
+      //   backgroundColor:
+      //       REALLY_NOSTALGIC_BLUE_BG, // DynamicTheme.of(context).data.backgroundColor,
+      // ),
       backgroundColor: REALLY_NOSTALGIC_BLUE_BG,
       // DynamicTheme.of(context).data.backgroundColor,
       body: _isLoading == true
@@ -136,7 +153,9 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
                                       Text(
                                         date.day % 10 == 1
                                             ? "st"
-                                            : date.day % 10 == 2 ? "nd" : "th",
+                                            : date.day % 10 == 2
+                                                ? "nd"
+                                                : "th",
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w900,
@@ -301,30 +320,55 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
                                     )
                                   ],
                                 ),
-                                RichText(
-                                  text: TextSpan(
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                        text: 'Phewwww....You\'re',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: "Quicksand",
+                                overall >= 75.00
+                                    ? RichText(
+                                        text: TextSpan(
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                              text: 'Phewwww....You\'re',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Quicksand",
+                                              ),
+                                            ),
+                                            TextSpan(
+                                              text: ' Safe',
+                                              style: TextStyle(
+                                                color: NOSTALGIC_GREEN,
+                                                fontFamily: "Quicksand",
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            TextSpan(
+                                              text: ' !',
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    : RichText(
+                                        text: TextSpan(
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                              text: 'You\'re in',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Quicksand",
+                                              ),
+                                            ),
+                                            TextSpan(
+                                              text: ' Danger',
+                                              style: TextStyle(
+                                                color: NOSTALGIC_RED,
+                                                fontFamily: "Quicksand",
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            TextSpan(
+                                              text: ' !',
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      TextSpan(
-                                        text: ' Safe',
-                                        style: TextStyle(
-                                          color: NOSTALGIC_GREEN,
-                                          fontFamily: "Quicksand",
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      TextSpan(
-                                        text: ' !',
-                                      ),
-                                    ],
-                                  ),
-                                ),
                                 SizedBox(
                                   height: 20,
                                 ),

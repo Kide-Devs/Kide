@@ -220,7 +220,7 @@ class _MyHomePageState extends State<MyHomePage> {
     MapsPage(),
     ContactsPage(),
     HomePage(),
-    ForYouPage(),
+    AttendanceMainPage(),
     MorePage(),
   ];
 
@@ -228,7 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
     MAPS,
     CONTACTS,
     "K  I  D  E",
-    "SAP SLcM",
+    "ATTENDANCE",
     MORE
   ];
 
@@ -363,19 +363,19 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   ),
-                  ListTile(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AttendanceMainPage()));
-                    },
-                    leading: Icon(Icons.assignment_return),
-                    title: Text(
-                      'Attendance',
-                      style: TextStyle(fontFamily: "EncodeSans", fontSize: 16),
-                    ),
-                  ),
+                  // ListTile(
+                  //   onTap: () {
+                  //     Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) => AttendanceMainPage()));
+                  //   },
+                  //   leading: Icon(Icons.assignment_return),
+                  //   title: Text(
+                  //     'Attendance',
+                  //     style: TextStyle(fontFamily: "EncodeSans", fontSize: 16),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

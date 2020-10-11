@@ -7,9 +7,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'attendanceMainPage.dart';
 
 class SapCredForm extends StatefulWidget {
-  SapCredForm({this.emailController});
+  // SapCredForm({this.emailController});
 
-  final TextEditingController emailController;
+  // final TextEditingController emailController;
 
   static const routeName = "/Login";
 
@@ -20,7 +20,7 @@ class SapCredForm extends StatefulWidget {
 }
 
 class _SapCredFormState extends State<SapCredForm> {
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _rollController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   String rocketAnimation = 'idle', msgToUser = '';
@@ -54,10 +54,11 @@ class _SapCredFormState extends State<SapCredForm> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     WeirdTextField(
-                      hintText: "Sap Email",
-                      controller: widget.emailController == null
-                          ? _emailController
-                          : widget.emailController,
+                      hintText: "Sap Roll",
+                      controller: _rollController,
+                      //  widget.emailController == null
+                      //     ? _rollController
+                      //     : widget.emailController,
                     ),
                     WeirdTextField(
                       hintText: "Sap Password",
@@ -84,21 +85,22 @@ class _SapCredFormState extends State<SapCredForm> {
                           SharedPreferences _prefs =
                               await SharedPreferences.getInstance();
 
-                          String email = widget.emailController != null
-                                  ? widget.emailController.text
-                                  : _emailController.text,
-                              password = _passwordController.text;
+                          // String email = widget.emailController != null
+                          //         ? widget.emailController.text
+                          //         : _rollController.text,
+                          String password = _passwordController.text;
+                          String rollsave = _rollController.text;
 
-                          if (email.trim() == '' || password.trim() == '') {
+                          if (_rollController.text.trim() == '' ||
+                              password.trim() == '') {
                             setState(() {
                               msgToUser = "Fill all the details";
                             });
                             return null;
                           }
 
-
-                          _prefs.setString("email", email);
                           _prefs.setString("password", password);
+                          _prefs.setString("roll", rollsave);
 
                           Navigator.pushReplacement(
                             context,

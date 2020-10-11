@@ -18,7 +18,7 @@ jobs:
         channel: 'beta'
     - run: flutter clean
     - run: flutter packages get
-    - run: flutter build apk --debug --split-per-abi
+    - run: flutter build apk --debug --split-per-abi --stacktrace
     - name: Get the version
       id: get_version
       run: echo ::set-output name=COMMIT::$(git rev-parse --short "$GITHUB_SHA") && echo ::set-output name=BRANCH::${GITHUB_REF##*/}

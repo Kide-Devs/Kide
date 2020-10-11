@@ -42,10 +42,8 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
       String password = _prefs.getString('password');
       Map map = {"roll_no": email.split('@')[0], "password": password};
       var ans = jsonEncode(map);
-      var body = await http.post(
-          ATTENDANCE_API_URL,
-          body: ans,
-          headers: {"Content-Type": "application/json"});
+      var body = await http.post(ATTENDANCE_API_URL,
+          body: ans, headers: {"Content-Type": "application/json"});
       var bd = jsonDecode(body.body);
       List attendance = bd;
       print(attendance.length);
@@ -58,7 +56,7 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
       attendanceDetails = attendanceDetails.toSet().toList();
       print(attendanceDetails[0].facultyName);
       overall = overall / (attendanceDetails.length);
-      print("Overall : " + "$overall");
+      print("Overall : " + "${overall}");
       _isLoading = false;
       setState(() {});
     } catch (e) {
@@ -75,20 +73,20 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: new Text(
-      //     "ATTENDANCE",
-      //     style: TextStyle(
-      //       color: Colors.white,
-      //       fontFamily: "Michroma",
-      //       fontWeight: FontWeight.w300,
-      //       fontSize: 23,
-      //     ),
-      //   ),
-      //   centerTitle: true,
-      //   backgroundColor:
-      //       REALLY_NOSTALGIC_BLUE_BG, // DynamicTheme.of(context).data.backgroundColor,
-      // ),
+      appBar: AppBar(
+        title: new Text(
+          "ATTENDANCE",
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: "Michroma",
+            fontWeight: FontWeight.w300,
+            fontSize: 23,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor:
+            REALLY_NOSTALGIC_BLUE_BG, // DynamicTheme.of(context).data.backgroundColor,
+      ),
       backgroundColor: REALLY_NOSTALGIC_BLUE_BG,
       // DynamicTheme.of(context).data.backgroundColor,
       body: _isLoading == true
@@ -182,163 +180,157 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         color: Colors.blue[400].withOpacity(0.2),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Stack(
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    SizedBox(
-                                      height: 180,
-                                      width: 190,
-                                      child: AspectRatio(
-                                        aspectRatio: 0.1,
-                                        child: PieChart(
-                                          PieChartData(
-                                              pieTouchData: PieTouchData(
-                                                  touchCallback:
-                                                      (pieTouchResponse) {
-                                                setState(() {
-                                                  if (pieTouchResponse
-                                                              .touchInput
-                                                          is FlLongPressEnd ||
-                                                      pieTouchResponse
-                                                              .touchInput
-                                                          is FlPanEnd) {
-                                                  } else {}
-                                                });
-                                              }),
-                                              borderData: FlBorderData(
-                                                show: false,
+                                    Stack(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: SizedBox(
+                                            height: constraints.maxWidth / 2,
+                                            width: constraints.maxWidth / 2,
+                                            child: AspectRatio(
+                                              aspectRatio: 0.1,
+                                              child: PieChart(
+                                                PieChartData(
+                                                    pieTouchData: PieTouchData(
+                                                        touchCallback:
+                                                            (pieTouchResponse) {
+                                                      setState(() {
+                                                        if (pieTouchResponse
+                                                                    .touchInput
+                                                                is FlLongPressEnd ||
+                                                            pieTouchResponse
+                                                                    .touchInput
+                                                                is FlPanEnd) {
+                                                        } else {}
+                                                      });
+                                                    }),
+                                                    borderData: FlBorderData(
+                                                      show: false,
+                                                    ),
+                                                    sectionsSpace: 0,
+                                                    centerSpaceRadius: 38,
+                                                    sections:
+                                                        showingSections()),
                                               ),
-                                              sectionsSpace: 0,
-                                              centerSpaceRadius: 38,
-                                              sections: showingSections()),
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      top: 78,
-                                      bottom: 0,
-                                      left: 72,
-                                      child: Text(
-                                        "${overall.toStringAsFixed(1)}%",
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w900,
-                                          color: Colors.white,
+                                        Positioned(
+                                          top: constraints.maxWidth / 4 - 3,
+                                          left: constraints.maxWidth / 4 - 15,
+                                          child: Text(
+                                            "${overall.toString().substring(0, 4)}%",
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w900,
+                                              color: Colors.white,
+                                            ),
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ),
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                width: 20,
+                                                height: 20,
+                                                decoration: BoxDecoration(
+                                                    color: NOSTALGIC_GREEN,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            40)),
+                                              ),
+                                              Text(
+                                                "Attended",
+                                                style: TextStyle(
+                                                  fontFamily: "Quicksand",
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: constraints.maxWidth * 0.15,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                width: 20,
+                                                height: 20,
+                                                decoration: BoxDecoration(
+                                                    color: NOSTALGIC_RED,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            40)),
+                                              ),
+                                              Text(
+                                                "Skipped",
+                                                style: TextStyle(
+                                                  fontFamily: "Quicksand",
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    )
                                   ],
                                 ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      width: 170,
-                                      height: 35,
-                                      child: ListTile(
-                                        leading: Container(
-                                          width: 20,
-                                          height: 20,
-                                          decoration: BoxDecoration(
-                                              color: NOSTALGIC_GREEN,
-                                              borderRadius:
-                                                  BorderRadius.circular(40)),
-                                        ),
-                                        title: Text(
-                                          "Attended",
-                                          style: TextStyle(
-                                            fontFamily: "Quicksand",
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                RichText(
+                                  text: TextSpan(
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: 'Phewwww....You\'re',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: "Quicksand",
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Container(
-                                      width: 170,
-                                      height: 45,
-                                      child: ListTile(
-                                        leading: Container(
-                                          width: 20,
-                                          height: 20,
-                                          decoration: BoxDecoration(
-                                              color: NOSTALGIC_RED,
-                                              borderRadius:
-                                                  BorderRadius.circular(40)),
-                                        ),
-                                        title: Text(
-                                          "Skipped",
-                                          style: TextStyle(
-                                            fontFamily: "Quicksand",
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                      TextSpan(
+                                        text: ' Safe',
+                                        style: TextStyle(
+                                          color: NOSTALGIC_GREEN,
+                                          fontFamily: "Quicksand",
+                                          fontWeight: FontWeight.w600,
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                )
+                                      TextSpan(
+                                        text: ' !',
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
                               ],
-                            ),
-                             overall >= 75.00 ? RichText(
-                              text: TextSpan(
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: 'Phewwww....You\'re',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Quicksand",
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: ' Safe',
-                                    style: TextStyle(
-                                      color: NOSTALGIC_GREEN,
-                                      fontFamily: "Quicksand",
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: ' !',
-                                  ),
-                                ],
-                              ),
-                            ):RichText(
-                              text: TextSpan(
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: 'you\'re in',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "Quicksand",
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: ' danger',
-                                    style: TextStyle(
-                                      color: NOSTALGIC_RED,
-                                      fontFamily: "Quicksand",
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: ' !',
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                          ],
+                            );
+                          },
                         ),
                       ),
                       SizedBox(
@@ -460,9 +452,7 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
       child: Card(
         color: Colors.transparent,
         shadowColor: Colors.lightBlueAccent[100].withOpacity(0.2),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12)
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 5),
           child: ListTile(

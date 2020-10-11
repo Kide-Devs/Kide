@@ -363,19 +363,19 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   ),
-                  ListTile(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AttendanceMainPage()));
-                    },
-                    leading: Icon(Icons.assignment_return),
-                    title: Text(
-                      'Attendance',
-                      style: TextStyle(fontFamily: "EncodeSans", fontSize: 16),
-                    ),
-                  ),
+                  // ListTile(
+                  //   onTap: () {
+                  //     Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) => AttendanceMainPage()));
+                  //   },
+                  //   leading: Icon(Icons.assignment_return),
+                  //   title: Text(
+                  //     'Attendance',
+                  //     style: TextStyle(fontFamily: "EncodeSans", fontSize: 16),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

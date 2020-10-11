@@ -352,6 +352,7 @@ class _AvatarEditorTab {
 
   const _AvatarEditorTab(this.title, this.modifiers);
 }
+
 class _AvatarPropertyModifier extends StatelessWidget {
   final String title;
   final List<AvatarProperty> values;
@@ -366,17 +367,11 @@ class _AvatarPropertyModifier extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
-  static const TextStyle _titleStyle = TextStyle(
-    fontFamily: "Quicksand",
-    fontWeight: FontWeight.w500,
-    fontSize: 20,
-  );
-
   static const double BUTTON_SIZE = 40;
 
   static Color _buttonColor(BuildContext context) {
     return DynamicTheme.of(context).data.accentColor;
-  } 
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -384,36 +379,55 @@ class _AvatarPropertyModifier extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       child: Row(
         children: [
-          Text(
-            title,
-            style: _titleStyle,
-          ),
-          Spacer(),
-          Text(
-            values[currentIndex].title,
-            style: TextStyle(
-              fontFamily: "Quicksand",
-              fontWeight: FontWeight.w500,
-              fontSize: 18,
+          Expanded(
+            child: Row(
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontFamily: "Quicksand",
+                    fontWeight: FontWeight.w500,
+                    fontSize: 20,
+                  ),
+                ),
+              ],
             ),
           ),
-          IconButton(
-            icon: Icon(Icons.arrow_left_outlined),
-            iconSize: BUTTON_SIZE,
-            color: _buttonColor(context),
-            onPressed: () {
-              final newIndex = (currentIndex - 1) % values.length;
-              indexChangeCallback(newIndex);
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.arrow_right_outlined),
-            iconSize: BUTTON_SIZE,
-            color: _buttonColor(context),
-            onPressed: () {
-              final newIndex = (currentIndex + 1) % values.length;
-              indexChangeCallback(newIndex);
-            },
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_left),
+                  iconSize: BUTTON_SIZE,
+                  color: _buttonColor(context),
+                  onPressed: () {
+                    final newIndex = (currentIndex - 1) % values.length;
+                    indexChangeCallback(newIndex);
+                  },
+                ),
+                Flexible(
+                  child: Text(
+                    values[currentIndex].title,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: "Quicksand",
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.arrow_right),
+                  iconSize: BUTTON_SIZE,
+                  color: _buttonColor(context),
+                  onPressed: () {
+                    final newIndex = (currentIndex + 1) % values.length;
+                    indexChangeCallback(newIndex);
+                  },
+                ),
+              ],
+            ),
           ),
         ],
       ),

@@ -4,7 +4,6 @@ import 'package:Kide/util/constants.dart';
 import 'package:Kide/widgets/RoundedButton.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AvatarEditPage extends StatefulWidget {
@@ -297,6 +296,7 @@ class __AvatarEditorContainerState extends State<_AvatarEditorContainer>
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
+        margin: const EdgeInsets.fromLTRB(10, 10, 20, 0),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -391,7 +391,7 @@ class _AvatarPropertyModifier extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: "Quicksand",
                     fontWeight: FontWeight.w500,
-                    fontSize: 20,
+                    fontSize: 18,
                   ),
                 ),
               ],
@@ -417,7 +417,7 @@ class _AvatarPropertyModifier extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: "Quicksand",
                       fontWeight: FontWeight.w500,
-                      fontSize: 18,
+                      fontSize: 14,
                     ),
                   ),
                 ),

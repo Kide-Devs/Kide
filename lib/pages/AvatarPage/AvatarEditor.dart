@@ -41,6 +41,58 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
               color: DynamicTheme.of(context).data.textTheme.subtitle1.color),
           onPressed: () => Navigator.of(context).pop(),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: RoundedButton(
+              text: 'Save',
+              color: Colors.blueAccent.shade700,
+              shadowColor: Colors.transparent,
+              onPressed: () async {
+                print("Saving Avatar...");
+                var accessory = accessories[accessoryIndex].value;
+                var clothingType = clothingTypes[clothingIndex].value;
+                var clothingColor = clothingColors[dressColorIndex].value;
+                var eyebrow = eyebrows[eyebrowIndex].value;
+                var eye = eyes[eyeIndex].value;
+                var facialHair = facialHairs[faceHairIndex].value;
+                var hair = hairs[hairIndex].value;
+                var hat = hats[hatIndex].value;
+                var hairColor = hairColors[hairColorIndex].value;
+                var hatColor = hatColors[hatColorIndex].value;
+                var skinTone = skinTones[toneIndex].value;
+                var mouth = mouths[mouthIndex].value;
+                await Firestore.instance
+                    .collection("userInfo")
+                    .document(widget.uid)
+                    .setData({
+                  "avatarUrl": "https://bigheads.io/svg?"
+                      "accessory=$accessory&"
+                      "body=chest&"
+                      "circleColor=blue&"
+                      "clothing=$clothingType&"
+                      "clothingColor=$clothingColor&"
+                      "eyebrows=$eyebrow&"
+                      "eyes=$eye&"
+                      "faceMask=false&"
+                      "faceMaskColor=red&"
+                      "facialHair=$facialHair&"
+                      "graphic=none&"
+                      "hair=$hair&"
+                      "hairColor=$hairColor&"
+                      "hat=$hat&"
+                      "hatColor=$hatColor&"
+                      "lashes=true&"
+                      "lipColor=pink&"
+                      "mask=true&"
+                      "mouth=$mouth&"
+                      "skinTone=$skinTone"
+                }, merge: true);
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
+        ],
         elevation: 0,
         title: new Text(
           KIDE_CAPS,
@@ -77,56 +129,6 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
                 hairColor: hairColors[hairColorIndex].value,
                 eye: eyes[eyeIndex].value,
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
-            child: RoundedButton(
-              text: 'Save',
-              color: Colors.blueAccent.shade700,
-              shadowColor: Colors.transparent,
-              onPressed: () async {
-                print("Saving Avatar...");
-                var accessory = accessories[accessoryIndex];
-                var clothingType = clothingTypes[clothingIndex];
-                var clothingColor = clothingColors[dressColorIndex];
-                var eyebrow = eyebrows[eyebrowIndex];
-                var eye = eyes[eyeIndex];
-                var facialHair = facialHairs[faceHairIndex];
-                var hair = hairs[hairIndex];
-                var hat = hats[hatIndex];
-                var hairColor = hairColors[hairColorIndex];
-                var hatColor = hatColors[hatColorIndex];
-                var skinTone = skinTones[toneIndex];
-                var mouth = mouths[mouthIndex];
-                await Firestore.instance
-                    .collection("userInfo")
-                    .document(widget.uid)
-                    .setData({
-                  "avatarUrl": "https://bigheads.io/svg?"
-                      "accessory=$accessory&"
-                      "body=chest&"
-                      "circleColor=blue&"
-                      "clothing=$clothingType&"
-                      "clothingColor=$clothingColor&"
-                      "eyebrows=$eyebrow&"
-                      "eyes=$eye&"
-                      "faceMask=false&"
-                      "faceMaskColor=red&"
-                      "facialHair=$facialHair&"
-                      "graphic=none&"
-                      "hair=$hair&"
-                      "hairColor=$hairColor&"
-                      "hat=$hat&"
-                      "hatColor=$hatColor&"
-                      "lashes=true&"
-                      "lipColor=pink&"
-                      "mask=true&"
-                      "mouth=$mouth&"
-                      "skinTone=$skinTone"
-                }, merge: true);
-                Navigator.of(context).pop();
-              },
             ),
           ),
           _AvatarEditorContainer(

@@ -7,6 +7,7 @@ class RoundedButton extends StatelessWidget {
   final Color shadowColor;
   final double verticalPadding;
   final double horizontalPadding;
+  final double fontSize;
 
   const RoundedButton({
     @required this.text,
@@ -14,6 +15,7 @@ class RoundedButton extends StatelessWidget {
     @required this.color,
     this.verticalPadding = 8,
     this.horizontalPadding = 28,
+    this.fontSize = 20,
     this.shadowColor = Colors.transparent,
     key,
   }) : super(key: key);
@@ -39,7 +41,7 @@ class RoundedButton extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: 20,
+            fontSize: fontSize,
             fontFamily: "Quicksand",
             fontWeight: FontWeight.w600,
             color: Colors.white,

@@ -43,7 +43,9 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: RoundedButton(
+            child: RoundedButton( 
+              verticalPadding: 6,
+              horizontalPadding: 8,             
               text: 'Save',
               color: Colors.blueAccent.shade700,
               shadowColor: Colors.transparent,
@@ -296,7 +298,7 @@ class __AvatarEditorContainerState extends State<_AvatarEditorContainer>
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        margin: const EdgeInsets.fromLTRB(10, 10, 20, 0),
+        margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [

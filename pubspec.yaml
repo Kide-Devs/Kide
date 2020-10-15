@@ -8,39 +8,40 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_svg: ^0.18.1
-  provider: ^4.0.2
-  flutter_staggered_grid_view: ^0.3.0
-  url_launcher: ^5.5.0
-  shared_preferences: ^0.5.4+6
-  google_maps_flutter: ^0.5.11
-  geolocator: ^5.1.4+2
-  permission_handler: null
+  cached_network_image: null
   cloud_firestore: ^0.13.0+1
   connectivity: ^0.4.6+2
-  location: null
-  transparent_image: ^1.0.0
-  cached_network_image: null
+  curved_navigation_bar: ^0.3.2
+  day_night_switcher: null
+  double_back_to_close_app: ^1.2.0
   dynamic_theme: null
-  intl: null
-  sqflite: null
-  flare_flutter: null
   firebase_auth: null
   firebase_dynamic_links: ^0.5.1
-  share: ^0.6.4+3
-  day_night_switcher: null
-  webview_flutter: null
-  fluttertoast: null
   fl_chart: ^0.11.1
+  flare_flutter: null
   flutter_bcrypt: null
   flutter_email_sender: null
-  curved_navigation_bar: ^0.3.2
+  flutter_staggered_grid_view: ^0.3.0
+  flutter_svg: ^0.18.1
+  fluttertoast: null
+  geolocator: ^5.1.4+2
+  google_maps_flutter: ^0.5.11
+  intl: null
+  location: null
   onesignal_flutter: ^2.6.1
+  permission_handler: null
+  provider: ^4.0.2
+  share: ^0.6.4+3
+  shared_preferences: ^0.5.4+6
+  sqflite: null
+  transparent_image: ^1.0.0
+  url_launcher: ^5.5.0
+  webview_flutter: null
 
 dev_dependencies:
-  flutter_launcher_icons: ^0.7.4
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.7.4
 
 flutter_icons:
   android: true

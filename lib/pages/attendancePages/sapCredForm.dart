@@ -102,12 +102,13 @@ class _SapCredFormState extends State<SapCredForm> {
                           _prefs.setString("password", password);
                           _prefs.setString("roll", rollsave);
 
-                          Navigator.pushReplacement(
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (_) => AttendanceMainPage(),
                             ),
                           );
+                          // AttendanceMainPage();
                         }),
                     SizedBox(height: 10),
                   ],

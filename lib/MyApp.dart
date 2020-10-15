@@ -28,8 +28,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'pages/EventsPage/BookmarksPage.dart';
 import 'pages/HomePage/PostDetailsPage.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -273,8 +273,16 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: isAv
                                   ? SvgPicture.network(
                                       url,
-                                      height:  (640 / MediaQuery.of(context).size.height) * 100,
-                                      width: (360 / MediaQuery.of(context).size.height) * 100,
+                                      height: (640 /
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .height) *
+                                          100,
+                                      width: (360 /
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .height) *
+                                          100,
                                       alignment: Alignment.topLeft,
                                     )
                                   : InitialNameAvatar(
@@ -481,7 +489,12 @@ class _MyHomePageState extends State<MyHomePage> {
           : null,
       extendBody: true,
       backgroundColor: DynamicTheme.of(context).data.scaffoldBackgroundColor,
-      body: _tabs[indexState.bottomNavIndex],
+      body: DoubleBackToCloseApp(
+        child: _tabs[indexState.bottomNavIndex],
+        snackBar: const SnackBar(
+          content: Text('Tap back again to leave'),
+        ),
+      ),
       bottomNavigationBar: BottomNav(),
     );
   }

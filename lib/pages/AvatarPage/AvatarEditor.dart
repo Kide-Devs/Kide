@@ -42,10 +42,11 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8),
             child: RoundedButton( 
-              verticalPadding: 6,
-              horizontalPadding: 8,             
+              verticalPadding: 8,
+              horizontalPadding: 8,   
+              fontSize: 18,          
               text: 'Save',
               color: Colors.blueAccent.shade700,
               shadowColor: Colors.transparent,

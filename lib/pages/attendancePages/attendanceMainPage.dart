@@ -402,7 +402,7 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
                   double.parse(attendanceDetails[i].totalPercentage),
                   attendanceDetails[i].facultyName),
             SizedBox(
-              height: 10,
+              height: 80,
             ),
           ],
         ),

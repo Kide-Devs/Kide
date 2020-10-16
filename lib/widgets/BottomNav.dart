@@ -15,7 +15,7 @@ class BottomNav extends StatelessWidget {
       height: 55,
       index: _currentIndex,
       buttonBackgroundColor: DynamicTheme.of(context).data.backgroundColor,
-      color:  DynamicTheme.of(context).data.backgroundColor,
+      color: DynamicTheme.of(context).data.backgroundColor,
       backgroundColor: Color.fromRGBO(0, 0, 0, 0).withOpacity(0),
       onTap: (index) {
         indexState.setIndex(index);
@@ -27,7 +27,7 @@ class BottomNav extends StatelessWidget {
         ),
         Icon(
           Icons.contacts,
-          color:DynamicTheme.of(context).data.textTheme.bodyText1.color,
+          color: DynamicTheme.of(context).data.textTheme.bodyText1.color,
         ),
         AnimatedContainer(
           duration: Duration(milliseconds: 350),
@@ -39,9 +39,10 @@ class BottomNav extends StatelessWidget {
         ),
         // Icon(Icons.pin_drop,
         //   color:DynamicTheme.of(context).data.textTheme.bodyText1.color),
-        SvgPicture.asset('lib/assets/icons8-sap.svg',color: DynamicTheme.of(context).data.textTheme.bodyText1.color),
+        SvgPicture.asset('lib/assets/icons8-sap.svg',
+            color: DynamicTheme.of(context).data.textTheme.bodyText1.color),
         Icon(Icons.more_horiz,
-          color: DynamicTheme.of(context).data.textTheme.bodyText1.color),
+            color: DynamicTheme.of(context).data.textTheme.bodyText1.color),
       ],
     );
   }

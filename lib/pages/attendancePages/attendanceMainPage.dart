@@ -38,10 +38,11 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
   double overall = 0.0;
   double attended = 0.0;
   double total = 0;
-  String errormsg = '';
+  String errorMsg = '';
   bool _isError = false;
   String roll;
   String uid;
+
   getData() {
     Firestore.instance.collection('userInfo').document(uid).get().then((value) {
       setState(() {
@@ -63,7 +64,6 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
           body: ans, headers: {"Content-Type": "application/json"});
       var bd = jsonDecode(body.body);
       List attendance = bd;
-      print(attendance.length);
       for (int i = 0; i < attendance.length; i++) {
         attendanceDetails.add(attendanceModel.fromJson(attendance[i]));
         overall += double.parse(attendanceDetails[i].totalPercentage);
@@ -71,9 +71,7 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
         attended += double.parse(attendanceDetails[i].noOfPresent);
       }
       attendanceDetails = attendanceDetails.toSet().toList();
-      print(attendanceDetails[0].facultyName);
       overall = overall / (attendanceDetails.length);
-      print("Overall : " + "$overall");
       _isLoading = false;
       setState(() {});
     } catch (e) {
@@ -83,6 +81,14 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
       setState(() {});
       print(e.toString());
     }
+  }
+
+  void isSubmitDoneCallback() {
+    setState(() {
+      _isError = false;
+      _isLoading = true;
+    });
+    fetchAttendance();
   }
 
   var date = DateTime.now();
@@ -112,299 +118,295 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
                 backgroundColor: Colors.red,
               ),
             )
-          : _isError == true
-              ? SapCredForm()
-              : Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  child: ListView(
-                    shrinkWrap: true,
-                    padding: EdgeInsets.all(12),
-                    children: [
-                      Card(
-                        color: Colors.transparent,
-                        shadowColor: Colors.transparent,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                DateFormat('EEEE').format(date),
-                                style: TextStyle(
-                                    fontFamily: "Quicksand",
-                                    color: Colors.white),
+          : _isError ? SapCredForm(isSubmitDoneCallback: isSubmitDoneCallback) : Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: ListView(
+          shrinkWrap: true,
+          padding: EdgeInsets.all(12),
+          children: [
+            Card(
+              color: Colors.transparent,
+              shadowColor: Colors.transparent,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      DateFormat('EEEE').format(date),
+                      style: TextStyle(
+                          fontFamily: "Quicksand",
+                          color: Colors.white),
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Row(
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "${date.day}",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w900,
+                                fontSize: 34,
                               ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "${date.day}",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w900,
-                                          fontSize: 34,
-                                        ),
-                                      ),
-                                      Text(
-                                        date.day % 10 == 1
-                                            ? "st"
-                                            : date.day % 10 == 2
-                                                ? "nd"
-                                                : "th",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w900,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Text(
-                                    "${DateFormat(" MMM, yyyy").format(date)}",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 26,
-                                      fontFamily: "Quicksand",
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ],
+                            ),
+                            Text(
+                              date.day % 10 == 1
+                                  ? "st"
+                                  : date.day % 10 == 2 ? "nd" : "th",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w900,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          "${DateFormat(" MMM, yyyy").format(date)}",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 26,
+                            fontFamily: "Quicksand",
                           ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
 //                          child: ListTile(
 //                            title:
 //                            subtitle:
 //                          ),
-                        ),
-                      ),
-                      ListTile(
-                        title: Text(
-                          "Overall Attendance",
-                          style: TextStyle(
-                            fontSize: 21,
-                            fontFamily: "Quicksand",
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
+              ),
+            ),
+            ListTile(
+              title: Text(
+                "Overall Attendance",
+                style: TextStyle(
+                  fontSize: 21,
+                  fontFamily: "Quicksand",
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              color: Colors.blue[400].withOpacity(0.2),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween,
+                        children: [
+                          Stack(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SizedBox(
+                                  height: constraints.maxWidth / 2,
+                                  width: constraints.maxWidth / 2,
+                                  child: AspectRatio(
+                                    aspectRatio: 0.1,
+                                    child: PieChart(
+                                      PieChartData(
+                                          pieTouchData: PieTouchData(
+                                              touchCallback:
+                                                  (pieTouchResponse) {
+                                                setState(() {
+                                                  if (pieTouchResponse
+                                                      .touchInput
+                                                  is FlLongPressEnd ||
+                                                      pieTouchResponse
+                                                          .touchInput
+                                                      is FlPanEnd) {
+                                                  } else {}
+                                                });
+                                              }),
+                                          borderData: FlBorderData(
+                                            show: false,
+                                          ),
+                                          sectionsSpace: 0,
+                                          centerSpaceRadius: 38,
+                                          sections:
+                                          showingSections()),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: constraints.maxWidth / 4 - 3,
+                                left: constraints.maxWidth / 4 - 15,
+                                child: Text(
+                                  "${overall.toString().substring(0, 4)}%",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w900,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ),
-                      Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        color: Colors.blue[400].withOpacity(0.2),
-                        child: LayoutBuilder(
-                          builder: (context, constraints) {
-                            return Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment:
+                              MainAxisAlignment.center,
                               children: [
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.center,
                                   children: [
-                                    Stack(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: SizedBox(
-                                            height: constraints.maxWidth / 2,
-                                            width: constraints.maxWidth / 2,
-                                            child: AspectRatio(
-                                              aspectRatio: 0.1,
-                                              child: PieChart(
-                                                PieChartData(
-                                                    pieTouchData: PieTouchData(
-                                                        touchCallback:
-                                                            (pieTouchResponse) {
-                                                      setState(() {
-                                                        if (pieTouchResponse
-                                                                    .touchInput
-                                                                is FlLongPressEnd ||
-                                                            pieTouchResponse
-                                                                    .touchInput
-                                                                is FlPanEnd) {
-                                                        } else {}
-                                                      });
-                                                    }),
-                                                    borderData: FlBorderData(
-                                                      show: false,
-                                                    ),
-                                                    sectionsSpace: 0,
-                                                    centerSpaceRadius: 38,
-                                                    sections:
-                                                        showingSections()),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          top: constraints.maxWidth / 4 - 3,
-                                          left: constraints.maxWidth / 4 - 15,
-                                          child: Text(
-                                            "${overall.toString().substring(0, 4)}%",
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w900,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                                    Container(
+                                      width: 20,
+                                      height: 20,
+                                      decoration: BoxDecoration(
+                                          color: NOSTALGIC_GREEN,
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                              40)),
                                     ),
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                width: 20,
-                                                height: 20,
-                                                decoration: BoxDecoration(
-                                                    color: NOSTALGIC_GREEN,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            40)),
-                                              ),
-                                              Text(
-                                                "Attended",
-                                                style: TextStyle(
-                                                  fontFamily: "Quicksand",
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: constraints.maxWidth * 0.15,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                width: 20,
-                                                height: 20,
-                                                decoration: BoxDecoration(
-                                                    color: NOSTALGIC_RED,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            40)),
-                                              ),
-                                              Text(
-                                                "Skipped",
-                                                style: TextStyle(
-                                                  fontFamily: "Quicksand",
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                    Text(
+                                      "Attended",
+                                      style: TextStyle(
+                                        fontFamily: "Quicksand",
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
-                                overall >= 75.00
-                                    ? RichText(
-                                        text: TextSpan(
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                              text: 'Phewwww....You\'re',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Quicksand",
-                                              ),
-                                            ),
-                                            TextSpan(
-                                              text: ' Safe',
-                                              style: TextStyle(
-                                                color: NOSTALGIC_GREEN,
-                                                fontFamily: "Quicksand",
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            TextSpan(
-                                              text: ' !',
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    : RichText(
-                                        text: TextSpan(
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                              text: 'You\'re in',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: "Quicksand",
-                                              ),
-                                            ),
-                                            TextSpan(
-                                              text: ' Danger',
-                                              style: TextStyle(
-                                                color: NOSTALGIC_RED,
-                                                fontFamily: "Quicksand",
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            TextSpan(
-                                              text: ' !',
-                                            ),
-                                          ],
-                                        ),
-                                      ),
                                 SizedBox(
-                                  height: 20,
+                                  height: constraints.maxWidth * 0.15,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: 20,
+                                      height: 20,
+                                      decoration: BoxDecoration(
+                                          color: NOSTALGIC_RED,
+                                          borderRadius:
+                                          BorderRadius.circular(
+                                              40)),
+                                    ),
+                                    Text(
+                                      "Skipped",
+                                      style: TextStyle(
+                                        fontFamily: "Quicksand",
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
-                            );
-                          },
+                            ),
+                          )
+                        ],
+                      ),
+                      overall >= 75.00
+                          ? RichText(
+                        text: TextSpan(
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: 'Phewwww....You\'re',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontFamily: "Quicksand",
+                              ),
+                            ),
+                            TextSpan(
+                              text: ' Safe',
+                              style: TextStyle(
+                                color: NOSTALGIC_GREEN,
+                                fontFamily: "Quicksand",
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            TextSpan(
+                              text: ' !',
+                            ),
+                          ],
+                        ),
+                      )
+                          : RichText(
+                        text: TextSpan(
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: 'You\'re in',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontFamily: "Quicksand",
+                              ),
+                            ),
+                            TextSpan(
+                              text: ' Danger',
+                              style: TextStyle(
+                                color: NOSTALGIC_RED,
+                                fontFamily: "Quicksand",
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            TextSpan(
+                              text: ' !',
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(
-                        height: 10,
-                      ),
-                      _middlePage(
-                          "${total.toString()}",
-                          "${attended.toString()}",
-                          "${(total - attended).toString()}"),
-                      ListTile(
-                        leading: Text(
-                          "Subjects",
-                          style: TextStyle(
-                            fontSize: 21,
-                            fontFamily: "Quicksand",
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      for (int i = 0; i < attendanceDetails.length; i++)
-                        subjectCards(
-                            attendanceDetails[i].subject,
-                            double.parse(attendanceDetails[i].totalPercentage),
-                            attendanceDetails[i].facultyName),
-                      SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
                     ],
-                  ),
+                  );
+                },
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            _middlePage(
+                "${total.toString()}",
+                "${attended.toString()}",
+                "${(total - attended).toString()}"),
+            ListTile(
+              leading: Text(
+                "Subjects",
+                style: TextStyle(
+                  fontSize: 21,
+                  fontFamily: "Quicksand",
+                  color: Colors.white,
                 ),
+              ),
+            ),
+            for (int i = 0; i < attendanceDetails.length; i++)
+              subjectCards(
+                  attendanceDetails[i].subject,
+                  double.parse(attendanceDetails[i].totalPercentage),
+                  attendanceDetails[i].facultyName),
+            SizedBox(
+              height: 10,
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -563,16 +565,18 @@ class _AttendanceMainPageState extends State<AttendanceMainPage> {
       switch (i) {
         case 0:
           return PieChartSectionData(
-              color: NOSTALGIC_GREEN,
-              value: overall,
-              radius: radius,
-              showTitle: false);
+            color: NOSTALGIC_GREEN,
+            value: overall,
+            radius: radius,
+            showTitle: false,
+          );
         case 1:
           return PieChartSectionData(
-              color: NOSTALGIC_RED,
-              value: 100 - overall,
-              radius: radius,
-              showTitle: false);
+            color: NOSTALGIC_RED,
+            value: 100 - overall,
+            radius: radius,
+            showTitle: false,
+          );
 
         default:
           return null;

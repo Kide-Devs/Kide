@@ -1,9 +1,9 @@
 import 'package:Kide/pages/AvatarPage/AvatarPin.dart';
 import 'package:Kide/pages/AvatarPage/avatar_consts.dart';
 import 'package:Kide/util/constants.dart';
+import 'package:Kide/widgets/RoundedButton.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AvatarEditPage extends StatefulWidget {
@@ -40,6 +40,61 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
               color: DynamicTheme.of(context).data.textTheme.subtitle1.color),
           onPressed: () => Navigator.of(context).pop(),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: RoundedButton( 
+              verticalPadding: 8,
+              horizontalPadding: 8,   
+              fontSize: 18,          
+              text: 'Save',
+              color: Colors.blueAccent.shade700,
+              shadowColor: Colors.transparent,
+              onPressed: () async {
+                print("Saving Avatar...");
+                var accessory = accessories[accessoryIndex].value;
+                var clothingType = clothingTypes[clothingIndex].value;
+                var clothingColor = clothingColors[dressColorIndex].value;
+                var eyebrow = eyebrows[eyebrowIndex].value;
+                var eye = eyes[eyeIndex].value;
+                var facialHair = facialHairs[faceHairIndex].value;
+                var hair = hairs[hairIndex].value;
+                var hat = hats[hatIndex].value;
+                var hairColor = hairColors[hairColorIndex].value;
+                var hatColor = hatColors[hatColorIndex].value;
+                var skinTone = skinTones[toneIndex].value;
+                var mouth = mouths[mouthIndex].value;
+                await Firestore.instance
+                    .collection("userInfo")
+                    .document(widget.uid)
+                    .setData({
+                  "avatarUrl": "https://bigheads.io/svg?"
+                      "accessory=$accessory&"
+                      "body=chest&"
+                      "circleColor=blue&"
+                      "clothing=$clothingType&"
+                      "clothingColor=$clothingColor&"
+                      "eyebrows=$eyebrow&"
+                      "eyes=$eye&"
+                      "faceMask=false&"
+                      "faceMaskColor=red&"
+                      "facialHair=$facialHair&"
+                      "graphic=none&"
+                      "hair=$hair&"
+                      "hairColor=$hairColor&"
+                      "hat=$hat&"
+                      "hatColor=$hatColor&"
+                      "lashes=true&"
+                      "lipColor=pink&"
+                      "mask=true&"
+                      "mouth=$mouth&"
+                      "skinTone=$skinTone"
+                }, merge: true);
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
+        ],
         elevation: 0,
         title: new Text(
           KIDE_CAPS,
@@ -54,7 +109,7 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
         backgroundColor: DynamicTheme.of(context).data.backgroundColor,
       ),
       backgroundColor: DynamicTheme.of(context).data.backgroundColor,
-      body: ListView(
+      body: Column(
         children: [
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.3,
@@ -63,207 +118,321 @@ class _AvatarEditPageState extends State<AvatarEditPage> {
               child: Avatar(
                 width: 300,
                 height: 300,
-                accessory: accessories[accessoryIndex],
-                hat: hats[hatIndex],
-                clothingType: clothingTypes[clothingIndex],
-                eyebrow: eyebrows[eyebrowIndex],
-                mouth: mouths[mouthIndex],
-                hair: hairs[hairIndex],
-                facialHair: facialHairs[faceHairIndex],
-                clothingColor: clothingColors[dressColorIndex],
-                skinTone: skinTones[toneIndex],
-                hatColor: hatColors[hatColorIndex],
-                hairColor: hairColors[hairColorIndex],
-                eye: eyes[eyeIndex],
+                accessory: accessories[accessoryIndex].value,
+                hat: hats[hatIndex].value,
+                clothingType: clothingTypes[clothingIndex].value,
+                eyebrow: eyebrows[eyebrowIndex].value,
+                mouth: mouths[mouthIndex].value,
+                hair: hairs[hairIndex].value,
+                facialHair: facialHairs[faceHairIndex].value,
+                clothingColor: clothingColors[dressColorIndex].value,
+                skinTone: skinTones[toneIndex].value,
+                hatColor: hatColors[hatColorIndex].value,
+                hairColor: hairColors[hairColorIndex].value,
+                eye: eyes[eyeIndex].value,
               ),
             ),
           ),
-          SizedBox(height: 30),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.65,
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    MaterialButton(
-                      color: Colors.indigoAccent,
-                      onPressed: () {
-                        setState(() {
-                          accessoryIndex =
-                              (accessoryIndex + 1) % accessories.length;
-                        });
-                      },
-                      child: Text("Accessory"),
-                    ),
-                    MaterialButton(
-                      color: Colors.indigoAccent,
-                      onPressed: () {
-                        setState(() {
-                          hatIndex = (hatIndex + 1) % hats.length;
-                        });
-                      },
-                      child: Text("Hat"),
-                    ),
-                    MaterialButton(
-                      color: Colors.indigoAccent,
-                      onPressed: () {
-                        setState(() {
-                          clothingIndex =
-                              (clothingIndex + 1) % clothingTypes.length;
-                        });
-                      },
-                      child: Text("Clothing"),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    MaterialButton(
-                      color: Colors.indigoAccent,
-                      onPressed: () {
-                        setState(() {
-                          eyebrowIndex = (eyebrowIndex + 1) % eyebrows.length;
-                        });
-                      },
-                      child: Text("Eyebrow"),
-                    ),
-                    MaterialButton(
-                      color: Colors.indigoAccent,
-                      onPressed: () {
-                        setState(() {
-                          mouthIndex = (mouthIndex + 1) % mouths.length;
-                        });
-                      },
-                      child: Text("Mouth"),
-                    ),
-                    MaterialButton(
-                      color: Colors.indigoAccent,
-                      onPressed: () {
-                        setState(() {
-                          hairIndex = (hairIndex + 1) % hairs.length;
-                        });
-                      },
-                      child: Text("Hair"),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    MaterialButton(
-                      color: Colors.indigoAccent,
-                      onPressed: () {
-                        setState(() {
-                          faceHairIndex =
-                              (faceHairIndex + 1) % facialHairs.length;
-                        });
-                      },
-                      child: Text("Face Hair"),
-                    ),
-                    MaterialButton(
-                      color: Colors.indigoAccent,
-                      onPressed: () {
-                        setState(() {
-                          dressColorIndex =
-                              (dressColorIndex + 1) % clothingColors.length;
-                        });
-                      },
-                      child: Text("Dress Color"),
-                    ),
-                    MaterialButton(
-                      color: Colors.indigoAccent,
-                      onPressed: () {
-                        setState(() {
-                          toneIndex = (toneIndex + 1) % skinTones.length;
-                        });
-                      },
-                      child: Text("Tone"),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    MaterialButton(
-                      color: Colors.indigoAccent,
-                      onPressed: () {
-                        setState(() {
-                          hatColorIndex =
-                              (hatColorIndex + 1) % hatColors.length;
-                        });
-                      },
-                      child: Text("Hat Color"),
-                    ),
-                    MaterialButton(
-                      color: Colors.indigoAccent,
-                      onPressed: () {
-                        setState(() {
-                          hairColorIndex =
-                              (hairColorIndex + 1) % hairColors.length;
-                        });
-                      },
-                      child: Text("Hair Color"),
-                    ),
-                    MaterialButton(
-                      color: Colors.indigoAccent,
-                      onPressed: () {
-                        setState(() {
-                          eyeIndex = (eyeIndex + 1) % eyes.length;
-                        });
-                      },
-                      child: Text("Eye"),
-                    ),
-                  ],
-                ),
-                MaterialButton(
-                  onPressed: () async {
-                    print("Saving Avatar...");
-                    var accessory = accessories[accessoryIndex];
-                    var clothingType = clothingTypes[clothingIndex];
-                    var clothingColor = clothingColors[dressColorIndex];
-                    var eyebrow = eyebrows[eyebrowIndex];
-                    var eye = eyes[eyeIndex];
-                    var facialHair = facialHairs[faceHairIndex];
-                    var hair = hairs[hairIndex];
-                    var hat = hats[hatIndex];
-                    var hairColor = hairColors[hairColorIndex];
-                    var hatColor = hatColors[hatColorIndex];
-                    var skinTone = skinTones[toneIndex];
-                    var mouth = mouths[mouthIndex];
-                    await Firestore.instance
-                        .collection("userInfo")
-                        .document(widget.uid)
-                        .setData({
-                      "avatarUrl": "https://bigheads.io/svg?"
-                          "accessory=$accessory&"
-                          "body=chest&"
-                          "circleColor=blue&"
-                          "clothing=$clothingType&"
-                          "clothingColor=$clothingColor&"
-                          "eyebrows=$eyebrow&"
-                          "eyes=$eye&"
-                          "faceMask=false&"
-                          "faceMaskColor=red&"
-                          "facialHair=$facialHair&"
-                          "graphic=none&"
-                          "hair=$hair&"
-                          "hairColor=$hairColor&"
-                          "hat=$hat&"
-                          "hatColor=$hatColor&"
-                          "lashes=true&"
-                          "lipColor=pink&"
-                          "mask=true&"
-                          "mouth=$mouth&"
-                          "skinTone=$skinTone"
-                    }, merge: true);
-                    Navigator.of(context).pop();
+          _AvatarEditorContainer(
+            tabs: [
+              _AvatarEditorTab('Body', [
+                _AvatarPropertyModifier(
+                  'Eyebrow',
+                  (index) {
+                    setState(() {
+                      eyebrowIndex = index;
+                    });
                   },
-                  child: Text("Save"),
-                )
+                  eyebrowIndex,
+                  eyebrows,
+                ),
+                _AvatarPropertyModifier(
+                  'Mouth',
+                  (index) {
+                    setState(() {
+                      mouthIndex = index;
+                    });
+                  },
+                  mouthIndex,
+                  mouths,
+                ),
+                _AvatarPropertyModifier(
+                  'Hair',
+                  (index) {
+                    setState(() {
+                      hairIndex = index;
+                    });
+                  },
+                  hairIndex,
+                  hairs,
+                ),
+                _AvatarPropertyModifier(
+                  'Facial Hair',
+                  (index) {
+                    setState(() {
+                      faceHairIndex = index;
+                    });
+                  },
+                  faceHairIndex,
+                  facialHairs,
+                ),
+                _AvatarPropertyModifier(
+                  'Hair Color',
+                  (index) {
+                    setState(() {
+                      hairColorIndex = index;
+                    });
+                  },
+                  hairColorIndex,
+                  hairColors,
+                ),
+                _AvatarPropertyModifier(
+                  'Eyes',
+                  (index) {
+                    setState(() {
+                      eyeIndex = index;
+                    });
+                  },
+                  eyeIndex,
+                  eyes,
+                ),
+                _AvatarPropertyModifier(
+                  'Skin Tone',
+                  (index) {
+                    setState(() {
+                      toneIndex = index;
+                    });
+                  },
+                  toneIndex,
+                  skinTones,
+                ),
+              ]),
+              _AvatarEditorTab('Clothing', [
+                _AvatarPropertyModifier(
+                  'Hats',
+                  (index) {
+                    setState(() {
+                      hatIndex = index;
+                    });
+                  },
+                  hatIndex,
+                  hats,
+                ),
+                _AvatarPropertyModifier(
+                  'Hat Color',
+                  (index) {
+                    setState(() {
+                      hatColorIndex = index;
+                    });
+                  },
+                  hatColorIndex,
+                  hatColors,
+                ),
+                _AvatarPropertyModifier(
+                  'Accessory',
+                  (index) {
+                    setState(() {
+                      accessoryIndex = index;
+                    });
+                  },
+                  accessoryIndex,
+                  accessories,
+                ),
+                _AvatarPropertyModifier(
+                  'Clothing',
+                  (index) {
+                    setState(() {
+                      clothingIndex = index;
+                    });
+                  },
+                  clothingIndex,
+                  clothingTypes,
+                ),
+                _AvatarPropertyModifier(
+                  'Clothing Color',
+                  (index) {
+                    setState(() {
+                      dressColorIndex = index;
+                    });
+                  },
+                  dressColorIndex,
+                  clothingColors,
+                ),
+              ]),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _AvatarEditorContainer extends StatefulWidget {
+  final List<_AvatarEditorTab> tabs;
+
+  _AvatarEditorContainer({@required this.tabs});
+
+  @override
+  __AvatarEditorContainerState createState() => __AvatarEditorContainerState();
+}
+
+class __AvatarEditorContainerState extends State<_AvatarEditorContainer>
+    with TickerProviderStateMixin {
+  TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      length: widget.tabs.length,
+      vsync: this,
+    );
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.blueGrey.withOpacity(0.3),
+              Colors.blueGrey.withOpacity(0.2)
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(30),
+          ),
+        ),
+        child: Column(
+          children: [
+            TabBar(
+              controller: _tabController,
+              indicatorColor: DynamicTheme.of(context).data.indicatorColor,
+              labelColor:
+                  DynamicTheme.of(context).data.tabBarTheme.labelStyle.color,
+              labelStyle: TextStyle(
+                  fontFamily: "Quicksand",
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16),
+              tabs: [
+                ...widget.tabs
+                    .map((tab) => Tab(
+                          text: tab.title,
+                        ))
+                    .toList(),
+              ],
+            ),
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: widget.tabs
+                    .map(
+                      (tab) => Scrollbar(
+                        child: ListView(
+                          children: tab.modifiers,
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _AvatarEditorTab {
+  final String title;
+  final List<_AvatarPropertyModifier> modifiers;
+
+  const _AvatarEditorTab(this.title, this.modifiers);
+}
+
+class _AvatarPropertyModifier extends StatelessWidget {
+  final String title;
+  final List<AvatarProperty> values;
+  final int currentIndex;
+  final Function(int index) indexChangeCallback;
+
+  const _AvatarPropertyModifier(
+    this.title,
+    this.indexChangeCallback,
+    this.currentIndex,
+    this.values, {
+    Key key,
+  }) : super(key: key);
+
+  static const double BUTTON_SIZE = 40;
+
+  static Color _buttonColor(BuildContext context) {
+    return DynamicTheme.of(context).data.accentColor;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      child: Row(
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontFamily: "Quicksand",
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_left),
+                  iconSize: BUTTON_SIZE,
+                  color: _buttonColor(context),
+                  onPressed: () {
+                    final newIndex = (currentIndex - 1) % values.length;
+                    indexChangeCallback(newIndex);
+                  },
+                ),
+                Flexible(
+                  child: Text(
+                    values[currentIndex].title,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: "Quicksand",
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.arrow_right),
+                  iconSize: BUTTON_SIZE,
+                  color: _buttonColor(context),
+                  onPressed: () {
+                    final newIndex = (currentIndex + 1) % values.length;
+                    indexChangeCallback(newIndex);
+                  },
+                ),
               ],
             ),
           ),

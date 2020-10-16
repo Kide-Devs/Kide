@@ -1,5 +1,5 @@
 ## Kide
-`v2.1.1`
+`v2.2.4`
 ![Build APK](https://github.com/Kide-Devs/Kide/workflows/Build%20APK/badge.svg?branch=master)
 
 ## We Are Open for HacktoberFest 2020!

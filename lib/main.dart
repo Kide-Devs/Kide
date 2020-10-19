@@ -5,12 +5,15 @@ import 'package:Kide/pages/OnBoarding/OnBoarding.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  precachePicture(ExactAssetPicture(SvgPicture.svgStringDecoder, './lib/assets/blank_avatar.svg'), null);
   runApp(
     new DynamicTheme(
       defaultBrightness: Brightness.light,

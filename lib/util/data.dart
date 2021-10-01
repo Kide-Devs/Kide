@@ -49,23 +49,23 @@ Future getQn()
 
 List <Official> dummyUni = [
   Official(
-    name: "ANUJEET CHATERJEE",
+    name: "John Doe",
     designation: "Male Coach",
   ),
   Official(
-    name: "BISHMAY RANJAN SAHOO",
+    name: "Jane DOe",
     designation: "Female Coach",
   ),
   Official(
-    name: "DEEP RAJ",
+    name: "Denver Atraski",
     designation: "Temp Coach",
   ),
   Official(
-    name: "ARKAJYOTI MUKHERJEE",
+    name: "Andrew Mayne",
     designation: "University Sports Manager (USM)",
   ),
   Official(
-    name: "VANSH BHATIA",
+    name: "Vruce Bayne",
     designation: "University contingent Manager (UCM)",
   ),
 ];

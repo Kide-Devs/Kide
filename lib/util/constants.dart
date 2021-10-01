@@ -1,4 +1,6 @@
 const String VERSION = "v2.2.4";
+const String NEXT_VERSION = "v2.3.0";
+const String PREV_VERSION = "v2.2.3";
 const String MAPS =  "Maps";
 const String CONTACTS =  "Contacts";
 const String HOME =  "Home";

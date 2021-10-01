@@ -35,3 +35,17 @@ const POST_APPBAR_BG = const Color(0xFF616161);
 const NOSTALGIC_GREEN = const Color.fromRGBO(50, 250, 170, 1);
 const NOSTALGIC_RED = const Color.fromRGBO(255, 99, 115, 1);
 const REALLY_NOSTALGIC_BLUE_BG = const Color.fromRGBO(22, 28, 52, 1);
+
+// Hacktoberfest contributions
+
+const NEW_MATERIAL_WHITE = const Color(0xFFFFFF5F);
+const NEW_MATERIAL_BLACK = const Color(0xFF000050);
+const NEW_MATERIAL_GREY = const Color(0xFF9E9E5E);
+const NEW_MATERIAL_BLUE = const Color(0xFF219653);
+const NEW_MATERIAL_AMBER = const Color(0xFFFFC157);
+const NEW_MATERIAL_AMBER_ACCENT = const Color(0xFFFFD750);
+const NEW_MATERIAL_WHITE_70 = const Color(0xB3FFFF5F);
+const NEW_MATERIAL_WHITE_38 = const Color(0x62FFFF5F);
+const NEW_MATERIAL_BLACK_26 = const Color(0x42000050);
+const NEW_MATERIAL_BLUE_ACCENT = const Color(0xFF82B15F);
+const NEW_APP_BACKGROUND_COLOR = const Color(0xF7121252);

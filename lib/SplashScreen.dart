@@ -31,10 +31,13 @@ class _SplashScreenState extends State<SplashScreen> {
     }
   }
 
+
+  // navigation to 
   void navigationMyApp() {
     Navigator.of(context).pushReplacementNamed(MyApp.routeName);
   }
 
+  // navigation to use auth
   void navigationUserAuth() {
     Navigator.of(context).pushReplacementNamed(LoginPage.routeName);
   }
@@ -50,6 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
     startTime();
   }
 
+  // overall widget
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

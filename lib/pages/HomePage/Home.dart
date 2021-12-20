@@ -1,4 +1,5 @@
 import 'package:Kide/pages/AboutUsPage.dart/AboutUs.dart';
+import 'package:Kide/pages/AvatarPage/AvatarLoading.dart';
 import 'package:Kide/pages/HomePage/widgets/PostsPage.dart';
 import 'package:Kide/pages/Profile/profile.dart';
 import 'package:Kide/pages/SettingsPage/settings.dart';
@@ -80,6 +81,9 @@ class _HomePageState extends State<HomePage>
   @override
   // ignore: must_call_super
   Widget build(BuildContext context) {
+    final avatarWidth = (360 / MediaQuery.of(context).size.height) * 100;
+    final avatarHeight = (640 / MediaQuery.of(context).size.height) * 100;
+
     if (ct == 0) {
       // Checking for darkTheme enabled
       isDarkModeEnabled =
@@ -109,9 +113,13 @@ class _HomePageState extends State<HomePage>
                               child: isAv
                                   ? SvgPicture.network(
                                       url,
-                                      height:  (640 / MediaQuery.of(context).size.height) * 100,
-                                      width: (360 / MediaQuery.of(context).size.height) * 100,
+                                      height: avatarHeight,
+                                      width: avatarWidth,
                                       alignment: Alignment.topLeft,
+                                      placeholderBuilder: (_) => AvatarLoading(
+                                        avatarWidth,
+                                        avatarHeight,
+                                      ),
                                     )
                                   : InitialNameAvatar(
                                       name,
